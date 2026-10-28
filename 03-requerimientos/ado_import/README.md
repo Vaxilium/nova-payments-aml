@@ -10,6 +10,8 @@ Este directorio contiene los CSV separados para importar en Azure DevOps sin per
 
 **Por qué tres pasadas:** Azure DevOps exige que el campo `Parent` contenga el ID numérico de un work item existente. No se puede crear un hijo y su padre en la misma importación.
 
+**Columnas de referencia:** `Logical ID` y `Parent Logical ID` no se importan; sirven para identificar cada work item y reconstruir la jerarquía con los IDs numéricos que asigna Azure DevOps.
+
 **Guía completa:** `../guia-importacion-azure-devops.md`.
 
 **Maestro:** `../ado_workitems.csv` contiene los 65 work items con IDs lógicos para auditoría y trazabilidad. No se importa directamente porque `Parent Logical ID` no es un campo de Azure DevOps.

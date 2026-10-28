@@ -72,7 +72,7 @@
    - Ejemplo: si `EP-01` quedó con ID `101`, todas las features con `Parent Logical ID=EP-01` llevan `Parent=101`.
 3. Importar el archivo con **Import work items**.
 4. Verificar 15 features y su vínculo con la épica.
-5. Anotar el ID numérico de cada feature (`FE-01-01` a `FE-10-01`).
+5. Anotar el ID numérico de cada feature usando `Logical ID` (`FE-01-01` a `FE-10-01`) como referencia.
 
 ### Pasada 3 — Historias
 
