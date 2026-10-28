@@ -1,0 +1,16 @@
+Work Item Type,Title,Description,Priority,Tags,Area Path,Iteration Path,State,Parent,Parent Logical ID
+Feature,Originación y validación del pago local,Feature de la épica EP-01 — Pagos locales instantáneos.,1,Pago local;feature,NovaBank-Payments\Pagos,NovaBank-Payments\Backlog,New,,EP-01
+Feature,"Confirmación, estado y devoluciones",Feature de la épica EP-01 — Pagos locales instantáneos.,1,Pago local;feature,NovaBank-Payments\Pagos,NovaBank-Payments\Backlog,New,,EP-01
+Feature,Validación y generación ISO 20022,Feature de la épica EP-02 — Cross-border ISO 20022.,1,Cross-border;feature,NovaBank-Payments\Pagos,NovaBank-Payments\Backlog,New,,EP-02
+Feature,"Seguimiento, reintentos y excepciones",Feature de la épica EP-02 — Cross-border ISO 20022.,1,Cross-border;feature,NovaBank-Payments\Pagos,NovaBank-Payments\Backlog,New,,EP-02
+Feature,Alta digital e identidad,Feature de la épica EP-03 — Onboarding y KYC digital.,1,Onboarding;feature,NovaBank-Payments\AML,NovaBank-Payments\Backlog,New,,EP-03
+Feature,"Screening, scoring y revisión",Feature de la épica EP-03 — Onboarding y KYC digital.,1,Onboarding;feature,NovaBank-Payments\AML,NovaBank-Payments\Backlog,New,,EP-03
+Feature,Evaluación de riesgo en tiempo real,Feature de la épica EP-04 — Monitoreo AML y gestión de alertas.,1,Monitoreo AML;feature,NovaBank-Payments\AML,NovaBank-Payments\Backlog,New,,EP-04
+Feature,Bandeja y gestión de alertas,Feature de la épica EP-04 — Monitoreo AML y gestión de alertas.,1,Monitoreo AML;feature,NovaBank-Payments\AML,NovaBank-Payments\Backlog,New,,EP-04
+Feature,Investigación y ROS,Feature de la épica EP-05 — Investigación y ROS.,1,Investigación AML;feature,NovaBank-Payments\AML,NovaBank-Payments\Backlog,New,,EP-05
+Feature,Partida doble y conciliación,"Feature de la épica EP-06 — Contabilidad, conciliación y auditoría.",1,Contabilidad;feature,NovaBank-Payments\Contabilidad,NovaBank-Payments\Backlog,New,,EP-06
+Feature,Auditoría y evidencia,"Feature de la épica EP-06 — Contabilidad, conciliación y auditoría.",1,Auditoría;feature,NovaBank-Payments\Contabilidad,NovaBank-Payments\Backlog,New,,EP-06
+Feature,Tableros y reportes,Feature de la épica EP-07 — Reporting y analítica.,2,Reporting;feature,NovaBank-Payments\Analitica,NovaBank-Payments\Backlog,New,,EP-07
+Feature,Autoservicio y notificaciones,Feature de la épica EP-08 — Experiencia de cliente y autoservicio.,2,Experiencia;feature,NovaBank-Payments\Pagos,NovaBank-Payments\Backlog,New,,EP-08
+Feature,Parametrización y gobierno,Feature de la épica EP-09 — Parametrización y gobierno de reglas.,2,Gobierno de reglas;feature,NovaBank-Payments\Plataforma,NovaBank-Payments\Backlog,New,,EP-09
+Feature,Seguridad y trazabilidad técnica,"Feature de la épica EP-10 — Plataforma, seguridad e idempotencia.",1,Plataforma;feature,NovaBank-Payments\Plataforma,NovaBank-Payments\Backlog,New,,EP-10

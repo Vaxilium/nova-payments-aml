@@ -1,0 +1,609 @@
+External issue ID,Project Key,Issue Type,Summary,Description,Priority,Labels,Story Points,Epic Name,Epic Link,Status,Sprint,Assignee,Reporter
+EP-01,NOVA,Epic,Pagos locales instantáneos,"Habilitar transferencias P2P y P2B en guaraníes, 24/7, con alias o cuenta, confirmación, estado en tiempo real y devoluciones controladas. Es la épica que materializa el objetivo O-01 y el proceso PR-02.
+
+Resultado esperado: Un cliente puede pagar a otra persona o empresa en segundos, con confirmación y trazabilidad, sin intervención manual.",High,pagos-locales must,,Pagos locales instantáneos,,To Do,,,
+EP-02,NOVA,Epic,Cross-border ISO 20022,"Procesar pagos internacionales salientes en USD/EUR con validación de IBAN, BIC, moneda e importe, generación de pacs.008, procesamiento de pacs.002 y gestión de rechazos, devoluciones y reintentos idempotentes. Materializa O-02 y PR-03.
+
+Resultado esperado: Un pago internacional se valida, se envía como mensaje ISO 20022 y se sigue hasta su estado final sin reparación manual.",High,cross-border iso20022 must,,Cross-border ISO 20022,,To Do,,,
+EP-03,NOVA,Epic,Onboarding y KYC digital,"Permitir el alta digital de personas y empresas con verificación de identidad, screening de sanciones/PEP, scoring de riesgo, debida diligencia proporcional y revisión periódica. Materializa O-03 y PR-01/PR-14.
+
+Resultado esperado: Un cliente queda dado de alta con identidad verificada, perfil de riesgo y evidencia de debida diligencia.",High,onboarding kyc must,,Onboarding y KYC digital,,To Do,,,
+EP-04,NOVA,Epic,Monitoreo AML y gestión de alertas,"Evaluar screening y riesgo antes de liberar pagos, ejecutar reglas de monitoreo transaccional, priorizar alertas y gestionarlas con dueño, SLA, investigación y evidencia. Materializa O-03/O-04 y PR-04/PR-05.
+
+Resultado esperado: Toda señal de riesgo se convierte en una alerta priorizada, asignada y resuelta con evidencia auditable.",High,aml monitoreo must,,Monitoreo AML y gestión de alertas,,To Do,,,
+EP-05,NOVA,Epic,Investigación y ROS,"Escalar casos sospechosos, reunir evidencia, preparar el borrador de ROS, aprobarlo y registrarlo de forma ficticia con control de reserva. Materializa PR-06 y el componente de cumplimiento de O-04/O-06.
+
+Resultado esperado: Un caso sospechoso queda documentado, aprobado y registrado con narrativa y evidencia consistentes.",High,aml ros must,,Investigación y ROS,,To Do,,,
+EP-06,NOVA,Epic,"Contabilidad, conciliación y auditoría","Registrar cada movimiento con partida doble, conciliar contra el riel y el core, gestionar diferencias y exponer una bitácora de auditoría inmutable y correlacionada. Materializa PR-08/PR-13 y O-06.
+
+Resultado esperado: El libro mayor cuadra, las diferencias tienen dueño y cada operación puede reconstruirse desde la auditoría.",High,contabilidad auditoria must,,"Contabilidad, conciliación y auditoría",,To Do,,,
+EP-07,NOVA,Epic,Reporting y analítica,"Publicar tableros operativos y de cumplimiento con definiciones versionadas, filtros y exportación controlada. Materializa BR-13 y PR-09; los datasets y dashboards se construyen en Fase 6.
+
+Resultado esperado: Producto, Operaciones y Cumplimiento consultan los mismos KPIs con dueño, periodo y fuente.",Medium,reporting analitica should,,Reporting y analítica,,To Do,,,
+EP-08,NOVA,Epic,Experiencia de cliente y autoservicio,"Dar visibilidad del estado, permitir reclamos y enviar notificaciones claras y enmascaradas. Materializa O-05 y BR-16; las pantallas se especifican en Fase 6.
+
+Resultado esperado: El cliente entiende qué pasó con su pago y puede resolver consultas o reclamos sin contactar al banco.",Medium,experiencia autoservicio should,,Experiencia de cliente y autoservicio,,To Do,,,
+EP-09,NOVA,Epic,Parametrización y gobierno de reglas,"Permitir que Riesgos y Cumplimiento administren límites, umbrales y reglas con versionado, aprobación, vigencia y simulación de impacto. Materializa BR-14 y PR-10.
+
+Resultado esperado: Un cambio de regla se propone, simula, aprueba y activa con trazabilidad, sin desplegar código.",Medium,parametrizacion gobierno should,,Parametrización y gobierno de reglas,,To Do,,,
+EP-10,NOVA,Epic,"Plataforma, seguridad e idempotencia","Proveer autenticación por rol, autorización, eventos correlacionados, idempotencia de API y monitoreo de salud/SLA. Es una épica habilitadora de O-06 y de todos los flujos de pago.
+
+Resultado esperado: La plataforma es segura, observable, reintentable sin duplicar efectos y auditable por diseño.",High,plataforma seguridad must,,"Plataforma, seguridad e idempotencia",,To Do,,,
+US-001,NOVA,Story,Crear transferencia local P2P,"Como cliente persona, quiero iniciar una transferencia local en PYG indicando cuenta destino o alias, para enviar dinero al instante sin acudir a una sucursal.
+
+Criterios de aceptación:
+Escenario: Pago local válido
+  Dado que el cliente está autenticado y tiene una cuenta origen con saldo suficiente
+  Cuando ingresa un alias o cuenta destino válidos, un importe menor o igual a ₲10.000.000 y confirma la operación
+  Entonces el sistema crea un pago con identificador único y estado RECIBIDO
+  Y muestra un comprobante preliminar con beneficiario enmascarado e importe
+
+Escenario: Importe por encima del límite
+  Dado que el límite por operación configurado es ₲10.000.000
+  Cuando el cliente intenta transferir un importe mayor
+  Entonces el sistema rechaza la solicitud con el motivo LIMITE_EXCEDIDO
+  Y no debita la cuenta origen",High,pagos-locales must,5,,Pagos locales instantáneos,To Do,Sprint 1,,
+US-002,NOVA,Story,Resolver alias o cuenta destino,"Como cliente persona, quiero resolver el alias o la cuenta del beneficiario antes de confirmar, para verificar que el dinero llegará a la persona correcta.
+
+Criterios de aceptación:
+Escenario: Alias vigente
+  Dado que existe un alias vigente asociado a una cuenta activa
+  Cuando el cliente lo ingresa en el formulario de pago
+  Entonces el sistema devuelve el titular enmascarado y la cuenta destino enmascarada
+  Y permite continuar con la confirmación
+
+Escenario: Alias inexistente
+  Dado que el alias ingresado no existe o está inactivo
+  Cuando el cliente intenta continuar
+  Entonces el sistema muestra ALIAS_NO_ENCONTRADO
+  Y no crea el pago",High,pagos-locales must,3,,Pagos locales instantáneos,To Do,Sprint 1,,
+US-003,NOVA,Story,Confirmar y consultar el estado del pago,"Como cliente persona, quiero consultar el estado del pago en tiempo real, para saber si el dinero fue acreditado, rechazado o devuelto sin llamar al banco.
+
+Criterios de aceptación:
+Escenario: Consulta de estado exitosa
+  Dado que existe un pago del cliente con identificador único
+  Cuando el cliente consulta el estado
+  Entonces el sistema devuelve uno de los estados RECIBIDO, VALIDADO, ENVIADO, ACREDITADO, RECHAZADO o DEVUELTO
+  Y muestra la marca de tiempo y el próximo paso cuando corresponda
+
+Escenario: Estado final notificado
+  Dado que el pago alcanzó un estado final
+  Cuando el motor registra la transición
+  Entonces se emite un evento de estado final con el identificador de correlación
+  Y el cliente recibe una notificación con datos enmascarados",High,pagos-locales must,3,,Pagos locales instantáneos,To Do,Sprint 1,,
+US-004,NOVA,Story,Solicitar devolución de un pago local,"Como cliente persona, quiero solicitar la devolución de un pago local dentro del plazo permitido, para recuperar el dinero cuando el pago no correspondía.
+
+Criterios de aceptación:
+Escenario: Solicitud dentro de plazo
+  Dado que el pago está en estado ACREDITADO y dentro del plazo de solicitud
+  Cuando el cliente registra el motivo y confirma la solicitud
+  Entonces el sistema crea un caso de devolución con número, dueño y SLA
+  Y muestra el estado SOLICITADA al cliente
+
+Escenario: Solicitud fuera de plazo
+  Dado que el pago superó el plazo configurado para solicitar devolución
+  Cuando el cliente intenta registrar la solicitud
+  Entonces el sistema rechaza la devolución automática con el motivo FUERA_DE_PLAZO
+  Y ofrece el canal de reclamo formal",Medium,pagos-locales should,5,,Pagos locales instantáneos,To Do,Backlog,,
+US-005,NOVA,Story,Validar límites y saldo disponible,"Como cliente persona, quiero que el sistema valide límites y saldo antes de enviar el pago, para evitar rechazos tardíos y débitos inconsistentes.
+
+Criterios de aceptación:
+Escenario: Saldo y límites suficientes
+  Dado que el cliente tiene saldo disponible y no supera el límite por operación ni el límite diario
+  Cuando solicita el pago
+  Entonces el sistema marca la validación como APTA
+  Y continúa con la evaluación de riesgo
+
+Escenario: Saldo insuficiente
+  Dado que el cliente no tiene saldo suficiente en la cuenta origen
+  Cuando solicita el pago
+  Entonces el sistema rechaza la operación con el motivo SALDO_INSUFICIENTE
+  Y no genera orden al riel",High,pagos-locales must,3,,Pagos locales instantáneos,To Do,Sprint 1,,
+US-006,NOVA,Story,"Validar IBAN, BIC, moneda e importe internacional","Como cliente empresa, quiero que el sistema valide los datos del pago internacional antes de enviarlo, para evitar rechazos del corresponsal y reprocesos.
+
+Criterios de aceptación:
+Escenario: Datos internacionales válidos
+  Dado que el cliente ingresa un IBAN con checksum válido, un BIC de 8 u 11 caracteres y una moneda USD o EUR
+  Cuando solicita validar la instrucción
+  Entonces el sistema devuelve el resultado VÁLIDO con los campos normalizados
+  Y habilita la generación del mensaje ISO 20022
+
+Escenario: IBAN con checksum inválido
+  Dado que el IBAN ingresado no supera la validación de estructura o checksum
+  Cuando el cliente solicita validar la instrucción
+  Entonces el sistema rechaza con el campo IBAN y el motivo CHECKSUM_INVALIDO
+  Y no genera ningún mensaje
+
+Escenario: Moneda no soportada
+  Dado que el cliente selecciona una moneda distinta de USD o EUR
+  Cuando solicita validar la instrucción
+  Entonces el sistema rechaza con el motivo MONEDA_NO_SOPORTADA
+  Y muestra las monedas disponibles",High,cross-border must,5,,Cross-border ISO 20022,To Do,Sprint 2,,
+US-007,NOVA,Story,Generar y validar mensaje pacs.008,"Como sistema de mensajería, quiero generar un pacs.008 válido a partir de la instrucción, para enviar el pago internacional con la estructura ISO 20022 correcta.
+
+Criterios de aceptación:
+Escenario: Generación de pacs.008
+  Dado que la instrucción internacional fue validada
+  Cuando el sistema genera el mensaje
+  Entonces crea un pacs.008 con UETR, importe, moneda, ordenante, beneficiario y referencias
+  Y valida el mensaje contra el esquema antes de enviarlo
+
+Escenario: Campo obligatorio faltante
+  Dado que la instrucción carece de un campo obligatorio del mensaje
+  Cuando el sistema intenta generar el pacs.008
+  Entonces bloquea el envío y reporta el campo faltante
+  Y deja el pago en estado REQUIERE_CORRECCION",High,cross-border must,8,,Cross-border ISO 20022,To Do,Sprint 2,,
+US-008,NOVA,Story,Procesar pacs.002 y actualizar el estado,"Como sistema de mensajería, quiero procesar el reporte de estado pacs.002 y actualizar el pago, para conocer si el corresponsal aceptó, rechazó o devolvió la operación.
+
+Criterios de aceptación:
+Escenario: Pacs.002 aceptado
+  Dado que el corresponsal responde con un pacs.002 de aceptación
+  Cuando el adaptador procesa el mensaje y correlaciona el UETR
+  Entonces el pago pasa a estado ACEPTADO_CORRESPONSAL o ACREDITADO según la etapa
+  Y se registra el evento con el identificador de correlación
+
+Escenario: Pacs.002 rechazado
+  Dado que el corresponsal responde con un rechazo
+  Cuando el adaptador procesa el mensaje
+  Entonces el pago pasa a estado RECHAZADO con el motivo informado
+  Y se crea un caso para Operaciones Internacionales",High,cross-border must,5,,Cross-border ISO 20022,To Do,Sprint 2,,
+US-009,NOVA,Story,Reintentar envío internacional sin duplicar,"Como sistema de mensajería, quiero reintentar un envío internacional usando la misma clave de idempotencia, para recuperar timeouts sin generar un segundo pago.
+
+Criterios de aceptación:
+Escenario: Reintento con la misma clave
+  Dado que el primer envío terminó en timeout sin respuesta confirmada
+  Cuando el sistema reintenta con la misma clave de idempotencia y el mismo payload
+  Entonces reutiliza el resultado del intento original o consulta el estado
+  Y no genera un segundo pacs.008
+
+Escenario: Clave reutilizada con otro payload
+  Dado que existe una clave de idempotencia asociada a un pago distinto
+  Cuando se intenta usarla con otro importe o beneficiario
+  Entonces el sistema rechaza con el motivo IDEMPOTENCY_KEY_CONFLICT
+  Y no envía el mensaje",High,cross-border must,5,,Cross-border ISO 20022,To Do,Backlog,,
+US-010,NOVA,Story,Gestionar rechazo o devolución internacional,"Como analista de Operaciones Internacionales, quiero gestionar el rechazo o la devolución de un pago internacional, para resolver la excepción con evidencia y notificar al cliente.
+
+Criterios de aceptación:
+Escenario: Rechazo del corresponsal
+  Dado que el corresponsal rechazó el pago y existe un pacs.002 de rechazo
+  Cuando el analista revisa el caso
+  Entonces el sistema muestra el motivo, el mensaje y la traza completa
+  Y permite notificar al cliente con una explicación accionable
+
+Escenario: Devolución de fondos
+  Dado que el corresponsal devolvió los fondos
+  Cuando Operaciones registra la devolución
+  Entonces el pago pasa a estado DEVUELTO y se genera el asiento de reversa
+  Y se cierra el caso con evidencia",Medium,cross-border should,5,,Cross-border ISO 20022,To Do,Backlog,,
+US-011,NOVA,Story,Iniciar alta digital de cliente,"Como cliente persona, quiero completar el alta digital con mis datos y aceptar los términos, para abrir una cuenta sin ir a una sucursal.
+
+Criterios de aceptación:
+Escenario: Solicitud de alta completa
+  Dado que el cliente completa los datos obligatorios y acepta los términos
+  Cuando envía la solicitud
+  Entonces el sistema crea una solicitud en estado PENDIENTE_VERIFICACION con identificador
+  Y muestra los siguientes pasos y el plazo estimado
+
+Escenario: Datos obligatorios incompletos
+  Dado que falta un dato obligatorio o el formato es inválido
+  Cuando el cliente intenta enviar la solicitud
+  Entonces el sistema marca los campos faltantes y no avanza
+  Y conserva lo ingresado para reintentar",High,onboarding must,8,,Onboarding y KYC digital,To Do,Sprint 1,,
+US-012,NOVA,Story,Verificar identidad y documentación,"Como analista de Cumplimiento, quiero verificar la identidad y la documentación del cliente, para asegurar que la persona es quien dice ser.
+
+Criterios de aceptación:
+Escenario: Identidad verificada
+  Dado que el documento es válido, está vigente y coincide con los datos declarados
+  Cuando el servicio de identidad completa la verificación
+  Entonces la solicitud pasa a identidad VERIFICADA
+  Y se adjunta la evidencia al expediente
+
+Escenario: Documento vencido
+  Dado que el documento presentado está vencido o ilegible
+  Cuando se ejecuta la verificación
+  Entonces la solicitud queda PENDIENTE_DOCUMENTO con el motivo
+  Y se solicita al cliente un documento válido",High,onboarding must,5,,Onboarding y KYC digital,To Do,Sprint 1,,
+US-013,NOVA,Story,Ejecutar screening de sanciones y PEP,"Como analista de Cumplimiento, quiero ejecutar el screening del cliente contra listas ficticias, para detectar coincidencias antes de aprobar el alta o un pago.
+
+Criterios de aceptación:
+Escenario: Sin coincidencias
+  Dado que el cliente no presenta coincidencias en las listas ficticias
+  Cuando se ejecuta el screening
+  Entonces el resultado es LIMPIO y se registra la versión de la lista consultada
+  Y el expediente queda listo para scoring de riesgo
+
+Escenario: Coincidencia crítica
+  Dado que el cliente coincide con una entrada crítica de la lista ficticia
+  Cuando se ejecuta el screening
+  Entonces el sistema bloquea el alta y genera una alerta P1
+  Y deriva el caso a revisión de Cumplimiento
+
+Escenario: Coincidencia parcial
+  Dado que el screening devuelve una coincidencia parcial o de baja confianza
+  Cuando se registra el resultado
+  Entonces el caso pasa a revisión manual con la evidencia de la coincidencia
+  Y no se aprueba el alta hasta la decisión del analista",High,onboarding must,5,,Onboarding y KYC digital,To Do,Sprint 1,,
+US-014,NOVA,Story,Calcular scoring de riesgo y aplicar EDD,"Como analista de Cumplimiento, quiero calcular el riesgo del cliente y aplicar debida diligencia proporcional, para asignar controles adecuados a cada perfil.
+
+Criterios de aceptación:
+Escenario: Riesgo bajo
+  Dado que el cliente obtiene un score de riesgo bajo
+  Cuando el motor de decisión clasifica el perfil
+  Entonces se aplica CDD estándar y el alta queda apta para aprobación
+  Y se registra el score y sus factores
+
+Escenario: Riesgo alto o PEP
+  Dado que el cliente es PEP o su score es alto
+  Cuando el motor de decisión clasifica el perfil
+  Entonces se exige EDD y aprobación del Oficial de Cumplimiento
+  Y no se habilita el alta hasta completar la evidencia adicional",High,onboarding must,5,,Onboarding y KYC digital,To Do,Backlog,,
+US-015,NOVA,Story,Programar revisión periódica y bloqueo,"Como analista de Cumplimiento, quiero programar la revisión periódica del cliente y bloquearlo si el riesgo lo exige, para mantener actualizado el perfil y evitar operar con clientes de riesgo no atendido.
+
+Criterios de aceptación:
+Escenario: Revisión vencida
+  Dado que la fecha de revisión periódica de un cliente venció
+  Cuando el job diario evalúa los vencimientos
+  Entonces crea una tarea de revisión con dueño y plazo
+  Y notifica al analista asignado
+
+Escenario: Bloqueo por riesgo alto
+  Dado que la revisión detecta un riesgo alto no aceptado
+  Cuando Cumplimiento aprueba el bloqueo
+  Entonces el cliente pasa a estado BLOQUEADO y se impiden nuevos pagos
+  Y se registra el motivo y la evidencia",Medium,onboarding should,5,,Onboarding y KYC digital,To Do,Backlog,,
+US-016,NOVA,Story,Evaluar screening y riesgo antes de liberar el pago,"Como sistema de riesgo, quiero evaluar screening y riesgo de cada pago antes de liberar fondos, para evitar que una operación riesgosa salga sin control.
+
+Criterios de aceptación:
+Escenario: Pago sin coincidencia
+  Dado que el ordenante y el beneficiario no presentan coincidencias
+  Cuando el motor evalúa el pago
+  Entonces registra la decisión LIBERAR con la evidencia y la versión de reglas
+  Y el pago continúa al riel
+
+Escenario: Coincidencia en lista
+  Dado que el screening detecta una coincidencia crítica en el beneficiario
+  Cuando el motor evalúa el pago
+  Entonces bloquea la liberación y genera una alerta P1
+  Y el pago queda en estado BLOQUEADO_POR_RIESGO",High,aml must,5,,Monitoreo AML y gestión de alertas,To Do,Sprint 1,,
+US-017,NOVA,Story,Ejecutar reglas de monitoreo transaccional,"Como analista de Monitoreo AML, quiero ejecutar reglas de umbral, velocidad, geografía, contraparte y estructuración, para detectar operaciones inusuales de forma consistente.
+
+Criterios de aceptación:
+Escenario: Regla de umbral
+  Dado que un pago supera el umbral configurado para la regla RULE-01
+  Cuando se ejecuta el monitoreo
+  Entonces se genera una alerta con la regla, el importe y el contexto del cliente
+  Y se registra la evidencia de la evaluación
+
+Escenario: Regla de velocidad
+  Dado que un cliente supera la cantidad de operaciones permitidas en la ventana de tiempo
+  Cuando se ejecuta la regla RULE-02
+  Entonces se genera una alerta de velocidad con las operaciones que la activaron
+  Y se prioriza según el DMN de prioridad
+
+Escenario: Regla de estructuración
+  Dado que se detectan varias operaciones por debajo del umbral con patrón repetido
+  Cuando se ejecuta la regla RULE-04
+  Entonces se genera una alerta de estructuración con la secuencia detectada
+  Y se conserva la traza de las operaciones relacionadas",High,aml must,8,,Monitoreo AML y gestión de alertas,To Do,Sprint 2,,
+US-018,NOVA,Story,"Priorizar alertas P1, P2 y P3","Como supervisor de Monitoreo AML, quiero priorizar automáticamente las alertas según el riesgo, para atender primero los casos más críticos.
+
+Criterios de aceptación:
+Escenario: Alerta crítica
+  Dado que una alerta involucra una coincidencia de sanciones o un importe crítico
+  Cuando se evalúa la prioridad
+  Entonces se clasifica como P1 con SLA de asignación de 15 minutos
+  Y se muestra en la parte superior de la bandeja
+
+Escenario: Alerta de bajo riesgo
+  Dado que una alerta corresponde a un umbral menor sin otros factores
+  Cuando se evalúa la prioridad
+  Entonces se clasifica como P3 con el SLA correspondiente
+  Y se encola para atención según capacidad",High,aml must,3,,Monitoreo AML y gestión de alertas,To Do,Sprint 2,,
+US-019,NOVA,Story,Asignar y gestionar la bandeja de alertas,"Como supervisor de Monitoreo AML, quiero asignar alertas a analistas y controlar su SLA, para garantizar que ninguna alerta quede sin dueño.
+
+Criterios de aceptación:
+Escenario: Asignación manual
+  Dado que existe una alerta sin asignar
+  Cuando el supervisor la asigna a un analista
+  Entonces la alerta pasa a estado ASIGNADA con dueño, prioridad y vencimiento
+  Y el analista la ve en su bandeja
+
+Escenario: P1 sin asignar
+  Dado que una alerta P1 lleva 15 minutos sin asignación
+  Cuando el job de SLA evalúa la bandeja
+  Entonces escala la alerta al supervisor y registra el incumplimiento
+  Y muestra la alerta como SLA_EN_RIESGO",High,aml must,5,,Monitoreo AML y gestión de alertas,To Do,Sprint 2,,
+US-020,NOVA,Story,Investigar y cerrar una alerta,"Como analista de Monitoreo AML, quiero documentar la investigación y cerrar la alerta con evidencia, para demostrar que el caso fue analizado y justificar la decisión.
+
+Criterios de aceptación:
+Escenario: Cierre no sospechoso
+  Dado que el analista revisó la evidencia y no encontró indicios de sospecha
+  Cuando registra el análisis y confirma el cierre
+  Entonces la alerta pasa a CERRADA con motivo NO_SOSPECHOSA
+  Y se conserva el expediente y la marca de tiempo
+
+Escenario: Evidencia insuficiente
+  Dado que el analista no adjuntó evidencia suficiente
+  Cuando intenta cerrar la alerta
+  Entonces el sistema bloquea el cierre y solicita completar el expediente
+  Y mantiene la alerta en estado EN_INVESTIGACION",High,aml must,5,,Monitoreo AML y gestión de alertas,To Do,Sprint 2,,
+US-021,NOVA,Story,Escalar un caso a investigación,"Como analista de Monitoreo AML, quiero escalar una alerta a investigación cuando existen indicios de sospecha, para profundizar el análisis con el expediente completo.
+
+Criterios de aceptación:
+Escenario: Escalamiento aprobado
+  Dado que el analista documenta indicios de sospecha
+  Cuando el supervisor aprueba el escalamiento
+  Entonces se crea un caso de investigación con el expediente vinculado
+  Y se asigna al analista de investigación
+
+Escenario: Escalamiento sin aprobación
+  Dado que el supervisor no aprueba el escalamiento
+  Cuando revisa la solicitud
+  Entonces el caso vuelve a la bandeja de alertas con el comentario
+  Y no se crea un caso de investigación",Medium,aml should,3,,Investigación y ROS,To Do,Backlog,,
+US-022,NOVA,Story,Preparar el borrador de ROS,"Como analista de investigación, quiero preparar un borrador de ROS con los campos obligatorios y la narrativa, para documentar la sospecha de forma completa y consistente.
+
+Criterios de aceptación:
+Escenario: Borrador completo
+  Dado que el caso de investigación tiene evidencia y análisis
+  Cuando el analista genera el borrador
+  Entonces el sistema completa los campos obligatorios y la narrativa
+  Y deja el ROS en estado BORRADOR para revisión
+
+Escenario: Campo obligatorio faltante
+  Dado que falta un campo obligatorio del ROS
+  Cuando el analista intenta enviarlo a revisión
+  Entonces el sistema bloquea el envío y marca el campo faltante
+  Y conserva el borrador para completarlo",High,aml must,8,,Investigación y ROS,To Do,Backlog,,
+US-023,NOVA,Story,Aprobar y registrar el ROS ficticio,"Como Oficial de Cumplimiento, quiero aprobar y registrar el ROS ficticio con control de reserva, para dejar evidencia de la decisión sin enviar información real.
+
+Criterios de aceptación:
+Escenario: Aprobación del ROS
+  Dado que el borrador está completo y revisado
+  Cuando el Oficial de Cumplimiento aprueba
+  Entonces el ROS pasa a estado APROBADO con hash, fecha y responsable
+  Y se registra como ficticio, sin envío a SEPRELAD
+
+Escenario: Rechazo del borrador
+  Dado que el Oficial de Cumplimiento detecta información insuficiente
+  Cuando rechaza el borrador
+  Entonces el ROS vuelve a BORRADOR con el comentario
+  Y se notifica al analista",High,aml must,5,,Investigación y ROS,To Do,Backlog,,
+US-024,NOVA,Story,Registrar asiento de partida doble,"Como sistema contable, quiero registrar cada movimiento con débito y crédito balanceados, para mantener el libro mayor íntegro y auditable.
+
+Criterios de aceptación:
+Escenario: Asiento balanceado
+  Dado que un pago fue aceptado y tiene importe, cuentas y referencias
+  Cuando el sistema registra el asiento
+  Entonces crea débito y crédito de igual importe vinculados al pago
+  Y valida que la suma de débitos sea igual a la suma de créditos
+
+Escenario: Asiento desbalanceado
+  Dado que el importe del débito no coincide con el crédito
+  Cuando el sistema intenta registrar el asiento
+  Entonces rechaza el registro y genera una alerta contable
+  Y no altera el libro mayor",High,contabilidad must,8,,"Contabilidad, conciliación y auditoría",To Do,Sprint 2,,
+US-025,NOVA,Story,Conciliar contra el riel y el core,"Como analista de Contraloría, quiero conciliar diariamente los asientos contra el riel y el core, para detectar diferencias antes del cierre.
+
+Criterios de aceptación:
+Escenario: Cierre sin diferencias
+  Dado que los registros del libro mayor, el riel y el core coinciden
+  Cuando se ejecuta la conciliación diaria
+  Entonces el sistema marca el cierre como CONCILIADO
+  Y publica el porcentaje de conciliación del día
+
+Escenario: Diferencia detectada
+  Dado que existe un asiento sin contraparte en el riel o el core
+  Cuando se ejecuta la conciliación
+  Entonces se crea una diferencia con dueño, importe y referencia
+  Y se excluye del cierre automático",High,contabilidad must,5,,"Contabilidad, conciliación y auditoría",To Do,Backlog,,
+US-026,NOVA,Story,Gestionar diferencias de conciliación,"Como analista de Contraloría, quiero gestionar las diferencias de conciliación hasta su resolución, para evitar ajustes manuales sin trazabilidad.
+
+Criterios de aceptación:
+Escenario: Diferencia asignada
+  Dado que existe una diferencia de conciliación
+  Cuando Contraloría la asigna a un responsable
+  Entonces la diferencia pasa a estado ABIERTA con plazo y evidencia
+  Y se muestra en el tablero de cierre
+
+Escenario: Ajuste aprobado
+  Dado que la diferencia fue investigada y requiere ajuste
+  Cuando el supervisor aprueba el asiento de ajuste
+  Entonces se registra el ajuste con referencia a la diferencia
+  Y la diferencia pasa a CERRADA",Medium,contabilidad should,3,,"Contabilidad, conciliación y auditoría",To Do,Backlog,,
+US-027,NOVA,Story,Consultar la bitácora de auditoría,"Como auditor interno, quiero consultar la bitácora de una operación por identificador, para reconstruir la historia completa y demostrar el control.
+
+Criterios de aceptación:
+Escenario: Consulta por operación
+  Dado que el auditor tiene permiso de consulta
+  Cuando busca una operación por su identificador de correlación
+  Entonces el sistema devuelve los eventos ordenados con actor, timestamp y resultado
+  Y permite exportar la traza para evidencia
+
+Escenario: Intento de modificación
+  Dado que la bitácora es de solo agregado
+  Cuando un usuario intenta modificar o borrar un evento
+  Entonces el sistema rechaza la operación y registra el intento
+  Y notifica a Seguridad",High,contabilidad must,5,,"Contabilidad, conciliación y auditoría",To Do,Backlog,,
+US-028,NOVA,Story,Tablero de KPIs de pagos,"Como gerente de Operaciones, quiero ver un tablero con los KPIs de pagos locales e internacionales, para detectar desvíos de SLA y volumen a tiempo.
+
+Criterios de aceptación:
+Escenario: Tablero con datos
+  Dado que existen datos del periodo seleccionado
+  Cuando el gerente abre el tablero
+  Entonces ve K-01 a K-06 con fórmula, periodo, fuente y dueño
+  Y puede filtrar por canal, moneda y tipo de pago
+
+Escenario: Dato faltante
+  Dado que una fuente no reportó datos para el periodo
+  Cuando se carga el tablero
+  Entonces el KPI se muestra como SIN_DATOS
+  Y no se infiere ni se completa el valor",Medium,reporting should,5,,Reporting y analítica,To Do,Backlog,,
+US-029,NOVA,Story,Tablero de KPIs AML,"Como Jefe de Monitoreo AML, quiero ver un tablero con los KPIs de alertas, investigación y ROS, para gestionar capacidad, SLA y calidad de las reglas.
+
+Criterios de aceptación:
+Escenario: Tablero AML
+  Dado que existen alertas y casos del periodo
+  Cuando el jefe abre el tablero
+  Entonces ve K-07 a K-12 con filtros por prioridad, analista y regla
+  Y puede identificar la regla con mayor tasa de falsos positivos
+
+Escenario: Filtro por analista
+  Dado que el jefe selecciona un analista
+  Cuando aplica el filtro
+  Entonces el tablero muestra solo los casos asignados a ese analista
+  Y conserva el periodo y la definición del KPI",Medium,reporting should,5,,Reporting y analítica,To Do,Backlog,,
+US-030,NOVA,Story,Exportar reporte operativo,"Como analista de Operaciones, quiero exportar un reporte operativo filtrado a CSV, para compartir el análisis con áreas que no acceden al tablero.
+
+Criterios de aceptación:
+Escenario: Exportación con filtros
+  Dado que el analista aplicó filtros válidos
+  Cuando solicita exportar
+  Entonces el sistema genera un CSV con los filtros, la fecha y la fuente
+  Y registra la exportación en la bitácora
+
+Escenario: Exportación sin permiso
+  Dado que el usuario no tiene permiso de exportación
+  Cuando intenta exportar
+  Entonces el sistema deniega la operación con 403
+  Y registra el intento",Low,reporting could,3,,Reporting y analítica,To Do,Backlog,,
+US-031,NOVA,Story,Consultar estado desde autoservicio,"Como cliente persona, quiero consultar el estado y el próximo paso de mi pago desde autoservicio, para resolver la duda sin contactar al banco.
+
+Criterios de aceptación:
+Escenario: Consulta del propio pago
+  Dado que el cliente está autenticado y el pago le pertenece
+  Cuando abre el detalle del pago
+  Entonces ve estado, importe, beneficiario enmascarado y próximo paso
+  Y ve el canal de reclamo cuando el estado es final
+
+Escenario: Acceso a pago ajeno
+  Dado que el pago pertenece a otro cliente
+  Cuando el cliente intenta consultarlo
+  Entonces el sistema deniega el acceso
+  Y no revela información del pago",Medium,experiencia should,3,,Experiencia de cliente y autoservicio,To Do,Backlog,,
+US-032,NOVA,Story,Registrar reclamo de pago,"Como cliente persona, quiero registrar un reclamo asociado a un pago, para dejar constancia y recibir seguimiento.
+
+Criterios de aceptación:
+Escenario: Reclamo nuevo
+  Dado que el cliente selecciona un pago propio y un motivo válido
+  Cuando envía el reclamo
+  Entonces el sistema crea un caso con número y plazo visible
+  Y muestra el estado REGISTRADO
+
+Escenario: Reclamo duplicado
+  Dado que ya existe un reclamo abierto para el mismo pago y motivo
+  Cuando el cliente intenta registrar otro
+  Entonces el sistema vincula la solicitud al caso existente
+  Y evita duplicar el expediente",Medium,experiencia should,3,,Experiencia de cliente y autoservicio,To Do,Backlog,,
+US-033,NOVA,Story,Notificar eventos del pago al cliente,"Como sistema de notificaciones, quiero enviar notificaciones claras cuando cambia el estado del pago, para el cliente sepa qué pasó sin consultar manualmente.
+
+Criterios de aceptación:
+Escenario: Notificación de acreditación
+  Dado que el pago pasó a estado ACREDITADO
+  Cuando se procesa el evento
+  Entonces el sistema envía una notificación con importe y beneficiario enmascarado
+  Y registra el envío y la respuesta del canal
+
+Escenario: Fallo de notificación
+  Dado que el canal de notificación no responde
+  Cuando se intenta enviar el mensaje
+  Entonces el sistema programa reintentos y registra el fallo
+  Y no bloquea ni revierte el pago",Medium,experiencia should,5,,Experiencia de cliente y autoservicio,To Do,Backlog,,
+US-034,NOVA,Story,Configurar límites y umbrales,"Como administrador de Riesgos, quiero configurar límites y umbrales sin desplegar código, para ajustar el control al apetito de riesgo vigente.
+
+Criterios de aceptación:
+Escenario: Nuevo umbral
+  Dado que el administrador tiene permiso de configuración
+  Cuando crea un cambio de umbral dentro del rango permitido
+  Entonces el sistema crea una versión en estado BORRADOR con autor y fecha
+  Y no afecta la operación hasta su aprobación
+
+Escenario: Valor fuera de rango
+  Dado que el valor propuesto está fuera del rango permitido
+  Cuando el administrador intenta guardarlo
+  Entonces el sistema rechaza el cambio con el rango válido
+  Y no crea la versión",Medium,parametrizacion should,5,,Parametrización y gobierno de reglas,To Do,Backlog,,
+US-035,NOVA,Story,Versionar y aprobar cambios de reglas,"Como Oficial de Cumplimiento, quiero aprobar y activar versiones de reglas con vigencia, para todo cambio tenga control, evidencia y posibilidad de reversa.
+
+Criterios de aceptación:
+Escenario: Cambio aprobado
+  Dado que existe una versión BORRADOR revisada
+  Cuando Riesgos y Cumplimiento aprueban
+  Entonces la versión pasa a ACTIVA con fecha de vigencia
+  Y la versión anterior queda histórica
+
+Escenario: Cambio sin aprobación
+  Dado que falta una de las aprobaciones requeridas
+  Cuando se intenta activar la versión
+  Entonces el sistema bloquea la activación
+  Y muestra las aprobaciones pendientes",Medium,parametrizacion should,5,,Parametrización y gobierno de reglas,To Do,Backlog,,
+US-036,NOVA,Story,Simular impacto de reglas,"Como analista de Riesgos, quiero simular el impacto de una regla sobre datos sintéticos, para estimar alertas y falsos positivos antes de activarla.
+
+Criterios de aceptación:
+Escenario: Simulación disponible
+  Dado que existe un dataset sintético versionado
+  Cuando el analista ejecuta la simulación de una regla
+  Entonces el sistema muestra operaciones afectadas, alertas estimadas y tasa de falsos positivos
+  Y conserva el resultado con la versión simulada
+
+Escenario: Dataset no disponible
+  Dado que el dataset requerido no está disponible
+  Cuando el analista intenta simular
+  Entonces el sistema muestra DATASET_NO_DISPONIBLE
+  Y no genera resultados parciales",Low,parametrizacion could,8,,Parametrización y gobierno de reglas,To Do,Backlog,,
+US-037,NOVA,Story,Autenticación y autorización por rol,"Como usuario interno, quiero acceder solo a las funciones permitidas por mi rol, para segregar funciones y proteger la información.
+
+Criterios de aceptación:
+Escenario: Acceso permitido
+  Dado que un usuario tiene el rol ANALISTA_AML
+  Cuando accede a la bandeja de alertas
+  Entonces el sistema permite la operación
+  Y registra el acceso en la bitácora
+
+Escenario: Acceso denegado
+  Dado que un usuario con rol ANALISTA_AML intenta acceder a configuración de reglas
+  Cuando realiza la solicitud
+  Entonces el sistema responde 403 y no muestra la función
+  Y registra el intento denegado",High,plataforma must,5,,"Plataforma, seguridad e idempotencia",To Do,Sprint 1,,
+US-038,NOVA,Story,Registrar eventos con correlación,"Como sistema de auditoría, quiero registrar cada evento con identificador de correlación, actor y resultado, para reconstruir cualquier operación de extremo a extremo.
+
+Criterios de aceptación:
+Escenario: Evento correlacionado
+  Dado que ocurre un evento de pago, riesgo o alerta
+  Cuando se persiste el evento
+  Entonces incluye correlation_id, actor, timestamp, tipo y resultado
+  Y queda disponible para consulta
+
+Escenario: Evento sin correlación
+  Dado que un evento no tiene correlation_id
+  Cuando se intenta persistir
+  Entonces el sistema lo rechaza y registra el error
+  Y no contamina la traza",High,plataforma must,5,,"Plataforma, seguridad e idempotencia",To Do,Sprint 1,,
+US-039,NOVA,Story,Garantizar idempotencia de API,"Como sistema cliente, quiero reintentar una solicitud sin duplicar el efecto, para tolerar timeouts y fallos de red de forma segura.
+
+Criterios de aceptación:
+Escenario: Reintento idempotente
+  Dado que se envió una solicitud con una Idempotency-Key y se recibió timeout
+  Cuando se repite la solicitud con la misma clave y payload
+  Entonces el sistema devuelve la misma respuesta sin crear otro recurso
+  Y mantiene el estado original
+
+Escenario: Conflicto de clave
+  Dado que la Idempotency-Key ya fue usada con otro payload
+  Cuando se envía la nueva solicitud
+  Entonces el sistema responde 409 IDEMPOTENCY_KEY_CONFLICT
+  Y no procesa la nueva solicitud",High,plataforma must,5,,"Plataforma, seguridad e idempotencia",To Do,Sprint 2,,
+US-040,NOVA,Story,Monitorear salud y SLA,"Como operador de TI, quiero monitorear la salud de los componentes y el cumplimiento de SLA, para detectar degradaciones antes de que afecten a los clientes.
+
+Criterios de aceptación:
+Escenario: Chequeo de salud
+  Dado que el operador consulta el endpoint de salud
+  Cuando el sistema evalúa las dependencias
+  Entonces devuelve el estado de core, riel, screening y base de datos
+  Y marca DEGRADADO cuando una dependencia no responde
+
+Escenario: Latencia fuera de umbral
+  Dado que el p95 de un componente supera el umbral configurado
+  Cuando se evalúa la regla de monitoreo
+  Entonces se genera una alerta operativa con el componente y la ventana
+  Y se registra el evento en la bitácora",High,plataforma must,3,,"Plataforma, seguridad e idempotencia",To Do,Backlog,,
