@@ -1,11 +1,13 @@
 # NovaBank — Instant & Cross-Border Payments + AML Hub
 
-> Portfolio case study by **Franco Tillería Centurión** · Business Analyst (banking) · Asunción, Paraguay
+> Portfolio case study by **Franco Tillería Centurión** — Business Analyst (banking) — Asunción, Paraguay
 > Fictional case. No real customer, account or confidential data is used.
 
 ## Executive Summary (English)
 
 NovaBank is a fictional Paraguayan bank launching instant domestic transfers (inspired by the BCP's SPI) and cross-border payments over SWIFT/ISO 20022, with AML monitoring and compliance embedded end to end. This repository documents the full Business Analysis lifecycle: discovery, process modeling, requirements, core/middleware design, messaging validation, AML rules, UAT and analytics. It is built as a public portfolio to demonstrate practical BA tools and banking-domain knowledge on a realistic but entirely synthetic scenario.
+
+Phase 1 (business analysis and process modeling) is complete at artifact level: BRD, stakeholder/RACI analysis, risk register, bilingual glossary, KPIs, regulatory context, six BPMN 2.0 processes, four DMN decision tables, Mermaid/C4/ER/journey views and a visual recreation guide. Structural validation was performed with `bpmn-moddle` and `dmn-moddle`; evidence in Bizagi/Camunda/Signavio and Lucidchart/Visio/Miro remains a manual author task.
 
 ## Caso de negocio (5 líneas)
 
@@ -19,18 +21,37 @@ NovaBank is a fictional Paraguayan bank launching instant domestic transfers (in
 
 El repositorio recorre siete fases: negocio y procesos; requerimientos; core y middleware; mensajería; AML y compliance; UX y analítica; QA/UAT y cierre. Cada fase produce artefactos listos para revisar o importar en herramientas reales, más un registro honesto de lo que requiere ejecución manual del autor.
 
+## Avance de Fase 1
+
+| Área | Artefactos | Estado |
+|---|---|---|
+| Negocio | BRD, stakeholders, riesgos, glosario, KPIs, contexto regulatorio | Completado |
+| Procesos | 6 BPMN 2.0, 4 DMN, mapa de procesos, Mermaid | Validado estructuralmente |
+| Arquitectura | C4 L1/L2, componentes, ER, event storming, journeys | Completado |
+| Guía visual | Lucidchart, Visio y Miro | Completado |
+| Evidencias | EV-004 y EV-005 | Pendiente de acción manual |
+
+Documentos de entrada:
+
+- [BRD](01-negocio/BRD.md)
+- [Mapa de procesos](02-procesos/mapa-procesos.md)
+- [Contexto regulatorio](01-negocio/contexto-regulatorio.md)
+- [KPIs](01-negocio/kpis.md)
+- [Glosario](01-negocio/glosario.md)
+
 ## Herramientas demostradas
 
-> Estado inicial: todas **pendientes**. Se actualizarán a medida que avance cada fase.
+> Estado actual del repositorio. No se declara el uso de una herramienta que no se haya operado.
 
 | Capacidad | Herramienta | Artefacto en el repositorio | Estado |
 |---|---|---|---|
+| Análisis de negocio | BRD / RACI / riesgos / KPIs | Documentos de `01-negocio/` | Completado |
+| Modelado de procesos | Bizagi / Camunda / Signavio | 6 `.bpmn` BPMN 2.0 | Validado estructuralmente; evidencia manual pendiente |
+| Modelado de decisiones | DMN (Camunda / Signavio) | 4 `.dmn` | Validado estructuralmente; evidencia manual pendiente |
+| Diagramación | Lucidchart / Visio / Miro | Mermaid, C4, ER y guía de recreación | Artefactos listos; evidencia manual pendiente |
 | Gestión de backlog | Jira | CSV de importación + guía | Pendiente |
 | Documentación | Confluence | Páginas en Markdown | Pendiente |
 | Gestión de trabajo y CI | Azure DevOps | CSV de work items + pipeline YAML | Pendiente |
-| Modelado de procesos | Bizagi / Camunda / Signavio | `.bpmn` BPMN 2.0 | Pendiente |
-| Modelado de decisiones | DMN (Camunda / Signavio) | `.dmn` | Pendiente |
-| Diagramación | Lucidchart / Visio / Miro | Mermaid/PlantUML + guía | Pendiente |
 | Datos y consultas | SQL (SQLite) | Esquema, consultas, reglas | Pendiente |
 | Modelado de requisitos | Historias de usuario / Gherkin | Backlog y criterios de aceptación | Pendiente |
 | Diseño de pantallas | Balsamiq / Figma | Especificaciones + prototipo | Pendiente |
@@ -83,7 +104,7 @@ Cada carpeta contiene un `README.md` corto con su propósito, contenidos esperad
 | Fase | Estado |
 |---|---|
 | 0 — Preparación del repositorio | Completada |
-| 1 — Negocio y procesos | Pendiente |
+| 1 — Negocio y procesos | Completada en artefactos; evidencias manuales pendientes |
 | 2 — Requerimientos | Pendiente |
 | 3 — Core bancario y middleware | Pendiente |
 | 4 — Mensajería | Pendiente |

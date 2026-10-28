@@ -2,7 +2,7 @@
 
 **Proyecto:** NovaBank Instant & Cross-Border Payments + AML Hub (caso ficticio)
 **Rol:** Business Analyst end-to-end
-**Estado actual:** Fase 0 completada — scaffold listo. Siguiente: Fase 1.
+**Estado actual:** Fase 1 completada en artefactos; pendientes evidencias manuales y cierre.
 **Última actualización:** 2026-10-27
 
 > Convención: marcar `[x]` solo cuando el artefacto exista y esté verificado.
@@ -27,23 +27,23 @@
 
 **Objetivo:** entender el problema, el contexto regulatorio y modelar el negocio antes de especificar.
 
-- [ ] BRD: contexto, objetivos, alcance, fuera de alcance, KPIs, restricciones.
-- [ ] Mapa de stakeholders y matriz RACI.
-- [ ] Registro de riesgos (probabilidad, impacto, mitigación, dueño).
-- [ ] Glosario bilingüe ES/EN (pagos, mensajería, AML).
-- [ ] Mapa de procesos AS-IS y TO-BE (onboarding, pagos, alertas).
-- [ ] BPMN 2.0: onboarding/KYC.
-- [ ] BPMN 2.0: transferencia instantánea local (SPI-like).
-- [ ] BPMN 2.0: transferencia internacional (SWIFT / ISO 20022).
-- [ ] BPMN 2.0: gestión de alertas AML y escalamiento.
-- [ ] BPMN 2.0: investigación y ROS.
-- [ ] DMN: scoring de riesgo de cliente.
-- [ ] DMN: enrutamiento y priorización de alertas.
-- [ ] DMN: límites, bloqueos y aprobaciones.
-- [ ] Diagramas: contexto C4 (L1), flujo de datos, journeys.
-- [ ] Investigación normativa oficial (BCP/SPI, SEPRELAD, GAFI) y registro en `docs/FUENTES.md`.
-- [ ] Artefactos importables para Bizagi/Camunda/Signavio (`.bpmn`, `.dmn`) y guía para Lucidchart/Visio/Miro.
-- [ ] Evidencias manuales de Fase 1 en `docs/EVIDENCIAS.md`.
+- [x] BRD: contexto, objetivos, alcance, fuera de alcance, KPIs, restricciones.
+- [x] Mapa de stakeholders y matriz RACI.
+- [x] Registro de riesgos (probabilidad, impacto, mitigación, dueño).
+- [x] Glosario bilingüe ES/EN (pagos, mensajería, AML).
+- [x] Mapa de procesos AS-IS y TO-BE (onboarding, pagos, alertas).
+- [x] BPMN 2.0: onboarding/KYC.
+- [x] BPMN 2.0: transferencia instantánea local (SPI-like).
+- [x] BPMN 2.0: transferencia internacional (SWIFT / ISO 20022).
+- [x] BPMN 2.0: gestión de alertas AML y escalamiento.
+- [x] BPMN 2.0: investigación y ROS.
+- [x] DMN: scoring de riesgo de cliente.
+- [x] DMN: enrutamiento y priorización de alertas.
+- [x] DMN: límites, bloqueos y aprobaciones.
+- [x] Diagramas: contexto C4 (L1), flujo de datos, journeys.
+- [x] Investigación normativa oficial (BCP/SPI, SEPRELAD, GAFI) y registro en `docs/FUENTES.md`.
+- [x] Artefactos importables para Bizagi/Camunda/Signavio (`.bpmn`, `.dmn`) y guía para Lucidchart/Visio/Miro.
+- [ ] Evidencias manuales de Fase 1 en `docs/EVIDENCIAS.md` (EV-004, EV-005: requieren acción del autor).
 - [ ] Commit(s) + push de cierre de fase.
 
 **Entregables clave:** BRD, BPMN, DMN, matriz de riesgos, glosario, mapa de fuentes.
@@ -174,3 +174,4 @@
 | Fecha | Fase | Nota |
 |---|---|---|
 | 2026-10-27 | 0 | Scaffold del repositorio, gobernanza y README inicial. |
+| 2026-10-27 | 1 | BRD, stakeholders, riesgos, glosario, KPIs, contexto regulatorio, 6 BPMN, 4 DMN, Mermaid, C4/ER/journeys y guía visual. Pendientes: EV-004, EV-005 y push de cierre. |
