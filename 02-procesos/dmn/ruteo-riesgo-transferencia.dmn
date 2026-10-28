@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
+             id="definitions_ruteo_riesgo"
+             name="Ruteo de riesgo de transferencia"
+             namespace="http://novabank.example/dmn/ruteo">
+  <decision id="Decision_RuteoTransferencia" name="Ruteo de riesgo de transferencia">
+    <informationRequirement id="IR_Ruteo_1">
+      <requiredInput href="#InputData_monto_gy" />
+    </informationRequirement>
+    <informationRequirement id="IR_Ruteo_2">
+      <requiredInput href="#InputData_pais_destino" />
+    </informationRequirement>
+    <informationRequirement id="IR_Ruteo_3">
+      <requiredInput href="#InputData_perfil_cliente" />
+    </informationRequirement>
+    <informationRequirement id="IR_Ruteo_4">
+      <requiredInput href="#InputData_canal" />
+    </informationRequirement>
+    <informationRequirement id="IR_Ruteo_5">
+      <requiredInput href="#InputData_tipo_transferencia" />
+    </informationRequirement>
+    <informationRequirement id="IR_Ruteo_6">
+      <requiredInput href="#InputData_es_pep" />
+    </informationRequirement>
+    <informationRequirement id="IR_Ruteo_7">
+      <requiredInput href="#InputData_en_lista_sanciones" />
+    </informationRequirement>
+    <decisionTable id="DT_RuteoTransferencia" hitPolicy="FIRST" outputLabel="Ruteo">
+      <input id="In_Ruteo_1" label="Monto (PYG)">
+        <inputExpression id="IE_Ruteo_1" typeRef="number">
+          <text>monto_gy</text>
+        </inputExpression>
+      </input>
+      <input id="In_Ruteo_2" label="País de destino">
+        <inputExpression id="IE_Ruteo_2" typeRef="string">
+          <text>pais_destino</text>
+        </inputExpression>
+      </input>
+      <input id="In_Ruteo_3" label="Perfil del cliente">
+        <inputExpression id="IE_Ruteo_3" typeRef="string">
+          <text>perfil_cliente</text>
+        </inputExpression>
+      </input>
+      <input id="In_Ruteo_4" label="Canal">
+        <inputExpression id="IE_Ruteo_4" typeRef="string">
+          <text>canal</text>
+        </inputExpression>
+      </input>
+      <input id="In_Ruteo_5" label="Tipo de transferencia">
+        <inputExpression id="IE_Ruteo_5" typeRef="string">
+          <text>tipo_transferencia</text>
+        </inputExpression>
+      </input>
+      <input id="In_Ruteo_6" label="¿Es PEP?">
+        <inputExpression id="IE_Ruteo_6" typeRef="boolean">
+          <text>es_pep</text>
+        </inputExpression>
+      </input>
+      <input id="In_Ruteo_7" label="¿En lista de sanciones?">
+        <inputExpression id="IE_Ruteo_7" typeRef="boolean">
+          <text>en_lista_sanciones</text>
+        </inputExpression>
+      </input>
+      <output id="Out_Ruteo_1" name="nivel_riesgo" label="Nivel de riesgo" typeRef="string" />
+      <output id="Out_Ruteo_2" name="ruta" label="Ruta" typeRef="string" />
+      <output id="Out_Ruteo_3" name="prioridad" label="Prioridad" typeRef="string" />
+      <output id="Out_Ruteo_4" name="requiere_aprobacion" label="¿Requiere aprobación?" typeRef="boolean" />
+      <output id="Out_Ruteo_5" name="motivo" label="Motivo" typeRef="string" />
+      <rule id="Rule_Ruteo_1">
+        <inputEntry id="IRule_Ruteo_1_1"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_1_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_1_3"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_1_4"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_1_5"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_1_6"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_1_7"><text>true</text></inputEntry>
+        <outputEntry id="ORule_Ruteo_1_1"><text>"BLOQUEO"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_1_2"><text>"BLOQUEO"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_1_3"><text>"P1"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_1_4"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_1_5"><text>"Coincidencia en lista de sanciones"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Ruteo_2">
+        <inputEntry id="IRule_Ruteo_2_1"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_2_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_2_3"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_2_4"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_2_5"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_2_6"><text>true</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_2_7"><text>false</text></inputEntry>
+        <outputEntry id="ORule_Ruteo_2_1"><text>"ALTO"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_2_2"><text>"EDD"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_2_3"><text>"P1"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_2_4"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_2_5"><text>"Cliente PEP: debida diligencia reforzada"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Ruteo_3">
+        <inputEntry id="IRule_Ruteo_3_1"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_3_2"><text>"IR","KP","SY"</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_3_3"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_3_4"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_3_5"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_3_6"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_3_7"><text>false</text></inputEntry>
+        <outputEntry id="ORule_Ruteo_3_1"><text>"ALTO"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_3_2"><text>"EDD_MANUAL"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_3_3"><text>"P1"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_3_4"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_3_5"><text>"País de alto riesgo según lista ficticia"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Ruteo_4">
+        <inputEntry id="IRule_Ruteo_4_1"><text>&gt; 10000000</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_4_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_4_3"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_4_4"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_4_5"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_4_6"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_4_7"><text>false</text></inputEntry>
+        <outputEntry id="ORule_Ruteo_4_1"><text>"ALTO"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_4_2"><text>"REVISION_MANUAL"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_4_3"><text>"P1"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_4_4"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_4_5"><text>"Excede el límite operativo del caso"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Ruteo_5">
+        <inputEntry id="IRule_Ruteo_5_1"><text>&gt;= 5000000</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_5_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_5_3"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_5_4"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_5_5"><text>"INTERNACIONAL"</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_5_6"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_5_7"><text>false</text></inputEntry>
+        <outputEntry id="ORule_Ruteo_5_1"><text>"MEDIO"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_5_2"><text>"SCREENING_REFORZADO"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_5_3"><text>"P2"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_5_4"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_5_5"><text>"Monto internacional relevante"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Ruteo_6">
+        <inputEntry id="IRule_Ruteo_6_1"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_6_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_6_3"><text>"ALTO"</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_6_4"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_6_5"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_6_6"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_6_7"><text>false</text></inputEntry>
+        <outputEntry id="ORule_Ruteo_6_1"><text>"MEDIO"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_6_2"><text>"SCREENING_REFORZADO"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_6_3"><text>"P2"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_6_4"><text>false</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_6_5"><text>"Perfil de riesgo alto"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Ruteo_7">
+        <inputEntry id="IRule_Ruteo_7_1"><text>&gt;= 2000000</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_7_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_7_3"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_7_4"><text>"API"</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_7_5"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_7_6"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_7_7"><text>false</text></inputEntry>
+        <outputEntry id="ORule_Ruteo_7_1"><text>"MEDIO"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_7_2"><text>"MONITOREO"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_7_3"><text>"P2"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_7_4"><text>false</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_7_5"><text>"Canal API y monto relevante"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Ruteo_8">
+        <inputEntry id="IRule_Ruteo_8_1"><text>&gt;= 1000000</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_8_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_8_3"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_8_4"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_8_5"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_8_6"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_8_7"><text>false</text></inputEntry>
+        <outputEntry id="ORule_Ruteo_8_1"><text>"MEDIO"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_8_2"><text>"MONITOREO"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_8_3"><text>"P3"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_8_4"><text>false</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_8_5"><text>"Monto sobre el umbral de monitoreo"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Ruteo_9">
+        <inputEntry id="IRule_Ruteo_9_1"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_9_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_9_3"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_9_4"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_9_5"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_9_6"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Ruteo_9_7"><text>false</text></inputEntry>
+        <outputEntry id="ORule_Ruteo_9_1"><text>"BAJO"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_9_2"><text>"STP"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_9_3"><text>"P3"</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_9_4"><text>false</text></outputEntry>
+        <outputEntry id="ORule_Ruteo_9_5"><text>"Sin señales de riesgo relevantes"</text></outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_monto_gy" name="Monto en guaraníes">
+    <variable id="Var_monto_gy" name="monto_gy" typeRef="number" />
+  </inputData>
+  <inputData id="InputData_pais_destino" name="País de destino">
+    <variable id="Var_pais_destino" name="pais_destino" typeRef="string" />
+  </inputData>
+  <inputData id="InputData_perfil_cliente" name="Perfil de riesgo del cliente">
+    <variable id="Var_perfil_cliente" name="perfil_cliente" typeRef="string" />
+  </inputData>
+  <inputData id="InputData_canal" name="Canal de origen">
+    <variable id="Var_canal" name="canal" typeRef="string" />
+  </inputData>
+  <inputData id="InputData_tipo_transferencia" name="Tipo de transferencia">
+    <variable id="Var_tipo_transferencia" name="tipo_transferencia" typeRef="string" />
+  </inputData>
+  <inputData id="InputData_es_pep" name="¿Es persona expuesta políticamente?">
+    <variable id="Var_es_pep" name="es_pep" typeRef="boolean" />
+  </inputData>
+  <inputData id="InputData_en_lista_sanciones" name="¿Está en lista de sanciones?">
+    <variable id="Var_en_lista_sanciones" name="en_lista_sanciones" typeRef="boolean" />
+  </inputData>
+</definitions>

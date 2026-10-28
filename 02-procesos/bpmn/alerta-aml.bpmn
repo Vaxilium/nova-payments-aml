@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  id="Definitions_alert"
+                  targetNamespace="http://novabank.example/bpmn"
+                  exporter="NovaBank BA"
+                  exporterVersion="1.0">
+  <bpmn:collaboration id="Collab_alert">
+    <bpmn:participant id="Participant_alert" name="Gestión de alerta AML — TO-BE" processRef="Process_alert" />
+  </bpmn:collaboration>
+
+  <bpmn:process id="Process_alert" name="Gestión de alerta AML — TO-BE" isExecutable="false">
+    <bpmn:documentation>Proceso objetivo de evaluación de reglas, creación y priorización de alertas, asignación, investigación, EDD y decisión de escalar o cerrar. Modelo de diseño, no ejecutable.</bpmn:documentation>
+    <bpmn:laneSet id="LaneSet_alert">
+      <bpmn:lane id="Lane_alert_1" name="Monitoreo">
+        <bpmn:flowNodeRef>Start_Alerta</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_EvaluarReglas</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_GeneraAlerta</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_SinAlerta</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_alert_2" name="Analista AML">
+        <bpmn:flowNodeRef>Task_Investigar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_RequiereEDDAlerta</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_SolicitarInfo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Documentar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_Sospecha</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_EscalarROS</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_CasoEscalado</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_alert_3" name="Supervisor AML">
+        <bpmn:flowNodeRef>Task_Priorizar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Asignar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_CerrarCaso</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_CasoCerrado</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_alert_4" name="Sistemas">
+        <bpmn:flowNodeRef>Task_CrearAlerta</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start_Alerta" name="Transacción registrada">
+      <bpmn:outgoing>F_Alr_01</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="Task_EvaluarReglas" name="Evaluar reglas de monitoreo">
+      <bpmn:incoming>F_Alr_01</bpmn:incoming>
+      <bpmn:outgoing>F_Alr_02</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="GW_GeneraAlerta" name="¿Genera alerta?" default="F_Alr_03">
+      <bpmn:incoming>F_Alr_02</bpmn:incoming>
+      <bpmn:outgoing>F_Alr_03</bpmn:outgoing>
+      <bpmn:outgoing>F_Alr_04</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="End_SinAlerta" name="Sin alerta">
+      <bpmn:incoming>F_Alr_03</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Task_CrearAlerta" name="Crear alerta con contexto">
+      <bpmn:incoming>F_Alr_04</bpmn:incoming>
+      <bpmn:outgoing>F_Alr_05</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_Priorizar" name="Priorizar con DMN">
+      <bpmn:incoming>F_Alr_05</bpmn:incoming>
+      <bpmn:outgoing>F_Alr_06</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Task_Asignar" name="Asignar analista y SLA">
+      <bpmn:incoming>F_Alr_06</bpmn:incoming>
+      <bpmn:outgoing>F_Alr_07</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_Investigar" name="Investigar y reunir evidencia">
+      <bpmn:incoming>F_Alr_07</bpmn:incoming>
+      <bpmn:incoming>F_Alr_10</bpmn:incoming>
+      <bpmn:outgoing>F_Alr_08</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="GW_RequiereEDDAlerta" name="¿Requiere EDD?" default="F_Alr_11">
+      <bpmn:incoming>F_Alr_08</bpmn:incoming>
+      <bpmn:outgoing>F_Alr_09</bpmn:outgoing>
+      <bpmn:outgoing>F_Alr_11</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_SolicitarInfo" name="Solicitar información adicional">
+      <bpmn:incoming>F_Alr_09</bpmn:incoming>
+      <bpmn:outgoing>F_Alr_10</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_Documentar" name="Documentar decisión">
+      <bpmn:incoming>F_Alr_11</bpmn:incoming>
+      <bpmn:outgoing>F_Alr_12</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="GW_Sospecha" name="¿Existe sospecha?" default="F_Alr_15">
+      <bpmn:incoming>F_Alr_12</bpmn:incoming>
+      <bpmn:outgoing>F_Alr_13</bpmn:outgoing>
+      <bpmn:outgoing>F_Alr_15</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_EscalarROS" name="Escalar a investigación/ROS">
+      <bpmn:incoming>F_Alr_13</bpmn:incoming>
+      <bpmn:outgoing>F_Alr_14</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_CerrarCaso" name="Cerrar caso con evidencia">
+      <bpmn:incoming>F_Alr_15</bpmn:incoming>
+      <bpmn:outgoing>F_Alr_16</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="End_CasoEscalado" name="Caso escalado a ROS">
+      <bpmn:incoming>F_Alr_14</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="End_CasoCerrado" name="Caso cerrado">
+      <bpmn:incoming>F_Alr_16</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="F_Alr_01" sourceRef="Start_Alerta" targetRef="Task_EvaluarReglas">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Alr_02" sourceRef="Task_EvaluarReglas" targetRef="GW_GeneraAlerta">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Alr_03" sourceRef="GW_GeneraAlerta" targetRef="End_SinAlerta" name="No">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Alr_04" sourceRef="GW_GeneraAlerta" targetRef="Task_CrearAlerta" name="Sí">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">aprobado == true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Alr_05" sourceRef="Task_CrearAlerta" targetRef="Task_Priorizar">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Alr_06" sourceRef="Task_Priorizar" targetRef="Task_Asignar">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Alr_07" sourceRef="Task_Asignar" targetRef="Task_Investigar">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Alr_08" sourceRef="Task_Investigar" targetRef="GW_RequiereEDDAlerta">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Alr_09" sourceRef="GW_RequiereEDDAlerta" targetRef="Task_SolicitarInfo" name="Sí">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">aprobado == true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Alr_10" sourceRef="Task_SolicitarInfo" targetRef="Task_Investigar">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Alr_11" sourceRef="GW_RequiereEDDAlerta" targetRef="Task_Documentar" name="No">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Alr_12" sourceRef="Task_Documentar" targetRef="GW_Sospecha">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Alr_13" sourceRef="GW_Sospecha" targetRef="Task_EscalarROS" name="Sí">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">aprobado == true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Alr_14" sourceRef="Task_EscalarROS" targetRef="End_CasoEscalado">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Alr_15" sourceRef="GW_Sospecha" targetRef="Task_CerrarCaso" name="No">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Alr_16" sourceRef="Task_CerrarCaso" targetRef="End_CasoCerrado">
+
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_alert">
+    <bpmndi:BPMNPlane id="Plane_alert" bpmnElement="Collab_alert">
+      <bpmndi:BPMNShape id="Participant_alert_di" bpmnElement="Participant_alert" isHorizontal="true">
+        <dc:Bounds x="40" y="40" width="2720" height="620" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_alert_1_di" bpmnElement="Lane_alert_1" isHorizontal="true">
+        <dc:Bounds x="40" y="40" width="2720" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_alert_2_di" bpmnElement="Lane_alert_2" isHorizontal="true">
+        <dc:Bounds x="40" y="190" width="2720" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_alert_3_di" bpmnElement="Lane_alert_3" isHorizontal="true">
+        <dc:Bounds x="40" y="340" width="2720" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_alert_4_di" bpmnElement="Lane_alert_4" isHorizontal="true">
+        <dc:Bounds x="40" y="490" width="2720" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_Alerta_di" bpmnElement="Start_Alerta">
+        <dc:Bounds x="202.0" y="97.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_EvaluarReglas_di" bpmnElement="Task_EvaluarReglas">
+        <dc:Bounds x="350.0" y="80.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_GeneraAlerta_di" bpmnElement="GW_GeneraAlerta">
+        <dc:Bounds x="575.0" y="90.0" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_SinAlerta_di" bpmnElement="End_SinAlerta">
+        <dc:Bounds x="772.0" y="97.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_CrearAlerta_di" bpmnElement="Task_CrearAlerta">
+        <dc:Bounds x="730.0" y="530.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Priorizar_di" bpmnElement="Task_Priorizar">
+        <dc:Bounds x="920.0" y="380.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Asignar_di" bpmnElement="Task_Asignar">
+        <dc:Bounds x="1110.0" y="380.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Investigar_di" bpmnElement="Task_Investigar">
+        <dc:Bounds x="1300.0" y="230.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_RequiereEDDAlerta_di" bpmnElement="GW_RequiereEDDAlerta">
+        <dc:Bounds x="1525.0" y="240.0" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_SolicitarInfo_di" bpmnElement="Task_SolicitarInfo">
+        <dc:Bounds x="1680.0" y="230.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Documentar_di" bpmnElement="Task_Documentar">
+        <dc:Bounds x="1870.0" y="230.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_Sospecha_di" bpmnElement="GW_Sospecha">
+        <dc:Bounds x="2095.0" y="240.0" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_EscalarROS_di" bpmnElement="Task_EscalarROS">
+        <dc:Bounds x="2250.0" y="230.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_CerrarCaso_di" bpmnElement="Task_CerrarCaso">
+        <dc:Bounds x="2250.0" y="380.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_CasoEscalado_di" bpmnElement="End_CasoEscalado">
+        <dc:Bounds x="2482.0" y="247.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_CasoCerrado_di" bpmnElement="End_CasoCerrado">
+        <dc:Bounds x="2482.0" y="397.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="F_Alr_01_di" bpmnElement="F_Alr_01">
+        <di:waypoint x="238.0" y="115.0" />
+        <di:waypoint x="294.0" y="115.0" />
+        <di:waypoint x="294.0" y="115.0" />
+        <di:waypoint x="350.0" y="115.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Alr_02_di" bpmnElement="F_Alr_02">
+        <di:waypoint x="470.0" y="115.0" />
+        <di:waypoint x="522.5" y="115.0" />
+        <di:waypoint x="522.5" y="115.0" />
+        <di:waypoint x="575.0" y="115.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Alr_03_di" bpmnElement="F_Alr_03">
+        <di:waypoint x="625.0" y="115.0" />
+        <di:waypoint x="698.5" y="115.0" />
+        <di:waypoint x="698.5" y="115.0" />
+        <di:waypoint x="772.0" y="115.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="690.5" y="101.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Alr_04_di" bpmnElement="F_Alr_04">
+        <di:waypoint x="625.0" y="115.0" />
+        <di:waypoint x="677.5" y="115.0" />
+        <di:waypoint x="677.5" y="565.0" />
+        <di:waypoint x="730.0" y="565.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="669.5" y="326.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Alr_05_di" bpmnElement="F_Alr_05">
+        <di:waypoint x="850.0" y="565.0" />
+        <di:waypoint x="885.0" y="565.0" />
+        <di:waypoint x="885.0" y="415.0" />
+        <di:waypoint x="920.0" y="415.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Alr_06_di" bpmnElement="F_Alr_06">
+        <di:waypoint x="1040.0" y="415.0" />
+        <di:waypoint x="1075.0" y="415.0" />
+        <di:waypoint x="1075.0" y="415.0" />
+        <di:waypoint x="1110.0" y="415.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Alr_07_di" bpmnElement="F_Alr_07">
+        <di:waypoint x="1230.0" y="415.0" />
+        <di:waypoint x="1265.0" y="415.0" />
+        <di:waypoint x="1265.0" y="265.0" />
+        <di:waypoint x="1300.0" y="265.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Alr_08_di" bpmnElement="F_Alr_08">
+        <di:waypoint x="1420.0" y="265.0" />
+        <di:waypoint x="1472.5" y="265.0" />
+        <di:waypoint x="1472.5" y="265.0" />
+        <di:waypoint x="1525.0" y="265.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Alr_09_di" bpmnElement="F_Alr_09">
+        <di:waypoint x="1575.0" y="265.0" />
+        <di:waypoint x="1627.5" y="265.0" />
+        <di:waypoint x="1627.5" y="265.0" />
+        <di:waypoint x="1680.0" y="265.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1619.5" y="251.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Alr_10_di" bpmnElement="F_Alr_10">
+        <di:waypoint x="1740.0" y="300.0" />
+        <di:waypoint x="1740.0" y="335.0" />
+        <di:waypoint x="1360.0" y="335.0" />
+        <di:waypoint x="1360.0" y="230.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Alr_11_di" bpmnElement="F_Alr_11">
+        <di:waypoint x="1575.0" y="265.0" />
+        <di:waypoint x="1722.5" y="265.0" />
+        <di:waypoint x="1722.5" y="265.0" />
+        <di:waypoint x="1870.0" y="265.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1714.5" y="251.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Alr_12_di" bpmnElement="F_Alr_12">
+        <di:waypoint x="1990.0" y="265.0" />
+        <di:waypoint x="2042.5" y="265.0" />
+        <di:waypoint x="2042.5" y="265.0" />
+        <di:waypoint x="2095.0" y="265.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Alr_13_di" bpmnElement="F_Alr_13">
+        <di:waypoint x="2145.0" y="265.0" />
+        <di:waypoint x="2197.5" y="265.0" />
+        <di:waypoint x="2197.5" y="265.0" />
+        <di:waypoint x="2250.0" y="265.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2189.5" y="251.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Alr_14_di" bpmnElement="F_Alr_14">
+        <di:waypoint x="2370.0" y="265.0" />
+        <di:waypoint x="2426.0" y="265.0" />
+        <di:waypoint x="2426.0" y="265.0" />
+        <di:waypoint x="2482.0" y="265.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Alr_15_di" bpmnElement="F_Alr_15">
+        <di:waypoint x="2145.0" y="265.0" />
+        <di:waypoint x="2197.5" y="265.0" />
+        <di:waypoint x="2197.5" y="415.0" />
+        <di:waypoint x="2250.0" y="415.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2189.5" y="326.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Alr_16_di" bpmnElement="F_Alr_16">
+        <di:waypoint x="2370.0" y="415.0" />
+        <di:waypoint x="2426.0" y="415.0" />
+        <di:waypoint x="2426.0" y="415.0" />
+        <di:waypoint x="2482.0" y="415.0" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

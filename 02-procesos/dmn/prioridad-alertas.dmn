@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
+             id="definitions_prioridad_alertas"
+             name="Prioridad de alertas AML"
+             namespace="http://novabank.example/dmn/prioridad-alertas">
+  <decision id="Decision_PrioridadAlerta" name="Prioridad de alerta AML">
+    <informationRequirement id="IR_Prioridad_1">
+      <requiredInput href="#InputData_tipo_alerta" />
+    </informationRequirement>
+    <informationRequirement id="IR_Prioridad_2">
+      <requiredInput href="#InputData_monto_alerta" />
+    </informationRequirement>
+    <informationRequirement id="IR_Prioridad_3">
+      <requiredInput href="#InputData_es_pep_alerta" />
+    </informationRequirement>
+    <informationRequirement id="IR_Prioridad_4">
+      <requiredInput href="#InputData_en_lista_sanciones_alerta" />
+    </informationRequirement>
+    <informationRequirement id="IR_Prioridad_5">
+      <requiredInput href="#InputData_pais_destino_alerta" />
+    </informationRequirement>
+    <informationRequirement id="IR_Prioridad_6">
+      <requiredInput href="#InputData_reincidencia_90d" />
+    </informationRequirement>
+    <informationRequirement id="IR_Prioridad_7">
+      <requiredInput href="#InputData_canal_alerta" />
+    </informationRequirement>
+    <decisionTable id="DT_PrioridadAlerta" hitPolicy="FIRST" outputLabel="Prioridad">
+      <input id="In_Prioridad_1" label="Tipo de alerta">
+        <inputExpression id="IE_Prioridad_1" typeRef="string">
+          <text>tipo_alerta</text>
+        </inputExpression>
+      </input>
+      <input id="In_Prioridad_2" label="Monto (PYG)">
+        <inputExpression id="IE_Prioridad_2" typeRef="number">
+          <text>monto_gy</text>
+        </inputExpression>
+      </input>
+      <input id="In_Prioridad_3" label="¿Es PEP?">
+        <inputExpression id="IE_Prioridad_3" typeRef="boolean">
+          <text>es_pep</text>
+        </inputExpression>
+      </input>
+      <input id="In_Prioridad_4" label="¿En lista de sanciones?">
+        <inputExpression id="IE_Prioridad_4" typeRef="boolean">
+          <text>en_lista_sanciones</text>
+        </inputExpression>
+      </input>
+      <input id="In_Prioridad_5" label="País de destino">
+        <inputExpression id="IE_Prioridad_5" typeRef="string">
+          <text>pais_destino</text>
+        </inputExpression>
+      </input>
+      <input id="In_Prioridad_6" label="Reincidencia en 90 días">
+        <inputExpression id="IE_Prioridad_6" typeRef="number">
+          <text>reincidencia_90d</text>
+        </inputExpression>
+      </input>
+      <input id="In_Prioridad_7" label="Canal">
+        <inputExpression id="IE_Prioridad_7" typeRef="string">
+          <text>canal</text>
+        </inputExpression>
+      </input>
+      <output id="Out_Prioridad_1" name="prioridad" label="Prioridad" typeRef="string" />
+      <output id="Out_Prioridad_2" name="sla_minutos" label="SLA (minutos)" typeRef="number" />
+      <output id="Out_Prioridad_3" name="requiere_escalamiento" label="¿Requiere escalamiento?" typeRef="boolean" />
+      <output id="Out_Prioridad_4" name="motivo" label="Motivo" typeRef="string" />
+      <rule id="Rule_Prioridad_1">
+        <inputEntry id="IRule_Prioridad_1_1"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_1_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_1_3"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_1_4"><text>true</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_1_5"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_1_6"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_1_7"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Prioridad_1_1"><text>"P1"</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_1_2"><text>15</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_1_3"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_1_4"><text>"Coincidencia en lista de sanciones"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Prioridad_2">
+        <inputEntry id="IRule_Prioridad_2_1"><text>"ESTRUCTURACION"</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_2_2"><text>&gt;= 5000000</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_2_3"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_2_4"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_2_5"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_2_6"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_2_7"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Prioridad_2_1"><text>"P1"</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_2_2"><text>15</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_2_3"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_2_4"><text>"Estructuración de monto relevante"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Prioridad_3">
+        <inputEntry id="IRule_Prioridad_3_1"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_3_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_3_3"><text>true</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_3_4"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_3_5"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_3_6"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_3_7"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Prioridad_3_1"><text>"P1"</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_3_2"><text>30</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_3_3"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_3_4"><text>"Alerta sobre cliente PEP"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Prioridad_4">
+        <inputEntry id="IRule_Prioridad_4_1"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_4_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_4_3"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_4_4"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_4_5"><text>"IR","KP","SY"</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_4_6"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_4_7"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Prioridad_4_1"><text>"P1"</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_4_2"><text>30</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_4_3"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_4_4"><text>"País de alto riesgo según lista ficticia"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Prioridad_5">
+        <inputEntry id="IRule_Prioridad_5_1"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_5_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_5_3"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_5_4"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_5_5"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_5_6"><text>&gt;= 3</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_5_7"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Prioridad_5_1"><text>"P2"</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_5_2"><text>60</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_5_3"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_5_4"><text>"Reincidencia en 90 días"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Prioridad_6">
+        <inputEntry id="IRule_Prioridad_6_1"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_6_2"><text>&gt;= 5000000</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_6_3"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_6_4"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_6_5"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_6_6"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_6_7"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Prioridad_6_1"><text>"P2"</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_6_2"><text>60</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_6_3"><text>false</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_6_4"><text>"Monto sobre umbral de revisión"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Prioridad_7">
+        <inputEntry id="IRule_Prioridad_7_1"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_7_2"><text>&gt;= 2000000</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_7_3"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_7_4"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_7_5"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_7_6"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_7_7"><text>"API"</text></inputEntry>
+        <outputEntry id="ORule_Prioridad_7_1"><text>"P3"</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_7_2"><text>240</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_7_3"><text>false</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_7_4"><text>"Canal API y monto relevante"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Prioridad_8">
+        <inputEntry id="IRule_Prioridad_8_1"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_8_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_8_3"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_8_4"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_8_5"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_8_6"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Prioridad_8_7"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Prioridad_8_1"><text>"P3"</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_8_2"><text>480</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_8_3"><text>false</text></outputEntry>
+        <outputEntry id="ORule_Prioridad_8_4"><text>"Alerta estándar"</text></outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_tipo_alerta" name="Tipo de alerta">
+    <variable id="Var_tipo_alerta" name="tipo_alerta" typeRef="string" />
+  </inputData>
+  <inputData id="InputData_monto_alerta" name="Monto de la operación">
+    <variable id="Var_monto_alerta" name="monto_gy" typeRef="number" />
+  </inputData>
+  <inputData id="InputData_es_pep_alerta" name="¿Es PEP?">
+    <variable id="Var_es_pep_alerta" name="es_pep" typeRef="boolean" />
+  </inputData>
+  <inputData id="InputData_en_lista_sanciones_alerta" name="¿En lista de sanciones?">
+    <variable id="Var_en_lista_sanciones_alerta" name="en_lista_sanciones" typeRef="boolean" />
+  </inputData>
+  <inputData id="InputData_pais_destino_alerta" name="País de destino">
+    <variable id="Var_pais_destino_alerta" name="pais_destino" typeRef="string" />
+  </inputData>
+  <inputData id="InputData_reincidencia_90d" name="Reincidencia en 90 días">
+    <variable id="Var_reincidencia_90d" name="reincidencia_90d" typeRef="number" />
+  </inputData>
+  <inputData id="InputData_canal_alerta" name="Canal">
+    <variable id="Var_canal_alerta" name="canal" typeRef="string" />
+  </inputData>
+</definitions>

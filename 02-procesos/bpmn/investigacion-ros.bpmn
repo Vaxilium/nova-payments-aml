@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  id="Definitions_ros"
+                  targetNamespace="http://novabank.example/bpmn"
+                  exporter="NovaBank BA"
+                  exporterVersion="1.0">
+  <bpmn:collaboration id="Collab_ros">
+    <bpmn:participant id="Participant_ros" name="Investigación y ROS — TO-BE" processRef="Process_ros" />
+  </bpmn:collaboration>
+
+  <bpmn:process id="Process_ros" name="Investigación y ROS — TO-BE" isExecutable="false">
+    <bpmn:documentation>Proceso objetivo de investigación, decisión de sospecha, preparación, revisión, aprobación, registro y reporte simulado de ROS con reserva. Modelo de diseño, no ejecutable.</bpmn:documentation>
+    <bpmn:laneSet id="LaneSet_ros">
+      <bpmn:lane id="Lane_ros_1" name="Analista AML">
+        <bpmn:flowNodeRef>Start_ROS</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ReunirEvidencia</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Redactar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_CerrarSinROS</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_CasoCerrado</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_PrepararROS</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Devolver</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_ros_2" name="Supervisor AML">
+        <bpmn:flowNodeRef>GW_ExisteSospecha</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_RevisarROS</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_ROS_Aprobado</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_ros_3" name="Oficial de Cumplimiento">
+        <bpmn:flowNodeRef>Task_RegistrarROS</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Reserva</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_ROSReportado</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_ros_4" name="Sistemas">
+        <bpmn:flowNodeRef>Task_NotificarUIF</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start_ROS" name="Caso escalado recibido">
+      <bpmn:outgoing>F_ROS_01</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="Task_ReunirEvidencia" name="Reunir y analizar evidencia">
+      <bpmn:incoming>F_ROS_01</bpmn:incoming>
+      <bpmn:outgoing>F_ROS_02</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_Redactar" name="Redactar narrativa y hallazgos">
+      <bpmn:incoming>F_ROS_02</bpmn:incoming>
+      <bpmn:incoming>F_ROS_10</bpmn:incoming>
+      <bpmn:outgoing>F_ROS_03</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="GW_ExisteSospecha" name="¿Existe sospecha?" default="F_ROS_04">
+      <bpmn:incoming>F_ROS_03</bpmn:incoming>
+      <bpmn:outgoing>F_ROS_04</bpmn:outgoing>
+      <bpmn:outgoing>F_ROS_06</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_CerrarSinROS" name="Cerrar caso y documentar">
+      <bpmn:incoming>F_ROS_04</bpmn:incoming>
+      <bpmn:outgoing>F_ROS_05</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="End_CasoCerrado" name="Caso cerrado sin ROS">
+      <bpmn:incoming>F_ROS_05</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="Task_PrepararROS" name="Preparar borrador de ROS">
+      <bpmn:incoming>F_ROS_06</bpmn:incoming>
+      <bpmn:outgoing>F_ROS_07</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_RevisarROS" name="Revisar ROS">
+      <bpmn:incoming>F_ROS_07</bpmn:incoming>
+      <bpmn:outgoing>F_ROS_08</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="GW_ROS_Aprobado" name="¿ROS aprobado?" default="F_ROS_09">
+      <bpmn:incoming>F_ROS_08</bpmn:incoming>
+      <bpmn:outgoing>F_ROS_09</bpmn:outgoing>
+      <bpmn:outgoing>F_ROS_11</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_Devolver" name="Devolver a análisis">
+      <bpmn:incoming>F_ROS_09</bpmn:incoming>
+      <bpmn:outgoing>F_ROS_10</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_RegistrarROS" name="Aprobar y registrar ROS">
+      <bpmn:incoming>F_ROS_11</bpmn:incoming>
+      <bpmn:outgoing>F_ROS_12</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_Reserva" name="Aplicar reserva y control de acceso">
+      <bpmn:incoming>F_ROS_12</bpmn:incoming>
+      <bpmn:outgoing>F_ROS_13</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_NotificarUIF" name="Notificar a UIF (simulado)">
+      <bpmn:incoming>F_ROS_13</bpmn:incoming>
+      <bpmn:outgoing>F_ROS_14</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="End_ROSReportado" name="ROS reportado">
+      <bpmn:incoming>F_ROS_14</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="F_ROS_01" sourceRef="Start_ROS" targetRef="Task_ReunirEvidencia">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ROS_02" sourceRef="Task_ReunirEvidencia" targetRef="Task_Redactar">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ROS_03" sourceRef="Task_Redactar" targetRef="GW_ExisteSospecha">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ROS_04" sourceRef="GW_ExisteSospecha" targetRef="Task_CerrarSinROS" name="No">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ROS_05" sourceRef="Task_CerrarSinROS" targetRef="End_CasoCerrado">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ROS_06" sourceRef="GW_ExisteSospecha" targetRef="Task_PrepararROS" name="Sí">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">aprobado == true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ROS_07" sourceRef="Task_PrepararROS" targetRef="Task_RevisarROS">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ROS_08" sourceRef="Task_RevisarROS" targetRef="GW_ROS_Aprobado">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ROS_09" sourceRef="GW_ROS_Aprobado" targetRef="Task_Devolver" name="No">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ROS_10" sourceRef="Task_Devolver" targetRef="Task_Redactar">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ROS_11" sourceRef="GW_ROS_Aprobado" targetRef="Task_RegistrarROS" name="Sí">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">aprobado == true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ROS_12" sourceRef="Task_RegistrarROS" targetRef="Task_Reserva">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ROS_13" sourceRef="Task_Reserva" targetRef="Task_NotificarUIF">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ROS_14" sourceRef="Task_NotificarUIF" targetRef="End_ROSReportado">
+
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_ros">
+    <bpmndi:BPMNPlane id="Plane_ros" bpmnElement="Collab_ros">
+      <bpmndi:BPMNShape id="Participant_ros_di" bpmnElement="Participant_ros" isHorizontal="true">
+        <dc:Bounds x="40" y="40" width="2720" height="620" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_ros_1_di" bpmnElement="Lane_ros_1" isHorizontal="true">
+        <dc:Bounds x="40" y="40" width="2720" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_ros_2_di" bpmnElement="Lane_ros_2" isHorizontal="true">
+        <dc:Bounds x="40" y="190" width="2720" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_ros_3_di" bpmnElement="Lane_ros_3" isHorizontal="true">
+        <dc:Bounds x="40" y="340" width="2720" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_ros_4_di" bpmnElement="Lane_ros_4" isHorizontal="true">
+        <dc:Bounds x="40" y="490" width="2720" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_ROS_di" bpmnElement="Start_ROS">
+        <dc:Bounds x="202.0" y="97.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ReunirEvidencia_di" bpmnElement="Task_ReunirEvidencia">
+        <dc:Bounds x="350.0" y="80.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Redactar_di" bpmnElement="Task_Redactar">
+        <dc:Bounds x="540.0" y="80.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_ExisteSospecha_di" bpmnElement="GW_ExisteSospecha">
+        <dc:Bounds x="765.0" y="240.0" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_CerrarSinROS_di" bpmnElement="Task_CerrarSinROS">
+        <dc:Bounds x="920.0" y="80.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_CasoCerrado_di" bpmnElement="End_CasoCerrado">
+        <dc:Bounds x="1152.0" y="97.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_PrepararROS_di" bpmnElement="Task_PrepararROS">
+        <dc:Bounds x="1300.0" y="80.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_RevisarROS_di" bpmnElement="Task_RevisarROS">
+        <dc:Bounds x="1490.0" y="230.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_ROS_Aprobado_di" bpmnElement="GW_ROS_Aprobado">
+        <dc:Bounds x="1715.0" y="240.0" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Devolver_di" bpmnElement="Task_Devolver">
+        <dc:Bounds x="1870.0" y="80.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_RegistrarROS_di" bpmnElement="Task_RegistrarROS">
+        <dc:Bounds x="1870.0" y="380.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Reserva_di" bpmnElement="Task_Reserva">
+        <dc:Bounds x="2060.0" y="380.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_NotificarUIF_di" bpmnElement="Task_NotificarUIF">
+        <dc:Bounds x="2250.0" y="530.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_ROSReportado_di" bpmnElement="End_ROSReportado">
+        <dc:Bounds x="2482.0" y="397.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="F_ROS_01_di" bpmnElement="F_ROS_01">
+        <di:waypoint x="238.0" y="115.0" />
+        <di:waypoint x="294.0" y="115.0" />
+        <di:waypoint x="294.0" y="115.0" />
+        <di:waypoint x="350.0" y="115.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ROS_02_di" bpmnElement="F_ROS_02">
+        <di:waypoint x="470.0" y="115.0" />
+        <di:waypoint x="505.0" y="115.0" />
+        <di:waypoint x="505.0" y="115.0" />
+        <di:waypoint x="540.0" y="115.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ROS_03_di" bpmnElement="F_ROS_03">
+        <di:waypoint x="660.0" y="115.0" />
+        <di:waypoint x="712.5" y="115.0" />
+        <di:waypoint x="712.5" y="265.0" />
+        <di:waypoint x="765.0" y="265.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ROS_04_di" bpmnElement="F_ROS_04">
+        <di:waypoint x="815.0" y="265.0" />
+        <di:waypoint x="867.5" y="265.0" />
+        <di:waypoint x="867.5" y="115.0" />
+        <di:waypoint x="920.0" y="115.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="859.5" y="176.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ROS_05_di" bpmnElement="F_ROS_05">
+        <di:waypoint x="1040.0" y="115.0" />
+        <di:waypoint x="1096.0" y="115.0" />
+        <di:waypoint x="1096.0" y="115.0" />
+        <di:waypoint x="1152.0" y="115.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ROS_06_di" bpmnElement="F_ROS_06">
+        <di:waypoint x="815.0" y="265.0" />
+        <di:waypoint x="1057.5" y="265.0" />
+        <di:waypoint x="1057.5" y="115.0" />
+        <di:waypoint x="1300.0" y="115.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1049.5" y="176.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ROS_07_di" bpmnElement="F_ROS_07">
+        <di:waypoint x="1420.0" y="115.0" />
+        <di:waypoint x="1455.0" y="115.0" />
+        <di:waypoint x="1455.0" y="265.0" />
+        <di:waypoint x="1490.0" y="265.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ROS_08_di" bpmnElement="F_ROS_08">
+        <di:waypoint x="1610.0" y="265.0" />
+        <di:waypoint x="1662.5" y="265.0" />
+        <di:waypoint x="1662.5" y="265.0" />
+        <di:waypoint x="1715.0" y="265.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ROS_09_di" bpmnElement="F_ROS_09">
+        <di:waypoint x="1765.0" y="265.0" />
+        <di:waypoint x="1817.5" y="265.0" />
+        <di:waypoint x="1817.5" y="115.0" />
+        <di:waypoint x="1870.0" y="115.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1809.5" y="176.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ROS_10_di" bpmnElement="F_ROS_10">
+        <di:waypoint x="1930.0" y="150.0" />
+        <di:waypoint x="1930.0" y="185.0" />
+        <di:waypoint x="600.0" y="185.0" />
+        <di:waypoint x="600.0" y="80.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ROS_11_di" bpmnElement="F_ROS_11">
+        <di:waypoint x="1765.0" y="265.0" />
+        <di:waypoint x="1817.5" y="265.0" />
+        <di:waypoint x="1817.5" y="415.0" />
+        <di:waypoint x="1870.0" y="415.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1809.5" y="326.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ROS_12_di" bpmnElement="F_ROS_12">
+        <di:waypoint x="1990.0" y="415.0" />
+        <di:waypoint x="2025.0" y="415.0" />
+        <di:waypoint x="2025.0" y="415.0" />
+        <di:waypoint x="2060.0" y="415.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ROS_13_di" bpmnElement="F_ROS_13">
+        <di:waypoint x="2180.0" y="415.0" />
+        <di:waypoint x="2215.0" y="415.0" />
+        <di:waypoint x="2215.0" y="565.0" />
+        <di:waypoint x="2250.0" y="565.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ROS_14_di" bpmnElement="F_ROS_14">
+        <di:waypoint x="2370.0" y="565.0" />
+        <di:waypoint x="2426.0" y="565.0" />
+        <di:waypoint x="2426.0" y="415.0" />
+        <di:waypoint x="2482.0" y="415.0" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

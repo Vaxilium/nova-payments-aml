@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  id="Definitions_local_to_be"
+                  targetNamespace="http://novabank.example/bpmn"
+                  exporter="NovaBank BA"
+                  exporterVersion="1.0">
+  <bpmn:collaboration id="Collab_local_to_be">
+    <bpmn:participant id="Participant_local_to_be" name="Transferencia instantánea local — TO-BE" processRef="Process_local_to_be" />
+  </bpmn:collaboration>
+  <bpmn:message id="Catch_ConfirmacionSPI_Msg" name="Esperar confirmación del SPI" />
+  <bpmn:process id="Process_local_to_be" name="Transferencia instantánea local — TO-BE" isExecutable="false">
+    <bpmn:documentation>Proceso objetivo de transferencia local 24/7 con validación automática, scoring de riesgo, envío al SPI, confirmación, idempotencia y conciliación. Modelo de diseño, no ejecutable.</bpmn:documentation>
+    <bpmn:laneSet id="LaneSet_local_to_be">
+      <bpmn:lane id="Lane_local_to_be_1" name="Canal">
+        <bpmn:flowNodeRef>Start_LocalToBe</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_CapturarPago</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_CorregirDatos</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_RechazoDatos</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_NotificarEstado</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_PagoCompletado</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_local_to_be_2" name="Motor de Pagos">
+        <bpmn:flowNodeRef>Task_ResolverAlias</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_DatosValidos</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_VerificarSaldo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_SaldoSuficiente</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_EnviarSPI</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Catch_ConfirmacionSPI</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_Confirmado</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Acreditar</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_local_to_be_3" name="Riesgo / AML">
+        <bpmn:flowNodeRef>Task_Scoring</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_RiesgoAprobado</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_local_to_be_4" name="Core / Contabilidad">
+        <bpmn:flowNodeRef>Task_RegistrarAsiento</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_local_to_be_5" name="Operaciones">
+        <bpmn:flowNodeRef>Task_Retener</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_GestionarRechazo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_PagoRetenido</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_PagoRechazado</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start_LocalToBe" name="Cliente inicia pago">
+      <bpmn:outgoing>F_ToBe_01</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="Task_CapturarPago" name="Capturar alias/cuenta, importe y motivo">
+      <bpmn:incoming>F_ToBe_01</bpmn:incoming>
+      <bpmn:incoming>F_ToBe_05</bpmn:incoming>
+      <bpmn:outgoing>F_ToBe_02</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_ResolverAlias" name="Resolver alias y validar datos">
+      <bpmn:incoming>F_ToBe_02</bpmn:incoming>
+      <bpmn:outgoing>F_ToBe_03</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="GW_DatosValidos" name="¿Datos y límite válidos?" default="F_ToBe_04">
+      <bpmn:incoming>F_ToBe_03</bpmn:incoming>
+      <bpmn:outgoing>F_ToBe_04</bpmn:outgoing>
+      <bpmn:outgoing>F_ToBe_06</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_CorregirDatos" name="Corregir datos">
+      <bpmn:incoming>F_ToBe_04</bpmn:incoming>
+      <bpmn:outgoing>F_ToBe_05</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_VerificarSaldo" name="Verificar saldo y límite">
+      <bpmn:incoming>F_ToBe_06</bpmn:incoming>
+      <bpmn:outgoing>F_ToBe_07</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="GW_SaldoSuficiente" name="¿Saldo suficiente?" default="F_ToBe_08">
+      <bpmn:incoming>F_ToBe_07</bpmn:incoming>
+      <bpmn:outgoing>F_ToBe_08</bpmn:outgoing>
+      <bpmn:outgoing>F_ToBe_09</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="End_RechazoDatos" name="Pago rechazado por datos">
+      <bpmn:incoming>F_ToBe_08</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Task_Scoring" name="Screening y scoring de riesgo">
+      <bpmn:incoming>F_ToBe_09</bpmn:incoming>
+      <bpmn:outgoing>F_ToBe_10</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="GW_RiesgoAprobado" name="¿Pago aprobado?" default="F_ToBe_11">
+      <bpmn:incoming>F_ToBe_10</bpmn:incoming>
+      <bpmn:outgoing>F_ToBe_11</bpmn:outgoing>
+      <bpmn:outgoing>F_ToBe_13</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_Retener" name="Retener para revisión manual">
+      <bpmn:incoming>F_ToBe_11</bpmn:incoming>
+      <bpmn:outgoing>F_ToBe_12</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_EnviarSPI" name="Enviar orden al SPI">
+      <bpmn:incoming>F_ToBe_13</bpmn:incoming>
+      <bpmn:outgoing>F_ToBe_14</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:intermediateCatchEvent id="Catch_ConfirmacionSPI" name="Esperar confirmación del SPI">
+      <bpmn:incoming>F_ToBe_14</bpmn:incoming>
+      <bpmn:outgoing>F_ToBe_15</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="Catch_ConfirmacionSPI_Message" messageRef="Catch_ConfirmacionSPI_Msg" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:exclusiveGateway id="GW_Confirmado" name="¿Confirmado?" default="F_ToBe_16">
+      <bpmn:incoming>F_ToBe_15</bpmn:incoming>
+      <bpmn:outgoing>F_ToBe_16</bpmn:outgoing>
+      <bpmn:outgoing>F_ToBe_18</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_GestionarRechazo" name="Gestionar rechazo o devolución">
+      <bpmn:incoming>F_ToBe_16</bpmn:incoming>
+      <bpmn:outgoing>F_ToBe_17</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_Acreditar" name="Acreditar y registrar asiento">
+      <bpmn:incoming>F_ToBe_18</bpmn:incoming>
+      <bpmn:outgoing>F_ToBe_19</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_RegistrarAsiento" name="Registrar partida doble">
+      <bpmn:incoming>F_ToBe_19</bpmn:incoming>
+      <bpmn:outgoing>F_ToBe_20</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_NotificarEstado" name="Notificar estado al cliente">
+      <bpmn:incoming>F_ToBe_20</bpmn:incoming>
+      <bpmn:outgoing>F_ToBe_21</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="End_PagoCompletado" name="Pago completado">
+      <bpmn:incoming>F_ToBe_21</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="End_PagoRetenido" name="Pago retenido para revisión">
+      <bpmn:incoming>F_ToBe_12</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="End_PagoRechazado" name="Pago rechazado o devuelto">
+      <bpmn:incoming>F_ToBe_17</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="F_ToBe_01" sourceRef="Start_LocalToBe" targetRef="Task_CapturarPago">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ToBe_02" sourceRef="Task_CapturarPago" targetRef="Task_ResolverAlias">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ToBe_03" sourceRef="Task_ResolverAlias" targetRef="GW_DatosValidos">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ToBe_04" sourceRef="GW_DatosValidos" targetRef="Task_CorregirDatos" name="No">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ToBe_05" sourceRef="Task_CorregirDatos" targetRef="Task_CapturarPago">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ToBe_06" sourceRef="GW_DatosValidos" targetRef="Task_VerificarSaldo" name="Sí">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">aprobado == true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ToBe_07" sourceRef="Task_VerificarSaldo" targetRef="GW_SaldoSuficiente">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ToBe_08" sourceRef="GW_SaldoSuficiente" targetRef="End_RechazoDatos" name="No">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ToBe_09" sourceRef="GW_SaldoSuficiente" targetRef="Task_Scoring" name="Sí">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">aprobado == true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ToBe_10" sourceRef="Task_Scoring" targetRef="GW_RiesgoAprobado">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ToBe_11" sourceRef="GW_RiesgoAprobado" targetRef="Task_Retener" name="No">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ToBe_12" sourceRef="Task_Retener" targetRef="End_PagoRetenido">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ToBe_13" sourceRef="GW_RiesgoAprobado" targetRef="Task_EnviarSPI" name="Sí">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">aprobado == true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ToBe_14" sourceRef="Task_EnviarSPI" targetRef="Catch_ConfirmacionSPI">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ToBe_15" sourceRef="Catch_ConfirmacionSPI" targetRef="GW_Confirmado">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ToBe_16" sourceRef="GW_Confirmado" targetRef="Task_GestionarRechazo" name="No">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ToBe_17" sourceRef="Task_GestionarRechazo" targetRef="End_PagoRechazado">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ToBe_18" sourceRef="GW_Confirmado" targetRef="Task_Acreditar" name="Sí">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">aprobado == true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ToBe_19" sourceRef="Task_Acreditar" targetRef="Task_RegistrarAsiento">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ToBe_20" sourceRef="Task_RegistrarAsiento" targetRef="Task_NotificarEstado">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_ToBe_21" sourceRef="Task_NotificarEstado" targetRef="End_PagoCompletado">
+
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_local_to_be">
+    <bpmndi:BPMNPlane id="Plane_local_to_be" bpmnElement="Collab_local_to_be">
+      <bpmndi:BPMNShape id="Participant_local_to_be_di" bpmnElement="Participant_local_to_be" isHorizontal="true">
+        <dc:Bounds x="40" y="40" width="3100" height="770" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_local_to_be_1_di" bpmnElement="Lane_local_to_be_1" isHorizontal="true">
+        <dc:Bounds x="40" y="40" width="3100" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_local_to_be_2_di" bpmnElement="Lane_local_to_be_2" isHorizontal="true">
+        <dc:Bounds x="40" y="190" width="3100" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_local_to_be_3_di" bpmnElement="Lane_local_to_be_3" isHorizontal="true">
+        <dc:Bounds x="40" y="340" width="3100" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_local_to_be_4_di" bpmnElement="Lane_local_to_be_4" isHorizontal="true">
+        <dc:Bounds x="40" y="490" width="3100" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_local_to_be_5_di" bpmnElement="Lane_local_to_be_5" isHorizontal="true">
+        <dc:Bounds x="40" y="640" width="3100" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_LocalToBe_di" bpmnElement="Start_LocalToBe">
+        <dc:Bounds x="202.0" y="97.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_CapturarPago_di" bpmnElement="Task_CapturarPago">
+        <dc:Bounds x="350.0" y="80.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ResolverAlias_di" bpmnElement="Task_ResolverAlias">
+        <dc:Bounds x="540.0" y="230.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_DatosValidos_di" bpmnElement="GW_DatosValidos">
+        <dc:Bounds x="765.0" y="240.0" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_CorregirDatos_di" bpmnElement="Task_CorregirDatos">
+        <dc:Bounds x="920.0" y="80.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_VerificarSaldo_di" bpmnElement="Task_VerificarSaldo">
+        <dc:Bounds x="920.0" y="230.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_SaldoSuficiente_di" bpmnElement="GW_SaldoSuficiente">
+        <dc:Bounds x="1145.0" y="240.0" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_RechazoDatos_di" bpmnElement="End_RechazoDatos">
+        <dc:Bounds x="1342.0" y="97.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Scoring_di" bpmnElement="Task_Scoring">
+        <dc:Bounds x="1300.0" y="380.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_RiesgoAprobado_di" bpmnElement="GW_RiesgoAprobado">
+        <dc:Bounds x="1525.0" y="390.0" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Retener_di" bpmnElement="Task_Retener">
+        <dc:Bounds x="1680.0" y="680.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_EnviarSPI_di" bpmnElement="Task_EnviarSPI">
+        <dc:Bounds x="1680.0" y="230.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Catch_ConfirmacionSPI_di" bpmnElement="Catch_ConfirmacionSPI">
+        <dc:Bounds x="1912.0" y="247.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_Confirmado_di" bpmnElement="GW_Confirmado">
+        <dc:Bounds x="2095.0" y="240.0" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_GestionarRechazo_di" bpmnElement="Task_GestionarRechazo">
+        <dc:Bounds x="2250.0" y="680.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Acreditar_di" bpmnElement="Task_Acreditar">
+        <dc:Bounds x="2250.0" y="230.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_RegistrarAsiento_di" bpmnElement="Task_RegistrarAsiento">
+        <dc:Bounds x="2440.0" y="530.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_NotificarEstado_di" bpmnElement="Task_NotificarEstado">
+        <dc:Bounds x="2630.0" y="80.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_PagoCompletado_di" bpmnElement="End_PagoCompletado">
+        <dc:Bounds x="2862.0" y="97.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_PagoRetenido_di" bpmnElement="End_PagoRetenido">
+        <dc:Bounds x="1912.0" y="697.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_PagoRechazado_di" bpmnElement="End_PagoRechazado">
+        <dc:Bounds x="2482.0" y="697.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="F_ToBe_01_di" bpmnElement="F_ToBe_01">
+        <di:waypoint x="238.0" y="115.0" />
+        <di:waypoint x="294.0" y="115.0" />
+        <di:waypoint x="294.0" y="115.0" />
+        <di:waypoint x="350.0" y="115.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ToBe_02_di" bpmnElement="F_ToBe_02">
+        <di:waypoint x="470.0" y="115.0" />
+        <di:waypoint x="505.0" y="115.0" />
+        <di:waypoint x="505.0" y="265.0" />
+        <di:waypoint x="540.0" y="265.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ToBe_03_di" bpmnElement="F_ToBe_03">
+        <di:waypoint x="660.0" y="265.0" />
+        <di:waypoint x="712.5" y="265.0" />
+        <di:waypoint x="712.5" y="265.0" />
+        <di:waypoint x="765.0" y="265.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ToBe_04_di" bpmnElement="F_ToBe_04">
+        <di:waypoint x="815.0" y="265.0" />
+        <di:waypoint x="867.5" y="265.0" />
+        <di:waypoint x="867.5" y="115.0" />
+        <di:waypoint x="920.0" y="115.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="859.5" y="176.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ToBe_05_di" bpmnElement="F_ToBe_05">
+        <di:waypoint x="980.0" y="150.0" />
+        <di:waypoint x="980.0" y="185.0" />
+        <di:waypoint x="410.0" y="185.0" />
+        <di:waypoint x="410.0" y="80.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ToBe_06_di" bpmnElement="F_ToBe_06">
+        <di:waypoint x="815.0" y="265.0" />
+        <di:waypoint x="867.5" y="265.0" />
+        <di:waypoint x="867.5" y="265.0" />
+        <di:waypoint x="920.0" y="265.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="859.5" y="251.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ToBe_07_di" bpmnElement="F_ToBe_07">
+        <di:waypoint x="1040.0" y="265.0" />
+        <di:waypoint x="1092.5" y="265.0" />
+        <di:waypoint x="1092.5" y="265.0" />
+        <di:waypoint x="1145.0" y="265.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ToBe_08_di" bpmnElement="F_ToBe_08">
+        <di:waypoint x="1195.0" y="265.0" />
+        <di:waypoint x="1268.5" y="265.0" />
+        <di:waypoint x="1268.5" y="115.0" />
+        <di:waypoint x="1342.0" y="115.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1260.5" y="176.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ToBe_09_di" bpmnElement="F_ToBe_09">
+        <di:waypoint x="1195.0" y="265.0" />
+        <di:waypoint x="1247.5" y="265.0" />
+        <di:waypoint x="1247.5" y="415.0" />
+        <di:waypoint x="1300.0" y="415.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1239.5" y="326.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ToBe_10_di" bpmnElement="F_ToBe_10">
+        <di:waypoint x="1420.0" y="415.0" />
+        <di:waypoint x="1472.5" y="415.0" />
+        <di:waypoint x="1472.5" y="415.0" />
+        <di:waypoint x="1525.0" y="415.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ToBe_11_di" bpmnElement="F_ToBe_11">
+        <di:waypoint x="1575.0" y="415.0" />
+        <di:waypoint x="1627.5" y="415.0" />
+        <di:waypoint x="1627.5" y="715.0" />
+        <di:waypoint x="1680.0" y="715.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1619.5" y="551.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ToBe_12_di" bpmnElement="F_ToBe_12">
+        <di:waypoint x="1800.0" y="715.0" />
+        <di:waypoint x="1856.0" y="715.0" />
+        <di:waypoint x="1856.0" y="715.0" />
+        <di:waypoint x="1912.0" y="715.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ToBe_13_di" bpmnElement="F_ToBe_13">
+        <di:waypoint x="1575.0" y="415.0" />
+        <di:waypoint x="1627.5" y="415.0" />
+        <di:waypoint x="1627.5" y="265.0" />
+        <di:waypoint x="1680.0" y="265.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1619.5" y="326.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ToBe_14_di" bpmnElement="F_ToBe_14">
+        <di:waypoint x="1800.0" y="265.0" />
+        <di:waypoint x="1856.0" y="265.0" />
+        <di:waypoint x="1856.0" y="265.0" />
+        <di:waypoint x="1912.0" y="265.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ToBe_15_di" bpmnElement="F_ToBe_15">
+        <di:waypoint x="1948.0" y="265.0" />
+        <di:waypoint x="2021.5" y="265.0" />
+        <di:waypoint x="2021.5" y="265.0" />
+        <di:waypoint x="2095.0" y="265.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ToBe_16_di" bpmnElement="F_ToBe_16">
+        <di:waypoint x="2145.0" y="265.0" />
+        <di:waypoint x="2197.5" y="265.0" />
+        <di:waypoint x="2197.5" y="715.0" />
+        <di:waypoint x="2250.0" y="715.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2189.5" y="476.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ToBe_17_di" bpmnElement="F_ToBe_17">
+        <di:waypoint x="2370.0" y="715.0" />
+        <di:waypoint x="2426.0" y="715.0" />
+        <di:waypoint x="2426.0" y="715.0" />
+        <di:waypoint x="2482.0" y="715.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ToBe_18_di" bpmnElement="F_ToBe_18">
+        <di:waypoint x="2145.0" y="265.0" />
+        <di:waypoint x="2197.5" y="265.0" />
+        <di:waypoint x="2197.5" y="265.0" />
+        <di:waypoint x="2250.0" y="265.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2189.5" y="251.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ToBe_19_di" bpmnElement="F_ToBe_19">
+        <di:waypoint x="2370.0" y="265.0" />
+        <di:waypoint x="2405.0" y="265.0" />
+        <di:waypoint x="2405.0" y="565.0" />
+        <di:waypoint x="2440.0" y="565.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ToBe_20_di" bpmnElement="F_ToBe_20">
+        <di:waypoint x="2560.0" y="565.0" />
+        <di:waypoint x="2595.0" y="565.0" />
+        <di:waypoint x="2595.0" y="115.0" />
+        <di:waypoint x="2630.0" y="115.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_ToBe_21_di" bpmnElement="F_ToBe_21">
+        <di:waypoint x="2750.0" y="115.0" />
+        <di:waypoint x="2806.0" y="115.0" />
+        <di:waypoint x="2806.0" y="115.0" />
+        <di:waypoint x="2862.0" y="115.0" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

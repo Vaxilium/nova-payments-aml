@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
+             id="definitions_limites_aprobaciones"
+             name="Límites y aprobaciones de pago"
+             namespace="http://novabank.example/dmn/limites-aprobaciones">
+  <decision id="Decision_LimitesAprobaciones" name="Límites y aprobaciones de pago">
+    <informationRequirement id="IR_Limites_1">
+      <requiredInput href="#InputData_tipo_transferencia_limite" />
+    </informationRequirement>
+    <informationRequirement id="IR_Limites_2">
+      <requiredInput href="#InputData_monto_limite" />
+    </informationRequirement>
+    <informationRequirement id="IR_Limites_3">
+      <requiredInput href="#InputData_nivel_riesgo_limite" />
+    </informationRequirement>
+    <informationRequirement id="IR_Limites_4">
+      <requiredInput href="#InputData_es_cliente_empresa" />
+    </informationRequirement>
+    <informationRequirement id="IR_Limites_5">
+      <requiredInput href="#InputData_canal_limite" />
+    </informationRequirement>
+    <decisionTable id="DT_LimitesAprobaciones" hitPolicy="FIRST" outputLabel="Límites">
+      <input id="In_Limites_1" label="Tipo de transferencia">
+        <inputExpression id="IE_Limites_1" typeRef="string">
+          <text>tipo_transferencia</text>
+        </inputExpression>
+      </input>
+      <input id="In_Limites_2" label="Monto (PYG)">
+        <inputExpression id="IE_Limites_2" typeRef="number">
+          <text>monto_gy</text>
+        </inputExpression>
+      </input>
+      <input id="In_Limites_3" label="Nivel de riesgo">
+        <inputExpression id="IE_Limites_3" typeRef="string">
+          <text>nivel_riesgo</text>
+        </inputExpression>
+      </input>
+      <input id="In_Limites_4" label="¿Cliente empresa?">
+        <inputExpression id="IE_Limites_4" typeRef="boolean">
+          <text>es_cliente_empresa</text>
+        </inputExpression>
+      </input>
+      <input id="In_Limites_5" label="Canal">
+        <inputExpression id="IE_Limites_5" typeRef="string">
+          <text>canal</text>
+        </inputExpression>
+      </input>
+      <output id="Out_Limites_1" name="limite_operativo_gy" label="Límite operativo (PYG)" typeRef="number" />
+      <output id="Out_Limites_2" name="puede_continuar" label="¿Puede continuar?" typeRef="boolean" />
+      <output id="Out_Limites_3" name="nivel_aprobacion" label="Nivel de aprobación" typeRef="string" />
+      <output id="Out_Limites_4" name="requiere_aprobacion" label="¿Requiere aprobación?" typeRef="boolean" />
+      <output id="Out_Limites_5" name="motivo" label="Motivo" typeRef="string" />
+      <rule id="Rule_Limites_1">
+        <inputEntry id="IRule_Limites_1_1"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_1_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_1_3"><text>"BLOQUEO"</text></inputEntry>
+        <inputEntry id="IRule_Limites_1_4"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_1_5"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Limites_1_1"><text>0</text></outputEntry>
+        <outputEntry id="ORule_Limites_1_2"><text>false</text></outputEntry>
+        <outputEntry id="ORule_Limites_1_3"><text>"CUMPLIMIENTO"</text></outputEntry>
+        <outputEntry id="ORule_Limites_1_4"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Limites_1_5"><text>"Bloqueo por riesgo o sanciones"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Limites_2">
+        <inputEntry id="IRule_Limites_2_1"><text>"LOCAL"</text></inputEntry>
+        <inputEntry id="IRule_Limites_2_2"><text>&gt; 10000000</text></inputEntry>
+        <inputEntry id="IRule_Limites_2_3"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_2_4"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_2_5"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Limites_2_1"><text>10000000</text></outputEntry>
+        <outputEntry id="ORule_Limites_2_2"><text>false</text></outputEntry>
+        <outputEntry id="ORule_Limites_2_3"><text>"AUTOMATICA"</text></outputEntry>
+        <outputEntry id="ORule_Limites_2_4"><text>false</text></outputEntry>
+        <outputEntry id="ORule_Limites_2_5"><text>"Excede el tope del SPI"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Limites_3">
+        <inputEntry id="IRule_Limites_3_1"><text>"INTERNACIONAL"</text></inputEntry>
+        <inputEntry id="IRule_Limites_3_2"><text>&gt; 50000000</text></inputEntry>
+        <inputEntry id="IRule_Limites_3_3"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_3_4"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_3_5"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Limites_3_1"><text>50000000</text></outputEntry>
+        <outputEntry id="ORule_Limites_3_2"><text>false</text></outputEntry>
+        <outputEntry id="ORule_Limites_3_3"><text>"COMITE"</text></outputEntry>
+        <outputEntry id="ORule_Limites_3_4"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Limites_3_5"><text>"Excede el límite internacional del caso"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Limites_4">
+        <inputEntry id="IRule_Limites_4_1"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_4_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_4_3"><text>"ALTO"</text></inputEntry>
+        <inputEntry id="IRule_Limites_4_4"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_4_5"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Limites_4_1"><text>10000000</text></outputEntry>
+        <outputEntry id="ORule_Limites_4_2"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Limites_4_3"><text>"OFICIAL_CUMPLIMIENTO"</text></outputEntry>
+        <outputEntry id="ORule_Limites_4_4"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Limites_4_5"><text>"Riesgo alto: aprobación de Cumplimiento"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Limites_5">
+        <inputEntry id="IRule_Limites_5_1"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_5_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_5_3"><text>"MEDIO"</text></inputEntry>
+        <inputEntry id="IRule_Limites_5_4"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_5_5"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Limites_5_1"><text>10000000</text></outputEntry>
+        <outputEntry id="ORule_Limites_5_2"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Limites_5_3"><text>"SUPERVISOR"</text></outputEntry>
+        <outputEntry id="ORule_Limites_5_4"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Limites_5_5"><text>"Riesgo medio: aprobación de supervisor"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Limites_6">
+        <inputEntry id="IRule_Limites_6_1"><text>"INTERNACIONAL"</text></inputEntry>
+        <inputEntry id="IRule_Limites_6_2"><text>&gt;= 5000000</text></inputEntry>
+        <inputEntry id="IRule_Limites_6_3"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_6_4"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_6_5"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Limites_6_1"><text>50000000</text></outputEntry>
+        <outputEntry id="ORule_Limites_6_2"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Limites_6_3"><text>"SUPERVISOR"</text></outputEntry>
+        <outputEntry id="ORule_Limites_6_4"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Limites_6_5"><text>"Monto internacional relevante"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Limites_7">
+        <inputEntry id="IRule_Limites_7_1"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_7_2"><text>&gt;= 2000000</text></inputEntry>
+        <inputEntry id="IRule_Limites_7_3"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_7_4"><text>true</text></inputEntry>
+        <inputEntry id="IRule_Limites_7_5"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Limites_7_1"><text>10000000</text></outputEntry>
+        <outputEntry id="ORule_Limites_7_2"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Limites_7_3"><text>"SUPERVISOR"</text></outputEntry>
+        <outputEntry id="ORule_Limites_7_4"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Limites_7_5"><text>"Cliente empresa y monto relevante"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Limites_8">
+        <inputEntry id="IRule_Limites_8_1"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_8_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_8_3"><text>"BAJO"</text></inputEntry>
+        <inputEntry id="IRule_Limites_8_4"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Limites_8_5"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Limites_8_1"><text>10000000</text></outputEntry>
+        <outputEntry id="ORule_Limites_8_2"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Limites_8_3"><text>"AUTOMATICA"</text></outputEntry>
+        <outputEntry id="ORule_Limites_8_4"><text>false</text></outputEntry>
+        <outputEntry id="ORule_Limites_8_5"><text>"Dentro de límites y sin aprobación adicional"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Limites_9">
+        <inputEntry id="IRule_Limites_9_1"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_9_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_9_3"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_9_4"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Limites_9_5"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Limites_9_1"><text>10000000</text></outputEntry>
+        <outputEntry id="ORule_Limites_9_2"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Limites_9_3"><text>"AUTOMATICA"</text></outputEntry>
+        <outputEntry id="ORule_Limites_9_4"><text>false</text></outputEntry>
+        <outputEntry id="ORule_Limites_9_5"><text>"Dentro de límites del caso"</text></outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_tipo_transferencia_limite" name="Tipo de transferencia">
+    <variable id="Var_tipo_transferencia_limite" name="tipo_transferencia" typeRef="string" />
+  </inputData>
+  <inputData id="InputData_monto_limite" name="Monto de la operación">
+    <variable id="Var_monto_limite" name="monto_gy" typeRef="number" />
+  </inputData>
+  <inputData id="InputData_nivel_riesgo_limite" name="Nivel de riesgo">
+    <variable id="Var_nivel_riesgo_limite" name="nivel_riesgo" typeRef="string" />
+  </inputData>
+  <inputData id="InputData_es_cliente_empresa" name="¿Es cliente empresa?">
+    <variable id="Var_es_cliente_empresa" name="es_cliente_empresa" typeRef="boolean" />
+  </inputData>
+  <inputData id="InputData_canal_limite" name="Canal">
+    <variable id="Var_canal_limite" name="canal" typeRef="string" />
+  </inputData>
+</definitions>

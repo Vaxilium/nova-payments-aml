@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  id="Definitions_intl_to_be"
+                  targetNamespace="http://novabank.example/bpmn"
+                  exporter="NovaBank BA"
+                  exporterVersion="1.0">
+  <bpmn:collaboration id="Collab_intl_to_be">
+    <bpmn:participant id="Participant_intl_to_be" name="Transferencia internacional saliente — TO-BE" processRef="Process_intl_to_be" />
+  </bpmn:collaboration>
+  <bpmn:message id="Catch_Pacs002_Msg" name="Esperar pacs.002" />
+  <bpmn:process id="Process_intl_to_be" name="Transferencia internacional saliente — TO-BE" isExecutable="false">
+    <bpmn:documentation>Proceso objetivo de pago internacional saliente en USD/EUR con validación IBAN/BIC, screening, mensajería ISO 20022, seguimiento pacs.002 y conciliación. Modelo de diseño, no ejecutable.</bpmn:documentation>
+    <bpmn:laneSet id="LaneSet_intl_to_be">
+      <bpmn:lane id="Lane_intl_to_be_1" name="Canal">
+        <bpmn:flowNodeRef>Start_Intl</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_CapturarIntl</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_CorregirIntl</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_NotificarIntl</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_IntlEnviado</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_intl_to_be_2" name="Validador">
+        <bpmn:flowNodeRef>Task_ValidarIBAN</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_IntlDatos</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_intl_to_be_3" name="Riesgo / AML">
+        <bpmn:flowNodeRef>Task_ScoringIntl</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_IntlRiesgo</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_intl_to_be_4" name="Mensajería ISO 20022">
+        <bpmn:flowNodeRef>Task_GenerarPacs</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ValidarPacs</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_PacsValido</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_RepararPacs</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_EnviarSWIFT</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Catch_Pacs002</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_IntlAceptado</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_intl_to_be_5" name="Operaciones / Contabilidad">
+        <bpmn:flowNodeRef>Task_EDDIntl</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_IntlRevision</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_RechazoIntl</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_IntlRechazado</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ConciliarIntl</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start_Intl" name="Cliente solicita pago internacional">
+      <bpmn:outgoing>F_Intl_01</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="Task_CapturarIntl" name="Capturar IBAN/BIC, moneda e importe">
+      <bpmn:incoming>F_Intl_01</bpmn:incoming>
+      <bpmn:incoming>F_Intl_05</bpmn:incoming>
+      <bpmn:outgoing>F_Intl_02</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_ValidarIBAN" name="Validar IBAN, BIC e ISO 4217">
+      <bpmn:incoming>F_Intl_02</bpmn:incoming>
+      <bpmn:outgoing>F_Intl_03</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="GW_IntlDatos" name="¿Datos válidos?" default="F_Intl_04">
+      <bpmn:incoming>F_Intl_03</bpmn:incoming>
+      <bpmn:outgoing>F_Intl_04</bpmn:outgoing>
+      <bpmn:outgoing>F_Intl_06</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_CorregirIntl" name="Corregir instrucción">
+      <bpmn:incoming>F_Intl_04</bpmn:incoming>
+      <bpmn:outgoing>F_Intl_05</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_ScoringIntl" name="Screening y scoring de riesgo">
+      <bpmn:incoming>F_Intl_06</bpmn:incoming>
+      <bpmn:outgoing>F_Intl_07</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="GW_IntlRiesgo" name="¿Aprobado?" default="F_Intl_08">
+      <bpmn:incoming>F_Intl_07</bpmn:incoming>
+      <bpmn:outgoing>F_Intl_08</bpmn:outgoing>
+      <bpmn:outgoing>F_Intl_10</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_EDDIntl" name="Retener y solicitar EDD">
+      <bpmn:incoming>F_Intl_08</bpmn:incoming>
+      <bpmn:outgoing>F_Intl_09</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="End_IntlRevision" name="Pago en revisión">
+      <bpmn:incoming>F_Intl_09</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Task_GenerarPacs" name="Generar pacs.008">
+      <bpmn:incoming>F_Intl_10</bpmn:incoming>
+      <bpmn:incoming>F_Intl_14</bpmn:incoming>
+      <bpmn:outgoing>F_Intl_11</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_ValidarPacs" name="Validar esquema ISO 20022">
+      <bpmn:incoming>F_Intl_11</bpmn:incoming>
+      <bpmn:outgoing>F_Intl_12</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="GW_PacsValido" name="¿Mensaje válido?" default="F_Intl_13">
+      <bpmn:incoming>F_Intl_12</bpmn:incoming>
+      <bpmn:outgoing>F_Intl_13</bpmn:outgoing>
+      <bpmn:outgoing>F_Intl_15</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_RepararPacs" name="Reparar mensaje">
+      <bpmn:incoming>F_Intl_13</bpmn:incoming>
+      <bpmn:outgoing>F_Intl_14</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_EnviarSWIFT" name="Enviar pacs.008 a SWIFT">
+      <bpmn:incoming>F_Intl_15</bpmn:incoming>
+      <bpmn:outgoing>F_Intl_16</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:intermediateCatchEvent id="Catch_Pacs002" name="Esperar pacs.002">
+      <bpmn:incoming>F_Intl_16</bpmn:incoming>
+      <bpmn:outgoing>F_Intl_17</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="Catch_Pacs002_Message" messageRef="Catch_Pacs002_Msg" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:exclusiveGateway id="GW_IntlAceptado" name="¿Aceptado?" default="F_Intl_18">
+      <bpmn:incoming>F_Intl_17</bpmn:incoming>
+      <bpmn:outgoing>F_Intl_18</bpmn:outgoing>
+      <bpmn:outgoing>F_Intl_20</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_RechazoIntl" name="Gestionar rechazo o devolución">
+      <bpmn:incoming>F_Intl_18</bpmn:incoming>
+      <bpmn:outgoing>F_Intl_19</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="End_IntlRechazado" name="Pago rechazado o devuelto">
+      <bpmn:incoming>F_Intl_19</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Task_ConciliarIntl" name="Conciliar y registrar asiento">
+      <bpmn:incoming>F_Intl_20</bpmn:incoming>
+      <bpmn:outgoing>F_Intl_21</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_NotificarIntl" name="Notificar estado al cliente">
+      <bpmn:incoming>F_Intl_21</bpmn:incoming>
+      <bpmn:outgoing>F_Intl_22</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="End_IntlEnviado" name="Pago enviado">
+      <bpmn:incoming>F_Intl_22</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="F_Intl_01" sourceRef="Start_Intl" targetRef="Task_CapturarIntl">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Intl_02" sourceRef="Task_CapturarIntl" targetRef="Task_ValidarIBAN">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Intl_03" sourceRef="Task_ValidarIBAN" targetRef="GW_IntlDatos">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Intl_04" sourceRef="GW_IntlDatos" targetRef="Task_CorregirIntl" name="No">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Intl_05" sourceRef="Task_CorregirIntl" targetRef="Task_CapturarIntl">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Intl_06" sourceRef="GW_IntlDatos" targetRef="Task_ScoringIntl" name="Sí">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">aprobado == true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Intl_07" sourceRef="Task_ScoringIntl" targetRef="GW_IntlRiesgo">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Intl_08" sourceRef="GW_IntlRiesgo" targetRef="Task_EDDIntl" name="No">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Intl_09" sourceRef="Task_EDDIntl" targetRef="End_IntlRevision">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Intl_10" sourceRef="GW_IntlRiesgo" targetRef="Task_GenerarPacs" name="Sí">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">aprobado == true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Intl_11" sourceRef="Task_GenerarPacs" targetRef="Task_ValidarPacs">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Intl_12" sourceRef="Task_ValidarPacs" targetRef="GW_PacsValido">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Intl_13" sourceRef="GW_PacsValido" targetRef="Task_RepararPacs" name="No">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Intl_14" sourceRef="Task_RepararPacs" targetRef="Task_GenerarPacs">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Intl_15" sourceRef="GW_PacsValido" targetRef="Task_EnviarSWIFT" name="Sí">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">aprobado == true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Intl_16" sourceRef="Task_EnviarSWIFT" targetRef="Catch_Pacs002">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Intl_17" sourceRef="Catch_Pacs002" targetRef="GW_IntlAceptado">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Intl_18" sourceRef="GW_IntlAceptado" targetRef="Task_RechazoIntl" name="No">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Intl_19" sourceRef="Task_RechazoIntl" targetRef="End_IntlRechazado">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Intl_20" sourceRef="GW_IntlAceptado" targetRef="Task_ConciliarIntl" name="Sí">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">aprobado == true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Intl_21" sourceRef="Task_ConciliarIntl" targetRef="Task_NotificarIntl">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Intl_22" sourceRef="Task_NotificarIntl" targetRef="End_IntlEnviado">
+
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_intl_to_be">
+    <bpmndi:BPMNPlane id="Plane_intl_to_be" bpmnElement="Collab_intl_to_be">
+      <bpmndi:BPMNShape id="Participant_intl_to_be_di" bpmnElement="Participant_intl_to_be" isHorizontal="true">
+        <dc:Bounds x="40" y="40" width="3670" height="770" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_intl_to_be_1_di" bpmnElement="Lane_intl_to_be_1" isHorizontal="true">
+        <dc:Bounds x="40" y="40" width="3670" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_intl_to_be_2_di" bpmnElement="Lane_intl_to_be_2" isHorizontal="true">
+        <dc:Bounds x="40" y="190" width="3670" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_intl_to_be_3_di" bpmnElement="Lane_intl_to_be_3" isHorizontal="true">
+        <dc:Bounds x="40" y="340" width="3670" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_intl_to_be_4_di" bpmnElement="Lane_intl_to_be_4" isHorizontal="true">
+        <dc:Bounds x="40" y="490" width="3670" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_intl_to_be_5_di" bpmnElement="Lane_intl_to_be_5" isHorizontal="true">
+        <dc:Bounds x="40" y="640" width="3670" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_Intl_di" bpmnElement="Start_Intl">
+        <dc:Bounds x="202.0" y="97.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_CapturarIntl_di" bpmnElement="Task_CapturarIntl">
+        <dc:Bounds x="350.0" y="80.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ValidarIBAN_di" bpmnElement="Task_ValidarIBAN">
+        <dc:Bounds x="540.0" y="230.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_IntlDatos_di" bpmnElement="GW_IntlDatos">
+        <dc:Bounds x="765.0" y="240.0" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_CorregirIntl_di" bpmnElement="Task_CorregirIntl">
+        <dc:Bounds x="920.0" y="80.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ScoringIntl_di" bpmnElement="Task_ScoringIntl">
+        <dc:Bounds x="920.0" y="380.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_IntlRiesgo_di" bpmnElement="GW_IntlRiesgo">
+        <dc:Bounds x="1145.0" y="390.0" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_EDDIntl_di" bpmnElement="Task_EDDIntl">
+        <dc:Bounds x="1300.0" y="680.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_IntlRevision_di" bpmnElement="End_IntlRevision">
+        <dc:Bounds x="1532.0" y="697.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_GenerarPacs_di" bpmnElement="Task_GenerarPacs">
+        <dc:Bounds x="1300.0" y="530.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ValidarPacs_di" bpmnElement="Task_ValidarPacs">
+        <dc:Bounds x="1490.0" y="530.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_PacsValido_di" bpmnElement="GW_PacsValido">
+        <dc:Bounds x="1715.0" y="540.0" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_RepararPacs_di" bpmnElement="Task_RepararPacs">
+        <dc:Bounds x="1870.0" y="530.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_EnviarSWIFT_di" bpmnElement="Task_EnviarSWIFT">
+        <dc:Bounds x="2060.0" y="530.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Catch_Pacs002_di" bpmnElement="Catch_Pacs002">
+        <dc:Bounds x="2292.0" y="547.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_IntlAceptado_di" bpmnElement="GW_IntlAceptado">
+        <dc:Bounds x="2475.0" y="540.0" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_RechazoIntl_di" bpmnElement="Task_RechazoIntl">
+        <dc:Bounds x="2630.0" y="680.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_IntlRechazado_di" bpmnElement="End_IntlRechazado">
+        <dc:Bounds x="2862.0" y="697.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ConciliarIntl_di" bpmnElement="Task_ConciliarIntl">
+        <dc:Bounds x="3010.0" y="680.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_NotificarIntl_di" bpmnElement="Task_NotificarIntl">
+        <dc:Bounds x="3200.0" y="80.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_IntlEnviado_di" bpmnElement="End_IntlEnviado">
+        <dc:Bounds x="3432.0" y="97.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="F_Intl_01_di" bpmnElement="F_Intl_01">
+        <di:waypoint x="238.0" y="115.0" />
+        <di:waypoint x="294.0" y="115.0" />
+        <di:waypoint x="294.0" y="115.0" />
+        <di:waypoint x="350.0" y="115.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Intl_02_di" bpmnElement="F_Intl_02">
+        <di:waypoint x="470.0" y="115.0" />
+        <di:waypoint x="505.0" y="115.0" />
+        <di:waypoint x="505.0" y="265.0" />
+        <di:waypoint x="540.0" y="265.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Intl_03_di" bpmnElement="F_Intl_03">
+        <di:waypoint x="660.0" y="265.0" />
+        <di:waypoint x="712.5" y="265.0" />
+        <di:waypoint x="712.5" y="265.0" />
+        <di:waypoint x="765.0" y="265.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Intl_04_di" bpmnElement="F_Intl_04">
+        <di:waypoint x="815.0" y="265.0" />
+        <di:waypoint x="867.5" y="265.0" />
+        <di:waypoint x="867.5" y="115.0" />
+        <di:waypoint x="920.0" y="115.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="859.5" y="176.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Intl_05_di" bpmnElement="F_Intl_05">
+        <di:waypoint x="980.0" y="150.0" />
+        <di:waypoint x="980.0" y="185.0" />
+        <di:waypoint x="410.0" y="185.0" />
+        <di:waypoint x="410.0" y="80.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Intl_06_di" bpmnElement="F_Intl_06">
+        <di:waypoint x="815.0" y="265.0" />
+        <di:waypoint x="867.5" y="265.0" />
+        <di:waypoint x="867.5" y="415.0" />
+        <di:waypoint x="920.0" y="415.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="859.5" y="326.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Intl_07_di" bpmnElement="F_Intl_07">
+        <di:waypoint x="1040.0" y="415.0" />
+        <di:waypoint x="1092.5" y="415.0" />
+        <di:waypoint x="1092.5" y="415.0" />
+        <di:waypoint x="1145.0" y="415.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Intl_08_di" bpmnElement="F_Intl_08">
+        <di:waypoint x="1195.0" y="415.0" />
+        <di:waypoint x="1247.5" y="415.0" />
+        <di:waypoint x="1247.5" y="715.0" />
+        <di:waypoint x="1300.0" y="715.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1239.5" y="551.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Intl_09_di" bpmnElement="F_Intl_09">
+        <di:waypoint x="1420.0" y="715.0" />
+        <di:waypoint x="1476.0" y="715.0" />
+        <di:waypoint x="1476.0" y="715.0" />
+        <di:waypoint x="1532.0" y="715.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Intl_10_di" bpmnElement="F_Intl_10">
+        <di:waypoint x="1195.0" y="415.0" />
+        <di:waypoint x="1247.5" y="415.0" />
+        <di:waypoint x="1247.5" y="565.0" />
+        <di:waypoint x="1300.0" y="565.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1239.5" y="476.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Intl_11_di" bpmnElement="F_Intl_11">
+        <di:waypoint x="1420.0" y="565.0" />
+        <di:waypoint x="1455.0" y="565.0" />
+        <di:waypoint x="1455.0" y="565.0" />
+        <di:waypoint x="1490.0" y="565.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Intl_12_di" bpmnElement="F_Intl_12">
+        <di:waypoint x="1610.0" y="565.0" />
+        <di:waypoint x="1662.5" y="565.0" />
+        <di:waypoint x="1662.5" y="565.0" />
+        <di:waypoint x="1715.0" y="565.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Intl_13_di" bpmnElement="F_Intl_13">
+        <di:waypoint x="1765.0" y="565.0" />
+        <di:waypoint x="1817.5" y="565.0" />
+        <di:waypoint x="1817.5" y="565.0" />
+        <di:waypoint x="1870.0" y="565.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1809.5" y="551.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Intl_14_di" bpmnElement="F_Intl_14">
+        <di:waypoint x="1930.0" y="600.0" />
+        <di:waypoint x="1930.0" y="635.0" />
+        <di:waypoint x="1360.0" y="635.0" />
+        <di:waypoint x="1360.0" y="530.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Intl_15_di" bpmnElement="F_Intl_15">
+        <di:waypoint x="1765.0" y="565.0" />
+        <di:waypoint x="1912.5" y="565.0" />
+        <di:waypoint x="1912.5" y="565.0" />
+        <di:waypoint x="2060.0" y="565.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1904.5" y="551.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Intl_16_di" bpmnElement="F_Intl_16">
+        <di:waypoint x="2180.0" y="565.0" />
+        <di:waypoint x="2236.0" y="565.0" />
+        <di:waypoint x="2236.0" y="565.0" />
+        <di:waypoint x="2292.0" y="565.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Intl_17_di" bpmnElement="F_Intl_17">
+        <di:waypoint x="2328.0" y="565.0" />
+        <di:waypoint x="2401.5" y="565.0" />
+        <di:waypoint x="2401.5" y="565.0" />
+        <di:waypoint x="2475.0" y="565.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Intl_18_di" bpmnElement="F_Intl_18">
+        <di:waypoint x="2525.0" y="565.0" />
+        <di:waypoint x="2577.5" y="565.0" />
+        <di:waypoint x="2577.5" y="715.0" />
+        <di:waypoint x="2630.0" y="715.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2569.5" y="626.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Intl_19_di" bpmnElement="F_Intl_19">
+        <di:waypoint x="2750.0" y="715.0" />
+        <di:waypoint x="2806.0" y="715.0" />
+        <di:waypoint x="2806.0" y="715.0" />
+        <di:waypoint x="2862.0" y="715.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Intl_20_di" bpmnElement="F_Intl_20">
+        <di:waypoint x="2525.0" y="565.0" />
+        <di:waypoint x="2767.5" y="565.0" />
+        <di:waypoint x="2767.5" y="715.0" />
+        <di:waypoint x="3010.0" y="715.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2759.5" y="626.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Intl_21_di" bpmnElement="F_Intl_21">
+        <di:waypoint x="3130.0" y="715.0" />
+        <di:waypoint x="3165.0" y="715.0" />
+        <di:waypoint x="3165.0" y="115.0" />
+        <di:waypoint x="3200.0" y="115.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Intl_22_di" bpmnElement="F_Intl_22">
+        <di:waypoint x="3320.0" y="115.0" />
+        <di:waypoint x="3376.0" y="115.0" />
+        <di:waypoint x="3376.0" y="115.0" />
+        <di:waypoint x="3432.0" y="115.0" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

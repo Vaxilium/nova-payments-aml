@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  id="Definitions_local_as_is"
+                  targetNamespace="http://novabank.example/bpmn"
+                  exporter="NovaBank BA"
+                  exporterVersion="1.0">
+  <bpmn:collaboration id="Collab_local_as_is">
+    <bpmn:participant id="Participant_local_as_is" name="Transferencia instantánea local — AS-IS" processRef="Process_local_as_is" />
+  </bpmn:collaboration>
+
+  <bpmn:process id="Process_local_as_is" name="Transferencia instantánea local — AS-IS" isExecutable="false">
+    <bpmn:documentation>Proceso actual de transferencia local: validación manual, autorización, proceso por lote y conciliación posterior. Modelo de diseño, no ejecutable.</bpmn:documentation>
+    <bpmn:laneSet id="LaneSet_local_as_is">
+      <bpmn:lane id="Lane_local_as_is_1" name="Canal / Sucursal">
+        <bpmn:flowNodeRef>Start_LocalAsIs</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_RecibirFormulario</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_SolicitarCorreccion</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_Notificar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_LocalAsIs</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_local_as_is_2" name="Back Office">
+        <bpmn:flowNodeRef>Task_ValidarManual</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_DatosCompletos</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AutorizarSupervisor</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_local_as_is_3" name="Tesorería">
+        <bpmn:flowNodeRef>Task_CargarLote</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Timer_Ventana</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ProcesarRiel</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_local_as_is_4" name="Core / Contabilidad">
+        <bpmn:flowNodeRef>Task_Conciliar</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start_LocalAsIs" name="Cliente solicita transferencia">
+      <bpmn:outgoing>F_AsIs_01</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="Task_RecibirFormulario" name="Recibir formulario y documentos">
+      <bpmn:incoming>F_AsIs_01</bpmn:incoming>
+      <bpmn:incoming>F_AsIs_05</bpmn:incoming>
+      <bpmn:outgoing>F_AsIs_02</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_ValidarManual" name="Validar datos manualmente">
+      <bpmn:incoming>F_AsIs_02</bpmn:incoming>
+      <bpmn:outgoing>F_AsIs_03</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="GW_DatosCompletos" name="¿Datos completos?" default="F_AsIs_04">
+      <bpmn:incoming>F_AsIs_03</bpmn:incoming>
+      <bpmn:outgoing>F_AsIs_04</bpmn:outgoing>
+      <bpmn:outgoing>F_AsIs_06</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_SolicitarCorreccion" name="Solicitar corrección">
+      <bpmn:incoming>F_AsIs_04</bpmn:incoming>
+      <bpmn:outgoing>F_AsIs_05</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_AutorizarSupervisor" name="Autorizar supervisor">
+      <bpmn:incoming>F_AsIs_06</bpmn:incoming>
+      <bpmn:outgoing>F_AsIs_07</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_CargarLote" name="Cargar en lote">
+      <bpmn:incoming>F_AsIs_07</bpmn:incoming>
+      <bpmn:outgoing>F_AsIs_08</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:intermediateCatchEvent id="Timer_Ventana" name="Esperar ventana de proceso">
+      <bpmn:incoming>F_AsIs_08</bpmn:incoming>
+      <bpmn:outgoing>F_AsIs_09</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="Timer_Ventana_Timer"><bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P1D</bpmn:timeDuration></bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:serviceTask id="Task_ProcesarRiel" name="Procesar ACH/LBTR">
+      <bpmn:incoming>F_AsIs_09</bpmn:incoming>
+      <bpmn:outgoing>F_AsIs_10</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="Task_Conciliar" name="Conciliar y registrar">
+      <bpmn:incoming>F_AsIs_10</bpmn:incoming>
+      <bpmn:outgoing>F_AsIs_11</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_Notificar" name="Notificar al cliente">
+      <bpmn:incoming>F_AsIs_11</bpmn:incoming>
+      <bpmn:outgoing>F_AsIs_12</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="End_LocalAsIs" name="Transferencia completada">
+      <bpmn:incoming>F_AsIs_12</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="F_AsIs_01" sourceRef="Start_LocalAsIs" targetRef="Task_RecibirFormulario">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_AsIs_02" sourceRef="Task_RecibirFormulario" targetRef="Task_ValidarManual">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_AsIs_03" sourceRef="Task_ValidarManual" targetRef="GW_DatosCompletos">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_AsIs_04" sourceRef="GW_DatosCompletos" targetRef="Task_SolicitarCorreccion" name="No">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_AsIs_05" sourceRef="Task_SolicitarCorreccion" targetRef="Task_RecibirFormulario">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_AsIs_06" sourceRef="GW_DatosCompletos" targetRef="Task_AutorizarSupervisor" name="Sí">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">aprobado == true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_AsIs_07" sourceRef="Task_AutorizarSupervisor" targetRef="Task_CargarLote">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_AsIs_08" sourceRef="Task_CargarLote" targetRef="Timer_Ventana">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_AsIs_09" sourceRef="Timer_Ventana" targetRef="Task_ProcesarRiel">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_AsIs_10" sourceRef="Task_ProcesarRiel" targetRef="Task_Conciliar">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_AsIs_11" sourceRef="Task_Conciliar" targetRef="Task_Notificar">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_AsIs_12" sourceRef="Task_Notificar" targetRef="End_LocalAsIs">
+
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_local_as_is">
+    <bpmndi:BPMNPlane id="Plane_local_as_is" bpmnElement="Collab_local_as_is">
+      <bpmndi:BPMNShape id="Participant_local_as_is_di" bpmnElement="Participant_local_as_is" isHorizontal="true">
+        <dc:Bounds x="40" y="40" width="2340" height="620" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_local_as_is_1_di" bpmnElement="Lane_local_as_is_1" isHorizontal="true">
+        <dc:Bounds x="40" y="40" width="2340" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_local_as_is_2_di" bpmnElement="Lane_local_as_is_2" isHorizontal="true">
+        <dc:Bounds x="40" y="190" width="2340" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_local_as_is_3_di" bpmnElement="Lane_local_as_is_3" isHorizontal="true">
+        <dc:Bounds x="40" y="340" width="2340" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_local_as_is_4_di" bpmnElement="Lane_local_as_is_4" isHorizontal="true">
+        <dc:Bounds x="40" y="490" width="2340" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_LocalAsIs_di" bpmnElement="Start_LocalAsIs">
+        <dc:Bounds x="202.0" y="97.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_RecibirFormulario_di" bpmnElement="Task_RecibirFormulario">
+        <dc:Bounds x="350.0" y="80.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ValidarManual_di" bpmnElement="Task_ValidarManual">
+        <dc:Bounds x="540.0" y="230.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_DatosCompletos_di" bpmnElement="GW_DatosCompletos">
+        <dc:Bounds x="765.0" y="240.0" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_SolicitarCorreccion_di" bpmnElement="Task_SolicitarCorreccion">
+        <dc:Bounds x="920.0" y="80.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AutorizarSupervisor_di" bpmnElement="Task_AutorizarSupervisor">
+        <dc:Bounds x="920.0" y="230.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_CargarLote_di" bpmnElement="Task_CargarLote">
+        <dc:Bounds x="1110.0" y="380.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Timer_Ventana_di" bpmnElement="Timer_Ventana">
+        <dc:Bounds x="1342.0" y="397.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ProcesarRiel_di" bpmnElement="Task_ProcesarRiel">
+        <dc:Bounds x="1490.0" y="380.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Conciliar_di" bpmnElement="Task_Conciliar">
+        <dc:Bounds x="1680.0" y="530.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Notificar_di" bpmnElement="Task_Notificar">
+        <dc:Bounds x="1870.0" y="80.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_LocalAsIs_di" bpmnElement="End_LocalAsIs">
+        <dc:Bounds x="2102.0" y="97.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="F_AsIs_01_di" bpmnElement="F_AsIs_01">
+        <di:waypoint x="238.0" y="115.0" />
+        <di:waypoint x="294.0" y="115.0" />
+        <di:waypoint x="294.0" y="115.0" />
+        <di:waypoint x="350.0" y="115.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_AsIs_02_di" bpmnElement="F_AsIs_02">
+        <di:waypoint x="470.0" y="115.0" />
+        <di:waypoint x="505.0" y="115.0" />
+        <di:waypoint x="505.0" y="265.0" />
+        <di:waypoint x="540.0" y="265.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_AsIs_03_di" bpmnElement="F_AsIs_03">
+        <di:waypoint x="660.0" y="265.0" />
+        <di:waypoint x="712.5" y="265.0" />
+        <di:waypoint x="712.5" y="265.0" />
+        <di:waypoint x="765.0" y="265.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_AsIs_04_di" bpmnElement="F_AsIs_04">
+        <di:waypoint x="815.0" y="265.0" />
+        <di:waypoint x="867.5" y="265.0" />
+        <di:waypoint x="867.5" y="115.0" />
+        <di:waypoint x="920.0" y="115.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="859.5" y="176.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_AsIs_05_di" bpmnElement="F_AsIs_05">
+        <di:waypoint x="980.0" y="150.0" />
+        <di:waypoint x="980.0" y="185.0" />
+        <di:waypoint x="410.0" y="185.0" />
+        <di:waypoint x="410.0" y="80.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_AsIs_06_di" bpmnElement="F_AsIs_06">
+        <di:waypoint x="815.0" y="265.0" />
+        <di:waypoint x="867.5" y="265.0" />
+        <di:waypoint x="867.5" y="265.0" />
+        <di:waypoint x="920.0" y="265.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="859.5" y="251.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_AsIs_07_di" bpmnElement="F_AsIs_07">
+        <di:waypoint x="1040.0" y="265.0" />
+        <di:waypoint x="1075.0" y="265.0" />
+        <di:waypoint x="1075.0" y="415.0" />
+        <di:waypoint x="1110.0" y="415.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_AsIs_08_di" bpmnElement="F_AsIs_08">
+        <di:waypoint x="1230.0" y="415.0" />
+        <di:waypoint x="1286.0" y="415.0" />
+        <di:waypoint x="1286.0" y="415.0" />
+        <di:waypoint x="1342.0" y="415.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_AsIs_09_di" bpmnElement="F_AsIs_09">
+        <di:waypoint x="1378.0" y="415.0" />
+        <di:waypoint x="1434.0" y="415.0" />
+        <di:waypoint x="1434.0" y="415.0" />
+        <di:waypoint x="1490.0" y="415.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_AsIs_10_di" bpmnElement="F_AsIs_10">
+        <di:waypoint x="1610.0" y="415.0" />
+        <di:waypoint x="1645.0" y="415.0" />
+        <di:waypoint x="1645.0" y="565.0" />
+        <di:waypoint x="1680.0" y="565.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_AsIs_11_di" bpmnElement="F_AsIs_11">
+        <di:waypoint x="1800.0" y="565.0" />
+        <di:waypoint x="1835.0" y="565.0" />
+        <di:waypoint x="1835.0" y="115.0" />
+        <di:waypoint x="1870.0" y="115.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_AsIs_12_di" bpmnElement="F_AsIs_12">
+        <di:waypoint x="1990.0" y="115.0" />
+        <di:waypoint x="2046.0" y="115.0" />
+        <di:waypoint x="2046.0" y="115.0" />
+        <di:waypoint x="2102.0" y="115.0" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

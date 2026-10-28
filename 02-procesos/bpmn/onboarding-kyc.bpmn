@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL"
+                  xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+                  xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+                  xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  id="Definitions_onboarding"
+                  targetNamespace="http://novabank.example/bpmn"
+                  exporter="NovaBank BA"
+                  exporterVersion="1.0">
+  <bpmn:collaboration id="Collab_onboarding">
+    <bpmn:participant id="Participant_onboarding" name="Onboarding y KYC — TO-BE" processRef="Process_onboarding" />
+  </bpmn:collaboration>
+
+  <bpmn:process id="Process_onboarding" name="Onboarding y KYC — TO-BE" isExecutable="false">
+    <bpmn:documentation>Proceso objetivo de alta digital con verificación de identidad, screening de sanciones/PEP, evaluación de riesgo, EDD y creación de cliente. Modelo de diseño, no ejecutable.</bpmn:documentation>
+    <bpmn:laneSet id="LaneSet_onboarding">
+      <bpmn:lane id="Lane_onboarding_1" name="Cliente">
+        <bpmn:flowNodeRef>Start_Onboarding</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_DocAdicional</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_SolicitarEvidencia</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_NotificarAlta</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_ClienteActivo</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_onboarding_2" name="Canal Digital">
+        <bpmn:flowNodeRef>Task_CapturarAlta</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_onboarding_3" name="KYC / AML">
+        <bpmn:flowNodeRef>Task_ValidarIdentidad</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_Identidad</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_ScreeningAlta</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_Coincidencia</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_EvaluarRiesgo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>GW_RequiereEDD</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_onboarding_4" name="Cumplimiento">
+        <bpmn:flowNodeRef>Task_Bloquear</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>End_AltaRechazada</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_AprobarCliente</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>Task_RevisarEDD</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_onboarding_5" name="Core">
+        <bpmn:flowNodeRef>Task_CrearCliente</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="Start_Onboarding" name="Persona solicita alta">
+      <bpmn:outgoing>F_Onb_01</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="Task_CapturarAlta" name="Capturar datos y documentos">
+      <bpmn:incoming>F_Onb_01</bpmn:incoming>
+      <bpmn:incoming>F_Onb_05</bpmn:incoming>
+      <bpmn:outgoing>F_Onb_02</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_ValidarIdentidad" name="Validar identidad">
+      <bpmn:incoming>F_Onb_02</bpmn:incoming>
+      <bpmn:outgoing>F_Onb_03</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="GW_Identidad" name="¿Identidad verificada?" default="F_Onb_04">
+      <bpmn:incoming>F_Onb_03</bpmn:incoming>
+      <bpmn:outgoing>F_Onb_04</bpmn:outgoing>
+      <bpmn:outgoing>F_Onb_06</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_DocAdicional" name="Solicitar documentación adicional">
+      <bpmn:incoming>F_Onb_04</bpmn:incoming>
+      <bpmn:outgoing>F_Onb_05</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_ScreeningAlta" name="Screening de sanciones y PEP">
+      <bpmn:incoming>F_Onb_06</bpmn:incoming>
+      <bpmn:outgoing>F_Onb_07</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="GW_Coincidencia" name="¿Coincidencia crítica?" default="F_Onb_10">
+      <bpmn:incoming>F_Onb_07</bpmn:incoming>
+      <bpmn:outgoing>F_Onb_08</bpmn:outgoing>
+      <bpmn:outgoing>F_Onb_10</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_Bloquear" name="Bloquear y rechazar">
+      <bpmn:incoming>F_Onb_08</bpmn:incoming>
+      <bpmn:outgoing>F_Onb_09</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:endEvent id="End_AltaRechazada" name="Alta rechazada">
+      <bpmn:incoming>F_Onb_09</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="Task_EvaluarRiesgo" name="Evaluar riesgo con DMN">
+      <bpmn:incoming>F_Onb_10</bpmn:incoming>
+      <bpmn:outgoing>F_Onb_11</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="GW_RequiereEDD" name="¿Requiere EDD?" default="F_Onb_14">
+      <bpmn:incoming>F_Onb_11</bpmn:incoming>
+      <bpmn:outgoing>F_Onb_12</bpmn:outgoing>
+      <bpmn:outgoing>F_Onb_14</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="Task_SolicitarEvidencia" name="Solicitar evidencia adicional">
+      <bpmn:incoming>F_Onb_12</bpmn:incoming>
+      <bpmn:outgoing>F_Onb_13</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_AprobarCliente" name="Aprobar cliente">
+      <bpmn:incoming>F_Onb_14</bpmn:incoming>
+      <bpmn:outgoing>F_Onb_15</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:userTask id="Task_RevisarEDD" name="Revisar y aprobar EDD">
+      <bpmn:incoming>F_Onb_13</bpmn:incoming>
+      <bpmn:outgoing>F_Onb_16</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="Task_CrearCliente" name="Crear cliente y cuenta">
+      <bpmn:incoming>F_Onb_15</bpmn:incoming>
+      <bpmn:incoming>F_Onb_16</bpmn:incoming>
+      <bpmn:outgoing>F_Onb_17</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="Task_NotificarAlta" name="Notificar alta y condiciones">
+      <bpmn:incoming>F_Onb_17</bpmn:incoming>
+      <bpmn:outgoing>F_Onb_18</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="End_ClienteActivo" name="Cliente activo">
+      <bpmn:incoming>F_Onb_18</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="F_Onb_01" sourceRef="Start_Onboarding" targetRef="Task_CapturarAlta">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Onb_02" sourceRef="Task_CapturarAlta" targetRef="Task_ValidarIdentidad">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Onb_03" sourceRef="Task_ValidarIdentidad" targetRef="GW_Identidad">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Onb_04" sourceRef="GW_Identidad" targetRef="Task_DocAdicional" name="No">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Onb_05" sourceRef="Task_DocAdicional" targetRef="Task_CapturarAlta">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Onb_06" sourceRef="GW_Identidad" targetRef="Task_ScreeningAlta" name="Sí">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">aprobado == true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Onb_07" sourceRef="Task_ScreeningAlta" targetRef="GW_Coincidencia">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Onb_08" sourceRef="GW_Coincidencia" targetRef="Task_Bloquear" name="Sí">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">aprobado == true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Onb_09" sourceRef="Task_Bloquear" targetRef="End_AltaRechazada">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Onb_10" sourceRef="GW_Coincidencia" targetRef="Task_EvaluarRiesgo" name="No">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Onb_11" sourceRef="Task_EvaluarRiesgo" targetRef="GW_RequiereEDD">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Onb_12" sourceRef="GW_RequiereEDD" targetRef="Task_SolicitarEvidencia" name="Sí">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">aprobado == true</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Onb_13" sourceRef="Task_SolicitarEvidencia" targetRef="Task_RevisarEDD">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Onb_14" sourceRef="GW_RequiereEDD" targetRef="Task_AprobarCliente" name="No">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Onb_15" sourceRef="Task_AprobarCliente" targetRef="Task_CrearCliente">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Onb_16" sourceRef="Task_RevisarEDD" targetRef="Task_CrearCliente">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Onb_17" sourceRef="Task_CrearCliente" targetRef="Task_NotificarAlta">
+
+    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="F_Onb_18" sourceRef="Task_NotificarAlta" targetRef="End_ClienteActivo">
+
+    </bpmn:sequenceFlow>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_onboarding">
+    <bpmndi:BPMNPlane id="Plane_onboarding" bpmnElement="Collab_onboarding">
+      <bpmndi:BPMNShape id="Participant_onboarding_di" bpmnElement="Participant_onboarding" isHorizontal="true">
+        <dc:Bounds x="40" y="40" width="2720" height="770" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_onboarding_1_di" bpmnElement="Lane_onboarding_1" isHorizontal="true">
+        <dc:Bounds x="40" y="40" width="2720" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_onboarding_2_di" bpmnElement="Lane_onboarding_2" isHorizontal="true">
+        <dc:Bounds x="40" y="190" width="2720" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_onboarding_3_di" bpmnElement="Lane_onboarding_3" isHorizontal="true">
+        <dc:Bounds x="40" y="340" width="2720" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_onboarding_4_di" bpmnElement="Lane_onboarding_4" isHorizontal="true">
+        <dc:Bounds x="40" y="490" width="2720" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_onboarding_5_di" bpmnElement="Lane_onboarding_5" isHorizontal="true">
+        <dc:Bounds x="40" y="640" width="2720" height="150" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Start_Onboarding_di" bpmnElement="Start_Onboarding">
+        <dc:Bounds x="202.0" y="97.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_CapturarAlta_di" bpmnElement="Task_CapturarAlta">
+        <dc:Bounds x="350.0" y="230.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ValidarIdentidad_di" bpmnElement="Task_ValidarIdentidad">
+        <dc:Bounds x="540.0" y="380.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_Identidad_di" bpmnElement="GW_Identidad">
+        <dc:Bounds x="765.0" y="390.0" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_DocAdicional_di" bpmnElement="Task_DocAdicional">
+        <dc:Bounds x="920.0" y="80.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_ScreeningAlta_di" bpmnElement="Task_ScreeningAlta">
+        <dc:Bounds x="920.0" y="380.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_Coincidencia_di" bpmnElement="GW_Coincidencia">
+        <dc:Bounds x="1145.0" y="390.0" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_Bloquear_di" bpmnElement="Task_Bloquear">
+        <dc:Bounds x="1300.0" y="530.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_AltaRechazada_di" bpmnElement="End_AltaRechazada">
+        <dc:Bounds x="1532.0" y="547.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_EvaluarRiesgo_di" bpmnElement="Task_EvaluarRiesgo">
+        <dc:Bounds x="1300.0" y="380.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="GW_RequiereEDD_di" bpmnElement="GW_RequiereEDD">
+        <dc:Bounds x="1525.0" y="390.0" width="50" height="50" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_SolicitarEvidencia_di" bpmnElement="Task_SolicitarEvidencia">
+        <dc:Bounds x="1680.0" y="80.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_AprobarCliente_di" bpmnElement="Task_AprobarCliente">
+        <dc:Bounds x="1680.0" y="530.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_RevisarEDD_di" bpmnElement="Task_RevisarEDD">
+        <dc:Bounds x="1870.0" y="530.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_CrearCliente_di" bpmnElement="Task_CrearCliente">
+        <dc:Bounds x="2060.0" y="680.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Task_NotificarAlta_di" bpmnElement="Task_NotificarAlta">
+        <dc:Bounds x="2250.0" y="80.0" width="120" height="70" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="End_ClienteActivo_di" bpmnElement="End_ClienteActivo">
+        <dc:Bounds x="2482.0" y="97.0" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="F_Onb_01_di" bpmnElement="F_Onb_01">
+        <di:waypoint x="238.0" y="115.0" />
+        <di:waypoint x="294.0" y="115.0" />
+        <di:waypoint x="294.0" y="265.0" />
+        <di:waypoint x="350.0" y="265.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Onb_02_di" bpmnElement="F_Onb_02">
+        <di:waypoint x="470.0" y="265.0" />
+        <di:waypoint x="505.0" y="265.0" />
+        <di:waypoint x="505.0" y="415.0" />
+        <di:waypoint x="540.0" y="415.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Onb_03_di" bpmnElement="F_Onb_03">
+        <di:waypoint x="660.0" y="415.0" />
+        <di:waypoint x="712.5" y="415.0" />
+        <di:waypoint x="712.5" y="415.0" />
+        <di:waypoint x="765.0" y="415.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Onb_04_di" bpmnElement="F_Onb_04">
+        <di:waypoint x="815.0" y="415.0" />
+        <di:waypoint x="867.5" y="415.0" />
+        <di:waypoint x="867.5" y="115.0" />
+        <di:waypoint x="920.0" y="115.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="859.5" y="251.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Onb_05_di" bpmnElement="F_Onb_05">
+        <di:waypoint x="980.0" y="150.0" />
+        <di:waypoint x="980.0" y="265.0" />
+        <di:waypoint x="410.0" y="265.0" />
+        <di:waypoint x="410.0" y="230.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Onb_06_di" bpmnElement="F_Onb_06">
+        <di:waypoint x="815.0" y="415.0" />
+        <di:waypoint x="867.5" y="415.0" />
+        <di:waypoint x="867.5" y="415.0" />
+        <di:waypoint x="920.0" y="415.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="859.5" y="401.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Onb_07_di" bpmnElement="F_Onb_07">
+        <di:waypoint x="1040.0" y="415.0" />
+        <di:waypoint x="1092.5" y="415.0" />
+        <di:waypoint x="1092.5" y="415.0" />
+        <di:waypoint x="1145.0" y="415.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Onb_08_di" bpmnElement="F_Onb_08">
+        <di:waypoint x="1195.0" y="415.0" />
+        <di:waypoint x="1247.5" y="415.0" />
+        <di:waypoint x="1247.5" y="565.0" />
+        <di:waypoint x="1300.0" y="565.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1239.5" y="476.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Onb_09_di" bpmnElement="F_Onb_09">
+        <di:waypoint x="1420.0" y="565.0" />
+        <di:waypoint x="1476.0" y="565.0" />
+        <di:waypoint x="1476.0" y="565.0" />
+        <di:waypoint x="1532.0" y="565.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Onb_10_di" bpmnElement="F_Onb_10">
+        <di:waypoint x="1195.0" y="415.0" />
+        <di:waypoint x="1247.5" y="415.0" />
+        <di:waypoint x="1247.5" y="415.0" />
+        <di:waypoint x="1300.0" y="415.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1239.5" y="401.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Onb_11_di" bpmnElement="F_Onb_11">
+        <di:waypoint x="1420.0" y="415.0" />
+        <di:waypoint x="1472.5" y="415.0" />
+        <di:waypoint x="1472.5" y="415.0" />
+        <di:waypoint x="1525.0" y="415.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Onb_12_di" bpmnElement="F_Onb_12">
+        <di:waypoint x="1575.0" y="415.0" />
+        <di:waypoint x="1627.5" y="415.0" />
+        <di:waypoint x="1627.5" y="115.0" />
+        <di:waypoint x="1680.0" y="115.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1619.5" y="251.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Onb_13_di" bpmnElement="F_Onb_13">
+        <di:waypoint x="1800.0" y="115.0" />
+        <di:waypoint x="1835.0" y="115.0" />
+        <di:waypoint x="1835.0" y="565.0" />
+        <di:waypoint x="1870.0" y="565.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Onb_14_di" bpmnElement="F_Onb_14">
+        <di:waypoint x="1575.0" y="415.0" />
+        <di:waypoint x="1627.5" y="415.0" />
+        <di:waypoint x="1627.5" y="565.0" />
+        <di:waypoint x="1680.0" y="565.0" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1619.5" y="476.0" width="24" height="14" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Onb_15_di" bpmnElement="F_Onb_15">
+        <di:waypoint x="1800.0" y="565.0" />
+        <di:waypoint x="1930.0" y="565.0" />
+        <di:waypoint x="1930.0" y="715.0" />
+        <di:waypoint x="2060.0" y="715.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Onb_16_di" bpmnElement="F_Onb_16">
+        <di:waypoint x="1990.0" y="565.0" />
+        <di:waypoint x="2025.0" y="565.0" />
+        <di:waypoint x="2025.0" y="715.0" />
+        <di:waypoint x="2060.0" y="715.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Onb_17_di" bpmnElement="F_Onb_17">
+        <di:waypoint x="2180.0" y="715.0" />
+        <di:waypoint x="2215.0" y="715.0" />
+        <di:waypoint x="2215.0" y="115.0" />
+        <di:waypoint x="2250.0" y="115.0" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="F_Onb_18_di" bpmnElement="F_Onb_18">
+        <di:waypoint x="2370.0" y="115.0" />
+        <di:waypoint x="2426.0" y="115.0" />
+        <di:waypoint x="2426.0" y="115.0" />
+        <di:waypoint x="2482.0" y="115.0" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/"
+             id="definitions_scoring_cliente"
+             name="Scoring de riesgo de cliente"
+             namespace="http://novabank.example/dmn/scoring-cliente">
+  <decision id="Decision_ScoringCliente" name="Puntaje de riesgo de cliente">
+    <informationRequirement id="IR_Scoring_1">
+      <requiredInput href="#InputData_es_pep_cliente" />
+    </informationRequirement>
+    <informationRequirement id="IR_Scoring_2">
+      <requiredInput href="#InputData_pais_residencia" />
+    </informationRequirement>
+    <informationRequirement id="IR_Scoring_3">
+      <requiredInput href="#InputData_actividad_economica" />
+    </informationRequirement>
+    <informationRequirement id="IR_Scoring_4">
+      <requiredInput href="#InputData_canal_alta" />
+    </informationRequirement>
+    <informationRequirement id="IR_Scoring_5">
+      <requiredInput href="#InputData_beneficiario_final_identificado" />
+    </informationRequirement>
+    <informationRequirement id="IR_Scoring_6">
+      <requiredInput href="#InputData_volumen_mensual_gy" />
+    </informationRequirement>
+    <decisionTable id="DT_ScoringCliente" hitPolicy="SUM" outputLabel="Puntaje">
+      <input id="In_Scoring_1" label="¿Es PEP?">
+        <inputExpression id="IE_Scoring_1" typeRef="boolean">
+          <text>es_pep</text>
+        </inputExpression>
+      </input>
+      <input id="In_Scoring_2" label="País de residencia">
+        <inputExpression id="IE_Scoring_2" typeRef="string">
+          <text>pais_residencia</text>
+        </inputExpression>
+      </input>
+      <input id="In_Scoring_3" label="Actividad económica">
+        <inputExpression id="IE_Scoring_3" typeRef="string">
+          <text>actividad_economica</text>
+        </inputExpression>
+      </input>
+      <input id="In_Scoring_4" label="Canal de alta">
+        <inputExpression id="IE_Scoring_4" typeRef="string">
+          <text>canal_alta</text>
+        </inputExpression>
+      </input>
+      <input id="In_Scoring_5" label="¿Beneficiario final identificado?">
+        <inputExpression id="IE_Scoring_5" typeRef="boolean">
+          <text>beneficiario_final_identificado</text>
+        </inputExpression>
+      </input>
+      <input id="In_Scoring_6" label="Volumen mensual (PYG)">
+        <inputExpression id="IE_Scoring_6" typeRef="number">
+          <text>volumen_mensual_gy</text>
+        </inputExpression>
+      </input>
+      <output id="Out_Scoring_1" name="puntos" label="Puntos" typeRef="number" />
+      <rule id="Rule_Scoring_1">
+        <inputEntry id="IRule_Scoring_1_1"><text>true</text></inputEntry>
+        <inputEntry id="IRule_Scoring_1_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_1_3"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_1_4"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_1_5"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_1_6"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Scoring_1_1"><text>30</text></outputEntry>
+      </rule>
+      <rule id="Rule_Scoring_2">
+        <inputEntry id="IRule_Scoring_2_1"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Scoring_2_2"><text>"IR","KP","SY"</text></inputEntry>
+        <inputEntry id="IRule_Scoring_2_3"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_2_4"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_2_5"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_2_6"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Scoring_2_1"><text>25</text></outputEntry>
+      </rule>
+      <rule id="Rule_Scoring_3">
+        <inputEntry id="IRule_Scoring_3_1"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Scoring_3_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_3_3"><text>"CASINO","CRIPTO","REMESAS"</text></inputEntry>
+        <inputEntry id="IRule_Scoring_3_4"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_3_5"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_3_6"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Scoring_3_1"><text>15</text></outputEntry>
+      </rule>
+      <rule id="Rule_Scoring_4">
+        <inputEntry id="IRule_Scoring_4_1"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Scoring_4_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_4_3"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_4_4"><text>"REMOTO"</text></inputEntry>
+        <inputEntry id="IRule_Scoring_4_5"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_4_6"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Scoring_4_1"><text>10</text></outputEntry>
+      </rule>
+      <rule id="Rule_Scoring_5">
+        <inputEntry id="IRule_Scoring_5_1"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Scoring_5_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_5_3"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_5_4"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_5_5"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Scoring_5_6"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Scoring_5_1"><text>20</text></outputEntry>
+      </rule>
+      <rule id="Rule_Scoring_6">
+        <inputEntry id="IRule_Scoring_6_1"><text>false</text></inputEntry>
+        <inputEntry id="IRule_Scoring_6_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_6_3"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_6_4"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_6_5"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_6_6"><text>&gt;= 50000000</text></inputEntry>
+        <outputEntry id="ORule_Scoring_6_1"><text>15</text></outputEntry>
+      </rule>
+      <rule id="Rule_Scoring_7">
+        <inputEntry id="IRule_Scoring_7_1"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_7_2"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_7_3"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_7_4"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_7_5"><text>-</text></inputEntry>
+        <inputEntry id="IRule_Scoring_7_6"><text>-</text></inputEntry>
+        <outputEntry id="ORule_Scoring_7_1"><text>10</text></outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <decision id="Decision_ClasificacionCliente" name="Clasificación de riesgo de cliente">
+    <informationRequirement id="IR_Clasificacion_1">
+      <requiredDecision href="#Decision_ScoringCliente" />
+    </informationRequirement>
+    <decisionTable id="DT_ClasificacionCliente" hitPolicy="FIRST" outputLabel="Clasificación">
+      <input id="In_Clasificacion_1" label="Puntaje">
+        <inputExpression id="IE_Clasificacion_1" typeRef="number">
+          <text>puntos</text>
+        </inputExpression>
+      </input>
+      <output id="Out_Clasificacion_1" name="nivel_riesgo" label="Nivel de riesgo" typeRef="string" />
+      <output id="Out_Clasificacion_2" name="requiere_edd" label="¿Requiere EDD?" typeRef="boolean" />
+      <output id="Out_Clasificacion_3" name="revision_meses" label="Revisión cada (meses)" typeRef="number" />
+      <output id="Out_Clasificacion_4" name="motivo" label="Motivo" typeRef="string" />
+      <rule id="Rule_Clasificacion_1">
+        <inputEntry id="IRule_Clasificacion_1_1"><text>&gt;= 70</text></inputEntry>
+        <outputEntry id="ORule_Clasificacion_1_1"><text>"ALTO"</text></outputEntry>
+        <outputEntry id="ORule_Clasificacion_1_2"><text>true</text></outputEntry>
+        <outputEntry id="ORule_Clasificacion_1_3"><text>6</text></outputEntry>
+        <outputEntry id="ORule_Clasificacion_1_4"><text>"Puntaje alto: EDD y revisión semestral"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Clasificacion_2">
+        <inputEntry id="IRule_Clasificacion_2_1"><text>&gt;= 40</text></inputEntry>
+        <outputEntry id="ORule_Clasificacion_2_1"><text>"MEDIO"</text></outputEntry>
+        <outputEntry id="ORule_Clasificacion_2_2"><text>false</text></outputEntry>
+        <outputEntry id="ORule_Clasificacion_2_3"><text>12</text></outputEntry>
+        <outputEntry id="ORule_Clasificacion_2_4"><text>"Puntaje medio: revisión anual"</text></outputEntry>
+      </rule>
+      <rule id="Rule_Clasificacion_3">
+        <inputEntry id="IRule_Clasificacion_3_1"><text>&lt; 40</text></inputEntry>
+        <outputEntry id="ORule_Clasificacion_3_1"><text>"BAJO"</text></outputEntry>
+        <outputEntry id="ORule_Clasificacion_3_2"><text>false</text></outputEntry>
+        <outputEntry id="ORule_Clasificacion_3_3"><text>24</text></outputEntry>
+        <outputEntry id="ORule_Clasificacion_3_4"><text>"Puntaje bajo: revisión cada 24 meses"</text></outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="InputData_es_pep_cliente" name="¿Es PEP?">
+    <variable id="Var_es_pep_cliente" name="es_pep" typeRef="boolean" />
+  </inputData>
+  <inputData id="InputData_pais_residencia" name="País de residencia">
+    <variable id="Var_pais_residencia" name="pais_residencia" typeRef="string" />
+  </inputData>
+  <inputData id="InputData_actividad_economica" name="Actividad económica">
+    <variable id="Var_actividad_economica" name="actividad_economica" typeRef="string" />
+  </inputData>
+  <inputData id="InputData_canal_alta" name="Canal de alta">
+    <variable id="Var_canal_alta" name="canal_alta" typeRef="string" />
+  </inputData>
+  <inputData id="InputData_beneficiario_final_identificado" name="¿Beneficiario final identificado?">
+    <variable id="Var_beneficiario_final_identificado" name="beneficiario_final_identificado" typeRef="boolean" />
+  </inputData>
+  <inputData id="InputData_volumen_mensual_gy" name="Volumen mensual en guaraníes">
+    <variable id="Var_volumen_mensual_gy" name="volumen_mensual_gy" typeRef="number" />
+  </inputData>
+</definitions>
