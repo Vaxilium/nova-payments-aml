@@ -44,7 +44,7 @@
 - [x] Investigación normativa oficial (BCP/SPI, SEPRELAD, GAFI) y registro en `docs/FUENTES.md`.
 - [x] Artefactos importables para Bizagi/Camunda/Signavio (`.bpmn`, `.dmn`) y guía para Lucidchart/Visio/Miro.
 - [ ] Evidencias manuales de Fase 1 en `docs/EVIDENCIAS.md` (EV-004, EV-005: requieren acción del autor).
-- [ ] Commit(s) + push de cierre de fase.
+- [x] Commit(s) + push de cierre de fase.
 
 **Entregables clave:** BRD, BPMN, DMN, matriz de riesgos, glosario, mapa de fuentes.
 
@@ -174,4 +174,4 @@
 | Fecha | Fase | Nota |
 |---|---|---|
 | 2026-10-27 | 0 | Scaffold del repositorio, gobernanza y README inicial. |
-| 2026-10-27 | 1 | BRD, stakeholders, riesgos, glosario, KPIs, contexto regulatorio, 6 BPMN, 4 DMN, Mermaid, C4/ER/journeys y guía visual. Pendientes: EV-004, EV-005 y push de cierre. |
+| 2026-10-27 | 1 | BRD, stakeholders, riesgos, glosario, KPIs, contexto regulatorio, 6 BPMN, 4 DMN, Mermaid, C4/ER/journeys y guía visual. Push realizado. Pendientes: EV-004 y EV-005. |
