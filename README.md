@@ -9,6 +9,8 @@ NovaBank is a fictional Paraguayan bank launching instant domestic transfers (in
 
 Phase 1 (business analysis and process modeling) is complete at artifact level: BRD, stakeholder/RACI analysis, risk register, bilingual glossary, KPIs, regulatory context, six BPMN 2.0 processes, four DMN decision tables, Mermaid/C4/ER/journey views and a visual recreation guide. Structural validation was performed with `bpmn-moddle` and `dmn-moddle`; evidence in Bizagi/Camunda/Signavio and Lucidchart/Visio/Miro remains a manual author task.
 
+Phase 2 (requirements) is complete at artifact level: 10 epics, 40 user stories with Gherkin acceptance criteria, MoSCoW priorities and story points, 16 non-functional requirements, two sprint plans, Jira and Azure DevOps import CSVs, a Confluence-ready space (including six ADRs and a RAID log), and a traceability matrix with reserved test-case IDs. Import evidence in Jira, Confluence and Azure DevOps remains a manual author task.
+
 ## Caso de negocio (5 líneas)
 
 1. NovaBank, banco ficticio de Paraguay, quiere competir en pagos con una propuesta instantánea local e internacional.
@@ -39,6 +41,28 @@ Documentos de entrada:
 - [KPIs](01-negocio/kpis.md)
 - [Glosario](01-negocio/glosario.md)
 
+## Avance de Fase 2
+
+| Área | Artefactos | Estado |
+|---|---|---|
+| Backlog | 10 épicas, 40 historias, Gherkin, MoSCoW y 198 story points | Completado |
+| Calidad | 16 NFR y Definition of Ready/Done | Completado |
+| Planificación | Sprint 1 (47 SP) y Sprint 2 (52 SP) | Completado |
+| Jira | `jira_import.csv` + guía de importación | Artefactos listos; evidencia manual pendiente |
+| Azure DevOps | `ado_workitems.csv` + tres pasadas de importación | Artefactos listos; evidencia manual pendiente |
+| Confluence | Inicio, BRD resumido, 6 ADR, glosario, 3 actas y RAID log | Artefactos listos; evidencia manual pendiente |
+| Trazabilidad | Objetivo → requerimiento → historia → proceso → `TC-###` | Completado; pruebas en Fase 7 |
+
+Documentos de Fase 2:
+
+- [Épicas](03-requerimientos/epicas.md)
+- [Historias de usuario](03-requerimientos/historias-usuario.md)
+- [Requerimientos no funcionales](03-requerimientos/requerimientos-no-funcionales.md)
+- [Planificación de sprints](03-requerimientos/planificacion-sprints.md)
+- [Definition of Ready/Done](03-requerimientos/definition-of-ready-done.md)
+- [Matriz de trazabilidad](03-requerimientos/matriz-trazabilidad.csv)
+- [Kit Confluence](03-requerimientos/confluence/README.md)
+
 ## Herramientas demostradas
 
 > Estado actual del repositorio. No se declara el uso de una herramienta que no se haya operado.
@@ -49,11 +73,11 @@ Documentos de entrada:
 | Modelado de procesos | Bizagi / Camunda / Signavio | 6 `.bpmn` BPMN 2.0 | Validado estructuralmente; evidencia manual pendiente |
 | Modelado de decisiones | DMN (Camunda / Signavio) | 4 `.dmn` | Validado estructuralmente; evidencia manual pendiente |
 | Diagramación | Lucidchart / Visio / Miro | Mermaid, C4, ER y guía de recreación | Artefactos listos; evidencia manual pendiente |
-| Gestión de backlog | Jira | CSV de importación + guía | Pendiente |
-| Documentación | Confluence | Páginas en Markdown | Pendiente |
-| Gestión de trabajo y CI | Azure DevOps | CSV de work items + pipeline YAML | Pendiente |
-| Datos y consultas | SQL (SQLite) | Esquema, consultas, reglas | Pendiente |
-| Modelado de requisitos | Historias de usuario / Gherkin | Backlog y criterios de aceptación | Pendiente |
+| Gestión de backlog | Jira | `jira_import.csv` + guía | Artefactos listos; evidencia manual pendiente |
+| Documentación | Confluence | Páginas en Markdown + kit de espacio | Artefactos listos; evidencia manual pendiente |
+| Gestión de trabajo y CI | Azure DevOps | CSV de work items + pipeline YAML | Artefactos de Fase 2 listos; pipeline en Fase 7 |
+| Datos y consultas | SQL (SQLite) | Esquema, consultas, reglas | Pendiente (Fase 3) |
+| Modelado de requisitos | Historias de usuario / Gherkin | 40 historias, NFR, DoR/DoD y trazabilidad | Completado |
 | Diseño de pantallas | Balsamiq / Figma | Especificaciones + prototipo | Pendiente |
 | Excel avanzado | Microsoft Excel | Workbook `.xlsx` con fórmulas y dashboard | Pendiente |
 | BI — modelado | Power BI | Medidas DAX + modelo | Pendiente |
@@ -105,7 +129,7 @@ Cada carpeta contiene un `README.md` corto con su propósito, contenidos esperad
 |---|---|
 | 0 — Preparación del repositorio | Completada |
 | 1 — Negocio y procesos | Completada en artefactos; evidencias manuales pendientes |
-| 2 — Requerimientos | Pendiente |
+| 2 — Requerimientos | Completada en artefactos; evidencias manuales pendientes |
 | 3 — Core bancario y middleware | Pendiente |
 | 4 — Mensajería | Pendiente |
 | 5 — AML y compliance | Pendiente |

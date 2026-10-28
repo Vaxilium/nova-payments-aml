@@ -2,8 +2,8 @@
 
 **Proyecto:** NovaBank Instant & Cross-Border Payments + AML Hub (caso ficticio)
 **Rol:** Business Analyst end-to-end
-**Estado actual:** Fase 1 completada en artefactos; pendientes evidencias manuales y cierre.
-**Última actualización:** 2026-10-27
+**Estado actual:** Fase 2 completada en artefactos; pendientes evidencias manuales EV-001, EV-002 y EV-003.
+**Última actualización:** 2026-10-28
 
 > Convención: marcar `[x]` solo cuando el artefacto exista y esté verificado.
 > Cada tarea cerrada lleva commit convencional. Cada fase cerrada lleva `git push origin main`.
@@ -54,18 +54,18 @@
 
 **Objetivo:** convertir el negocio en un backlog trazable y listo para Jira/Confluence/ADO.
 
-- [ ] Épicas del producto (pagos locales, cross-border, AML, reporting, UX).
-- [ ] Historias de usuario con criterios de aceptación en Gherkin.
-- [ ] Priorización MoSCoW y estimación relativa.
-- [ ] CSV de importación para Jira (campos, labels, épicas, sprints).
-- [ ] CSV de importación para Azure DevOps (work items, area paths, iterations).
-- [ ] Páginas Confluence en Markdown (índice, BRD, decisiones, runbook).
-- [ ] Matriz de trazabilidad requisito → historia → caso de prueba.
-- [ ] Definition of Ready / Definition of Done.
-- [ ] Evidencias manuales de Fase 2.
-- [ ] Commit(s) + push de cierre de fase.
+- [x] Épicas del producto (pagos locales, cross-border, AML, reporting, UX).
+- [x] Historias de usuario con criterios de aceptación en Gherkin.
+- [x] Priorización MoSCoW y estimación relativa.
+- [x] CSV de importación para Jira (campos, labels, épicas, sprints).
+- [x] CSV de importación para Azure DevOps (work items, area paths, iterations).
+- [x] Páginas Confluence en Markdown (índice, BRD, decisiones, runbook).
+- [x] Matriz de trazabilidad requisito → historia → caso de prueba.
+- [x] Definition of Ready / Definition of Done.
+- [ ] Evidencias manuales de Fase 2 (EV-001, EV-002, EV-003: requieren acción del autor).
+- [x] Commit(s) + push de cierre de fase.
 
-**Entregables clave:** backlog, CSV Jira/ADO, kit Confluence, matriz de trazabilidad.
+**Entregables clave:** backlog de 10 épicas y 40 historias (198 SP), 16 NFR, dos sprints, CSV Jira/ADO, kit Confluence con 6 ADR, RAID log y matriz de trazabilidad con `TC-001` a `TC-040` reservados.
 
 ---
 
@@ -175,3 +175,4 @@
 |---|---|---|
 | 2026-10-27 | 0 | Scaffold del repositorio, gobernanza y README inicial. |
 | 2026-10-27 | 1 | BRD, stakeholders, riesgos, glosario, KPIs, contexto regulatorio, 6 BPMN, 4 DMN, Mermaid, C4/ER/journeys y guía visual. Push realizado. Pendientes: EV-004 y EV-005. |
+| 2026-10-28 | 2 | 10 épicas, 40 historias con Gherkin/MoSCoW/SP, 16 NFR, DoR/DoD, 2 sprints, CSV Jira/ADO, kit Confluence con 6 ADR, glosario, 3 actas y RAID log, matriz de trazabilidad con TC-001 a TC-040. Push realizado. Pendientes: EV-001, EV-002 y EV-003. |

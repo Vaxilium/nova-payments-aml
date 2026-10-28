@@ -15,9 +15,9 @@ Registro de pasos manuales, capturas y enlaces de herramientas que el agente **n
 
 | ID | Fase | Herramienta | Artefacto a importar | Enlace | Captura | Fecha | Estado |
 |---|---|---|---|---|---|---|---|
-| EV-001 | 2 | Jira | CSV de épicas e historias | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
-| EV-002 | 2 | Confluence | Páginas Markdown | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
-| EV-003 | 2 | Azure DevOps | CSV de work items | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
+| EV-001 | 2 | Jira | `03-requerimientos/jira_import.csv` | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
+| EV-002 | 2 | Confluence | `03-requerimientos/confluence/*.md` | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
+| EV-003 | 2 | Azure DevOps | `ado_workitems.csv` + `ado_import/*.csv` | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
 | EV-004 | 1 | Bizagi / Camunda / Signavio | Archivos `.bpmn` y `.dmn` | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
 | EV-005 | 1 | Lucidchart / Visio / Miro | Diagramas C4, procesos y journeys | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
 | EV-006 | 6 | Balsamiq / Figma | Wireframes y prototipo | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
@@ -120,37 +120,140 @@ Pasos:
 
 ---
 
+## Fase 2 — Requerimientos
+
+### EV-001 — Importar backlog en Jira
+
+**Estado:** Pendiente de acción manual.
+
+Artefacto: `03-requerimientos/jira_import.csv` (50 filas: 10 épicas + 40 historias).
+Guía: `03-requerimientos/guia-importacion-jira.md`.
+
+Pasos:
+
+1. Crear un proyecto Jira Cloud con clave `NOVA` (company-managed o team-managed).
+2. Crear los campos personalizados `Story Points` (número) y `Sprint` (si el proyecto no los trae).
+3. Importar `jira_import.csv` desde **Issues → Import issues from CSV**.
+4. Mapear columnas:
+   - `External issue ID` → clave externa.
+   - `Issue Type` → tipo (`Epic`/`Story`).
+   - `Summary`, `Description`, `Priority`, `Labels`, `Story Points` → campos homónimos.
+   - `Epic Name` + `Epic Link` (company-managed) o `Parent` (team-managed).
+   - `Sprint` → sprint correspondiente.
+5. Crear el tablero Scrum y los sprints `Sprint 1` y `Sprint 2`.
+6. Verificar que las descripciones conserven los escenarios Gherkin.
+
+**Verificación mínima:**
+- [ ] 10 épicas creadas.
+- [ ] 40 historias creadas y vinculadas a su épica.
+- [ ] 198 story points en total.
+- [ ] Sprint 1: 10 historias / 47 SP.
+- [ ] Sprint 2: 9 historias / 52 SP.
+- [ ] Backlog restante: 21 historias / 99 SP.
+- [ ] Una historia de ejemplo muestra criterios Gherkin completos.
+
+- Enlace del proyecto: _pendiente_
+- Enlace del tablero: _pendiente_
+- Captura del backlog: _pendiente_
+- Captura de una historia con Gherkin: _pendiente_
+- Fecha: _pendiente_
+
+### EV-002 — Crear espacio en Confluence
+
+**Estado:** Pendiente de acción manual.
+
+Artefacto: `03-requerimientos/confluence/`.
+Guía: `03-requerimientos/confluence/README.md`.
+
+Pasos:
+
+1. Crear el espacio `NovaBank` (clave sugerida: `NOVA`).
+2. Crear la página de inicio desde `00-inicio.md`.
+3. Crear las páginas hijas en este orden:
+   - `01-brd-resumido.md`
+   - `02-decisiones/README.md` y los seis ADR (`adr-001` a `adr-006`)
+   - `03-glosario.md`
+   - `04-actas/acta-2026-10-20-kickoff.md`, `acta-2026-10-22-requerimientos.md`, `acta-2026-10-27-refinamiento.md`
+   - `05-raid-log.md`
+4. Pegar el Markdown y revisar tablas, encabezados y enlaces.
+5. Etiquetar las páginas con `novabank`, `requerimientos`, `aml` y `pagos`.
+6. Verificar que el índice de `00-inicio.md` apunte a las páginas creadas.
+
+**Verificación mínima:**
+- [ ] Espacio y página de inicio creados.
+- [ ] BRD resumido publicado.
+- [ ] Seis ADR publicados.
+- [ ] Glosario publicado.
+- [ ] Tres actas publicadas.
+- [ ] RAID log publicado.
+- [ ] Enlaces del índice funcionan.
+- [ ] Sin datos reales ni enlaces inventados.
+
+- Enlace del espacio: _pendiente_
+- Enlace del índice: _pendiente_
+- Captura del árbol de páginas: _pendiente_
+- Captura de un ADR: _pendiente_
+- Fecha: _pendiente_
+
+### EV-003 — Importar work items en Azure DevOps
+
+**Estado:** Pendiente de acción manual.
+
+Artefactos: `03-requerimientos/ado_import/01_epics.csv`, `02_features.csv`, `03_stories.csv`.
+Maestro de auditoría: `03-requerimientos/ado_workitems.csv`.
+Guía: `03-requerimientos/guia-importacion-azure-devops.md`.
+
+Pasos:
+
+1. Crear organización y proyecto `NovaBank-Payments` (o ajustar el prefijo en los CSV).
+2. Crear los Area Paths `NovaBank-Payments\Pagos`, `\AML`, `\Contabilidad`, `\Analitica` y `\Plataforma`.
+3. Crear las Iterations `Sprint 1` (2026-11-02 a 2026-11-13) y `Sprint 2` (2026-11-16 a 2026-11-27).
+4. **Pasada 1:** importar `01_epics.csv` y anotar los IDs numéricos asignados.
+5. **Pasada 2:** completar `Parent` de `02_features.csv` con el ID de cada épica e importar.
+6. **Pasada 3:** completar `Parent` de `03_stories.csv` con el ID de cada feature e importar.
+7. Verificar la jerarquía Epic → Feature → User Story y los story points.
+
+**Verificación mínima:**
+- [ ] 10 épicas creadas.
+- [ ] 15 features creadas y vinculadas.
+- [ ] 40 historias creadas y vinculadas.
+- [ ] 198 story points en total.
+- [ ] Sprint 1 y Sprint 2 configurados.
+- [ ] Una consulta de jerarquía muestra padre e hijos correctos.
+
+- Enlace del proyecto: _pendiente_
+- Enlace de la consulta de jerarquía: _pendiente_
+- Captura del tablero: _pendiente_
+- Captura de una historia con su feature: _pendiente_
+- Fecha: _pendiente_
+
+### Checklist de cierre de Fase 2
+
+- [x] 10 épicas y 40 historias creadas con Gherkin, MoSCoW y story points.
+- [x] 16 NFR y Definition of Ready/Done creados.
+- [x] Dos sprints planificados (47 SP + 52 SP).
+- [x] CSV de Jira y de Azure DevOps generados y verificados.
+- [x] Kit Confluence con 6 ADR, glosario, actas y RAID log creado.
+- [x] Matriz de trazabilidad con `TC-001` a `TC-040` reservados.
+- [ ] EV-001 completada por el autor.
+- [ ] EV-002 completada por el autor.
+- [ ] EV-003 completada por el autor.
+
+---
+
 ## Plantillas por herramienta
 
 ### Jira (Fase 2)
 
-- [ ] Crear proyecto (clave sugerida: `NOVA`).
-- [ ] Importar CSV de épicas e historias desde `03-requerimientos/`.
-- [ ] Verificar campos, labels y criterios de aceptación.
-- [ ] Crear tablero y sprint de ejemplo.
-- Enlace del proyecto: _pendiente_
-- Captura: _pendiente_
-- Fecha: _pendiente_
+Ver **EV-001** en la sección Fase 2. Artefacto: `03-requerimientos/jira_import.csv`.
 
 ### Confluence (Fase 2)
 
-- [ ] Crear espacio `NovaBank`.
-- [ ] Crear páginas desde los Markdown de `03-requerimientos/confluence/`.
-- [ ] Verificar índice, enlaces y jerarquía.
-- Enlace del espacio: _pendiente_
-- Captura: _pendiente_
-- Fecha: _pendiente_
+Ver **EV-002** en la sección Fase 2. Artefacto: `03-requerimientos/confluence/`.
 
 ### Azure DevOps (Fases 2 y 7)
 
-- [ ] Crear organización/proyecto (nombre sugerido: `NovaBank-Payments`).
-- [ ] Importar CSV de work items.
-- [ ] Configurar area paths e iterations.
-- [ ] Ejecutar pipeline YAML y conservar el run.
-- Enlace del proyecto: _pendiente_
-- Enlace del pipeline run: _pendiente_
-- Captura: _pendiente_
-- Fecha: _pendiente_
+Ver **EV-003** en la sección Fase 2 para la importación de work items. El pipeline YAML se ejecuta en Fase 7 (EV-009).
 
 ### Bizagi / Camunda / Signavio (Fase 1)
 

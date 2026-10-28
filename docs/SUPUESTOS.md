@@ -42,6 +42,19 @@ Registro de toda decisión o supuesto tomado sin consulta al autor, según las r
 | S-030 | 2026-10-27 | Decisión | El scoring de cliente usa una tabla DMN `SUM` para puntos y una segunda tabla `FIRST` para clasificar. | Permite sumar factores sin perder una salida legible. | Bajo | Activo |
 | S-031 | 2026-10-27 | Decisión | Mermaid, C4 y los journeys son vistas de comunicación; la fuente de verdad de procesos y decisiones son los BPMN/DMN. | Evita divergencia entre artefactos. | Medio | Activo |
 | S-032 | 2026-10-27 | Decisión | Los mensajes BPMN de confirmación se modelan con `messageEventDefinition` y `messageRef`; no implican integración real. | Documenta la semántica sin afirmar conectividad. | Bajo | Activo |
+| S-033 | 2026-10-28 | Decisión | El CSV de Jira usa el formato de importación de Jira Cloud: `External issue ID`, `Issue Type`, `Epic Name`/`Epic Link` (company-managed) y `Parent` como alternativa para team-managed. | Mantener un artefacto importable sin afirmar que la importación fue ejecutada. | Medio | Activo |
+| S-034 | 2026-10-28 | Decisión | La importación a Azure DevOps se documenta en tres pasadas (Epic → Feature → User Story) porque el campo `Parent` exige el ID numérico de un work item existente. El CSV maestro conserva IDs lógicos. | Evitar una jerarquía inválida y facilitar la verificación manual. | Medio | Activo |
+| S-035 | 2026-10-28 | Decisión | El backlog se fija en 10 épicas, 40 historias y 198 story points; los dos primeros sprints comprometen 19 historias / 99 SP (47 + 52). | Dar un alcance demostrable y dejar el resto priorizado. | Medio | Activo |
+| S-036 | 2026-10-28 | Decisión | Los IDs `TC-001` a `TC-040` quedan reservados para los casos de prueba de Fase 7; no se declaran ejecutados. | Evitar afirmar pruebas no realizadas y mantener la trazabilidad. | Medio | Activo |
+| S-037 | 2026-10-28 | Decisión | Las páginas de Confluence son Markdown listo para copiar/pegar; no usan macros de pago ni enlaces inventados. | Portabilidad y honestidad del artefacto. | Bajo | Activo |
+| S-038 | 2026-10-28 | Decisión | Las actas, fechas y asistentes de las reuniones son ficticios y usan solo roles; no representan reuniones reales. | Coherencia con el caso y privacidad. | Bajo | Activo |
+| S-039 | 2026-10-28 | Supuesto | La capacidad del equipo es 5 desarrolladores, 1 QA, 1 BA y 1 Product Owner; velocidad inicial 45–52 SP por sprint; Sprint 1 del 2026-11-02 al 2026-11-13 y Sprint 2 del 2026-11-16 al 2026-11-27. | Permite planificar sin datos históricos; se ajusta al cierre del Sprint 1. | Medio | Activo |
+| S-040 | 2026-10-28 | Decisión | Mapeo de prioridad MoSCoW: `Must` → Jira `High` / ADO `1`; `Should` → `Medium` / `2`; `Could` → `Low` / `3`. | Mantener consistencia entre herramientas. | Bajo | Activo |
+| S-041 | 2026-10-28 | Decisión | Se documentan seis ADR (orquestación, idempotencia/estados, ISO 20022, DMN, auditoría y datos sintéticos); son decisiones de diseño, no una implementación real. | Demostrar gobierno de arquitectura sin afirmar uso de herramientas. | Medio | Activo |
+| S-042 | 2026-10-28 | Supuesto | La retención inicial de auditoría es de 5 años, sujeta a validación de Cumplimiento/Legal. | Es un parámetro del caso; no se encontró una política aplicable verificada. | Alto | Activo |
+| S-043 | 2026-10-28 | Supuesto | Los valores de disponibilidad, latencia, capacidad, tasa de abuso y RTO/RPO son objetivos de diseño, no resultados medidos ni compromisos contractuales. | Honestidad: no se inventan métricas ni SLA reales. | Alto | Activo |
+| S-044 | 2026-10-28 | Decisión | Los Area Paths e Iterations de Azure DevOps usan el prefijo `NovaBank-Payments`; el autor debe ajustarlo al nombre real del proyecto. | Evitar rutas inválidas si el proyecto se crea con otro nombre. | Bajo | Activo |
+| S-045 | 2026-10-28 | Supuesto | NovaBank será participante o subparticipante del SPI; el caso no modela el proceso de adhesión ni la certificación. | Habilita el canal local sin afirmar una conexión real con el BCP. | Medio | Activo |
 
 ## Supuestos no verificados vigentes
 
@@ -55,6 +68,8 @@ Los siguientes supuestos se marcan `SUPUESTO NO VERIFICADO` en los documentos do
 | SNV-04 | Los umbrales de revisión manual y aprobación son adecuados para el apetito de riesgo del banco. | DMN de límites y aprobaciones | P-011 |
 | SNV-05 | La obligación de reportar ROS se activa con independencia del monto y dentro de plazos que el caso fija como parámetro interno. | Proceso de alertas, ROS | P-009 |
 | SNV-06 | El uso de ISO 20022 para pagos transfronterizos es obligatorio desde el fin de la coexistencia (22-11-2025). | BRD, proceso internacional | P-008 |
+| SNV-07 | La retención inicial de 5 años para la bitácora de auditoría es adecuada para el perímetro de NovaBank. | NFR-04, ADR-005 | P-012 |
+| SNV-08 | El SLA de asignación de alertas P1 en 15 minutos y el cierre de investigación en 10 días hábiles son parámetros internos, no plazos regulatorios. | US-018, K-09, K-10 | P-011 |
 
 ## Historial de cambios
 
@@ -64,3 +79,5 @@ Los siguientes supuestos se marcan `SUPUESTO NO VERIFICADO` en los documentos do
 | 2026-10-27 | Se agrega S-014 por la creación del repositorio remoto. |
 | 2026-10-27 | Fase 1: se agregan S-015 a S-028 y los supuestos no verificados SNV-01 a SNV-06. |
 | 2026-10-27 | Fase 1: se agregan S-029 a S-032 por decisiones de modelado BPMN/DMN y artefactos visuales. |
+| 2026-10-28 | Fase 2: se agregan S-033 a S-045 por formato Jira/ADO, alcance del backlog, IDs de prueba, Confluence, capacidad, prioridades, ADR, retención, NFR y participación en SPI. |
+| 2026-10-28 | Fase 2: se agregan SNV-07 (retención de auditoría) y SNV-08 (SLA de alertas) asociados a P-012 y P-011. |
