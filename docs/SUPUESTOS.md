@@ -23,6 +23,7 @@ Registro de toda decisión o supuesto tomado sin consulta al autor, según las r
 | S-011 | 2026-10-27 | Decisión | Lo no verificable se marca `SUPUESTO NO VERIFICADO` inline y se lista en `PENDIENTES.md`. | Transparencia. | Alto | Activo |
 | S-012 | 2026-10-27 | Decisión | Se incluye `opencode.json` en el repositorio como configuración de la sesión de trabajo. | Facilitar futuras sesiones del agente. | Bajo | Activo |
 | S-013 | 2026-10-27 | Decisión | No se crea `LICENSE` en Fase 0; la licencia se decide antes de difundir el repositorio (Fase 7). | Evitar otorgar licencia sin decisión explícita del autor. | Medio | Activo |
+| S-014 | 2026-10-27 | Decisión | El remoto `Vaxilium/nova-payments-aml` no existía; se creó como repositorio público con `gh repo create` y se hizo el push inicial. | El push falló con "Repository not found" y la cuenta `Vaxilium` ya estaba autenticada. El proyecto es un portafolio público. | Bajo | Activo |
 
 ## Supuestos no verificados vigentes
 
@@ -33,3 +34,4 @@ Ninguno. No se ha incorporado contenido normativo en esta fase.
 | Fecha | Cambio |
 |---|---|
 | 2026-10-27 | Creación del registro con S-001 a S-013. |
+| 2026-10-27 | Se agrega S-014 por la creación del repositorio remoto. |

@@ -32,7 +32,7 @@ Registro de pasos manuales, capturas y enlaces de herramientas que el agente **n
 No requiere evidencias externas. Los artefactos son archivos del repositorio y commits en GitHub.
 
 - [x] Repositorio creado y remoto configurado.
-- [ ] Primer push verificado en GitHub: `_pendiente_` (se completa al cierre de la sesión).
+- [x] Primer push verificado en GitHub: https://github.com/Vaxilium/nova-payments-aml (2026-10-27, rama `main`).
 
 ---
 
