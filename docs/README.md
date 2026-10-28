@@ -10,6 +10,7 @@ Documentación transversal que aplica a todas las fases.
 | [EVIDENCIAS.md](EVIDENCIAS.md) | Pasos manuales, capturas y enlaces de herramientas |
 
 Reglas:
+
 - Toda decisión tomada sin consulta se registra en `SUPUESTOS.md`.
 - Todo lo no verificable se marca `SUPUESTO NO VERIFICADO` en su documento y se lista en `PENDIENTES.md`.
 - Ninguna herramienta se declara usada sin evidencia real.

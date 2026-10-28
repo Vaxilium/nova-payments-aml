@@ -19,7 +19,7 @@ Registro de pasos manuales, capturas y enlaces de herramientas que el agente **n
 | EV-002 | 2 | Confluence | Páginas Markdown | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
 | EV-003 | 2 | Azure DevOps | CSV de work items | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
 | EV-004 | 1 | Bizagi / Camunda / Signavio | Archivos `.bpmn` y `.dmn` | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
-| EV-005 | 1 | Lucidchart / Visio / Miro | Diagramas C4 y journeys | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
+| EV-005 | 1 | Lucidchart / Visio / Miro | Diagramas C4, procesos y journeys | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
 | EV-006 | 6 | Balsamiq / Figma | Wireframes y prototipo | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
 | EV-007 | 6 | Power BI | Modelo y dashboard | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
 | EV-008 | 6 | Tableau | Dashboard | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
@@ -33,6 +33,90 @@ No requiere evidencias externas. Los artefactos son archivos del repositorio y c
 
 - [x] Repositorio creado y remoto configurado.
 - [x] Primer push verificado en GitHub: https://github.com/Vaxilium/nova-payments-aml (2026-10-27, rama `main`).
+
+---
+
+## Fase 1 — Negocio y procesos
+
+### EV-004 — Importar BPMN/DMN en Bizagi, Camunda o Signavio
+
+**Estado:** Pendiente de acción manual.
+
+Pasos:
+
+1. Abrir Camunda Modeler, Bizagi Modeler o Signavio Process Manager.
+2. Importar `02-procesos/bpmn/transferencia-instantanea-to-be.bpmn`.
+3. Verificar pool, lanes, eventos, gateways, flujos y etiquetas.
+4. Importar los cinco BPMN restantes:
+   - `transferencia-instantanea-as-is.bpmn`
+   - `transferencia-internacional-to-be.bpmn`
+   - `onboarding-kyc.bpmn`
+   - `alerta-aml.bpmn`
+   - `investigacion-ros.bpmn`
+5. Importar los cuatro DMN:
+   - `ruteo-riesgo-transferencia.dmn`
+   - `scoring-riesgo-cliente.dmn`
+   - `prioridad-alertas.dmn`
+   - `limites-aprobaciones.dmn`
+6. Ejecutar al menos una regla de cada DMN con datos ficticios.
+7. Capturar el diagrama y el resultado de la decisión.
+
+**Verificación mínima:**
+- [ ] Los seis BPMN abren sin errores.
+- [ ] Los cuatro DMN abren sin errores.
+- [ ] Las lanes y etiquetas se ven completas.
+- [ ] Una regla de ruteo devuelve un resultado coherente.
+- [ ] Una regla de scoring devuelve un puntaje y una clasificación.
+- [ ] Una regla de prioridad asigna P1/P2/P3.
+- [ ] Una regla de límites devuelve aprobación o rechazo.
+
+- Enlace al proyecto/modelo: _pendiente_
+- Captura BPMN local TO-BE: _pendiente_
+- Captura DMN ruteo: _pendiente_
+- Fecha: _pendiente_
+- Herramienta usada: _pendiente_
+
+### EV-005 — Recrear diagramas en Lucidchart, Visio o Miro
+
+**Estado:** Pendiente de acción manual.
+
+Pasos:
+
+1. Seguir `02-procesos/guia-lucidchart-visio-miro.md`.
+2. Crear el contexto C4 y el diagrama de contenedores.
+3. Recrear el proceso local TO-BE y el proceso internacional.
+4. Recrear el journey de cliente persona y el de empresa.
+5. Compartir con permiso de solo lectura.
+6. Capturar cada frame/diagrama.
+
+**Verificación mínima:**
+- [ ] Contexto C4 con actores y sistemas externos.
+- [ ] Contenedores con orquestador, riesgo, mensajería, core y datos.
+- [ ] Proceso local TO-BE con lanes y gateways.
+- [ ] Journey persona y empresa.
+- [ ] Sin datos reales.
+- [ ] Enlace de lectura probado.
+
+- Enlace Lucidchart: _pendiente_
+- Enlace Visio (OneDrive/SharePoint): _pendiente_
+- Enlace Miro: _pendiente_
+- Captura contexto C4: _pendiente_
+- Captura proceso local TO-BE: _pendiente_
+- Captura journey: _pendiente_
+- Fecha: _pendiente_
+
+### Checklist de cierre de Fase 1
+
+- [x] BRD, stakeholders, riesgos, glosario, KPIs y contexto regulatorio creados.
+- [x] Seis BPMN y cuatro DMN creados.
+- [x] BPMN validados con `bpmn-moddle`.
+- [x] DMN validados con `dmn-moddle`.
+- [x] Mermaid, C4, ER, event storming y journeys creados.
+- [x] Guía de recreación visual creada.
+- [ ] EV-004 completada por el autor.
+- [ ] EV-005 completada por el autor.
+
+> **Nota:** la validación estructural con `bpmn-moddle`/`dmn-moddle` no equivale a una prueba en Camunda, Bizagi o Signavio. La evidencia de herramienta sigue pendiente.
 
 ---
 
