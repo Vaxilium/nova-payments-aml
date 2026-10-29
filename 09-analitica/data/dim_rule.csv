@@ -1,0 +1,13 @@
+﻿rule_id,rule_name,severity,base_score,intended_pattern
+R01,Estructuración por debajo del umbral,HIGH,80,STRUCTURING
+R02,Velocidad transaccional por cantidad,HIGH,78,HIGH_VELOCITY
+R03,Velocidad transaccional por monto,MEDIUM,62,HIGH_VELOCITY
+R04,Cuenta de paso (entrada y salida rápida),HIGH,85,PASS_THROUGH
+R05,Depósitos redondos reiterados,MEDIUM,70,ROUND_MULE
+R06,Reactivación de cuenta inactiva,MEDIUM,66,DORMANT_ACTIVATION
+R07,Jurisdicción de alto riesgo,CRITICAL,92,GENERAL
+R08,Importe atípico frente al perfil,MEDIUM,58,GENERAL
+R09,Cambio abrupto de comportamiento,MEDIUM,64,GENERAL
+R10,Transferencias circulares,HIGH,88,GENERAL
+R11,Concentración de contraparte,MEDIUM,60,GENERAL
+R12,Fan-in de múltiples remitentes,HIGH,76,GENERAL

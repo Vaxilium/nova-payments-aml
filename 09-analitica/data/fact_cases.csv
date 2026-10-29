@@ -1,0 +1,60 @@
+﻿case_id,customer_id,title,status,priority,risk_score,opened_at,assigned_to,due_at,closed_at,ros_reported,alert_count,is_closed,is_reported,is_on_time_close
+1,CUS-000003,Caso AML · Estructuración por debajo del umbral,REPORTADO,P1,81,2026-05-08T15:57:16,analista_aml_2,2026-05-22T15:57:16,2026-05-20T15:57:16,1,16,1,1,1
+2,CUS-000004,Caso AML · Estructuración por debajo del umbral,REPORTADO,P1,82,2026-05-10T13:47:20,analista_aml_2,2026-05-22T13:47:20,2026-05-20T13:47:20,1,11,1,1,1
+3,CUS-000007,Caso AML · Estructuración por debajo del umbral,EN_ANALISIS,P1,82,2026-06-18T17:39:01,analista_aml_2,2026-07-02T17:39:01,,0,6,0,0,
+4,CUS-000006,Caso AML · Estructuración por debajo del umbral,REPORTADO,P1,80,2026-06-03T19:14:42,analista_aml_2,2026-06-17T19:14:42,2026-06-05T19:14:42,1,18,1,1,1
+5,CUS-000009,Caso AML · Estructuración por debajo del umbral,ESCALADO,P1,81,2026-07-01T17:24:09,analista_aml_3,2026-07-15T17:24:09,,0,27,0,0,
+6,CUS-000001,Caso AML · Estructuración por debajo del umbral,REPORTADO,P1,81,2026-07-04T05:29:21,analista_aml_1,2026-07-17T05:29:21,2026-07-09T05:29:21,1,16,1,1,1
+7,CUS-000002,Caso AML · Estructuración por debajo del umbral,ESCALADO,P1,80,2026-07-30T13:23:03,analista_aml_2,2026-08-13T13:23:03,,0,7,0,0,
+8,CUS-000010,Caso AML · Estructuración por debajo del umbral,ABIERTO,P1,81,2026-08-12T15:59:41,analista_aml_2,2026-08-26T15:59:41,,0,6,0,0,
+9,CUS-000008,Caso AML · Estructuración por debajo del umbral,REPORTADO,P1,80,2026-08-12T10:47:23,analista_aml_1,2026-08-26T10:47:23,2026-08-18T10:47:23,1,7,1,1,1
+10,CUS-000005,Caso AML · Estructuración por debajo del umbral,REPORTADO,P1,81,2026-08-01T02:05:10,analista_aml_1,2026-08-14T02:05:10,2026-08-11T02:05:10,1,28,1,1,1
+11,CUS-000023,Caso AML · Velocidad transaccional por cantidad,ABIERTO,P2,79,2026-05-18T15:22:00,analista_aml_2,2026-06-08T15:22:00,,0,2,0,0,
+12,CUS-000019,Caso AML · Velocidad transaccional por cantidad,ABIERTO,P1,81,2026-05-28T14:39:00,analista_aml_3,2026-06-11T14:39:00,,0,2,0,0,
+13,CUS-000020,Caso AML · Velocidad transaccional por cantidad,ESCALADO,P2,79,2026-06-24T14:38:00,analista_aml_3,2026-07-15T14:38:00,,0,2,0,0,
+14,CUS-000021,Caso AML · Velocidad transaccional por cantidad,ESCALADO,P2,79,2026-06-29T15:30:00,analista_aml_1,2026-07-20T15:30:00,,0,2,0,0,
+15,CUS-000022,Caso AML · Velocidad transaccional por cantidad,CERRADO,P2,78,2026-08-03T14:47:00,analista_aml_1,2026-08-24T14:47:00,2026-08-07T14:47:00,0,2,1,0,1
+16,CUS-000174,Caso AML · Cuenta de paso (entrada y salida rápida),ABIERTO,P1,85,2026-04-09T11:21:29,analista_aml_2,2026-04-23T11:21:29,,0,1,0,0,
+17,CUS-000473,Caso AML · Cuenta de paso (entrada y salida rápida),CERRADO,P1,86,2026-04-10T10:16:29,analista_aml_2,2026-04-24T10:16:29,2026-04-17T10:16:29,0,2,1,0,1
+18,CUS-000199,Caso AML · Cuenta de paso (entrada y salida rápida),EN_ANALISIS,P1,86,2026-04-12T14:22:45,analista_aml_3,2026-04-24T14:22:45,,0,1,0,0,
+19,CUS-000153,Caso AML · Cuenta de paso (entrada y salida rápida),ESCALADO,P1,87,2026-04-21T18:18:57,analista_aml_3,2026-05-05T18:18:57,,0,1,0,0,
+20,CUS-000430,Caso AML · Cuenta de paso (entrada y salida rápida),EN_ANALISIS,P1,86,2026-04-24T15:46:52,analista_aml_1,2026-05-08T15:46:52,,0,2,0,0,
+21,CUS-000272,Caso AML · Cuenta de paso (entrada y salida rápida),CERRADO,P1,86,2026-05-05T11:37:05,analista_aml_2,2026-05-19T11:37:05,2026-05-12T11:37:05,0,1,1,0,1
+22,CUS-000156,Caso AML · Cuenta de paso (entrada y salida rápida),EN_ANALISIS,P1,86,2026-05-05T17:36:23,analista_aml_2,2026-05-19T17:36:23,,0,2,0,0,
+23,CUS-000164,Caso AML · Cuenta de paso (entrada y salida rápida),ABIERTO,P1,86,2026-05-12T10:59:14,analista_aml_1,2026-05-26T10:59:14,,0,1,0,0,
+24,CUS-000013,Caso AML · Cuenta de paso (entrada y salida rápida),REPORTADO,P1,85,2026-05-12T16:37:26,analista_aml_2,2026-05-26T16:37:26,2026-05-19T16:37:26,1,12,1,1,1
+25,CUS-000015,Caso AML · Cuenta de paso (entrada y salida rápida),REPORTADO,P1,86,2026-05-12T17:10:24,analista_aml_1,2026-05-26T17:10:24,2026-05-21T17:10:24,1,12,1,1,1
+26,CUS-000012,Caso AML · Cuenta de paso (entrada y salida rápida),REPORTADO,P1,86,2026-05-15T12:40:09,analista_aml_3,2026-05-29T12:40:09,2026-05-28T12:40:09,1,10,1,1,1
+27,CUS-000017,Caso AML · Cuenta de paso (entrada y salida rápida),REPORTADO,P1,86,2026-05-18T14:12:33,analista_aml_1,2026-06-01T14:12:33,2026-05-27T14:12:33,1,10,1,1,1
+28,CUS-000011,Caso AML · Cuenta de paso (entrada y salida rápida),ESCALADO,P1,86,2026-05-23T11:31:02,analista_aml_3,2026-06-05T11:31:02,,0,9,0,0,
+29,CUS-000313,Caso AML · Cuenta de paso (entrada y salida rápida),CERRADO,P1,85,2026-05-28T10:58:21,analista_aml_2,2026-06-11T10:58:21,2026-06-09T10:58:21,0,1,1,0,1
+30,CUS-000099,Caso AML · Cuenta de paso (entrada y salida rápida),CERRADO,P1,85,2026-05-29T17:19:49,analista_aml_2,2026-06-12T17:19:49,2026-06-05T17:19:49,0,1,1,0,1
+31,CUS-000014,Caso AML · Cuenta de paso (entrada y salida rápida),REPORTADO,P1,85,2026-06-03T14:39:55,analista_aml_3,2026-06-17T14:39:55,2026-06-08T14:39:55,1,7,1,1,1
+32,CUS-000451,Caso AML · Cuenta de paso (entrada y salida rápida),CERRADO,P1,86,2026-06-10T10:18:25,analista_aml_3,2026-06-24T10:18:25,2026-06-15T10:18:25,0,1,1,0,1
+33,CUS-000016,Caso AML · Cuenta de paso (entrada y salida rápida),REPORTADO,P1,85,2026-06-14T16:42:25,analista_aml_3,2026-06-26T16:42:25,2026-06-22T16:42:25,1,11,1,1,1
+34,CUS-000252,Caso AML · Cuenta de paso (entrada y salida rápida),CERRADO,P1,86,2026-06-19T12:58:03,analista_aml_1,2026-07-03T12:58:03,2026-06-30T12:58:03,0,1,1,0,1
+35,CUS-000314,Caso AML · Cuenta de paso (entrada y salida rápida),ABIERTO,P1,87,2026-06-20T16:48:12,analista_aml_2,2026-07-03T16:48:12,,0,1,0,0,
+36,CUS-000221,Caso AML · Cuenta de paso (entrada y salida rápida),REPORTADO,P1,85,2026-06-21T16:26:39,analista_aml_3,2026-07-03T16:26:39,2026-06-29T16:26:39,1,1,1,1,1
+37,CUS-000160,Caso AML · Cuenta de paso (entrada y salida rápida),ABIERTO,P1,86,2026-06-28T21:02:33,analista_aml_3,2026-07-10T21:02:33,,0,1,0,0,
+38,CUS-000500,Caso AML · Cuenta de paso (entrada y salida rápida),CERRADO,P1,86,2026-07-15T13:51:31,analista_aml_3,2026-07-29T13:51:31,2026-07-23T13:51:31,0,1,1,0,1
+39,CUS-000018,Caso AML · Cuenta de paso (entrada y salida rápida),REPORTADO,P1,87,2026-07-16T17:00:38,analista_aml_2,2026-07-30T17:00:38,2026-07-23T17:00:38,1,8,1,1,1
+40,CUS-000229,Caso AML · Cuenta de paso (entrada y salida rápida),ABIERTO,P1,87,2026-07-17T15:43:31,analista_aml_2,2026-07-31T15:43:31,,0,1,0,0,
+41,CUS-000057,Caso AML · Cuenta de paso (entrada y salida rápida),EN_ANALISIS,P1,87,2026-07-29T14:16:14,analista_aml_2,2026-08-12T14:16:14,,0,1,0,0,
+42,CUS-000073,Caso AML · Cuenta de paso (entrada y salida rápida),REPORTADO,P1,85,2026-08-10T16:45:34,analista_aml_2,2026-08-24T16:45:34,2026-08-12T16:45:34,1,1,1,1,1
+43,CUS-000349,Caso AML · Cuenta de paso (entrada y salida rápida),CERRADO,P1,86,2026-08-12T16:31:31,analista_aml_3,2026-08-26T16:31:31,2026-08-20T16:31:31,0,1,1,0,1
+44,CUS-000100,Caso AML · Cuenta de paso (entrada y salida rápida),ABIERTO,P1,86,2026-08-20T11:02:50,analista_aml_1,2026-09-03T11:02:50,,0,1,0,0,
+45,CUS-000456,Caso AML · Cuenta de paso (entrada y salida rápida),REPORTADO,P1,87,2026-08-22T20:02:07,analista_aml_1,2026-09-04T20:02:07,2026-08-27T20:02:07,1,1,1,1,1
+46,CUS-000445,Caso AML · Cuenta de paso (entrada y salida rápida),ESCALADO,P1,87,2026-08-28T12:40:40,analista_aml_2,2026-09-11T12:40:40,,0,1,0,0,
+47,CUS-000047,Caso AML · Cuenta de paso (entrada y salida rápida),REPORTADO,P1,86,2026-08-29T12:25:48,analista_aml_2,2026-09-11T12:25:48,2026-09-09T12:25:48,1,1,1,1,1
+48,CUS-000207,Caso AML · Cuenta de paso (entrada y salida rápida),CERRADO,P1,85,2026-09-08T17:39:39,analista_aml_1,2026-09-22T17:39:39,2026-09-17T17:39:39,0,1,1,0,1
+49,CUS-000183,Caso AML · Cuenta de paso (entrada y salida rápida),EN_ANALISIS,P1,85,2026-09-14T21:46:03,analista_aml_2,2026-09-28T21:46:03,,0,1,0,0,
+50,CUS-000226,Caso AML · Cuenta de paso (entrada y salida rápida),ABIERTO,P1,86,2026-09-25T16:18:31,analista_aml_1,2026-10-09T16:18:31,,0,1,0,0,
+51,CUS-000024,Caso AML · Depósitos redondos reiterados,REPORTADO,P2,71,2026-04-24T11:26:00,analista_aml_3,2026-05-15T11:26:00,2026-05-06T11:26:00,1,22,1,1,1
+52,CUS-000028,Caso AML · Depósitos redondos reiterados,REPORTADO,P2,70,2026-04-25T16:43:00,analista_aml_2,2026-05-15T16:43:00,2026-05-11T16:43:00,1,17,1,1,1
+53,CUS-000025,Caso AML · Depósitos redondos reiterados,REPORTADO,P2,71,2026-04-26T18:38:00,analista_aml_3,2026-05-15T18:38:00,2026-05-13T18:38:00,1,20,1,1,1
+54,CUS-000026,Caso AML · Depósitos redondos reiterados,REPORTADO,P2,70,2026-05-01T12:45:00,analista_aml_1,2026-05-22T12:45:00,2026-05-04T12:45:00,1,24,1,1,1
+55,CUS-000027,Caso AML · Depósitos redondos reiterados,REPORTADO,P2,70,2026-05-06T17:23:00,analista_aml_1,2026-05-27T17:23:00,2026-05-07T17:23:00,1,24,1,1,1
+56,CUS-000029,Caso AML · Reactivación de cuenta inactiva,REPORTADO,P2,67,2026-09-11T09:26:00,analista_aml_2,2026-10-02T09:26:00,2026-09-18T09:26:00,1,2,1,1,1
+57,CUS-000031,Caso AML · Reactivación de cuenta inactiva,ESCALADO,P2,67,2026-09-11T15:35:00,analista_aml_1,2026-10-02T15:35:00,,0,2,0,0,
+58,CUS-000030,Caso AML · Importe atípico frente al perfil,CERRADO,P2,58,2026-09-11T16:33:00,analista_aml_3,2026-10-02T16:33:00,2026-09-22T16:33:00,0,1,1,0,1
+59,CUS-000327,Caso AML · Fan-in de múltiples remitentes,REPORTADO,P2,77,2026-06-29T14:58:26,analista_aml_2,2026-07-20T14:58:26,2026-07-02T14:58:26,1,4,1,1,1

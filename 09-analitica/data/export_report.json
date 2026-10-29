@@ -1,0 +1,32 @@
+{
+  "source_db": "05-core-middleware/db/novabank.db",
+  "generated_at": "2026-10-29T01:27:04",
+  "reference_date": "2026-10-01",
+  "rows": {
+    "dim_date": 183,
+    "dim_customer": 500,
+    "dim_account": 800,
+    "dim_rule": 12,
+    "dim_priority": 3,
+    "dim_currency": 3,
+    "fact_transactions": 49582,
+    "fact_payment_sla": 10820,
+    "fact_alerts": 377,
+    "fact_cases": 59,
+    "fact_daily_ops": 366,
+    "fact_ledger_daily": 366
+  },
+  "alert_lifecycle": {
+    "alerts": 377,
+    "assigned": 300,
+    "closed_fp": 155
+  },
+  "cases": 59,
+  "integrity_check": "ok",
+  "foreign_key_violations": 0,
+  "notes": [
+    "La latencia de fact_payment_sla es sintética y determinística; el core no registra timestamps separados.",
+    "Los estados de alertas y casos son un ciclo de vida analítico sintético para demostrar los tableros.",
+    "No se modificó la base del core: todo se ejecuta sobre una copia en memoria."
+  ]
+}
