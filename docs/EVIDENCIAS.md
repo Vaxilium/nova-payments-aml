@@ -421,8 +421,8 @@ cd 06-mensajeria
 **Estado:** Automatización y artefactos completos. EV-009, EV-010 y EV-011
 requieren ejecución manual del autor.
 
-**Commits y push:** pendientes al cierre de esta sesión. Los resultados se
-generaron localmente antes del commit final.
+**Commits y push:** `1410343` (Fase 7) publicado en `origin/main` el 2026-10-29.
+Los resultados se generaron localmente antes del commit final.
 
 ### Comandos ejecutados
 
@@ -563,6 +563,7 @@ Pasos:
 - [x] Pipelines de Azure DevOps y GitHub Actions creados y validados como YAML.
 - [x] Acta de cierre UAT creada.
 - [x] README final y borradores de LinkedIn creados.
+- [x] Commit `1410343` y push de cierre de Fase 7.
 - [ ] EV-009 completada por el autor.
 - [ ] EV-010 completada por el autor.
 - [ ] EV-011 completada por el autor.

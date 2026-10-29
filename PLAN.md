@@ -2,7 +2,7 @@
 
 **Proyecto:** NovaBank Instant & Cross-Border Payments + AML Hub (caso ficticio)
 **Rol:** Business Analyst end-to-end
-**Estado actual:** Fase 7 completada a nivel artefacto y automatización; pendientes manuales EV-001 a EV-011 y commit/push de cierre.
+**Estado actual:** Fase 7 completada a nivel artefacto y automatización; pendientes manuales EV-001 a EV-011.
 **Última actualización:** 2026-10-29
 
 > Convención: marcar `[x]` solo cuando el artefacto exista y esté verificado.
@@ -151,7 +151,7 @@
 - [x] README final con resultados, capturas y lecciones aprendidas.
 - [x] Borrador de post para LinkedIn (sin enlaces inventados).
 - [x] Revisión de calidad integral y cierre de pendientes.
-- [ ] Commit(s) + push de cierre de fase.
+- [x] Commit(s) + push de cierre de fase (`1410343`).
 
 **Entregables clave:** plan UAT, pipelines, README final, borrador LinkedIn.
 
@@ -180,4 +180,4 @@
 | 2026-10-28 | 4 | Catálogo ISO 20022 (pacs.008/pacs.002/pain.001/camt.053), mapeo MT103↔pacs.008, validador (IBAN/BIC/ISO 4217/importes/UETR), simuladores local e internacional con idempotencia/reintentos/AML simulado, 6 ejemplos, 4 diagramas Mermaid, 89 pruebas nuevas (158 totales). Pendiente: verificación manual de fuentes bloqueadas (P-008). |
 | 2026-10-29 | 5 | Scoring KYC 0–100, 12 reglas SQL calibradas, screening difuso con listas ficticias, 775 alertas deduplicadas (P1 110/P2 665), workflow de casos con SLA, evaluación contra 341 sospechosas (recall 100 %, precisión 99,13 % sobre etiquetadas), dos ROS ficticios, mapeo SEPRELAD/GAFI y 25 pruebas (183 totales). |
 | 2026-10-29 | 6 | 10 wireframes SVG, 12 CSV analíticos, workbook de 11 hojas, 36 medidas DAX, Power Query y guía Tableau, 16 pruebas (199 totales). Push realizado. Pendientes: EV-006 a EV-008. |
-| 2026-10-29 | 7 | 65 casos UAT, 51 automatizados aprobados, 6 manuales pendientes, 8 no implementados, 5 defectos, 204 pruebas, 23 controles SQL, pipelines YAML, README final y borradores LinkedIn. Commit/push pendiente. |
+| 2026-10-29 | 7 | 65 casos UAT, 51 automatizados aprobados, 6 manuales pendientes, 8 no implementados, 5 defectos, 204 pruebas, 23 controles SQL, pipelines YAML, README final y borradores LinkedIn. Push realizado: `1410343`. |
