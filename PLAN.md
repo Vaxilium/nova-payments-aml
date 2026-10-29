@@ -2,7 +2,7 @@
 
 **Proyecto:** NovaBank Instant & Cross-Border Payments + AML Hub (caso ficticio)
 **Rol:** Business Analyst end-to-end
-**Estado actual:** Fase 7 completada a nivel artefacto y automatización; pendientes manuales EV-001 a EV-011.
+**Estado actual:** Fase 8 completada; Fase 7 cerrada a nivel artefacto y automatización; pendientes manuales EV-001 a EV-011.
 **Última actualización:** 2026-10-29
 
 > Convención: marcar `[x]` solo cuando el artefacto exista y esté verificado.
@@ -157,6 +157,28 @@
 
 ---
 
+## Fase 8 — Auditoría y refuerzo
+
+**Objetivo:** verificar cada afirmación, probar desde cero y dejar el portafolio
+listo para publicar sin inflar resultados.
+
+- [x] Auditoría de verdad en `docs/AUDITORIA.md` (34 afirmaciones clasificadas).
+- [x] Corrección del README: verificado vs. requiere ejecución manual.
+- [x] Reverificación de `docs/FUENTES.md` y de los supuestos no verificados.
+- [x] Cierre de SNV-01 / P-006 con la FAQ oficial del BCP.
+- [x] Prueba desde cero en clon limpio con `.venv` nuevo (204/204, 51/51, 23/23).
+- [x] Comandos exactos de Windows PowerShell documentados en README.
+- [x] Revisión de seguridad: sin claves ni tokens; rutas absolutas sanitizadas.
+- [x] `README.en.md` completo y enlazado desde `README.md`.
+- [x] `docs/case-study.md`, `docs/entrevista.md`, `docs/github-metadata.md`.
+- [x] `LICENSE` (MIT), `CHANGELOG.md` y `docs/evidencias/README.md`.
+- [x] Commit(s), tag `v1.0.0` y push.
+
+**Entregables clave:** auditoría, README bilingüe, case study, guion de
+entrevista, licencia, changelog y checklist de capturas.
+
+---
+
 ## Hitos
 
 | Hito | Fase | Criterio |
@@ -181,3 +203,4 @@
 | 2026-10-29 | 5 | Scoring KYC 0–100, 12 reglas SQL calibradas, screening difuso con listas ficticias, 775 alertas deduplicadas (P1 110/P2 665), workflow de casos con SLA, evaluación contra 341 sospechosas (recall 100 %, precisión 99,13 % sobre etiquetadas), dos ROS ficticios, mapeo SEPRELAD/GAFI y 25 pruebas (183 totales). |
 | 2026-10-29 | 6 | 10 wireframes SVG, 12 CSV analíticos, workbook de 11 hojas, 36 medidas DAX, Power Query y guía Tableau, 16 pruebas (199 totales). Push realizado. Pendientes: EV-006 a EV-008. |
 | 2026-10-29 | 7 | 65 casos UAT, 51 automatizados aprobados, 6 manuales pendientes, 8 no implementados, 5 defectos, 204 pruebas, 23 controles SQL, pipelines YAML, README final y borradores LinkedIn. Push realizado: `1410343`. |
+| 2026-10-29 | 8 | Auditoría de 34 afirmaciones, prueba desde clon limpio (204/204, 51/51, 23/23), cierre de SNV-01/P-006, revisión de seguridad sin secretos, README bilingüe, case study, guion de entrevista, LICENSE MIT, CHANGELOG y checklist de evidencias. Tag `v1.0.0`. |

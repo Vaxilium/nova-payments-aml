@@ -573,6 +573,27 @@ Pasos:
 
 ---
 
+## Fase 8 — Auditoría y refuerzo
+
+**Estado:** Completado con evidencia automática (clon limpio, tests, SQL y
+documentación). No requiere herramientas externas nuevas.
+
+- [x] Auditoría de 34 afirmaciones en `docs/AUDITORIA.md`.
+- [x] Clon limpio con `.venv` nuevo: `204 passed`, `51/51` UAT, `23/23` SQL.
+- [x] `PRAGMA integrity_check=ok`; 0 violaciones de clave foránea.
+- [x] Sin claves, tokens ni nombres de empleadores reales.
+- [x] Rutas absolutas sanitizadas en documentación y resultados generados.
+- [x] SNV-01/P-006 cerrado con la FAQ oficial del BCP.
+- [x] `README.en.md`, `docs/case-study.md`, `docs/entrevista.md`, `LICENSE`,
+      `CHANGELOG.md`, `docs/github-metadata.md`.
+- [ ] Capturas de herramientas externas: ver checklist en
+      [`docs/evidencias/README.md`](evidencias/README.md).
+
+> Las capturas de EV-001 a EV-011 siguen siendo responsabilidad del autor. La
+> carpeta `docs/evidencias/` está preparada con nombres y criterios de aceptación.
+
+---
+
 ## Plantillas por herramienta
 
 ### Jira (Fase 2)
