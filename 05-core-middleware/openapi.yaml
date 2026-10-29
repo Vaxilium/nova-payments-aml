@@ -1,0 +1,956 @@
+openapi: 3.1.0
+info:
+  title: NovaBank Core & Payments Middleware API
+  description: API REST ficticia del core bancario y del middleware de pagos de NovaBank.
+    Expone consulta de clientes y cuentas, saldos, débitos, créditos, transferencias
+    y estado de operaciones. Todas las operaciones monetarias usan idempotency-key
+    y quedan registradas en el libro mayor por partida doble.
+  contact:
+    name: Franco Tillería Centurión
+    url: https://github.com/Vaxilium/nova-payments-aml
+  license:
+    name: Caso ficticio de portafolio
+  version: 1.0.0
+paths:
+  /v1/health:
+    get:
+      tags:
+      - core
+      summary: Estado del core
+      operationId: health_v1_health_get
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthResponse'
+  /v1/customers:
+    get:
+      tags:
+      - core
+      summary: Listar clientes
+      operationId: list_customers_v1_customers_get
+      parameters:
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          default: 50
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CustomerOut'
+                title: Response List Customers V1 Customers Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/customers/{customer_id}:
+    get:
+      tags:
+      - core
+      summary: Consultar cliente
+      operationId: get_customer_v1_customers__customer_id__get
+      parameters:
+      - name: customer_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Customer Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerOut'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/customers/{customer_id}/accounts:
+    get:
+      tags:
+      - core
+      summary: Listar cuentas del cliente
+      operationId: list_customer_accounts_v1_customers__customer_id__accounts_get
+      parameters:
+      - name: customer_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Customer Id
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          default: 50
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountOut'
+                title: Response List Customer Accounts V1 Customers  Customer Id  Accounts
+                  Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/accounts:
+    get:
+      tags:
+      - core
+      summary: Listar cuentas
+      operationId: list_accounts_v1_accounts_get
+      parameters:
+      - name: customer_id
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Customer Id
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 200
+          minimum: 1
+          default: 50
+          title: Limit
+      - name: offset
+        in: query
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+          default: 0
+          title: Offset
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AccountOut'
+                title: Response List Accounts V1 Accounts Get
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/accounts/{account_id}:
+    get:
+      tags:
+      - core
+      summary: Consultar cuenta
+      operationId: get_account_v1_accounts__account_id__get
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountOut'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/accounts/{account_id}/balance:
+    get:
+      tags:
+      - core
+      summary: Saldo contable y conciliación con el libro mayor
+      operationId: get_balance_v1_accounts__account_id__balance_get
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BalanceOut'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/accounts/{account_id}/credits:
+    post:
+      tags:
+      - core
+      summary: Acreditar (depósito) en una cuenta
+      operationId: credit_account_v1_accounts__account_id__credits_post
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: Idempotency-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Idempotency-Key
+      - name: X-Actor
+        in: header
+        required: false
+        schema:
+          type: string
+          default: api-client
+          title: X-Actor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreditRequest'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationOut'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/accounts/{account_id}/debits:
+    post:
+      tags:
+      - core
+      summary: Debitar (retiro) de una cuenta
+      operationId: debit_account_v1_accounts__account_id__debits_post
+      parameters:
+      - name: account_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Account Id
+      - name: Idempotency-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Idempotency-Key
+      - name: X-Actor
+        in: header
+        required: false
+        schema:
+          type: string
+          default: api-client
+          title: X-Actor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DebitRequest'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationOut'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/transfers:
+    post:
+      tags:
+      - core
+      summary: Transferir entre cuentas de la misma moneda
+      operationId: transfer_v1_transfers_post
+      parameters:
+      - name: Idempotency-Key
+        in: header
+        required: false
+        schema:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Idempotency-Key
+      - name: X-Actor
+        in: header
+        required: false
+        schema:
+          type: string
+          default: api-client
+          title: X-Actor
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TransferRequest'
+      responses:
+        '201':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationOut'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/operations/{operation_id}:
+    get:
+      tags:
+      - core
+      summary: Estado de una operación y sus asientos
+      operationId: get_operation_v1_operations__operation_id__get
+      parameters:
+      - name: operation_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Operation Id
+      responses:
+        '200':
+          description: Successful Response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OperationOut'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    AccountOut:
+      properties:
+        account_id:
+          type: string
+          title: Account Id
+        customer_id:
+          type: string
+          title: Customer Id
+        account_number:
+          type: string
+          title: Account Number
+        account_type:
+          type: string
+          title: Account Type
+        currency:
+          type: string
+          title: Currency
+        status:
+          type: string
+          title: Status
+        balance:
+          type: string
+          title: Balance
+        balance_minor:
+          type: integer
+          title: Balance Minor
+        overdraft_limit:
+          type: string
+          title: Overdraft Limit
+        overdraft_limit_minor:
+          type: integer
+          title: Overdraft Limit Minor
+        available_balance:
+          type: string
+          title: Available Balance
+        version:
+          type: integer
+          title: Version
+        opened_at:
+          type: string
+          title: Opened At
+        closed_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Closed At
+      type: object
+      required:
+      - account_id
+      - customer_id
+      - account_number
+      - account_type
+      - currency
+      - status
+      - balance
+      - balance_minor
+      - overdraft_limit
+      - overdraft_limit_minor
+      - available_balance
+      - version
+      - opened_at
+      title: AccountOut
+    BalanceOut:
+      properties:
+        account_id:
+          type: string
+          title: Account Id
+        customer_id:
+          type: string
+          title: Customer Id
+        account_number:
+          type: string
+          title: Account Number
+        account_type:
+          type: string
+          title: Account Type
+        currency:
+          type: string
+          title: Currency
+        status:
+          type: string
+          title: Status
+        balance:
+          type: string
+          title: Balance
+        balance_minor:
+          type: integer
+          title: Balance Minor
+        overdraft_limit:
+          type: string
+          title: Overdraft Limit
+        overdraft_limit_minor:
+          type: integer
+          title: Overdraft Limit Minor
+        available_balance:
+          type: string
+          title: Available Balance
+        version:
+          type: integer
+          title: Version
+        opened_at:
+          type: string
+          title: Opened At
+        closed_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Closed At
+        ledger_balance:
+          type: string
+          title: Ledger Balance
+        ledger_balance_minor:
+          type: integer
+          title: Ledger Balance Minor
+        reconciled:
+          type: boolean
+          title: Reconciled
+      type: object
+      required:
+      - account_id
+      - customer_id
+      - account_number
+      - account_type
+      - currency
+      - status
+      - balance
+      - balance_minor
+      - overdraft_limit
+      - overdraft_limit_minor
+      - available_balance
+      - version
+      - opened_at
+      - ledger_balance
+      - ledger_balance_minor
+      - reconciled
+      title: BalanceOut
+    CreditRequest:
+      properties:
+        amount:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: string
+          title: Amount
+          description: Importe mayor que cero en la moneda indicada
+        currency:
+          type: string
+          enum:
+          - PYG
+          - USD
+          title: Currency
+        description:
+          anyOf:
+          - type: string
+            maxLength: 280
+          - type: 'null'
+          title: Description
+        channel:
+          type: string
+          enum:
+          - API
+          - MOBILE
+          - WEB
+          - BRANCH
+          - ATM
+          - BATCH
+          title: Channel
+          default: API
+      type: object
+      required:
+      - amount
+      - currency
+      title: CreditRequest
+    CustomerOut:
+      properties:
+        customer_id:
+          type: string
+          title: Customer Id
+        customer_type:
+          type: string
+          title: Customer Type
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        business_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Business Name
+        document_type:
+          type: string
+          title: Document Type
+        document_number:
+          type: string
+          title: Document Number
+        birth_date:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Birth Date
+        country_code:
+          type: string
+          title: Country Code
+        city:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: City
+        segment:
+          type: string
+          title: Segment
+        risk_rating:
+          type: string
+          title: Risk Rating
+        kyc_status:
+          type: string
+          title: Kyc Status
+        is_active:
+          type: boolean
+          title: Is Active
+        created_at:
+          type: string
+          title: Created At
+        account_count:
+          type: integer
+          title: Account Count
+          default: 0
+      type: object
+      required:
+      - customer_id
+      - customer_type
+      - document_type
+      - document_number
+      - country_code
+      - segment
+      - risk_rating
+      - kyc_status
+      - is_active
+      - created_at
+      title: CustomerOut
+    DebitRequest:
+      properties:
+        amount:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: string
+          title: Amount
+          description: Importe mayor que cero en la moneda indicada
+        currency:
+          type: string
+          enum:
+          - PYG
+          - USD
+          title: Currency
+        description:
+          anyOf:
+          - type: string
+            maxLength: 280
+          - type: 'null'
+          title: Description
+        channel:
+          type: string
+          enum:
+          - API
+          - MOBILE
+          - WEB
+          - BRANCH
+          - ATM
+          - BATCH
+          title: Channel
+          default: API
+      type: object
+      required:
+      - amount
+      - currency
+      title: DebitRequest
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    HealthResponse:
+      properties:
+        status:
+          type: string
+          title: Status
+        database:
+          type: string
+          title: Database
+        accounts:
+          type: integer
+          title: Accounts
+        journal_entries:
+          type: integer
+          title: Journal Entries
+      type: object
+      required:
+      - status
+      - database
+      - accounts
+      - journal_entries
+      title: HealthResponse
+    JournalEntryOut:
+      properties:
+        entry_id:
+          type: string
+          title: Entry Id
+        status:
+          type: string
+          title: Status
+        entry_date:
+          type: string
+          title: Entry Date
+        description:
+          type: string
+          title: Description
+        lines:
+          items:
+            $ref: '#/components/schemas/JournalLineOut'
+          type: array
+          title: Lines
+      type: object
+      required:
+      - entry_id
+      - status
+      - entry_date
+      - description
+      - lines
+      title: JournalEntryOut
+    JournalLineOut:
+      properties:
+        line_no:
+          type: integer
+          title: Line No
+        gl_account_id:
+          type: integer
+          title: Gl Account Id
+        account_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Account Id
+        currency:
+          type: string
+          title: Currency
+        debit:
+          type: string
+          title: Debit
+        credit:
+          type: string
+          title: Credit
+        debit_minor:
+          type: integer
+          title: Debit Minor
+        credit_minor:
+          type: integer
+          title: Credit Minor
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+      type: object
+      required:
+      - line_no
+      - gl_account_id
+      - currency
+      - debit
+      - credit
+      - debit_minor
+      - credit_minor
+      title: JournalLineOut
+    OperationOut:
+      properties:
+        operation_id:
+          type: string
+          title: Operation Id
+        type:
+          type: string
+          title: Type
+        status:
+          type: string
+          title: Status
+        currency:
+          type: string
+          title: Currency
+        amount:
+          type: string
+          title: Amount
+        amount_minor:
+          type: integer
+          title: Amount Minor
+        counter_amount:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Counter Amount
+        counter_amount_minor:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Counter Amount Minor
+        fee:
+          type: string
+          title: Fee
+        fee_minor:
+          type: integer
+          title: Fee Minor
+        debit_account_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Debit Account Id
+        credit_account_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Credit Account Id
+        debit_account_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Debit Account Number
+        credit_account_number:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Credit Account Number
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+        channel:
+          type: string
+          title: Channel
+        created_at:
+          type: string
+          title: Created At
+        value_date:
+          type: string
+          title: Value Date
+        posted_at:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Posted At
+        entries:
+          items:
+            $ref: '#/components/schemas/JournalEntryOut'
+          type: array
+          title: Entries
+      type: object
+      required:
+      - operation_id
+      - type
+      - status
+      - currency
+      - amount
+      - amount_minor
+      - fee
+      - fee_minor
+      - channel
+      - created_at
+      - value_date
+      - entries
+      title: OperationOut
+    TransferRequest:
+      properties:
+        from_account_id:
+          type: string
+          maxLength: 40
+          minLength: 3
+          title: From Account Id
+        to_account_id:
+          type: string
+          maxLength: 40
+          minLength: 3
+          title: To Account Id
+        amount:
+          anyOf:
+          - type: number
+            exclusiveMinimum: 0.0
+          - type: string
+          title: Amount
+        currency:
+          type: string
+          enum:
+          - PYG
+          - USD
+          title: Currency
+        description:
+          anyOf:
+          - type: string
+            maxLength: 280
+          - type: 'null'
+          title: Description
+        channel:
+          type: string
+          enum:
+          - API
+          - MOBILE
+          - WEB
+          - BRANCH
+          - ATM
+          - BATCH
+          title: Channel
+          default: API
+      type: object
+      required:
+      - from_account_id
+      - to_account_id
+      - amount
+      - currency
+      title: TransferRequest
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+        input:
+          title: Input
+        ctx:
+          type: object
+          title: Context
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
