@@ -322,6 +322,52 @@ cd 06-mensajeria
 
 ---
 
+## Fase 5 — AML y compliance
+
+**Estado:** Completado con evidencia automática. Esta fase no requiere herramientas externas.
+
+### Comandos ejecutados
+
+```powershell
+.\.venv\Scripts\python.exe 07-aml-compliance\scripts\setup_aml.py --db 05-core-middleware\db\novabank.db
+.\.venv\Scripts\python.exe 07-aml-compliance\scripts\evaluate_rules.py --db 05-core-middleware\db\novabank.db
+.\.venv\Scripts\python.exe -m pytest 07-aml-compliance/tests -q
+.\.venv\Scripts\python.exe -m pytest -q
+```
+
+### Resultados verificados (2026-10-29)
+
+- [x] `pytest -q`: **183 pruebas aprobadas** (69 core + 89 mensajería + 25 AML), 0 fallos.
+- [x] `pytest 07-aml-compliance/tests -q`: **25 pruebas aprobadas**.
+- [x] Esquema AML aplicado sobre la base del core: KYC, alertas, casos, transiciones, screening y ROS.
+- [x] Scoring KYC determinístico para 500 clientes; hay clientes HIGH, MEDIUM y LOW.
+- [x] 12 reglas SQL ejecutadas sobre 49.582 transacciones.
+- [x] 494 transacciones alertadas: 341 TP, 3 FP etiquetados y 150 sin etiqueta.
+- [x] Precisión sobre etiquetadas: 99,13 %; precisión conservadora: 69,03 %; recall: 100 %.
+- [x] Cobertura completa de STRUCTURING, HIGH_VELOCITY, PASS_THROUGH, ROUND_MULE y DORMANT_ACTIVATION.
+- [x] Alertas deduplicadas: 1.326 coincidencias → 775 alertas (P1 110, P2 665).
+- [x] Flujo de alerta y caso probado: asignación, escalamiento, cierre y transición auditada.
+- [x] Hook AML probado: pago normal ALLOW, nombre sancionado REJECT, alto valor HOLD y país de riesgo HOLD.
+- [x] Dos ROS ficticios documentados; ninguno presentado ante una autoridad.
+
+### Artefactos de evidencia
+
+- Esquema: `07-aml-compliance/aml/schema_aml.sql`.
+- KYC: `07-aml-compliance/aml/kyc.py`.
+- Screening: `07-aml-compliance/aml/screening.py`.
+- Reglas: `07-aml-compliance/sql/rules/` (R01–R12).
+- Alertas: `07-aml-compliance/aml/alerts.py`.
+- Workflow: `07-aml-compliance/aml/workflow.py`.
+- Evaluación: `07-aml-compliance/aml/evaluation.py` y `07-aml-compliance/docs/evaluacion-verdad.md`.
+- Hook: `07-aml-compliance/aml/hook.py`.
+- ROS: `07-aml-compliance/docs/ros.md`.
+- Normativa: `07-aml-compliance/docs/mapeo-normativo.md`.
+- Pruebas: `07-aml-compliance/tests/`.
+
+> Las listas de sanciones/PEP y los países de alto riesgo son ficticios. Los SLA y umbrales son parámetros internos (SNV-08, SNV-10 a SNV-12).
+
+---
+
 ## Plantillas por herramienta
 
 ### Jira (Fase 2)

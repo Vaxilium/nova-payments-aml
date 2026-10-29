@@ -15,6 +15,8 @@ Phase 3 (core banking and middleware) is implemented and tested: a SQLite model 
 
 Phase 4 (financial messaging) is implemented and tested: an ISO 20022 catalogue for `pacs.008`, `pacs.002`, `pain.001` and `camt.053`, a functional MT103↔pacs.008 mapping, a validator for IBAN/BIC/ISO 4217/amounts/UETR, deterministic instant and international payment simulators with state machines, retries, idempotency and a simulated AML hook, validated XML/MT103 examples, Mermaid diagrams and 89 new pytest tests (158 total). XSD-level certification and real SWIFT/BCP connectivity are explicitly out of scope.
 
+Phase 5 (AML and compliance) is implemented and tested: deterministic KYC scoring (0–100), 12 SQL monitoring rules calibrated against the Phase 3 ground truth, fuzzy screening against fictional sanctions/PEP lists, deduplicated alerts with P1/P2/P3 priority and SLAs, case workflow with auditable transitions, two fictional STR drafts, a SEPRELAD/FATF mapping, and an AML hook integrated with the international simulator. Evaluation reports 341 true positives, 3 labeled false positives, 150 unlabeled alerts, 100% recall and 99.13% precision on labeled transactions. The full suite now has 183 passing tests.
+
 ## Caso de negocio (5 líneas)
 
 1. NovaBank, banco ficticio de Paraguay, quiere competir en pagos con una propuesta instantánea local e internacional.
@@ -108,6 +110,32 @@ Documentos de Fase 4:
 - [Simuladores](06-mensajeria/docs/simuladores.md)
 - [Ejemplos](06-mensajeria/examples/README.md)
 
+## Avance de Fase 5
+
+| Área | Artefactos | Estado |
+|---|---|---|
+| KYC/CDD | Scoring 0–100, EDD, perfiles determinísticos y persistencia | Completado y probado |
+| Reglas SQL | 12 reglas R01–R12 sobre 49.582 transacciones | Calibradas |
+| Screening | Listas ficticias, Jaro-Winkler y decisión BLOCK/REVIEW | Completado y probado |
+| Alertas | Deduplicación, score y prioridad P1/P2/P3 | Completado y probado |
+| Casos y SLA | Asignación, escalamiento, cierre y transiciones auditables | Completado y probado |
+| Evaluación | 341 TP, 3 FP etiquetados, 150 sin etiqueta; recall 100 %; precisión 99,13 % | Completado |
+| ROS | Plantilla y dos casos ficticios | Documentado |
+| Normativa | Mapeo SEPRELAD/GAFI y fuentes registradas | Documentado |
+| Integración | Hook AML del simulador internacional | Completado y probado |
+| Pruebas | 25 pruebas AML | 183 aprobadas en total |
+
+Documentos de Fase 5:
+
+- [README de la fase](07-aml-compliance/README.md)
+- [Enfoque basado en riesgo](07-aml-compliance/docs/enfoque-riesgo.md)
+- [Reglas de monitoreo](07-aml-compliance/docs/reglas-monitoreo.md)
+- [Screening](07-aml-compliance/docs/screening.md)
+- [Alertas, casos y SLA](07-aml-compliance/docs/alertas-casos-sla.md)
+- [ROS](07-aml-compliance/docs/ros.md)
+- [Mapeo normativo](07-aml-compliance/docs/mapeo-normativo.md)
+- [Evaluación contra la verdad](07-aml-compliance/docs/evaluacion-verdad.md)
+
 ## Herramientas demostradas
 
 > Estado actual del repositorio. No se declara el uso de una herramienta que no se haya operado.
@@ -130,8 +158,8 @@ Documentos de Fase 4:
 | Mensajería internacional | SWIFT MT / ISO 20022 | Catálogo, mapeo, validador y simulador | Implementado y probado |
 | Pagos instantáneos | SPI-like (simulador) | Máquina de estados, idempotencia y posteo | Implementado y probado |
 | Core bancario y middleware | SQLite + FastAPI | Modelo, libro mayor, API y OpenAPI | Implementado y probado |
-| AML / compliance | KYC, screening, reglas SQL | Reglas, alertas, ROS | Pendiente (Fase 5; hook AML simulado en Fase 4) |
-| Automatización de pruebas | pytest | 69 pruebas de Fase 3 + 89 de Fase 4 | Implementado; 158 aprobadas |
+| AML / compliance | KYC, screening, reglas SQL | Scoring, 12 reglas, alertas, casos, ROS y screening | Implementado y probado |
+| Automatización de pruebas | pytest | 69 core + 89 mensajería + 25 AML | Implementado; 183 aprobadas |
 | Integración continua | GitHub Actions | Workflow YAML | Pendiente |
 
 ## Estructura del repositorio
@@ -177,7 +205,7 @@ Cada carpeta contiene un `README.md` corto con su propósito, contenidos esperad
 | 2 — Requerimientos | Completada en artefactos; evidencias manuales pendientes |
 | 3 — Core bancario y middleware | Completada |
 | 4 — Mensajería | Completada |
-| 5 — AML y compliance | Pendiente |
+| 5 — AML y compliance | Completada |
 | 6 — UX y analítica | Pendiente |
 | 7 — QA/UAT y cierre | Pendiente |
 

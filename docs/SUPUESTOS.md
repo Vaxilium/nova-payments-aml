@@ -76,6 +76,19 @@ Registro de toda decisión o supuesto tomado sin consulta al autor, según las r
 | S-064 | 2026-10-28 | Decisión | El mapeo MT103 ↔ pacs.008 es una propuesta funcional campo a campo, no una tabla de traducción certificada por SWIFT. | El documento F-18 solo se consultó por fragmento indexado; no se dispone de la guía de traducción completa. | Alto | Activo |
 | S-065 | 2026-10-28 | Decisión | Los rechazos usan códigos de estado/razón estándar cuando están identificados (`RJCT`, `ACSC`, `AC01`, `AM04`, etc.) y un motivo propietario `TIMEOUT` para el escenario de expiración del simulador. | Evita atribuir un código normativo dudoso a un comportamiento interno del simulador. | Bajo | Activo |
 | S-066 | 2026-10-28 | Decisión | La tabla de códigos ISO 4217 del validador se genera desde el XML oficial de SIX (F-13) y se versiona en el repositorio; no hay consultas de red en tiempo de ejecución. | Validación reproducible y sin dependencia de conectividad. | Bajo | Activo |
+| S-067 | 2026-10-29 | Supuesto | El score KYC 0–100 usa los pesos documentados en `docs/enfoque-riesgo.md`; HIGH es 70–100, MEDIUM 40–69 y LOW 0–39. | Permite un modelo explicable y reproducible; los pesos son parámetros internos. | Alto | Activo |
+| S-068 | 2026-10-29 | Decisión | Los perfiles AML (PEP, UBO, SOF, noticias negativas, canal y complejidad) se derivan de `SHA-256(customer_id)`, no de datos reales. | Reproducibilidad y ausencia de PII. | Alto | Activo |
+| S-069 | 2026-10-29 | Decisión | El screening usa Jaro-Winkler y similitud de tokens, con umbrales 0,95 BLOCK, 0,88 REVIEW y 0,80 mínimo. | Comparación difusa explicable con biblioteca estándar. | Medio | Activo |
+| S-070 | 2026-10-29 | Decisión | La deduplicación de alertas usa `rule_id + customer_id + account_id + día`; se acumula el conteo y se conserva el mayor score. | Evitar duplicados por operaciones repetidas del mismo patrón. | Medio | Activo |
+| S-071 | 2026-10-29 | Supuesto | Los SLA de alertas (P1 15 min/10 días hábiles; P2 240 min/15 días; P3 1.440 min/20 días) son parámetros internos. | No se encontró un plazo regulatorio aplicable verificado. | Alto | Activo |
+| S-072 | 2026-10-29 | Decisión | Se implementan 12 reglas SQL (R01–R12) con parámetros versionados en `rule_params.json`; R07, R10 y R11 pueden devolver cero en el dataset actual. | Cubrir patrones típicos sin inventar alertas. | Medio | Activo |
+| S-073 | 2026-10-29 | Supuesto | R06 usa un proxy de dormancia (cuenta antigua, inactividad 48 h y depósito ≥5.000.000) porque el core no tiene un campo de dormancia. | Habilita la detección del patrón etiquetado; la limitación se registra en P-015. | Medio | Activo |
+| S-074 | 2026-10-29 | Decisión | R02 y R03 agrupan por día en lugar de una ventana móvil de 24 h para mantener el costo acotado en SQLite. | Rendimiento sobre 18.452 transferencias; el parámetro de ventana queda como referencia. | Bajo | Activo |
+| S-075 | 2026-10-29 | Decisión | R08 usa el promedio histórico total del cliente, R11 evalúa el período completo y R12 usa semanas calendario (`%Y-%W`). | Evitar self-joins costosos y mantener resultados reproducibles. | Medio | Activo |
+| S-076 | 2026-10-29 | Decisión | La evaluación reporta precisión sobre etiquetadas y precisión conservadora (no etiquetadas = FP); el recall se calcula solo sobre las 341 sospechosas. | Transparencia ante una muestra NORMAL incompleta. | Alto | Activo |
+| S-077 | 2026-10-29 | Decisión | La lista de países de alto riesgo se expresa en ISO3 y el hook mapea ISO2→ISO3 para comparar con las transacciones. | Evitar falsos negativos por formato de código de país. | Bajo | Activo |
+| S-078 | 2026-10-29 | Supuesto | Los dos ROS de `docs/ros.md` son borradores ficticios y no se presentaron ante ninguna autoridad. | Honestidad del portafolio. | Alto | Activo |
+| S-079 | 2026-10-29 | Decisión | La suite de Fase 5 agrega 25 pruebas; la suite completa queda en 183 pruebas (69 core + 89 mensajería + 25 AML). | Verificación automatizada de KYC, screening, reglas, alertas, workflow, evaluación y hook. | Medio | Activo |
 
 ## Supuestos no verificados vigentes
 
@@ -92,6 +105,9 @@ Los siguientes supuestos se marcan `SUPUESTO NO VERIFICADO` en los documentos do
 | SNV-07 | La retención inicial de 5 años para la bitácora de auditoría es adecuada para el perímetro de NovaBank. | NFR-04, ADR-005 | P-012 |
 | SNV-08 | El SLA de asignación de alertas P1 en 15 minutos y el cierre de investigación en 10 días hábiles son parámetros internos, no plazos regulatorios. | US-018, K-09, K-10 | P-011 |
 | SNV-09 | La correspondencia MT103 → pacs.008 y pacs.008 → MT103 es una propuesta de mapeo funcional; no se verificó contra la guía de traducción SWIFT completa. | `06-mensajeria/docs/mapeo-mt103-pacs008.md`, simulador internacional | P-008 |
+| SNV-10 | Los pesos y umbrales del score KYC son parámetros de diseño; no fueron validados por Cumplimiento ni por un modelo estadístico. | `07-aml-compliance/docs/enfoque-riesgo.md` | P-009, P-011 |
+| SNV-11 | El proxy de dormancia de R06 (cuenta antigua, inactividad 48 h y depósito ≥5.000.000) aproxima el patrón etiquetado, pero no mide dormancia real. | `07-aml-compliance/docs/reglas-monitoreo.md` | P-015 |
+| SNV-12 | Los umbrales de las reglas R01–R12 se calibraron sobre el dataset sintético de Fase 3 y no representan umbrales de producción. | `07-aml-compliance/docs/reglas-monitoreo.md` | P-011, P-017 |
 
 ## Historial de cambios
 
@@ -105,3 +121,4 @@ Los siguientes supuestos se marcan `SUPUESTO NO VERIFICADO` en los documentos do
 | 2026-10-28 | Fase 2: se agregan SNV-07 (retención de auditoría) y SNV-08 (SLA de alertas) asociados a P-012 y P-011. |
 | 2026-10-28 | Fase 3: se agregan S-046 a S-055 por modelo SQLite, partida doble, plan de cuentas, idempotencia, alcance FX, patrones sintéticos, tamaño del dataset, suite de pruebas y límites de seguridad. |
 | 2026-10-28 | Fase 4: se agregan S-056 a S-066 y SNV-09 por validación estructural, versiones CBPR+, identificadores locales/internacionales, simuladores, límites, alcance USD, comisión, hook AML, mapeo MT103 y datos ISO 4217. |
+| 2026-10-29 | Fase 5: se agregan S-067 a S-079 y SNV-10 a SNV-12 por scoring KYC, perfiles determinísticos, screening, deduplicación, SLA, reglas SQL, proxy de dormancia, agregaciones, evaluación, ISO3, ROS y suite de pruebas. |

@@ -38,6 +38,9 @@ Registro de fuentes oficiales consultadas para sostener afirmaciones normativas 
 | F-16 | SWIFT | Business Identifier Code (BIC) | https://www.swift.com/standards/data-standards/bic-business-identifier-code | 2026-10-28 | BIC de 8 caracteres (4!a + 2!a + 2!c) y rama opcional de 3 caracteres; SWIFT como autoridad de registro. | El sitio devolvió HTTP 403 a la consulta automatizada; contenido corroborado con resultado indexado del sitio oficial y F-15. |
 | F-17 | ISO | ISO/IEC 7064:2003 — Check character systems | https://www.iso.org/standard/31531.html | 2026-10-28 | Sistemas de carácter de control; base del cálculo MOD 97-10 usado por el IBAN. | Ficha oficial consultada; norma completa no descargada. |
 | F-18 | SWIFT | ISO 20022 Programme — Customer Workshop (message structure and translation overview) | https://www.swift.com/swift-resource/248681/download | 2026-10-28 | Nomenclatura de mensajes ISO 20022 y relación de traducción MT103/MT102 ↔ pacs.008, MT103 REJECT ↔ pacs.002 y MT940/MT950 ↔ camt.053. | Documento localizado por resultado indexado; no descargado en esta sesión. Se usa solo como orientación de correspondencia, no como regla normativa de traducción. Ver P-008. |
+| F-19 | SEPRELAD (UIF de Paraguay) | Resolución N° 70/2019 — normas de prevención de LA/FT | https://www.seprelad.gov.py/userfiles/files/resoluciones/11-res-n-70-19.pdf | 2026-10-29 | Marco de debida diligencia, beneficiario final, PEP, conservación de registros, monitoreo y reporte de operaciones sospechosas. Se citan los arts. 3, 21, 24, 25, 29 y 30 y el Anexo A4 de forma referencial. | La descarga automatizada supera el límite de 5 MB; el contenido se corroboró mediante fragmentos indexados del PDF oficial. No se verificó la aplicabilidad específica a bancos de la SIB (P-009). |
+| F-20 | SEPRELAD (UIF de Paraguay) | Resolución N° 214/2019 — normas complementarias de monitoreo y alertas | https://www.seprelad.gov.py/resoluciones/resoluciones/resolucion-n-214-2019-normas-complementarias-a-ser-observadas-por-los-so-supervisados-por-la-sb-y-ss.pdf | 2026-10-29 | Criterios de monitoreo, metodologías de detección, generación de alertas y análisis de operaciones. | La descarga devolvió un archivo binario no legible; el contenido se corroboró mediante fragmentos indexados del documento oficial. |
+| F-21 | GAFI / FATF | Risk-based approach — banking sector | https://www.fatf-gafi.org/en/publications/Fatfrecommendations/Risk-based-approach-banking-sector.html | 2026-10-29 | Principios de enfoque basado en riesgo aplicados a banca: identificación, evaluación, mitigación y monitoreo proporcional. | El sitio oficial devolvió HTTP 403 a la descarga automatizada; el contenido se corroboró mediante fragmentos indexados. Ver P-007. |
 
 ## Fuentes consultadas pero no utilizadas como base normativa
 
@@ -51,8 +54,8 @@ Registro de fuentes oficiales consultadas para sostener afirmaciones normativas 
 | Tema | Estado | Acción |
 |---|---|---|
 | Reglamento General del SIPAP y resoluciones BCP aplicables al SPI | No descargado en esta sesión | Validar número, vigencia y texto antes de Fase 5. |
-| Resolución SEPRELAD aplicable específicamente a bancos supervisados por la SIB | No verificada en esta sesión | Confirmar con el área de Cumplimiento y registrar en Fase 5. |
-| Listas de sanciones y PEP utilizadas en el caso | Ficticias | No se usan listas reales; se documentará el carácter sintético en Fase 5. |
+| Resolución SEPRELAD aplicable específicamente a bancos supervisados por la SIB | Parcial: F-19 y F-20 consultadas por fragmentos; aplicabilidad exacta no verificada | Confirmar con el área de Cumplimiento y registrar la norma exacta (P-009). |
+| Listas de sanciones y PEP utilizadas en el caso | Ficticias | No se usan listas reales; el carácter sintético está documentado en `07-aml-compliance/docs/screening.md`. |
 | Tasas, comisiones y límites comerciales | Ficticios | Son parámetros de diseño, no datos de mercado. |
 
 ## Historial de consultas
@@ -73,3 +76,6 @@ Registro de fuentes oficiales consultadas para sostener afirmaciones normativas 
 | 2026-10-28 | ISO 9362:2022 / SWIFT BIC | Ficha ISO consultada; página SWIFT con 403 y contenido corroborado por índice. |
 | 2026-10-28 | ISO/IEC 7064:2003 | Ficha oficial consultada. |
 | 2026-10-28 | SWIFT — ISO 20022 Programme Workshop | Documento localizado; correspondencia MT/MX corroborada por fragmento indexado. |
+| 2026-10-29 | SEPRELAD — Resolución N° 70/2019 | Descarga bloqueada por tamaño; contenido corroborado por fragmentos indexados (P-009). |
+| 2026-10-29 | SEPRELAD — Resolución N° 214/2019 | Archivo binario no legible; contenido corroborado por fragmentos indexados. |
+| 2026-10-29 | GAFI / FATF — Risk-based approach (banca) | Acceso directo 403; contenido corroborado por fragmentos indexados (P-007). |
