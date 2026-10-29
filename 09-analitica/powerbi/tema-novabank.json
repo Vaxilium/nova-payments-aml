@@ -1,0 +1,76 @@
+{
+  "name": "NovaBank AML",
+  "dataColors": [
+    "#0B3B60",
+    "#1F6FB2",
+    "#2E7D32",
+    "#ED6C02",
+    "#C62828",
+    "#5F6B7A",
+    "#7E57C2",
+    "#00897B"
+  ],
+  "background": "#FFFFFF",
+  "foreground": "#252525",
+  "tableAccent": "#1F6FB2",
+  "good": "#2E7D32",
+  "neutral": "#ED6C02",
+  "bad": "#C62828",
+  "maximum": "#0B3B60",
+  "center": "#1F6FB2",
+  "minimum": "#F7F9FC",
+  "textClasses": {
+    "title": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 14,
+      "color": "#0B3B60"
+    },
+    "header": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 11,
+      "color": "#0B3B60"
+    },
+    "label": {
+      "fontFace": "Segoe UI",
+      "fontSize": 10,
+      "color": "#5F6B7A"
+    },
+    "callout": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 28,
+      "color": "#252525"
+    }
+  },
+  "visualStyles": {
+    "*": {
+      "*": {
+        "background": [
+          {
+            "color": {
+              "solid": {
+                "color": "#FFFFFF"
+              }
+            },
+            "transparency": 0
+          }
+        ],
+        "border": [
+          {
+            "show": true,
+            "color": {
+              "solid": {
+                "color": "#E3E8EF"
+              }
+            },
+            "radius": 4
+          }
+        ],
+        "visualHeader": [
+          {
+            "show": true
+          }
+        ]
+      }
+    }
+  }
+}

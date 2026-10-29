@@ -1,0 +1,219 @@
+// NovaBank — medidas DAX del modelo analítico
+// Compatible con Power BI Desktop (modelo tabular / VertiPaq).
+// La tabla dim_date debe estar marcada como tabla de fechas.
+
+// ---------------------------------------------------------------------------
+// 1. Volumen y operaciones
+// ---------------------------------------------------------------------------
+
+Total Operations =
+COUNTROWS ( fact_transactions )
+
+Total Amount =
+SUM ( fact_transactions[amount] )
+
+Total Amount PYG =
+CALCULATE ( [Total Amount], fact_transactions[currency] = "PYG" )
+
+Total Amount USD =
+CALCULATE ( [Total Amount], fact_transactions[currency] = "USD" )
+
+Total Fees =
+SUM ( fact_transactions[fee] )
+
+Avg Ticket PYG =
+DIVIDE (
+    [Total Amount PYG],
+    CALCULATE ( COUNTROWS ( fact_transactions ), fact_transactions[currency] = "PYG" )
+)
+
+Local Operations =
+CALCULATE ( COUNTROWS ( fact_transactions ), fact_transactions[payment_scope] = "LOCAL" )
+
+International Operations =
+CALCULATE ( COUNTROWS ( fact_transactions ), fact_transactions[payment_scope] = "INTERNATIONAL" )
+
+STP Rate (proxy) =
+DIVIDE ( SUM ( fact_transactions[is_stp] ), COUNTROWS ( fact_transactions ) )
+
+Operations MoM % =
+VAR Actual = [Total Operations]
+VAR Previous =
+    CALCULATE ( [Total Operations], DATEADD ( dim_date[date_key], -1, MONTH ) )
+RETURN
+    DIVIDE ( Actual - Previous, Previous )
+
+// ---------------------------------------------------------------------------
+// 2. SLA de pagos locales
+// ---------------------------------------------------------------------------
+
+Local Payments =
+COUNTROWS ( fact_payment_sla )
+
+Local p95 Latency (ms) =
+PERCENTILE.INC ( fact_payment_sla[latency_ms], 0.95 )
+
+Local Avg Latency (ms) =
+AVERAGE ( fact_payment_sla[latency_ms] )
+
+Payments Within SLA % =
+AVERAGE ( fact_payment_sla[within_sla] )
+
+Payments Outside SLA =
+CALCULATE (
+    COUNTROWS ( fact_payment_sla ),
+    fact_payment_sla[within_sla] = 0
+)
+
+SLA Status =
+IF (
+    ISBLANK ( [Local p95 Latency (ms)] ),
+    "SIN DATOS",
+    IF ( [Local p95 Latency (ms)] <= 5000, "CUMPLE", "NO CUMPLE" )
+)
+
+// ---------------------------------------------------------------------------
+// 3. Alertas AML
+// ---------------------------------------------------------------------------
+
+Total Alerts =
+COUNTROWS ( fact_alerts )
+
+Open Alerts =
+CALCULATE ( COUNTROWS ( fact_alerts ), fact_alerts[is_closed] = 0 )
+
+Closed Alerts =
+CALCULATE ( COUNTROWS ( fact_alerts ), fact_alerts[is_closed] = 1 )
+
+P1 Alerts =
+CALCULATE ( COUNTROWS ( fact_alerts ), fact_alerts[priority] = "P1" )
+
+P1 Open Alerts =
+CALCULATE (
+    COUNTROWS ( fact_alerts ),
+    fact_alerts[priority] = "P1",
+    fact_alerts[is_closed] = 0
+)
+
+P1 Assigned On Time % =
+DIVIDE (
+    CALCULATE (
+        COUNTROWS ( fact_alerts ),
+        fact_alerts[priority] = "P1",
+        fact_alerts[assignment_minutes] <= 15
+    ),
+    [P1 Alerts]
+)
+
+False Positive Rate =
+DIVIDE (
+    SUM ( fact_alerts[is_false_positive] ),
+    SUM ( fact_alerts[is_closed] )
+)
+
+Escalated Alerts =
+CALCULATE ( COUNTROWS ( fact_alerts ), fact_alerts[is_escalated] = 1 )
+
+Avg Alert Risk Score =
+AVERAGE ( fact_alerts[risk_score] )
+
+Alerts per 1k Operations =
+DIVIDE ( [Total Alerts], [Total Operations] ) * 1000
+
+// ---------------------------------------------------------------------------
+// 4. Casos y reportes
+// ---------------------------------------------------------------------------
+
+Total Cases =
+COUNTROWS ( fact_cases )
+
+Closed Cases =
+CALCULATE ( COUNTROWS ( fact_cases ), fact_cases[is_closed] = 1 )
+
+Cases On Time % =
+DIVIDE (
+    SUM ( fact_cases[is_on_time_close] ),
+    CALCULATE ( COUNTROWS ( fact_cases ), fact_cases[is_closed] = 1 )
+)
+
+Reported Cases =
+CALCULATE ( COUNTROWS ( fact_cases ), fact_cases[is_reported] = 1 )
+
+Case Conversion Rate =
+DIVIDE ( [Total Cases], [Total Alerts] )
+
+// ---------------------------------------------------------------------------
+// 5. Conciliación y clientes
+// ---------------------------------------------------------------------------
+
+Reconciliation Difference =
+SUM ( fact_ledger_daily[debit] ) - SUM ( fact_ledger_daily[credit] )
+
+Reconciliation Status =
+IF (
+    ISBLANK ( [Reconciliation Difference] ),
+    "SIN DATOS",
+    IF ( ABS ( [Reconciliation Difference] ) < 0.01, "CUADRADO", "DIFERENCIA" )
+)
+
+Active Customers =
+CALCULATE ( COUNTROWS ( dim_customer ), dim_customer[is_active] = 1 )
+
+High Risk Customers =
+CALCULATE ( COUNTROWS ( dim_customer ), dim_customer[risk_category] = "HIGH" )
+
+Blocked Accounts =
+CALCULATE ( COUNTROWS ( dim_account ), dim_account[status] = "BLOCKED" )
+
+// ---------------------------------------------------------------------------
+// 6. Columnas calculadas
+// ---------------------------------------------------------------------------
+
+// En fact_payment_sla
+Latency Bin =
+VAR ms = fact_payment_sla[latency_ms]
+RETURN
+    SWITCH (
+        TRUE (),
+        ms < 1000, "< 1 s",
+        ms < 2000, "1–2 s",
+        ms < 3000, "2–3 s",
+        ms < 5000, "3–5 s",
+        "> 5 s"
+    )
+
+// En fact_payment_sla; ordena el histograma.
+Latency Bin Order =
+VAR ms = fact_payment_sla[latency_ms]
+RETURN
+    SWITCH (
+        TRUE (),
+        ms < 1000, 1,
+        ms < 2000, 2,
+        ms < 3000, 3,
+        ms < 5000, 4,
+        5
+    )
+
+// En dim_date, si no se obtiene desde Power Query.
+Month Name =
+FORMAT ( dim_date[date_key], "MMMM", "es-PY" )
+
+// En dim_date; ordena Month Name.
+Month Order =
+dim_date[month]
+
+// ---------------------------------------------------------------------------
+// 7. Formato sugerido
+// ---------------------------------------------------------------------------
+// Total Operations, Local Operations, International Operations, Local Payments,
+// Payments Outside SLA, Total Alerts, Open Alerts, Closed Alerts, P1 Alerts,
+// P1 Open Alerts, Escalated Alerts, Total Cases, Closed Cases, Reported Cases,
+// Active Customers, High Risk Customers, Blocked Accounts: entero, separador de miles.
+// Total Amount, Total Amount PYG, Total Amount USD, Total Fees, Avg Ticket PYG,
+// Reconciliation Difference: moneda con dos decimales (PYG con cero).
+// STP Rate (proxy), Payments Within SLA %, P1 Assigned On Time %, False Positive Rate,
+// Cases On Time %, Case Conversion Rate, Operations MoM %: porcentaje con un decimal.
+// Local p95 Latency (ms), Local Avg Latency (ms): entero con separador de miles.
+// Avg Alert Risk Score: decimal con un decimal.
+// Alerts per 1k Operations: decimal con dos decimales.
