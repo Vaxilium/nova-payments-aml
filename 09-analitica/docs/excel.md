@@ -168,7 +168,7 @@ Las validaciones se aplican solo a las celdas de entrada. Los escenarios son fó
 
 ## 7. Power Query en Excel
 
-Los scripts M de `09-analitica/powerquery/` se pueden pegar en **Datos → Obtener datos → De otras fuentes → Consulta en blanco → Editor avanzado**. El parámetro `RutaDatos` debe apuntar a la carpeta `09-analitica/data` (por ejemplo `C:\Users\User\Documents\nova-payments-aml\09-analitica\data`).
+Los scripts M de `09-analitica/powerquery/` se pueden pegar en **Datos → Obtener datos → De otras fuentes → Consulta en blanco → Editor avanzado**. El parámetro `RutaDatos` debe apuntar a la carpeta `09-analitica/data` (por ejemplo `<ruta-del-repositorio>\09-analitica\data`).
 
 Pasos resumidos:
 

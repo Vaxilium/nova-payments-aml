@@ -7,7 +7,7 @@
 
 - **Repositorio:** `nova-payments-aml` — portafolio público para GitHub y LinkedIn.
 - **Autor:** Franco Tillería Centurión — Analista Funcional / Business Analyst con experiencia bancaria (Asunción, Paraguay).
-- **Ruta local de trabajo:** `C:\Users\User\Documents\nova-payments-aml` (Windows + PowerShell 5.1). No trabajar en `C:\Users\User` aunque sea el cwd por defecto.
+- **Ruta local de trabajo:** carpeta raíz del repositorio `nova-payments-aml` (Windows + PowerShell 5.1). No trabajar fuera de esta carpeta.
 - **Remoto:** `origin` → `https://github.com/Vaxilium/nova-payments-aml.git`, rama `main`.
 
 ### Caso de negocio (100 % ficticio)

@@ -26,6 +26,23 @@ from uat.cases import CASES  # noqa: E402
 from build_workbook import build as build_workbook  # noqa: E402
 from run_sql_controls import ensure_database, run as run_sql_controls  # noqa: E402
 
+
+def _relative(path: Path) -> str:
+    """Devuelve la ruta relativa al repo para no publicar rutas personales."""
+    try:
+        return path.resolve().relative_to(REPO_ROOT).as_posix()
+    except ValueError:
+        return path.name
+
+
+def _sanitize(text: str) -> str:
+    """Elimina rutas absolutas del entorno local en artefactos de evidencia."""
+    return (
+        text.replace(str(REPO_ROOT), ".")
+        .replace(REPO_ROOT.as_posix(), ".")
+        .replace(str(REPO_ROOT.parent), "<repo-parent>")
+    )
+
 MASTER_COLUMNS = [
     "id",
     "tipo",
@@ -180,7 +197,9 @@ def main() -> int:
             capture_output=True,
         )
         pytest_output = (completed.stdout or "") + (completed.stderr or "")
-        (results_dir / "pytest-output.txt").write_text(pytest_output, encoding="utf-8")
+        (results_dir / "pytest-output.txt").write_text(
+            _sanitize(pytest_output), encoding="utf-8"
+        )
 
     pytest_results = parse_junit(junit_path)
     tests = {test["nodeid"]: test for test in pytest_results["testcases"]}
@@ -228,7 +247,7 @@ def main() -> int:
         "command": command,
         "environment": (
             f"{platform.system()} {platform.release()}; Python {platform.python_version()}; "
-            f"base {db_path.as_posix()}; pytest {pytest_results['total']} pruebas"
+            f"base {_relative(db_path)}; pytest {pytest_results['total']} pruebas"
         ),
         "pytest": pytest_results,
         "sql": sql_results,
