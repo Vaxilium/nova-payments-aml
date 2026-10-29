@@ -2,7 +2,7 @@
 
 **Proyecto:** NovaBank Instant & Cross-Border Payments + AML Hub (caso ficticio)
 **Rol:** Business Analyst end-to-end
-**Estado actual:** Fase 2 completada en artefactos; pendientes evidencias manuales EV-001, EV-002 y EV-003.
+**Estado actual:** Fase 3 completada; pendientes manuales heredados de fases 1 y 2 (EV-001 a EV-005).
 **Última actualización:** 2026-10-28
 
 > Convención: marcar `[x]` solo cuando el artefacto exista y esté verificado.
@@ -73,18 +73,18 @@
 
 **Objetivo:** construir el núcleo funcional del caso con datos sintéticos y API probada.
 
-- [ ] Modelo de datos SQLite (clientes, cuentas, movimientos, libro mayor, asientos).
-- [ ] DDL y script de creación/migración.
-- [ ] Generador de datos sintéticos reproducible (semilla fija, sin PII real).
-- [ ] Libro mayor con partida doble e invariantes contables.
-- [ ] API FastAPI `/v1`: clientes, cuentas, transferencias, estado.
-- [ ] Adaptador de core/middleware simulado (interfaz estable).
-- [ ] Exportación de contrato OpenAPI.
-- [ ] Tests pytest: unitarios, integración, invariantes contables y errores.
-- [ ] Evidencias manuales de Fase 3.
-- [ ] Commit(s) + push de cierre de fase.
+- [x] Modelo de datos SQLite (clientes, cuentas, movimientos, libro mayor, asientos).
+- [x] DDL y script de creación/migración.
+- [x] Generador de datos sintéticos reproducible (semilla fija, sin PII real).
+- [x] Libro mayor con partida doble e invariantes contables.
+- [x] API FastAPI `/v1`: clientes, cuentas, transferencias, estado.
+- [x] Adaptador de core/middleware simulado (interfaz estable).
+- [x] Exportación de contrato OpenAPI.
+- [x] Tests pytest: unitarios, integración, invariantes contables y errores.
+- [x] Evidencias de Fase 3 (automáticas: seed, consultas SQL, pytest y OpenAPI; sin herramientas externas).
+- [x] Commit(s) + push de cierre de fase.
 
-**Entregables clave:** esquema SQLite, dataset sintético, API documentada, suite de tests.
+**Entregables clave:** esquema SQLite con 15 triggers, dataset sintético con 341 operaciones sospechosas etiquetadas, 23 consultas SQL, API `/v1` con idempotencia, suite de 69 pruebas y `openapi.yaml`.
 
 ---
 
@@ -176,3 +176,4 @@
 | 2026-10-27 | 0 | Scaffold del repositorio, gobernanza y README inicial. |
 | 2026-10-27 | 1 | BRD, stakeholders, riesgos, glosario, KPIs, contexto regulatorio, 6 BPMN, 4 DMN, Mermaid, C4/ER/journeys y guía visual. Push realizado. Pendientes: EV-004 y EV-005. |
 | 2026-10-28 | 2 | 10 épicas, 40 historias con Gherkin/MoSCoW/SP, 16 NFR, DoR/DoD, 2 sprints, CSV Jira/ADO, kit Confluence con 6 ADR, glosario, 3 actas y RAID log, matriz de trazabilidad con TC-001 a TC-040. Push realizado. Pendientes: EV-001, EV-002 y EV-003. |
+| 2026-10-28 | 3 | Esquema SQLite con triggers, generador reproducible (500 clientes, 800 cuentas, 49.582 movimientos, 341 sospechosos etiquetados), 23 consultas SQL, API FastAPI `/v1` con idempotencia y auditoría, 69 pruebas pytest y `openapi.yaml`. Push realizado. |

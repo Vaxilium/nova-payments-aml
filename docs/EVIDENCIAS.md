@@ -241,6 +241,47 @@ Pasos:
 
 ---
 
+## Fase 3 — Core bancario y middleware
+
+**Estado:** Completado con evidencia automática. Esta fase no requiere herramientas externas.
+
+Los artefactos son código y datos reproducibles; la evidencia se obtiene ejecutando los comandos.
+
+### Comandos ejecutados
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\.venv\Scripts\python.exe 05-core-middleware\scripts\seed.py --db 05-core-middleware\db\novabank.db --reset
+.\.venv\Scripts\python.exe 05-core-middleware\scripts\export_openapi.py
+.\.venv\Scripts\python.exe -m pytest -q
+```
+
+### Resultados verificados (2026-10-28)
+
+- [x] `pytest -q`: **69 pruebas aprobadas**.
+- [x] Seed reproducible con semilla `20261027`: 500 clientes, 800 cuentas y 49.582 movimientos.
+- [x] 104.966 líneas de libro mayor y 52.084 asientos.
+- [x] 341 movimientos sospechosos etiquetados en `_aml_ground_truth` y 492 normales de muestra.
+- [x] Conciliación de saldos contra libro mayor: 0 diferencias; desbalance global PYG/USD: 0.
+- [x] 23 consultas SQL ejecutadas sin errores sobre la base completa.
+- [x] `openapi.yaml` generado con OpenAPI 3.1.
+- [x] `PRAGMA integrity_check`: `ok`; `PRAGMA foreign_key_check`: sin filas.
+
+### Artefactos de evidencia
+
+- Esquema y triggers: `05-core-middleware/db/schema.sql`.
+- Dataset reproducible: `05-core-middleware/scripts/seed.py`.
+- Consultas: `05-core-middleware/sql/` (índice en `README.md`).
+- API y contrato: `05-core-middleware/app/` y `05-core-middleware/openapi.yaml`.
+- Pruebas: `05-core-middleware/tests/`.
+- Documento conceptual: [`docs/core-y-middleware.md`](core-y-middleware.md).
+
+> La base `novabank.db` y `seed_report.json` son locales y están ignorados por git.
+> Cualquier persona puede regenerarlos con el comando de seed.
+
+---
+
 ## Plantillas por herramienta
 
 ### Jira (Fase 2)

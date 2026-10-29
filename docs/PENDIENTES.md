@@ -18,6 +18,7 @@ Bloqueos, deuda técnica y acciones que requieren intervención del autor (herra
 | P-010 | 1 | La lista de países de alto riesgo del DMN es ficticia y no reproduce una lista oficial del GAFI. Marcada `SUPUESTO NO VERIFICADO` (SNV-03). | Medio | 0 | Sustituir por la lista interna aprobada por Cumplimiento en Fase 5. | Abierto |
 | P-011 | 1, 2 | Los umbrales de los DMN y los SLA de alertas (montos, 15 minutos para P1, 10 días hábiles para cierre) son parámetros de diseño sin validación del negocio. Marcados `SUPUESTO NO VERIFICADO` (SNV-04, SNV-08). | Medio | 0 | Validar con Riesgos, Operaciones y Cumplimiento antes de Fase 5; Fase 2 los usa solo como parámetros de historias y NFR. | Abierto |
 | P-012 | 2 | La retención de 5 años de la bitácora de auditoría es un supuesto de diseño; no se verificó una política interna o normativa aplicable. Marcado `SUPUESTO NO VERIFICADO` (SNV-07). | Alto | 0 | Validar con Cumplimiento/Legal y ajustar NFR-04 y ADR-005 antes de Fase 5. | Abierto |
+| P-013 | 3 | SQLite tiene un solo escritor y la prueba de concurrencia es básica (dos hilos). No demuestra comportamiento de un core productivo con alta concurrencia, réplicas ni recuperación ante desastres. | Medio | 0 | Usar la suite como regresión funcional y, si se requiere, replicar el modelo en un RDBMS y ejecutar pruebas de carga en Fase 7. | Abierto |
 
 ## Cómo cerrar un pendiente
 

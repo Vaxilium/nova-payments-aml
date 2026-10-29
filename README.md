@@ -11,6 +11,8 @@ Phase 1 (business analysis and process modeling) is complete at artifact level: 
 
 Phase 2 (requirements) is complete at artifact level: 10 epics, 40 user stories with Gherkin acceptance criteria, MoSCoW priorities and story points, 16 non-functional requirements, two sprint plans, Jira and Azure DevOps import CSVs, a Confluence-ready space (including six ADRs and a RAID log), and a traceability matrix with reserved test-case IDs. Import evidence in Jira, Confluence and Azure DevOps remains a manual author task.
 
+Phase 3 (core banking and middleware) is implemented and tested: a SQLite model with double-entry ledger constraints and triggers, a reproducible dataset of 500 customers, 800 accounts and 49,582 transactions (including 341 labeled suspicious operations), 23 SQL control queries, a FastAPI `/v1` service with idempotency and audit trail, 69 pytest tests and an exported OpenAPI 3.1 contract.
+
 ## Caso de negocio (5 líneas)
 
 1. NovaBank, banco ficticio de Paraguay, quiere competir en pagos con una propuesta instantánea local e internacional.
@@ -63,6 +65,25 @@ Documentos de Fase 2:
 - [Matriz de trazabilidad](03-requerimientos/matriz-trazabilidad.csv)
 - [Kit Confluence](03-requerimientos/confluence/README.md)
 
+## Avance de Fase 3
+
+| Área | Artefactos | Estado |
+|---|---|---|
+| Modelo de datos | 14 tablas, índices, constraints y 15 triggers contables | Completado |
+| Libro mayor | Partida doble por moneda, inmutabilidad, conciliación de saldos | Completado y probado |
+| Dataset sintético | 500 clientes, 800 cuentas, 49.582 movimientos, 341 sospechosos etiquetados | Reproducible con semilla fija |
+| Consultas SQL | 23 controles con CTE y window functions | Ejecutadas sin errores |
+| API | FastAPI `/v1`, idempotencia, correlación y auditoría | Completado |
+| Contrato | OpenAPI 3.1 exportado | Completado |
+| Pruebas | 69 tests de constraints, libro mayor, API, concurrencia, seed y SQL | 69 aprobadas |
+
+Documentos de Fase 3:
+
+- [Core y middleware (conceptual)](docs/core-y-middleware.md)
+- [README de la fase](05-core-middleware/README.md)
+- [Índice de consultas SQL](05-core-middleware/sql/README.md)
+- [Contrato OpenAPI](05-core-middleware/openapi.yaml)
+
 ## Herramientas demostradas
 
 > Estado actual del repositorio. No se declara el uso de una herramienta que no se haya operado.
@@ -76,7 +97,7 @@ Documentos de Fase 2:
 | Gestión de backlog | Jira | `jira_import.csv` + guía | Artefactos listos; evidencia manual pendiente |
 | Documentación | Confluence | Páginas en Markdown + kit de espacio | Artefactos listos; evidencia manual pendiente |
 | Gestión de trabajo y CI | Azure DevOps | CSV de work items + pipeline YAML | Artefactos de Fase 2 listos; pipeline en Fase 7 |
-| Datos y consultas | SQL (SQLite) | Esquema, consultas, reglas | Pendiente (Fase 3) |
+| Datos y consultas | SQL (SQLite) | Esquema, 23 consultas y reglas | Implementado y probado |
 | Modelado de requisitos | Historias de usuario / Gherkin | 40 historias, NFR, DoR/DoD y trazabilidad | Completado |
 | Diseño de pantallas | Balsamiq / Figma | Especificaciones + prototipo | Pendiente |
 | Excel avanzado | Microsoft Excel | Workbook `.xlsx` con fórmulas y dashboard | Pendiente |
@@ -84,9 +105,9 @@ Documentos de Fase 2:
 | BI — visualización | Tableau | Especificación + dataset | Pendiente |
 | Mensajería internacional | SWIFT MT / ISO 20022 | Catálogo, mapeo y validador | Pendiente |
 | Pagos instantáneos | SPI-like (simulador) | Máquina de estados + API | Pendiente |
-| Core bancario y middleware | SQLite + FastAPI | Modelo, libro mayor, API | Pendiente |
-| AML / compliance | KYC, screening, reglas SQL | Reglas, alertas, ROS | Pendiente |
-| Automatización de pruebas | pytest | Suite de tests | Pendiente |
+| Core bancario y middleware | SQLite + FastAPI | Modelo, libro mayor, API y OpenAPI | Implementado y probado |
+| AML / compliance | KYC, screening, reglas SQL | Reglas, alertas, ROS | Pendiente (Fase 5; dataset etiquetado listo) |
+| Automatización de pruebas | pytest | 69 pruebas de Fase 3 | Implementado |
 | Integración continua | GitHub Actions | Workflow YAML | Pendiente |
 
 ## Estructura del repositorio
@@ -130,7 +151,7 @@ Cada carpeta contiene un `README.md` corto con su propósito, contenidos esperad
 | 0 — Preparación del repositorio | Completada |
 | 1 — Negocio y procesos | Completada en artefactos; evidencias manuales pendientes |
 | 2 — Requerimientos | Completada en artefactos; evidencias manuales pendientes |
-| 3 — Core bancario y middleware | Pendiente |
+| 3 — Core bancario y middleware | Completada |
 | 4 — Mensajería | Pendiente |
 | 5 — AML y compliance | Pendiente |
 | 6 — UX y analítica | Pendiente |
