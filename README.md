@@ -15,7 +15,9 @@ Phase 3 (core banking and middleware) is implemented and tested: a SQLite model 
 
 Phase 4 (financial messaging) is implemented and tested: an ISO 20022 catalogue for `pacs.008`, `pacs.002`, `pain.001` and `camt.053`, a functional MT103↔pacs.008 mapping, a validator for IBAN/BIC/ISO 4217/amounts/UETR, deterministic instant and international payment simulators with state machines, retries, idempotency and a simulated AML hook, validated XML/MT103 examples, Mermaid diagrams and 89 new pytest tests (158 total). XSD-level certification and real SWIFT/BCP connectivity are explicitly out of scope.
 
-Phase 5 (AML and compliance) is implemented and tested: deterministic KYC scoring (0–100), 12 SQL monitoring rules calibrated against the Phase 3 ground truth, fuzzy screening against fictional sanctions/PEP lists, deduplicated alerts with P1/P2/P3 priority and SLAs, case workflow with auditable transitions, two fictional STR drafts, a SEPRELAD/FATF mapping, and an AML hook integrated with the international simulator. Evaluation reports 341 true positives, 3 labeled false positives, 150 unlabeled alerts, 100% recall and 99.13% precision on labeled transactions. The full suite now has 183 passing tests.
+Phase 5 (AML and compliance) is implemented and tested: deterministic KYC scoring (0–100), 12 SQL monitoring rules calibrated against the Phase 3 ground truth, fuzzy screening against fictional sanctions/PEP lists, deduplicated alerts with P1/P2/P3 priority and SLAs, case workflow with auditable transitions, two fictional STR drafts, a SEPRELAD/FATF mapping, and an AML hook integrated with the international simulator. Evaluation reports 341 true positives, 3 labeled false positives, 150 unlabeled alerts, 100% recall and 99.13% precision on labeled transactions.
+
+Phase 6 (UX and analytics) is complete at artifact level: 10 screen specifications with wireframes (transfer app and AML analyst console), a navigable prototype flow, accessibility and style guides; a 12-CSV analytical dataset (49,582 transactions, 10,820 local payments, 377 deduplicated alerts, 59 cases), a data dictionary, an 11-sheet Excel workbook with real formulas, Power Query M scripts, 36 DAX measures, Power BI/Tableau dashboard specifications and a publication runbook. The full suite now has 199 passing tests. Screenshots and publications in Figma, Power BI and Tableau remain a manual author task.
 
 ## Caso de negocio (5 líneas)
 
@@ -123,7 +125,7 @@ Documentos de Fase 4:
 | ROS | Plantilla y dos casos ficticios | Documentado |
 | Normativa | Mapeo SEPRELAD/GAFI y fuentes registradas | Documentado |
 | Integración | Hook AML del simulador internacional | Completado y probado |
-| Pruebas | 25 pruebas AML | 183 aprobadas en total |
+| Pruebas | 25 pruebas AML | 183 aprobadas al cerrar Fase 5 |
 
 Documentos de Fase 5:
 
@@ -135,6 +137,30 @@ Documentos de Fase 5:
 - [ROS](07-aml-compliance/docs/ros.md)
 - [Mapeo normativo](07-aml-compliance/docs/mapeo-normativo.md)
 - [Evaluación contra la verdad](07-aml-compliance/docs/evaluacion-verdad.md)
+
+## Avance de Fase 6
+
+| Área | Artefactos | Estado |
+|---|---|---|
+| UX | 10 pantallas, flujo, guía de estilo, accesibilidad y 10 wireframes SVG | Artefactos listos; evidencia manual pendiente |
+| Dataset | 12 CSV + reporte de integridad y diccionario de datos | Exportado y validado |
+| Excel | Workbook de 11 hojas con XLOOKUP, INDEX/MATCH, SUMIFS, validaciones, formato condicional y simulador | Generado y probado |
+| Power Query | 14 scripts M, parámetro de ruta y consulta de conciliación | Artefactos listos |
+| Power BI | Modelo estrella, 36 medidas DAX, tema y guía de publicación | Artefactos listos; evidencia manual pendiente |
+| Tableau | Campos calculados equivalentes y guía de dashboards | Artefactos listos; evidencia manual pendiente |
+| Pruebas | 16 pruebas de analítica | 199 aprobadas en total |
+
+Documentos de Fase 6:
+
+- [README de analítica](09-analitica/README.md)
+- [Especificación de pantallas](04-diseno-ux/especificacion-pantallas.md)
+- [Flujo del prototipo](04-diseno-ux/flujo-prototipo.md)
+- [Wireframes](04-diseno-ux/wireframes/index.html)
+- [Diccionario de datos](09-analitica/docs/diccionario-datos.md)
+- [Workbook Excel](09-analitica/docs/excel.md)
+- [Especificación del tablero](09-analitica/docs/tablero.md)
+- [Power BI](09-analitica/powerbi/README.md)
+- [Tableau](09-analitica/tableau/calculos.md)
 
 ## Herramientas demostradas
 
@@ -151,10 +177,10 @@ Documentos de Fase 5:
 | Gestión de trabajo y CI | Azure DevOps | CSV de work items + pipeline YAML | Artefactos de Fase 2 listos; pipeline en Fase 7 |
 | Datos y consultas | SQL (SQLite) | Esquema, 23 consultas y reglas | Implementado y probado |
 | Modelado de requisitos | Historias de usuario / Gherkin | 40 historias, NFR, DoR/DoD y trazabilidad | Completado |
-| Diseño de pantallas | Balsamiq / Figma | Especificaciones + prototipo | Pendiente |
-| Excel avanzado | Microsoft Excel | Workbook `.xlsx` con fórmulas y dashboard | Pendiente |
-| BI — modelado | Power BI | Medidas DAX + modelo | Pendiente |
-| BI — visualización | Tableau | Especificación + dataset | Pendiente |
+| Diseño de pantallas | Balsamiq / Figma | Especificaciones + 10 wireframes + flujo | Artefactos listos; evidencia manual pendiente |
+| Excel avanzado | Microsoft Excel | Workbook `.xlsx` con fórmulas y dashboard | Generado y probado |
+| BI — modelado | Power BI | Modelo estrella + 36 medidas DAX + tema | Artefactos listos; evidencia manual pendiente |
+| BI — visualización | Tableau | Especificación + campos calculados + dataset | Artefactos listos; evidencia manual pendiente |
 | Mensajería internacional | SWIFT MT / ISO 20022 | Catálogo, mapeo, validador y simulador | Implementado y probado |
 | Pagos instantáneos | SPI-like (simulador) | Máquina de estados, idempotencia y posteo | Implementado y probado |
 | Core bancario y middleware | SQLite + FastAPI | Modelo, libro mayor, API y OpenAPI | Implementado y probado |

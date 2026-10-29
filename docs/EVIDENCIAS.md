@@ -20,9 +20,9 @@ Registro de pasos manuales, capturas y enlaces de herramientas que el agente **n
 | EV-003 | 2 | Azure DevOps | `ado_workitems.csv` + `ado_import/*.csv` | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
 | EV-004 | 1 | Bizagi / Camunda / Signavio | Archivos `.bpmn` y `.dmn` | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
 | EV-005 | 1 | Lucidchart / Visio / Miro | Diagramas C4, procesos y journeys | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
-| EV-006 | 6 | Balsamiq / Figma | Wireframes y prototipo | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
-| EV-007 | 6 | Power BI | Modelo y dashboard | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
-| EV-008 | 6 | Tableau | Dashboard | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
+| EV-006 | 6 | Balsamiq / Figma | Wireframes y prototipo | _pendiente_ | _pendiente_ | _pendiente_ | Artefacto listo; captura pendiente |
+| EV-007 | 6 | Power BI | Modelo y dashboard | _pendiente_ | _pendiente_ | _pendiente_ | Artefacto listo; captura pendiente |
+| EV-008 | 6 | Tableau | Dashboard | _pendiente_ | _pendiente_ | _pendiente_ | Artefacto listo; captura pendiente |
 | EV-009 | 7 | Azure DevOps | Pipeline ejecutado | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
 | EV-010 | 7 | GitHub Actions | Workflow ejecutado | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
 | EV-011 | 7 | LinkedIn | Post publicado | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
@@ -368,6 +368,52 @@ cd 06-mensajeria
 
 ---
 
+## Fase 6 — UX y analítica
+
+**Estado:** Artefactos automáticos completos; EV-006, EV-007 y EV-008 requieren captura manual del autor.
+
+### Comandos ejecutados
+
+```powershell
+.\.venv\Scripts\python.exe 04-diseno-ux\wireframes\generar_wireframes.py
+.\.venv\Scripts\python.exe 09-analitica\scripts\export_analytics.py
+.\.venv\Scripts\python.exe 09-analitica\scripts\build_excel.py
+.\.venv\Scripts\python.exe -m pytest 09-analitica\tests -q
+.\.venv\Scripts\python.exe -m pytest -q
+```
+
+### Resultados verificados
+
+- [x] 10 wireframes SVG + galería HTML + especificación de pantallas y flujo.
+- [x] Dataset de 12 CSV con 49.582 transacciones, 10.820 pagos locales, 377 alertas y 59 casos.
+- [x] `export_report.json` con `integrity_check = ok` y 0 violaciones de clave foránea.
+- [x] Workbook `NovaBank_analitica.xlsx` con 11 hojas, 14 rangos con nombre, 11 tablas, validaciones, formato condicional y fórmulas `XLOOKUP`, `INDEX/MATCH`, `SUMIFS`, `COUNTIFS` y `PERCENTILE`.
+- [x] 36 medidas DAX y columnas calculadas documentadas en `powerbi/medidas.dax`.
+- [x] 14 scripts M, tema de Power BI y guía de publicación.
+- [x] Campos calculados equivalentes y guía de Tableau Public.
+- [x] 16 pruebas del módulo de analítica aprobadas; suite completa: **199 pruebas aprobadas**, 0 fallos.
+
+### Artefactos de evidencia
+
+- UX: `04-diseno-ux/especificacion-pantallas.md`, `flujo-prototipo.md`, `guia-estilo.md`, `accesibilidad.md` y `wireframes/`.
+- Datos: `09-analitica/data/` y `09-analitica/data/README.md`.
+- Diccionario: `09-analitica/docs/diccionario-datos.md`.
+- Excel: `09-analitica/excel/NovaBank_analitica.xlsx` y `09-analitica/docs/excel.md`.
+- Power Query: `09-analitica/powerquery/`.
+- Power BI: `09-analitica/powerbi/medidas.dax`, `tema-novabank.json`, `README.md` y `09-analitica/docs/tablero.md`.
+- Tableau: `09-analitica/tableau/calculos.md`.
+- Pruebas: `09-analitica/tests/test_analytics.py`.
+
+### Evidencia manual pendiente
+
+- **EV-006:** recrear wireframes en Balsamiq/Figma y conectar el prototipo; captura y enlace.
+- **EV-007:** construir el `.pbix`, validar cifras, publicar o capturar y registrar URL.
+- **EV-008:** construir el libro de Tableau, publicar en Tableau Public (opcional) y capturar.
+
+> La latencia de pagos locales y el ciclo de vida de alertas/casos son sintéticos. No se declara haber abierto Power BI, Tableau ni Figma.
+
+---
+
 ## Plantillas por herramienta
 
 ### Jira (Fase 2)
@@ -401,8 +447,8 @@ Ver **EV-003** en la sección Fase 2 para la importación de work items. El pipe
 
 ### Balsamiq / Figma (Fase 6)
 
-- [ ] Recrear los wireframes según la especificación de pantalla.
-- [ ] Conectar el flujo del prototipo.
+- [ ] Recrear los wireframes de `04-diseno-ux/especificacion-pantallas.md` usando `04-diseno-ux/wireframes/index.html` como referencia.
+- [ ] Conectar el flujo de `04-diseno-ux/flujo-prototipo.md`.
 - [ ] Compartir enlace de solo lectura.
 - Enlace: _pendiente_
 - Captura: _pendiente_
@@ -410,17 +456,17 @@ Ver **EV-003** en la sección Fase 2 para la importación de work items. El pipe
 
 ### Power BI (Fase 6)
 
-- [ ] Importar el CSV del dataset analítico.
-- [ ] Crear el modelo y las medidas DAX especificadas.
-- [ ] Construir el dashboard y publicar captura.
+- [ ] Importar los CSV de `09-analitica/data/` con `09-analitica/powerquery/`.
+- [ ] Crear el modelo y las medidas de `09-analitica/powerbi/medidas.dax`.
+- [ ] Construir las páginas de `09-analitica/docs/tablero.md`, validar cifras y publicar captura.
 - Enlace: _pendiente_
 - Captura: _pendiente_
 - Fecha: _pendiente_
 
 ### Tableau (Fase 6)
 
-- [ ] Conectar el dataset.
-- [ ] Construir las vistas especificadas.
+- [ ] Conectar los CSV y crear las relaciones de `09-analitica/tableau/calculos.md`.
+- [ ] Crear las hojas y dashboards especificados.
 - [ ] Publicar en Tableau Public (opcional) y capturar.
 - Enlace: _pendiente_
 - Captura: _pendiente_

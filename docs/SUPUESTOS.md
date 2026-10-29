@@ -89,6 +89,12 @@ Registro de toda decisión o supuesto tomado sin consulta al autor, según las r
 | S-077 | 2026-10-29 | Decisión | La lista de países de alto riesgo se expresa en ISO3 y el hook mapea ISO2→ISO3 para comparar con las transacciones. | Evitar falsos negativos por formato de código de país. | Bajo | Activo |
 | S-078 | 2026-10-29 | Supuesto | Los dos ROS de `docs/ros.md` son borradores ficticios y no se presentaron ante ninguna autoridad. | Honestidad del portafolio. | Alto | Activo |
 | S-079 | 2026-10-29 | Decisión | La suite de Fase 5 agrega 25 pruebas; la suite completa queda en 183 pruebas (69 core + 89 mensajería + 25 AML). | Verificación automatizada de KYC, screening, reglas, alertas, workflow, evaluación y hook. | Medio | Activo |
+| S-080 | 2026-10-29 | Decisión | La latencia de `fact_payment_sla` se genera de forma determinística a partir del ID de la transacción; el core no registra timestamps separados de aceptación y acreditación. | Permite demostrar el tablero de SLA sin inventar una medición operativa; se marca como dato sintético en todos los artefactos. | Alto | Activo |
+| S-081 | 2026-10-29 | Decisión | El ciclo de vida de alertas y casos (asignación, estados, cierres y ROS) se simula con semilla derivada del ID para la capa analítica. | Habilita bandeja, SLA y tableros sin alterar la base del core; no representa decisiones reales de un analista. | Alto | Activo |
+| S-082 | 2026-10-29 | Decisión | El exportador analítico ejecuta las reglas AML sobre una copia en memoria de SQLite y no persiste alertas en la base de Fase 5. | Evita efectos laterales y mantiene reproducible el dataset; el corte analítico actual tiene 377 alertas. | Medio | Activo |
+| S-083 | 2026-10-29 | Decisión | El workbook usa `_xlfn.XLOOKUP` para compatibilidad con Excel 365/2021 y deja `INDEX/MATCH` como alternativa en la misma hoja. | Demuestra ambas técnicas sin depender de una sola versión de Excel. | Bajo | Activo |
+| S-084 | 2026-10-29 | Decisión | El modelo de Power BI/Tableau trata `fact_cases` como hecho independiente y no lo relaciona con `fact_alerts` para evitar rutas ambiguas. | Simplifica el modelo estrella; el detalle alerta→caso se resuelve por `case_id` o una página de detalle. | Medio | Activo |
+| S-085 | 2026-10-29 | Supuesto | La comisión internacional fija de USD 25 se convierte a la moneda de la operación con tipos de cambio ficticios (USD 7.300 y EUR 7.900 por PYG). | Coherencia del simulador; no son cotizaciones reales ni una política de precios del banco. | Bajo | Activo |
 
 ## Supuestos no verificados vigentes
 
@@ -122,3 +128,4 @@ Los siguientes supuestos se marcan `SUPUESTO NO VERIFICADO` en los documentos do
 | 2026-10-28 | Fase 3: se agregan S-046 a S-055 por modelo SQLite, partida doble, plan de cuentas, idempotencia, alcance FX, patrones sintéticos, tamaño del dataset, suite de pruebas y límites de seguridad. |
 | 2026-10-28 | Fase 4: se agregan S-056 a S-066 y SNV-09 por validación estructural, versiones CBPR+, identificadores locales/internacionales, simuladores, límites, alcance USD, comisión, hook AML, mapeo MT103 y datos ISO 4217. |
 | 2026-10-29 | Fase 5: se agregan S-067 a S-079 y SNV-10 a SNV-12 por scoring KYC, perfiles determinísticos, screening, deduplicación, SLA, reglas SQL, proxy de dormancia, agregaciones, evaluación, ISO3, ROS y suite de pruebas. |
+| 2026-10-29 | Fase 6: se agregan S-080 a S-085 por latencia sintética, ciclo de vida analítico, exportación en memoria, compatibilidad XLOOKUP, modelo de casos y conversión de comisión internacional. |

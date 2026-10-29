@@ -127,12 +127,12 @@
 
 **Objetivo:** mostrar diseño de pantallas y capacidad analítica sobre el dataset del caso.
 
-- [ ] Especificación de wireframes para Balsamiq/Figma (transferencia, bandeja de alertas, detalle de caso).
-- [ ] Flujo de prototipo y componentes reutilizables.
-- [ ] Excel avanzado: tablas, validaciones, Power Query, dashboard.
-- [ ] Dataset analítico y diccionario de datos.
-- [ ] Modelo y medidas DAX para Power BI.
-- [ ] Especificación de dashboard para Tableau.
+- [x] Especificación de wireframes para Balsamiq/Figma (transferencia, bandeja de alertas, detalle de caso).
+- [x] Flujo de prototipo y componentes reutilizables.
+- [x] Excel avanzado: tablas, validaciones, Power Query, dashboard.
+- [x] Dataset analítico y diccionario de datos.
+- [x] Modelo y medidas DAX para Power BI.
+- [x] Especificación de dashboard para Tableau.
 - [ ] Evidencias manuales de Fase 6.
 - [ ] Commit(s) + push de cierre de fase.
 
