@@ -48,7 +48,7 @@ Según la información pública del BCP [F-01, F-02]:
 | Devoluciones | Solicitud de devolución; plazo de hasta 10 días. | Estado de devolución y plazos visibles. |
 | Participantes | Bancos y entidades habilitadas. | Modelo de iniciador/receptor y mensajería. |
 
-> **Discrepancia documentada:** la tabla resumen del SIPAP [F-02] indica “días hábiles” para el SPI, mientras que las consultas frecuentes [F-01] indican operación 24/7. El caso adopta 24/7 y registra el punto como `SUPUESTO NO VERIFICADO` (SNV-01 / P-006). La validación definitiva requiere el Reglamento General del SIPAP vigente.
+> **Discrepancia documentada:** la tabla resumen del SIPAP [F-02] indica “días hábiles” para el SPI, mientras que las consultas frecuentes [F-01] indican operación 24/7. El caso adopta 24/7. La FAQ oficial del BCP fue reverificada el 2026-10-29 y confirma 24 horas, 7 días, tope de ₲10.000.000 y acreditación máxima de 5 segundos; por eso SNV-01 se marca **verificado** y P-006 se cierra. La discrepancia con la tabla resumen de F-02 se conserva como nota de fuente.
 
 ### 3.2 Flujo conceptual local
 

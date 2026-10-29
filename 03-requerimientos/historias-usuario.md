@@ -78,7 +78,7 @@ Escenario: Importe por encima del límite
   Y no debita la cuenta origen
 ```
 
-**Notas:** El tope de ₲10.000.000 y la operación 24/7 son parámetros del caso alineados a F-01 y marcados SUPUESTO NO VERIFICADO (SNV-01).
+**Notas:** El tope de ₲10.000.000, la operación 24/7 y la acreditación máxima de 5 segundos fueron verificados en la FAQ oficial del BCP (F-01) el 2026-10-29; SNV-01 queda cerrado.
 
 ### US-002 — Resolver alias o cuenta destino
 

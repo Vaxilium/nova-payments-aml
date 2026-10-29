@@ -2,6 +2,8 @@
 
 > Portfolio case study by **Franco Tillería Centurión** — Business Analyst (banking) — Asunción, Paraguay
 > Fictional case. No real customer, account or confidential data is used.
+>
+> [English version](README.en.md) · [Case study](docs/case-study.md) · [Interview guide](docs/entrevista.md) · [Truth audit](docs/AUDITORIA.md) · [Evidence checklist](docs/evidencias/README.md)
 
 ## Executive Summary (English)
 
@@ -13,7 +15,8 @@ core/middleware design, messaging validation, AML rules, UAT and analytics. It i
 a public portfolio built to demonstrate practical BA tools and banking-domain
 knowledge on a realistic but entirely synthetic scenario.
 
-The project is complete at artifact level across seven phases. It includes 10
+The project is complete at artifact level across seven delivery phases plus an
+independent audit/reinforcement phase. It includes 10
 epics and 40 user stories with Gherkin acceptance criteria, 6 BPMN processes, 4
 DMN decision tables, a tested SQLite core with double-entry accounting, a FastAPI
 `/v1` service, ISO 20022/MT103 validators and simulators, 12 AML monitoring
@@ -31,9 +34,11 @@ Latest reproducible results (2026-10-29, local Windows environment):
   prototype API has no authentication or role-based authorization.
 - **40/40 user stories traced** to at least one test case.
 
-The automated evidence is real and reproducible. Evidence for Jira, Confluence,
-Azure DevOps, Figma/Balsamiq, Power BI, Tableau, Camunda and LinkedIn remains a
-manual author task and is tracked in [`docs/EVIDENCIAS.md`](docs/EVIDENCIAS.md).
+The automated evidence is real and reproducible (verified in a fresh clone on
+2026-10-29). Evidence for Jira, Confluence, Azure DevOps, Figma/Balsamiq,
+Power BI, Tableau, Camunda and LinkedIn **requires manual execution by the
+author** and is tracked in [`docs/EVIDENCIAS.md`](docs/EVIDENCIAS.md). Every claim
+in this README was audited in [`docs/AUDITORIA.md`](docs/AUDITORIA.md).
 
 ## El problema
 
@@ -100,8 +105,8 @@ La vista completa de contexto, contenedores, entidades y journeys está en
 | Capacidad | Herramienta | Artefacto en el repositorio | Estado real |
 |---|---|---|---|
 | Análisis de negocio | BRD / RACI / riesgos / KPIs | [`01-negocio/`](01-negocio/) | Completado |
-| Modelado de procesos | Bizagi / Camunda / Signavio | 6 `.bpmn` en [`02-procesos/bpmn/`](02-procesos/bpmn/) | Validado estructuralmente; importación manual pendiente (EV-004) |
-| Modelado de decisiones | DMN (Camunda / Signavio) | 4 `.dmn` en [`02-procesos/dmn/`](02-procesos/dmn/) | Validado estructuralmente; ejecución manual pendiente (EV-004) |
+| Modelado de procesos | Bizagi / Camunda / Signavio | 6 `.bpmn` en [`02-procesos/bpmn/`](02-procesos/bpmn/) | XML bien formado; validación/importación en herramienta requiere ejecución manual (EV-004) |
+| Modelado de decisiones | DMN (Camunda / Signavio) | 4 `.dmn` en [`02-procesos/dmn/`](02-procesos/dmn/) | XML bien formado; ejecución en herramienta requiere ejecución manual (EV-004) |
 | Diagramación | Lucidchart / Visio / Miro | Mermaid, C4, ER y [guía](02-procesos/guia-lucidchart-visio-miro.md) | Artefactos listos; recreación manual pendiente (EV-005) |
 | Gestión de backlog | Jira | [`jira_import.csv`](03-requerimientos/jira_import.csv) + [guía](03-requerimientos/guia-importacion-jira.md) | Artefacto listo; importación manual pendiente (EV-001) |
 | Documentación | Confluence | [Kit de espacio](03-requerimientos/confluence/README.md) | Artefacto listo; publicación manual pendiente (EV-002) |
@@ -126,6 +131,10 @@ La vista completa de contexto, contenedores, entidades y journeys está en
 Requisitos: Python 3.12+ (el entorno local verificado usa 3.15), PowerShell 5.1
 en Windows o bash en Linux/macOS.
 
+Estos comandos fueron ejecutados sobre un **clon limpio** con un `.venv` nuevo el
+2026-10-29. Resultados esperados: `204 passed`, `51/51` automatizados, `23/23`
+consultas SQL, `integrity_check=ok` y 0 violaciones de clave foránea.
+
 ```powershell
 # 1. Crear y activar el entorno
 python -m venv .venv
@@ -134,20 +143,35 @@ python -m venv .venv
 # Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 
 # 2. Instalar dependencias
-pip install -r requirements.txt
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
 
-# 3. Generar la base sintética (semilla fija 20261027)
+# 3. Compilar módulos
+python -m compileall -q 05-core-middleware 06-mensajeria 07-aml-compliance 08-qa-uat 09-analitica
+
+# 4. Generar la base sintética (semilla fija 20261027)
 python 05-core-middleware\scripts\seed.py --db 05-core-middleware\db\novabank.db
 
-# 4. Ejecutar la suite completa
+# 5. Ejecutar la suite completa
 python -m pytest -q
 
-# 5. Ejecutar UAT, controles SQL y generar la matriz Excel
-python 08-qa-uat\scripts\run_uat.py
+# 6. Ejecutar UAT, controles SQL y generar la matriz Excel
+python 08-qa-uat\scripts\run_uat.py --db 05-core-middleware\db\novabank.db
 
-# 6. API local (opcional)
+# 7. Aplicar el esquema AML y evaluar reglas (opcional, para reproducir métricas AML)
+python 07-aml-compliance\scripts\setup_aml.py --db 05-core-middleware\db\novabank.db
+python 07-aml-compliance\scripts\evaluate_rules.py --db 05-core-middleware\db\novabank.db
+
+# 8. Exportar dataset analítico y workbook Excel (opcional)
+python 09-analitica\scripts\export_analytics.py
+python 09-analitica\scripts\build_excel.py
+
+# 9. API local (opcional)
 uvicorn app.main:app --reload --app-dir 05-core-middleware
 ```
+
+Si se usa `cmd.exe` en lugar de PowerShell, reemplazar `.\` por nada y `\` por
+`/` en las rutas; los scripts aceptan ambos separadores.
 
 Artefactos que se generan:
 
@@ -195,11 +219,13 @@ Artefactos que se generan:
 | Recall sobre sospechosas | 100 % |
 | Precisión sobre etiquetadas | 99,13 % |
 | Precisión conservadora | 69,03 % |
-| Alertas deduplicadas (snapshot Fase 5) | 775 |
-| Alertas en el corte analítico (Fase 6) | 377 |
+| Alertas deduplicadas (snapshot histórico Fase 5) | 775 — no reproducible con el comando actual |
+| Alertas en el corte reproducible actual | 377 |
 
 > La diferencia entre 775 y 377 está documentada como **DEF-004 / P-018**: son
-> cortes distintos de la misma base, no un resultado contradictorio oculto.
+> cortes distintos de la misma base, no un resultado contradictorio oculto. El
+> único valor que este repositorio reproduce hoy es **377**; el 775 se conserva
+> como referencia fechada del snapshot de Fase 5.
 
 ### Analítica y UX
 
@@ -287,6 +313,7 @@ Artefactos que se generan:
 | 5 — AML y compliance | Completada y probada |
 | 6 — UX y analítica | Completada en artefactos; EV-006 a EV-008 pendientes |
 | 7 — QA/UAT y cierre | Completada en automatización y artefactos; EV-009 a EV-011 pendientes |
+| 8 — Auditoría y refuerzo | Completada y verificada en clon limpio |
 
 ## Estructura del repositorio
 
@@ -319,9 +346,15 @@ nova-payments-aml/
 | [`docs/SUPUESTOS.md`](docs/SUPUESTOS.md) | Decisiones y supuestos registrados |
 | [`docs/PENDIENTES.md`](docs/PENDIENTES.md) | Bloqueos y tareas que requieren acción manual |
 | [`docs/FUENTES.md`](docs/FUENTES.md) | Fuentes oficiales verificadas y su uso |
+| [`docs/AUDITORIA.md`](docs/AUDITORIA.md) | Auditoría de verdad afirmación por afirmación |
 | [`docs/EVIDENCIAS.md`](docs/EVIDENCIAS.md) | Pasos manuales, capturas y enlaces de herramientas |
+| [`docs/evidencias/README.md`](docs/evidencias/README.md) | Lista de capturas que debe subir el autor |
+| [`docs/case-study.md`](docs/case-study.md) | Case study de dos páginas |
+| [`docs/entrevista.md`](docs/entrevista.md) | Guion de entrevista por fase y límites del proyecto |
 | [`08-qa-uat/README.md`](08-qa-uat/README.md) | Estrategia, casos, resultados y pipelines |
 | [`docs/linkedin.md`](docs/linkedin.md) | Textos para Destacados y borradores de posts |
+| [`CHANGELOG.md`](CHANGELOG.md) | Historial de versiones |
+| [`LICENSE`](LICENSE) | Licencia MIT |
 
 ## Aviso de ficción
 
@@ -335,3 +368,9 @@ entidades ni utiliza información confidencial.
 
 **Franco Tillería Centurión** — Analista Funcional / Business Analyst
 LinkedIn: _pendiente de enlace público_ (ver P-004 en `docs/PENDIENTES.md`).
+
+## Licencia
+
+Código y documentación bajo licencia [MIT](LICENSE). El caso, los nombres y los
+datos son ficticios; la licencia no otorga derechos sobre marcas de terceros
+(BCP, SWIFT, GAFI, SEPRELAD, ISO) mencionadas solo como referencia pública.

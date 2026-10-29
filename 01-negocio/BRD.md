@@ -247,7 +247,7 @@ La ficha completa de cada KPI (definición, fórmula, fuente, frecuencia, dueño
 
 | ID | Supuesto | Impacto si no se cumple | Estado |
 |---|---|---|---|
-| SU-01 | El SPI opera 24/7, en PYG, con tope de ₲10.000.000 y acreditación ≤ 5 s. | Cambia el diseño del canal y los SLA. | `SUPUESTO NO VERIFICADO` (SNV-01) |
+| SU-01 | El SPI opera 24/7, en PYG, con tope de ₲10.000.000 y acreditación ≤ 5 s. | Cambia el diseño del canal y los SLA. | Verificado con F-01 (2026-10-29); P-006 cerrado |
 | SU-02 | NovaBank ya tiene core bancario, libro mayor y canal digital. | El alcance de TI y el cronograma cambian. | Activo |
 | SU-03 | El banco será participante o subparticipante del SPI. | Sin participación no hay canal local directo. | Activo |
 | SU-04 | La conexión SWIFT se simula mediante un adaptador; no hay certificación real en el caso. | El esfuerzo de integración real es mayor. | Activo |

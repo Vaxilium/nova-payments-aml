@@ -96,7 +96,7 @@ La ficha completa está en `01-negocio/kpis.md`.
 
 ## 6. Supuestos y restricciones clave
 
-- El SPI opera 24/7, en PYG, con tope de ₲10.000.000 y acreditación ≤ 5 s (`SUPUESTO NO VERIFICADO`, SNV-01).
+- El SPI opera 24/7, en PYG, con tope de ₲10.000.000 y acreditación ≤ 5 s (verificado con F-01 el 2026-10-29; SNV-01 cerrado).
 - NovaBank ya tiene core, libro mayor y canal digital; el programa integra, no reemplaza.
 - La conexión SWIFT se simula; no hay certificación real.
 - Las listas de sanciones/PEP y países de alto riesgo son ficticias.

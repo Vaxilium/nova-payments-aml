@@ -10,7 +10,7 @@ Registro de toda decisión o supuesto tomado sin consulta al autor, según las r
 
 | ID | Fecha | Tipo | Decisión / supuesto | Motivo | Impacto | Estado |
 |---|---|---|---|---|---|---|
-| S-001 | 2026-10-27 | Decisión | El repositorio de trabajo es `C:\Users\User\Documents\nova-payments-aml`, no el cwd por defecto `C:\Users\User`. | Es el clon con el remoto `origin` correcto. | Bajo | Activo |
+| S-001 | 2026-10-27 | Decisión | El repositorio de trabajo es la carpeta local del clon `nova-payments-aml`, no el directorio personal del usuario. | Es el clon con el remoto `origin` correcto. | Bajo | Activo |
 | S-002 | 2026-10-27 | Supuesto | Todo nombre, cuenta, BIC, IBAN, cliente y transacción es ficticio, aunque con formato válido. | Regla de honestidad y privacidad del portafolio. | Alto | Activo |
 | S-003 | 2026-10-27 | Decisión | El stack objetivo es Python 3.12, pero el equipo solo tiene Python 3.15. Se crea `.venv` con 3.15 y el código se mantiene compatible con 3.12+. | Único intérprete disponible. | Medio | Activo |
 | S-004 | 2026-10-27 | Decisión | Se ignoran `*.db`, `*.sqlite` y `*.sqlite3`; la base se regenera con el script de seed (semilla fija). | Evitar binarios y datos volátiles en git; garantizar reproducibilidad. | Bajo | Activo |
@@ -107,13 +107,19 @@ Registro de toda decisión o supuesto tomado sin consulta al autor, según las r
 | S-094 | 2026-10-29 | Decisión | Los 6 casos manuales y los 8 no implementados no se declaran aprobados; el acta de cierre los lista y la UAT manual queda pendiente. | No inflar la cobertura ni simular una firma de aceptación. | Alto | Activo |
 | S-095 | 2026-10-29 | Decisión | La Fase 7 se cierra a nivel artefacto y automatización; el piloto productivo no se aprueba por DEF-003, DEF-002 y DEF-001. | Separar cierre documental de autorización para operar. | Alto | Activo |
 
+## Supuestos verificados en Fase 8
+
+| ID | Supuesto | Verificación | Fecha |
+|---|---|---|---|
+| SNV-01 | El SPI opera 24/7, en guaraníes, con tope de ₲10.000.000 y acreditación máxima de 5 segundos. | Texto oficial de la FAQ del BCP (F-01): “Todos los días, las 24 horas (incluso feriados)… hasta ₲10.000.000… es de 5 segundos”. Cierra P-006. | 2026-10-29 |
+
 ## Supuestos no verificados vigentes
 
 Los siguientes supuestos se marcan `SUPUESTO NO VERIFICADO` en los documentos donde se usan y quedan asociados a `PENDIENTES.md`:
 
 | ID | Supuesto | Documento donde se usa | Pendiente |
 |---|---|---|---|
-| SNV-01 | El Reglamento General del SIPAP vigente mantiene el tope de ₲10.000.000, la operación 24/7 y el plazo de acreditación de 5 segundos. | BRD, contexto regulatorio, procesos | P-006 |
+| SNV-01 | ~~El Reglamento General del SIPAP vigente mantiene el tope de ₲10.000.000, la operación 24/7 y el plazo de acreditación de 5 segundos.~~ Verificado con F-01; se conserva la fila por trazabilidad. | BRD, contexto regulatorio, procesos | P-006 (cerrado) |
 | SNV-02 | La Resolución SEPRELAD aplicable a bancos supervisados por la SIB es consistente con el enfoque de ROS, PEP y debida diligencia descrito en F-03. | Contexto regulatorio, procesos AML | P-009 |
 | SNV-03 | La lista ficticia de países de alto riesgo se inspira en categorías públicas del GAFI, sin reproducir una lista oficial. | DMN de ruteo, reglas AML | P-010 |
 | SNV-04 | Los umbrales de revisión manual y aprobación son adecuados para el apetito de riesgo del banco. | DMN de límites y aprobaciones | P-011 |
