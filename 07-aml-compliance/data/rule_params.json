@@ -1,0 +1,62 @@
+{
+  "R01": {
+    "threshold_minor": 10000000,
+    "min_ratio": 0.9,
+    "window_days": 7,
+    "min_count": 5,
+    "min_total_minor": 15000000
+  },
+  "R02": {
+    "min_count": 10,
+    "window_hours": 24
+  },
+  "R03": {
+    "min_total_minor": 2800000,
+    "min_count": 5,
+    "window_hours": 24
+  },
+  "R04": {
+    "window_minutes": 120,
+    "min_ratio": 0.8,
+    "min_amount_minor": 1000000
+  },
+  "R05": {
+    "min_amount_minor": 1000000,
+    "round_unit": 1000000,
+    "window_days": 90,
+    "min_count": 5
+  },
+  "R06": {
+    "min_amount_minor": 5000000,
+    "inactive_days": 2,
+    "min_account_age_days": 180
+  },
+  "R07": {},
+  "R08": {
+    "min_amount_minor": 5000000,
+    "multiplier": 3.0,
+    "min_history": 5
+  },
+  "R09": {
+    "multiplier": 5.0,
+    "min_total_minor": 80000000,
+    "window_days": 30,
+    "baseline_days": 90
+  },
+  "R10": {
+    "window_days": 7,
+    "tolerance": 0.05,
+    "min_amount_minor": 1000000
+  },
+  "R11": {
+    "window_days": 30,
+    "min_share": 0.8,
+    "min_count": 5,
+    "min_total_minor": 5000000
+  },
+  "R12": {
+    "window_days": 7,
+    "min_senders": 6,
+    "min_total_minor": 10000000
+  }
+}

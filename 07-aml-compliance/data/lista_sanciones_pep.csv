@@ -1,0 +1,21 @@
+list_type,list_id,name,aliases,country_code,date_of_birth,program,is_active,is_fictitious
+SANCTIONS,FIC-SANC-001,Viktor Solano,VICTOR SOLANO|V. Solano|Viktor A. Solano,PRY,1974-03-12,Lista ficticia NovaBank - Programa A,1,1
+SANCTIONS,FIC-SANC-002,Elena Marchetti,Elena M. Marchetti|E. Marchetti,ARG,1981-07-08,Lista ficticia NovaBank - Programa A,1,1
+SANCTIONS,FIC-SANC-003,Dmitri Volkonsky,Dmitry Volkonsky|D. Volkonsky,RUS,1969-11-23,Lista ficticia NovaBank - Programa B,1,1
+SANCTIONS,FIC-SANC-004,Hassan Al-Mansur,Hassan Al Mansur|H. Al-Mansur,ARE,1978-01-30,Lista ficticia NovaBank - Programa B,1,1
+SANCTIONS,FIC-SANC-005,Kwame Osei,Kwame O. Osei|K. Osei,GHA,1985-05-17,Lista ficticia NovaBank - Programa C,1,1
+SANCTIONS,FIC-SANC-006,Li Wei Chen,Liwei Chen|L. W. Chen,CHN,1972-09-04,Lista ficticia NovaBank - Programa C,1,1
+SANCTIONS,FIC-SANC-007,Maria Fernanda Rojas,M. Fernanda Rojas|Maria F. Rojas,COL,1988-02-14,Lista ficticia NovaBank - Programa A,1,1
+SANCTIONS,FIC-SANC-008,Andrei Petrov,Andrey Petrov|A. Petrov,RUS,1966-12-01,Lista ficticia NovaBank - Programa B,1,1
+SANCTIONS,FIC-SANC-009,Samir Haddad,Samir H. Haddad|S. Haddad,LBN,1979-06-21,Lista ficticia NovaBank - Programa C,1,1
+SANCTIONS,FIC-SANC-010,Lucia Benitez,Lucia B. Benitez|L. Benitez,PRY,1990-10-09,Lista ficticia NovaBank - Programa A,1,1
+PEP,FIC-PEP-001,Augusto Rivas,Augusto R. Rivas|A. Rivas,PRY,1961-04-02,Registro ficticio de PEP - Nacional,1,1
+PEP,FIC-PEP-002,Camila Duarte,Camila D. Duarte|C. Duarte,PRY,1975-08-19,Registro ficticio de PEP - Nacional,1,1
+PEP,FIC-PEP-003,Rodrigo Alvarez,Rodrigo A. Alvarez|R. Alvarez,PRY,1968-12-11,Registro ficticio de PEP - Nacional,1,1
+PEP,FIC-PEP-004,Beatriz Caceres,Beatriz C. Caceres|B. Caceres,PRY,1980-03-27,Registro ficticio de PEP - Nacional,1,1
+PEP,FIC-PEP-005,Javier Mendoza,Javier M. Mendoza|J. Mendoza,PRY,1971-09-15,Registro ficticio de PEP - Nacional,1,1
+PEP,FIC-PEP-006,Sofia Larrea,Sofia L. Larrea|S. Larrea,PRY,1983-06-06,Registro ficticio de PEP - Nacional,1,1
+PEP,FIC-PEP-007,Tomas Echeverria,Tomas E. Echeverria|T. Echeverria,PRY,1964-01-24,Registro ficticio de PEP - Extranjero,1,1
+PEP,FIC-PEP-008,Valentina Paredes,Valentina P. Paredes|V. Paredes,ARG,1977-11-03,Registro ficticio de PEP - Extranjero,1,1
+INTERNAL,FIC-INT-001,Nestor Galeano,Nestor G. Galeano|N. Galeano,PRY,1986-07-13,Lista interna ficticia - ex empleado,1,1
+INTERNAL,FIC-INT-002,Patricia Villalba,Patricia V. Villalba|P. Villalba,PRY,1973-05-28,Lista interna ficticia - proveedor observado,1,1
