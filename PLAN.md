@@ -134,7 +134,7 @@
 - [x] Modelo y medidas DAX para Power BI.
 - [x] Especificación de dashboard para Tableau.
 - [ ] Evidencias manuales de Fase 6.
-- [ ] Commit(s) + push de cierre de fase.
+- [x] Commit(s) + push de cierre de fase.
 
 **Entregables clave:** specs UX, workbook Excel, modelo DAX, guía Tableau, diccionario de datos.
 

@@ -372,6 +372,8 @@ cd 06-mensajeria
 
 **Estado:** Artefactos automáticos completos; EV-006, EV-007 y EV-008 requieren captura manual del autor.
 
+**Commits y push:** `a869314`, `fb7e2de`, `32a5597`, `975c393` y `338b94c` publicados en `origin/main` el 2026-10-29.
+
 ### Comandos ejecutados
 
 ```powershell
