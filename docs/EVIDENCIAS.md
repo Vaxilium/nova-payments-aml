@@ -282,6 +282,46 @@ python -m venv .venv
 
 ---
 
+## Fase 4 — Mensajería financiera
+
+**Estado:** Completado con evidencia automática. Esta fase no requiere herramientas externas.
+
+### Comandos ejecutados
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q
+cd 06-mensajeria
+..\.venv\Scripts\python.exe -m validator --message examples\iso20022\pacs.008-customer-credit-transfer.xml --international-pacs008
+..\.venv\Scripts\python.exe -m validator --message examples\iso20022\pacs.002-payment-status-report-acsc.xml
+..\.venv\Scripts\python.exe -m validator --message examples\iso20022\pacs.002-payment-status-report-rjct.xml
+..\.venv\Scripts\python.exe -m validator --message examples\iso20022\pain.001-customer-credit-transfer.xml
+..\.venv\Scripts\python.exe -m validator --message examples\iso20022\camt.053-bank-to-customer-statement.xml
+..\.venv\Scripts\python.exe -m validator --mt103 examples\mt\mt103-international-transfer.txt --map
+```
+
+### Resultados verificados (2026-10-28)
+
+- [x] `pytest -q`: **158 pruebas aprobadas** (69 del core + 89 de mensajería), 0 fallos.
+- [x] Los 5 ejemplos XML son válidos, incluido el perfil internacional de pacs.008.
+- [x] El MT103 de ejemplo es válido y se mapea a pacs.008.
+- [x] El CSV de mapeo tiene 14 filas y coincide con `MAPPING_ROWS`.
+- [x] El simulador internacional debita importe + comisión y balancea el asiento (`2102` / `1102` / `4102`).
+- [x] Los rechazos y timeouts generan `pacs.002` válido con el motivo correspondiente.
+
+### Artefactos de evidencia
+
+- Catálogo: `06-mensajeria/docs/catalogo-iso20022.md`.
+- Mapeo: `06-mensajeria/docs/mapeo-mt103-pacs008.md` y `06-mensajeria/mapping/mt103-pacs008.csv`.
+- Validador: `06-mensajeria/validator/` y `06-mensajeria/docs/validador.md`.
+- Simuladores: `06-mensajeria/simulator/` y `06-mensajeria/docs/simuladores.md`.
+- Ejemplos: `06-mensajeria/examples/`.
+- Diagramas: `06-mensajeria/diagrams/`.
+- Pruebas: `06-mensajeria/tests/`.
+
+> La validación es estructural y de negocio, no contra XSD oficiales (S-056). El bloqueo de ISO 20022/SWIFT se registra en P-008.
+
+---
+
 ## Plantillas por herramienta
 
 ### Jira (Fase 2)

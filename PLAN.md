@@ -2,7 +2,7 @@
 
 **Proyecto:** NovaBank Instant & Cross-Border Payments + AML Hub (caso ficticio)
 **Rol:** Business Analyst end-to-end
-**Estado actual:** Fase 3 completada; pendientes manuales heredados de fases 1 y 2 (EV-001 a EV-005).
+**Estado actual:** Fase 4 completada; pendientes manuales heredados de fases 1 y 2 (EV-001 a EV-005).
 **Última actualización:** 2026-10-28
 
 > Convención: marcar `[x]` solo cuando el artefacto exista y esté verificado.
@@ -92,16 +92,16 @@
 
 **Objetivo:** modelar, validar y simular mensajes de pago locales e internacionales.
 
-- [ ] Catálogo ISO 20022 (pacs.008, pacs.002, pain.001, camt.053) con campos usados.
-- [ ] Mapeo MT103 ↔ ISO 20022 (campos obligatorios y equivalencias).
-- [ ] Validador de mensajes (IBAN, BIC, ISO 4217, importes, campos obligatorios).
-- [ ] Simulador de pago instantáneo tipo SPI con máquina de estados.
-- [ ] Casos de error, rechazos y reintentos.
-- [ ] Tests de validación y de mapeo.
-- [ ] Evidencias manuales de Fase 4.
-- [ ] Commit(s) + push de cierre de fase.
+- [x] Catálogo ISO 20022 (pacs.008, pacs.002, pain.001, camt.053) con campos usados.
+- [x] Mapeo MT103 ↔ ISO 20022 (campos obligatorios y equivalencias).
+- [x] Validador de mensajes (IBAN, BIC, ISO 4217, importes, campos obligatorios).
+- [x] Simulador de pago instantáneo tipo SPI con máquina de estados.
+- [x] Casos de error, rechazos y reintentos.
+- [x] Tests de validación y de mapeo.
+- [x] Evidencias de Fase 4 (automáticas: ejemplos validados y `pytest`; sin herramientas externas).
+- [x] Commit(s) + push de cierre de fase.
 
-**Entregables clave:** catálogo de mensajes, validador, simulador, tests, fuentes citadas.
+**Entregables clave:** catálogo con 4 tipos de mensaje, mapeo MT103↔pacs.008 con 14 filas, validador, simuladores local e internacional, 6 ejemplos (5 XML + 1 MT103), 4 diagramas Mermaid y 89 pruebas de mensajería (158 en total con el core).
 
 ---
 
@@ -177,3 +177,4 @@
 | 2026-10-27 | 1 | BRD, stakeholders, riesgos, glosario, KPIs, contexto regulatorio, 6 BPMN, 4 DMN, Mermaid, C4/ER/journeys y guía visual. Push realizado. Pendientes: EV-004 y EV-005. |
 | 2026-10-28 | 2 | 10 épicas, 40 historias con Gherkin/MoSCoW/SP, 16 NFR, DoR/DoD, 2 sprints, CSV Jira/ADO, kit Confluence con 6 ADR, glosario, 3 actas y RAID log, matriz de trazabilidad con TC-001 a TC-040. Push realizado. Pendientes: EV-001, EV-002 y EV-003. |
 | 2026-10-28 | 3 | Esquema SQLite con triggers, generador reproducible (500 clientes, 800 cuentas, 49.582 movimientos, 341 sospechosos etiquetados), 23 consultas SQL, API FastAPI `/v1` con idempotencia y auditoría, 69 pruebas pytest y `openapi.yaml`. Push realizado. |
+| 2026-10-28 | 4 | Catálogo ISO 20022 (pacs.008/pacs.002/pain.001/camt.053), mapeo MT103↔pacs.008, validador (IBAN/BIC/ISO 4217/importes/UETR), simuladores local e internacional con idempotencia/reintentos/AML simulado, 6 ejemplos, 4 diagramas Mermaid, 89 pruebas nuevas (158 totales). Pendiente: verificación manual de fuentes bloqueadas (P-008). |

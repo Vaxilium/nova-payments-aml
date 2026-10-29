@@ -13,6 +13,8 @@ Phase 2 (requirements) is complete at artifact level: 10 epics, 40 user stories 
 
 Phase 3 (core banking and middleware) is implemented and tested: a SQLite model with double-entry ledger constraints and triggers, a reproducible dataset of 500 customers, 800 accounts and 49,582 transactions (including 341 labeled suspicious operations), 23 SQL control queries, a FastAPI `/v1` service with idempotency and audit trail, 69 pytest tests and an exported OpenAPI 3.1 contract.
 
+Phase 4 (financial messaging) is implemented and tested: an ISO 20022 catalogue for `pacs.008`, `pacs.002`, `pain.001` and `camt.053`, a functional MT103↔pacs.008 mapping, a validator for IBAN/BIC/ISO 4217/amounts/UETR, deterministic instant and international payment simulators with state machines, retries, idempotency and a simulated AML hook, validated XML/MT103 examples, Mermaid diagrams and 89 new pytest tests (158 total). XSD-level certification and real SWIFT/BCP connectivity are explicitly out of scope.
+
 ## Caso de negocio (5 líneas)
 
 1. NovaBank, banco ficticio de Paraguay, quiere competir en pagos con una propuesta instantánea local e internacional.
@@ -84,6 +86,28 @@ Documentos de Fase 3:
 - [Índice de consultas SQL](05-core-middleware/sql/README.md)
 - [Contrato OpenAPI](05-core-middleware/openapi.yaml)
 
+## Avance de Fase 4
+
+| Área | Artefactos | Estado |
+|---|---|---|
+| Catálogo ISO 20022 | `pacs.008`, `pacs.002`, `pain.001`, `camt.053` con campos y reglas del caso | Completado |
+| Mapeo MT103 ↔ pacs.008 | Tabla de 14 equivalencias y CSV importable | Completado |
+| Validador | IBAN MOD 97-10, BIC, ISO 4217, importes, Max35Text, UETR y estructura XML | Completado y probado |
+| Simulador local | PYG, tope ₲10.000.000, idempotencia, reintentos y máquina de estados | Completado |
+| Simulador internacional | IBAN/BIC, comisión, AML simulado y posteo contable USD | Completado |
+| Ejemplos | 5 XML ISO 20022 + 1 MT103, todos validados | Completado |
+| Diagramas | Arquitectura, estados y secuencias en Mermaid | Completado |
+| Pruebas | 89 pruebas de mensajería | 158 aprobadas en total |
+
+Documentos de Fase 4:
+
+- [README de la fase](06-mensajeria/README.md)
+- [Catálogo ISO 20022](06-mensajeria/docs/catalogo-iso20022.md)
+- [Mapeo MT103 ↔ pacs.008](06-mensajeria/docs/mapeo-mt103-pacs008.md)
+- [Validador](06-mensajeria/docs/validador.md)
+- [Simuladores](06-mensajeria/docs/simuladores.md)
+- [Ejemplos](06-mensajeria/examples/README.md)
+
 ## Herramientas demostradas
 
 > Estado actual del repositorio. No se declara el uso de una herramienta que no se haya operado.
@@ -103,11 +127,11 @@ Documentos de Fase 3:
 | Excel avanzado | Microsoft Excel | Workbook `.xlsx` con fórmulas y dashboard | Pendiente |
 | BI — modelado | Power BI | Medidas DAX + modelo | Pendiente |
 | BI — visualización | Tableau | Especificación + dataset | Pendiente |
-| Mensajería internacional | SWIFT MT / ISO 20022 | Catálogo, mapeo y validador | Pendiente |
-| Pagos instantáneos | SPI-like (simulador) | Máquina de estados + API | Pendiente |
+| Mensajería internacional | SWIFT MT / ISO 20022 | Catálogo, mapeo, validador y simulador | Implementado y probado |
+| Pagos instantáneos | SPI-like (simulador) | Máquina de estados, idempotencia y posteo | Implementado y probado |
 | Core bancario y middleware | SQLite + FastAPI | Modelo, libro mayor, API y OpenAPI | Implementado y probado |
-| AML / compliance | KYC, screening, reglas SQL | Reglas, alertas, ROS | Pendiente (Fase 5; dataset etiquetado listo) |
-| Automatización de pruebas | pytest | 69 pruebas de Fase 3 | Implementado |
+| AML / compliance | KYC, screening, reglas SQL | Reglas, alertas, ROS | Pendiente (Fase 5; hook AML simulado en Fase 4) |
+| Automatización de pruebas | pytest | 69 pruebas de Fase 3 + 89 de Fase 4 | Implementado; 158 aprobadas |
 | Integración continua | GitHub Actions | Workflow YAML | Pendiente |
 
 ## Estructura del repositorio
@@ -152,7 +176,7 @@ Cada carpeta contiene un `README.md` corto con su propósito, contenidos esperad
 | 1 — Negocio y procesos | Completada en artefactos; evidencias manuales pendientes |
 | 2 — Requerimientos | Completada en artefactos; evidencias manuales pendientes |
 | 3 — Core bancario y middleware | Completada |
-| 4 — Mensajería | Pendiente |
+| 4 — Mensajería | Completada |
 | 5 — AML y compliance | Pendiente |
 | 6 — UX y analítica | Pendiente |
 | 7 — QA/UAT y cierre | Pendiente |

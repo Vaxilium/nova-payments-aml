@@ -1,0 +1,16 @@
+stateDiagram-v2
+    [*] --> INITIATED
+    INITIATED --> VALIDATED: validación OK
+    INITIATED --> REJECTED: error de datos
+    VALIDATED --> HELD: AML HOLD solo internacional
+    VALIDATED --> SENT: gateway disponible
+    VALIDATED --> REJECTED: AML REJECT solo internacional
+    SENT --> SENT: reintento
+    SENT --> SETTLED: aceptado y contabilizado
+    SENT --> REJECTED: rechazo del PSP/corresponsal
+    SENT --> EXPIRED: timeout o reintentos agotados
+    HELD --> SENT: resolución manual (no implementada)
+    HELD --> REJECTED: cierre por AML
+    SETTLED --> [*]
+    REJECTED --> [*]
+    EXPIRED --> [*]

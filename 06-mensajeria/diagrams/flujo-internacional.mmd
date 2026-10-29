@@ -1,0 +1,30 @@
+sequenceDiagram
+    participant C as Cliente
+    participant S as InternationalPaymentSimulator
+    participant AML as Hook AML
+    participant G as Gateway simulado
+    participant Core as CoreLedgerBridge
+    C->>S: submit(InternationalPaymentRequest)
+    S->>S: validar IBAN, BIC, moneda, país e idempotencia
+    S->>AML: evaluar solicitud
+    alt HOLD
+        AML-->>S: HOLD
+        S-->>C: HELD + pacs.002 PDNG AMLHOLD
+    else REJECT
+        AML-->>S: REJECT
+        S-->>C: REJECTED + pacs.002 RJCT AMLREJECT
+    else ALLOW
+        S->>G: enviar pacs.008
+        G-->>S: ACCEPTED / RETRYABLE / REJECTED / TIMEOUT
+        alt ACCEPTED
+            S->>Core: post_outbound(importe + comisión)
+            Core-->>S: operation_id
+            S-->>C: SETTLED + pacs.002 ACSC
+        else RETRYABLE
+            S->>G: reintentar hasta 3 veces
+        else REJECTED
+            S-->>C: REJECTED + pacs.002 RJCT
+        else TIMEOUT
+            S-->>C: EXPIRED + pacs.002 RJCT TIMEOUT
+        end
+    end

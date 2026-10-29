@@ -1,0 +1,17 @@
+flowchart LR
+    Client[Cliente / canal] --> Instant[InstantPaymentSimulator]
+    Client --> Intl[InternationalPaymentSimulator]
+    Instant --> Validator[Validador ISO 20022 / MT103]
+    Intl --> Validator
+    Instant --> Messages[Builders pacs.008 / pacs.002]
+    Intl --> Messages
+    Intl --> AML[Hook AML simulado]
+    Instant --> Core[BankingService]
+    Intl --> Bridge[CoreLedgerBridge]
+    Bridge --> CoreDB[(SQLite del core)]
+    Core --> CoreDB
+    Messages --> Gateway[Gateway determinista]
+    Gateway --> Instant
+    Gateway --> Intl
+    Validator --> Examples[Ejemplos XML / MT103]
+    Validator --> Mapping[Mapeo MT103 ↔ pacs.008]

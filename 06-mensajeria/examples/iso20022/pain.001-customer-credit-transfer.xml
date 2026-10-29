@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:pain.001.001.09">
+  <CstmrCdtTrfInitn>
+    <GrpHdr>
+      <MsgId>PAIN-NOVA-0001</MsgId>
+      <CreDtTm>2026-10-28T15:00:00Z</CreDtTm>
+      <NbOfTxs>1</NbOfTxs>
+      <CtrlSum>1250.00</CtrlSum>
+    </GrpHdr>
+    <PmtInf>
+      <PmtInfId>PMT-NOVA-0001</PmtInfId>
+      <PmtMtd>TRF</PmtMtd>
+      <NbOfTxs>1</NbOfTxs>
+      <ReqdExctnDt>
+        <Dt>2026-10-28</Dt>
+      </ReqdExctnDt>
+      <Dbtr>
+        <Nm>ANA DEMO</Nm>
+        <Acct>
+          <Id>
+            <Othr>
+              <Id>00000000000001</Id>
+            </Othr>
+          </Id>
+        </Acct>
+      </Dbtr>
+      <CdtTrfTxInf>
+        <PmtId>
+          <EndToEndId>E2E-2026-0001</EndToEndId>
+        </PmtId>
+        <Amt>
+          <InstdAmt Ccy="USD">1250.00</InstdAmt>
+        </Amt>
+        <Cdtr>
+          <Nm>JOHN DEMO</Nm>
+          <Acct>
+            <Id>
+              <IBAN>DE89370400440532013000</IBAN>
+            </Id>
+          </Acct>
+        </Cdtr>
+        <CdtrAgt>
+          <FinInstnId>
+            <BICFI>NOVBDEFF</BICFI>
+          </FinInstnId>
+        </CdtrAgt>
+        <RmtInf>
+          <Ustrd>INVOICE 2026-001</Ustrd>
+        </RmtInf>
+      </CdtTrfTxInf>
+    </PmtInf>
+  </CstmrCdtTrfInitn>
+</Document>

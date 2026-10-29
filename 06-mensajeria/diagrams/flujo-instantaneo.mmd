@@ -1,0 +1,24 @@
+sequenceDiagram
+    participant C as Cliente
+    participant S as InstantPaymentSimulator
+    participant G as Gateway simulado
+    participant Core as BankingService
+    C->>S: submit(InstantPaymentRequest)
+    S->>S: validar datos, tope, cuentas e idempotencia
+    alt datos inválidos
+        S-->>C: SimulationValidationError + pacs.002 RJCT FF01
+    else datos válidos
+        S->>G: enviar pacs.008
+        G-->>S: ACCEPTED / RETRYABLE / REJECTED / TIMEOUT
+        alt ACCEPTED
+            S->>Core: transfer o debit_account
+            Core-->>S: operation_id
+            S-->>C: SETTLED + pacs.002 ACSC
+        else RETRYABLE
+            S->>G: reintentar hasta 3 veces
+        else REJECTED
+            S-->>C: REJECTED + pacs.002 RJCT
+        else TIMEOUT
+            S-->>C: EXPIRED + pacs.002 RJCT TIMEOUT
+        end
+    end

@@ -1,0 +1,15 @@
+mt103_field,iso_path,direction,notes
+20,PmtId/InstrId y PmtId/EndToEndId,MT103 → pacs.008,Referencia del ordenante; se conserva como instrucción y referencia extremo a extremo cuando no existe otro identificador.
+23B,PmtTpInf (informativo),MT103 → pacs.008,Código de operación bancaria; no tiene una equivalencia ISO única en el perfil del caso.
+32A,IntrBkSttlmAmt/@Ccy e IntrBkSttlmDt,MT103 → pacs.008,La fecha valor se usa como fecha de liquidación y el par moneda/importe como importe interbancario.
+33B,InstdAmt/@Ccy,MT103 → pacs.008,Importe instruido por el ordenante; opcional si coincide con 32A.
+50K,Dbtr/Nm y Dbtr/Acct/Id/Othr/Id,MT103 → pacs.008,Ordenante y cuenta de origen; el identificador local se expresa como Othr/Id.
+52A,DbtrAgt/FinInstnId/BICFI,MT103 → pacs.008,Institución del ordenante.
+57A,CdtrAgt/FinInstnId/BICFI,MT103 → pacs.008,Institución del beneficiario.
+59,"Cdtr/Nm, Cdtr/Acct y Cdtr/Agt",MT103 → pacs.008,"Beneficiario, cuenta/IBAN y, si se informa, BIC del beneficiario."
+70,RmtInf/Ustrd,MT103 → pacs.008,Información de remesa no estructurada.
+71A,ChrgBr,MT103 → pacs.008,OUR→DEBT; SHA→SHAR; BEN→CRED.
+72,RmtInf o datos suplementarios,MT103 → pacs.008,Información remitente-destinatario; el caso no la usa para el flujo principal.
+PmtId/EndToEndId,20 (referencia del ordenante),pacs.008 → MT103,Se conserva la referencia extremo a extremo como referencia del mensaje MT103.
+IntrBkSttlmAmt + IntrBkSttlmDt,32A,pacs.008 → MT103,Se compone la fecha valor y el par moneda/importe.
+ChrgBr,71A,pacs.008 → MT103,DEBT→OUR; SHAR→SHA; CRED→BEN.

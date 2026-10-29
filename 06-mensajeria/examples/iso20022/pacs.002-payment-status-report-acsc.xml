@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:pacs.002.001.10">
+  <FIToFIPmtStsRpt>
+    <GrpHdr>
+      <MsgId>STS-NOVA-INTL-0001</MsgId>
+      <CreDtTm>2026-10-28T15:30:05Z</CreDtTm>
+      <NbOfTxs>1</NbOfTxs>
+    </GrpHdr>
+    <OrgnlGrpInfAndSts>
+      <OrgnlMsgId>MSG-NOVA-INTL-0001</OrgnlMsgId>
+      <OrgnlMsgNmId>pacs.008.001.08</OrgnlMsgNmId>
+    </OrgnlGrpInfAndSts>
+    <TxInfAndSts>
+      <OrgnlInstrId>INTL-2026-0001</OrgnlInstrId>
+      <OrgnlEndToEndId>E2E-2026-0001</OrgnlEndToEndId>
+      <TxSts>ACSC</TxSts>
+    </TxInfAndSts>
+  </FIToFIPmtStsRpt>
+</Document>
