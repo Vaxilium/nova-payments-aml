@@ -1,7 +1,7 @@
 """CLI: genera la base sintética de NovaBank.
 
 Ejemplos:
-    python 05-core-middleware/scripts/seed.py --reset
+    python 05-core-middleware/scripts/seed.py
     python 05-core-middleware/scripts/seed.py --customers 50 --accounts 80 --transactions 2000
 """
 

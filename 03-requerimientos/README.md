@@ -21,7 +21,7 @@ Propósito: transformar el negocio en un backlog claro, priorizado y trazable, l
 | `ado_import/` | Tres CSV por pasada para Azure DevOps y guía de jerarquía. |
 | `guia-importacion-azure-devops.md` | Pasos, mapeo de campos y verificación en Azure DevOps. |
 | `confluence/` | Kit de páginas Markdown: inicio, BRD resumido, 6 ADR, glosario, 3 actas y RAID log. |
-| `matriz-trazabilidad.csv` | Objetivo → requerimiento → historia → proceso BPMN → caso de prueba reservado. |
+| `matriz-trazabilidad.csv` | Objetivo → requerimiento → historia → proceso BPMN → casos de prueba y estado real. |
 
 ---
 
@@ -38,7 +38,7 @@ Propósito: transformar el negocio en un backlog claro, priorizado y trazable, l
 | Sprint 1 | 10 historias / 47 SP |
 | Sprint 2 | 9 historias / 52 SP |
 | Backlog restante | 21 historias / 99 SP |
-| Casos de prueba reservados | `TC-001` a `TC-040` (Fase 7) |
+| Casos de prueba | 65 (`TC-001` a `TC-065`) |
 
 ---
 
@@ -73,7 +73,9 @@ La matriz `matriz-trazabilidad.csv` vincula:
 objetivo de negocio → requerimiento BRD → historia → proceso BPMN → caso de prueba
 ```
 
-Los casos `TC-001` a `TC-040` están **reservados** y se completarán en la Fase 7 (UAT). No se declaran ejecutados.
+Los 65 casos (`TC-001` a `TC-065`) están definidos en `08-qa-uat/`. La matriz
+registra el estado real: 51 automatizados aprobados, 6 manuales pendientes y 8
+no implementados. No se declaran ejecutados los casos manuales ni los ausentes.
 
 ---
 

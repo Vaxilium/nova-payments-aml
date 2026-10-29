@@ -1,0 +1,2738 @@
+{
+  "generated_at": "2026-10-29T01:51:55-03:00",
+  "command": "python -m pytest -q --junitxml=08-qa-uat/resultados/junit-uat.xml",
+  "environment": "Windows 11; Python 3.15.0; base C:/Users/User/Documents/nova-payments-aml/05-core-middleware/db/novabank.db; pytest 204 pruebas",
+  "pytest": {
+    "total": 204,
+    "passed": 204,
+    "failed": 0,
+    "skipped": 0,
+    "testcases": [
+      {
+        "nodeid": "05-core-middleware/tests/test_api.py::test_health",
+        "classname": "05-core-middleware.tests.test_api",
+        "name": "test_health",
+        "status": "passed",
+        "time": 0.211,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_api.py::test_list_and_get_customers",
+        "classname": "05-core-middleware.tests.test_api",
+        "name": "test_list_and_get_customers",
+        "status": "passed",
+        "time": 0.039,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_api.py::test_customer_not_found",
+        "classname": "05-core-middleware.tests.test_api",
+        "name": "test_customer_not_found",
+        "status": "passed",
+        "time": 0.036,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_api.py::test_customer_accounts_and_account_detail",
+        "classname": "05-core-middleware.tests.test_api",
+        "name": "test_customer_accounts_and_account_detail",
+        "status": "passed",
+        "time": 0.041,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_api.py::test_account_not_found",
+        "classname": "05-core-middleware.tests.test_api",
+        "name": "test_account_not_found",
+        "status": "passed",
+        "time": 0.04,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_api.py::test_balance_is_reconciled",
+        "classname": "05-core-middleware.tests.test_api",
+        "name": "test_balance_is_reconciled",
+        "status": "passed",
+        "time": 0.04,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_api.py::test_credit_via_api_and_operation_status",
+        "classname": "05-core-middleware.tests.test_api",
+        "name": "test_credit_via_api_and_operation_status",
+        "status": "passed",
+        "time": 0.06,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_api.py::test_idempotent_replay_returns_same_operation",
+        "classname": "05-core-middleware.tests.test_api",
+        "name": "test_idempotent_replay_returns_same_operation",
+        "status": "passed",
+        "time": 0.055,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_api.py::test_idempotency_conflict_via_api",
+        "classname": "05-core-middleware.tests.test_api",
+        "name": "test_idempotency_conflict_via_api",
+        "status": "passed",
+        "time": 0.05,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_api.py::test_missing_idempotency_key_via_api",
+        "classname": "05-core-middleware.tests.test_api",
+        "name": "test_missing_idempotency_key_via_api",
+        "status": "passed",
+        "time": 0.036,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_api.py::test_invalid_idempotency_key_via_api",
+        "classname": "05-core-middleware.tests.test_api",
+        "name": "test_invalid_idempotency_key_via_api",
+        "status": "passed",
+        "time": 0.036,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_api.py::test_debit_and_insufficient_funds_via_api",
+        "classname": "05-core-middleware.tests.test_api",
+        "name": "test_debit_and_insufficient_funds_via_api",
+        "status": "passed",
+        "time": 0.057,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_api.py::test_transfer_via_api",
+        "classname": "05-core-middleware.tests.test_api",
+        "name": "test_transfer_via_api",
+        "status": "passed",
+        "time": 0.067,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_api.py::test_transfer_same_account_via_api",
+        "classname": "05-core-middleware.tests.test_api",
+        "name": "test_transfer_same_account_via_api",
+        "status": "passed",
+        "time": 0.034,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_api.py::test_transfer_currency_mismatch_via_api",
+        "classname": "05-core-middleware.tests.test_api",
+        "name": "test_transfer_currency_mismatch_via_api",
+        "status": "passed",
+        "time": 0.041,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_api.py::test_blocked_account_via_api",
+        "classname": "05-core-middleware.tests.test_api",
+        "name": "test_blocked_account_via_api",
+        "status": "passed",
+        "time": 0.045,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_api.py::test_validation_errors_via_api",
+        "classname": "05-core-middleware.tests.test_api",
+        "name": "test_validation_errors_via_api",
+        "status": "passed",
+        "time": 0.036,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_api.py::test_operation_not_found",
+        "classname": "05-core-middleware.tests.test_api",
+        "name": "test_operation_not_found",
+        "status": "passed",
+        "time": 0.033,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_concurrency.py::test_concurrent_withdrawals_never_overdraw",
+        "classname": "05-core-middleware.tests.test_concurrency",
+        "name": "test_concurrent_withdrawals_never_overdraw",
+        "status": "passed",
+        "time": 0.033,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_concurrency.py::test_concurrent_same_idempotency_key_credits_once",
+        "classname": "05-core-middleware.tests.test_concurrency",
+        "name": "test_concurrent_same_idempotency_key_credits_once",
+        "status": "passed",
+        "time": 0.038,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_ledger_service.py::test_credit_account_creates_balanced_entry",
+        "classname": "05-core-middleware.tests.test_ledger_service",
+        "name": "test_credit_account_creates_balanced_entry",
+        "status": "passed",
+        "time": 0.038,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_ledger_service.py::test_credit_is_idempotent",
+        "classname": "05-core-middleware.tests.test_ledger_service",
+        "name": "test_credit_is_idempotent",
+        "status": "passed",
+        "time": 0.03,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_ledger_service.py::test_idempotency_conflict_on_different_payload",
+        "classname": "05-core-middleware.tests.test_ledger_service",
+        "name": "test_idempotency_conflict_on_different_payload",
+        "status": "passed",
+        "time": 0.025,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_ledger_service.py::test_missing_and_invalid_idempotency_key",
+        "classname": "05-core-middleware.tests.test_ledger_service",
+        "name": "test_missing_and_invalid_idempotency_key",
+        "status": "passed",
+        "time": 0.021,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_ledger_service.py::test_debit_account_updates_balance",
+        "classname": "05-core-middleware.tests.test_ledger_service",
+        "name": "test_debit_account_updates_balance",
+        "status": "passed",
+        "time": 0.03,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_ledger_service.py::test_debit_insufficient_funds",
+        "classname": "05-core-middleware.tests.test_ledger_service",
+        "name": "test_debit_insufficient_funds",
+        "status": "passed",
+        "time": 0.019,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_ledger_service.py::test_debit_currency_mismatch",
+        "classname": "05-core-middleware.tests.test_ledger_service",
+        "name": "test_debit_currency_mismatch",
+        "status": "passed",
+        "time": 0.019,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_ledger_service.py::test_transfer_moves_funds_and_balances",
+        "classname": "05-core-middleware.tests.test_ledger_service",
+        "name": "test_transfer_moves_funds_and_balances",
+        "status": "passed",
+        "time": 0.037,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_ledger_service.py::test_transfer_same_account_is_rejected",
+        "classname": "05-core-middleware.tests.test_ledger_service",
+        "name": "test_transfer_same_account_is_rejected",
+        "status": "passed",
+        "time": 0.019,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_ledger_service.py::test_transfer_insufficient_funds",
+        "classname": "05-core-middleware.tests.test_ledger_service",
+        "name": "test_transfer_insufficient_funds",
+        "status": "passed",
+        "time": 0.02,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_ledger_service.py::test_operation_response_includes_entries",
+        "classname": "05-core-middleware.tests.test_ledger_service",
+        "name": "test_operation_response_includes_entries",
+        "status": "passed",
+        "time": 0.025,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_schema_constraints.py::test_schema_contains_core_tables_and_triggers",
+        "classname": "05-core-middleware.tests.test_schema_constraints",
+        "name": "test_schema_contains_core_tables_and_triggers",
+        "status": "passed",
+        "time": 0.017,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_schema_constraints.py::test_line_requires_exactly_one_side",
+        "classname": "05-core-middleware.tests.test_schema_constraints",
+        "name": "test_line_requires_exactly_one_side",
+        "status": "passed",
+        "time": 0.025,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_schema_constraints.py::test_entry_with_one_line_cannot_be_posted",
+        "classname": "05-core-middleware.tests.test_schema_constraints",
+        "name": "test_entry_with_one_line_cannot_be_posted",
+        "status": "passed",
+        "time": 0.023,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_schema_constraints.py::test_unbalanced_entry_is_rejected_by_trigger",
+        "classname": "05-core-middleware.tests.test_schema_constraints",
+        "name": "test_unbalanced_entry_is_rejected_by_trigger",
+        "status": "passed",
+        "time": 0.021,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_schema_constraints.py::test_balanced_entry_can_be_posted_and_becomes_immutable",
+        "classname": "05-core-middleware.tests.test_schema_constraints",
+        "name": "test_balanced_entry_can_be_posted_and_becomes_immutable",
+        "status": "passed",
+        "time": 0.022,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_schema_constraints.py::test_line_currency_must_match_account",
+        "classname": "05-core-middleware.tests.test_schema_constraints",
+        "name": "test_line_currency_must_match_account",
+        "status": "passed",
+        "time": 0.022,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_schema_constraints.py::test_account_balance_cannot_break_overdraft_limit",
+        "classname": "05-core-middleware.tests.test_schema_constraints",
+        "name": "test_account_balance_cannot_break_overdraft_limit",
+        "status": "passed",
+        "time": 0.016,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_seed.py::test_seed_is_reproducible",
+        "classname": "05-core-middleware.tests.test_seed",
+        "name": "test_seed_is_reproducible",
+        "status": "passed",
+        "time": 0.125,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_seed.py::test_seed_ledger_is_balanced_and_reconciled",
+        "classname": "05-core-middleware.tests.test_seed",
+        "name": "test_seed_ledger_is_balanced_and_reconciled",
+        "status": "passed",
+        "time": 0.023,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_seed.py::test_daily_closing_matches_ledger",
+        "classname": "05-core-middleware.tests.test_seed",
+        "name": "test_daily_closing_matches_ledger",
+        "status": "passed",
+        "time": 0.004,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_seed.py::test_seed_injects_labeled_suspicious_patterns",
+        "classname": "05-core-middleware.tests.test_seed",
+        "name": "test_seed_injects_labeled_suspicious_patterns",
+        "status": "passed",
+        "time": 0.002,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_seed.py::test_seed_contains_expected_scale",
+        "classname": "05-core-middleware.tests.test_seed",
+        "name": "test_seed_contains_expected_scale",
+        "status": "passed",
+        "time": 0.104,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_at_least_twenty_queries",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_at_least_twenty_queries",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[01_conciliacion_saldos_libro_mayor.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[01_conciliacion_saldos_libro_mayor.sql]",
+        "status": "passed",
+        "time": 0.02,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[02_balance_comprobacion.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[02_balance_comprobacion.sql]",
+        "status": "passed",
+        "time": 0.021,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[03_saldos_por_moneda.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[03_saldos_por_moneda.sql]",
+        "status": "passed",
+        "time": 0.019,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[04_top_clientes_saldo.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[04_top_clientes_saldo.sql]",
+        "status": "passed",
+        "time": 0.019,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[05_movimientos_duplicados.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[05_movimientos_duplicados.sql]",
+        "status": "passed",
+        "time": 0.019,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[06_cuentas_inactivas.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[06_cuentas_inactivas.sql]",
+        "status": "passed",
+        "time": 0.019,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[07_flujo_diario_por_moneda.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[07_flujo_diario_por_moneda.sql]",
+        "status": "passed",
+        "time": 0.019,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[08_velocidad_transaccional_cliente.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[08_velocidad_transaccional_cliente.sql]",
+        "status": "passed",
+        "time": 0.025,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[09_estructuracion_umbral.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[09_estructuracion_umbral.sql]",
+        "status": "passed",
+        "time": 0.02,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[10_contrapartes_frecuentes.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[10_contrapartes_frecuentes.sql]",
+        "status": "passed",
+        "time": 0.019,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[11_comisiones_por_tipo_mes.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[11_comisiones_por_tipo_mes.sql]",
+        "status": "passed",
+        "time": 0.022,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[12_rentabilidad_cuenta.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[12_rentabilidad_cuenta.sql]",
+        "status": "passed",
+        "time": 0.017,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[13_passthrough_rapido.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[13_passthrough_rapido.sql]",
+        "status": "passed",
+        "time": 0.02,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[14_cierre_vs_libro.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[14_cierre_vs_libro.sql]",
+        "status": "passed",
+        "time": 0.018,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[15_tipos_cambio_utilizados.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[15_tipos_cambio_utilizados.sql]",
+        "status": "passed",
+        "time": 0.017,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[16_distribucion_montos.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[16_distribucion_montos.sql]",
+        "status": "passed",
+        "time": 0.018,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[17_cuentas_sobregiro_riesgo.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[17_cuentas_sobregiro_riesgo.sql]",
+        "status": "passed",
+        "time": 0.016,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[18_cohortes_clientes.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[18_cohortes_clientes.sql]",
+        "status": "passed",
+        "time": 0.017,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[19_operaciones_rechazadas_idempotencia.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[19_operaciones_rechazadas_idempotencia.sql]",
+        "status": "passed",
+        "time": 0.016,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[20_top_gl_movimientos.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[20_top_gl_movimientos.sql]",
+        "status": "passed",
+        "time": 0.018,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[21_corresponsalia_paises.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[21_corresponsalia_paises.sql]",
+        "status": "passed",
+        "time": 0.018,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[22_cobertura_verdad_aml.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[22_cobertura_verdad_aml.sql]",
+        "status": "passed",
+        "time": 0.016,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_query_executes[23_conciliacion_global_diaria.sql]",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_query_executes[23_conciliacion_global_diaria.sql]",
+        "status": "passed",
+        "time": 0.02,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_all_queries_use_cte_or_window",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_all_queries_use_cte_or_window",
+        "status": "passed",
+        "time": 0.002,
+        "message": ""
+      },
+      {
+        "nodeid": "05-core-middleware/tests/test_sql_queries.py::test_passthrough_query_returns_pairs",
+        "classname": "05-core-middleware.tests.test_sql_queries",
+        "name": "test_passthrough_query_returns_pairs",
+        "status": "passed",
+        "time": 0.019,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_currency_amounts.py::test_tabla_iso4217_generada",
+        "classname": "06-mensajeria.tests.test_currency_amounts",
+        "name": "test_tabla_iso4217_generada",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_currency_amounts.py::test_importes_validos[1000-PYG]",
+        "classname": "06-mensajeria.tests.test_currency_amounts",
+        "name": "test_importes_validos[1000-PYG]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_currency_amounts.py::test_importes_validos[10.50-USD]",
+        "classname": "06-mensajeria.tests.test_currency_amounts",
+        "name": "test_importes_validos[10.50-USD]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_currency_amounts.py::test_importes_validos[10.5-USD]",
+        "classname": "06-mensajeria.tests.test_currency_amounts",
+        "name": "test_importes_validos[10.5-USD]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_currency_amounts.py::test_importes_validos[1.230-USD]",
+        "classname": "06-mensajeria.tests.test_currency_amounts",
+        "name": "test_importes_validos[1.230-USD]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_currency_amounts.py::test_importes_validos[100000000-PYG]",
+        "classname": "06-mensajeria.tests.test_currency_amounts",
+        "name": "test_importes_validos[100000000-PYG]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_currency_amounts.py::test_importes_invalidos[10.5-PYG-AMOUNT_PRECISION]",
+        "classname": "06-mensajeria.tests.test_currency_amounts",
+        "name": "test_importes_invalidos[10.5-PYG-AMOUNT_PRECISION]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_currency_amounts.py::test_importes_invalidos[10.555-USD-AMOUNT_PRECISION]",
+        "classname": "06-mensajeria.tests.test_currency_amounts",
+        "name": "test_importes_invalidos[10.555-USD-AMOUNT_PRECISION]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_currency_amounts.py::test_importes_invalidos[0-USD-AMOUNT_NOT_POSITIVE]",
+        "classname": "06-mensajeria.tests.test_currency_amounts",
+        "name": "test_importes_invalidos[0-USD-AMOUNT_NOT_POSITIVE]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_currency_amounts.py::test_importes_invalidos[-1-USD-AMOUNT_NOT_POSITIVE]",
+        "classname": "06-mensajeria.tests.test_currency_amounts",
+        "name": "test_importes_invalidos[-1-USD-AMOUNT_NOT_POSITIVE]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_currency_amounts.py::test_importes_invalidos[abc-USD-AMOUNT_FORMAT]",
+        "classname": "06-mensajeria.tests.test_currency_amounts",
+        "name": "test_importes_invalidos[abc-USD-AMOUNT_FORMAT]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_currency_amounts.py::test_importes_invalidos[1-ZZZ-CURRENCY_UNKNOWN]",
+        "classname": "06-mensajeria.tests.test_currency_amounts",
+        "name": "test_importes_invalidos[1-ZZZ-CURRENCY_UNKNOWN]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_currency_amounts.py::test_importes_invalidos[1-XAU-CURRENCY_NO_MINOR_UNIT]",
+        "classname": "06-mensajeria.tests.test_currency_amounts",
+        "name": "test_importes_invalidos[1-XAU-CURRENCY_NO_MINOR_UNIT]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_currency_amounts.py::test_importes_invalidos[9999999999999999-USD-AMOUNT_TOO_LARGE]",
+        "classname": "06-mensajeria.tests.test_currency_amounts",
+        "name": "test_importes_invalidos[9999999999999999-USD-AMOUNT_TOO_LARGE]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_currency_amounts.py::test_conversion_unidad_menor",
+        "classname": "06-mensajeria.tests.test_currency_amounts",
+        "name": "test_conversion_unidad_menor",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_currency_amounts.py::test_conversion_rechaza_exceso_decimales",
+        "classname": "06-mensajeria.tests.test_currency_amounts",
+        "name": "test_conversion_rechaza_exceso_decimales",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_examples.py::test_ejemplos_iso20022_validos",
+        "classname": "06-mensajeria.tests.test_examples",
+        "name": "test_ejemplos_iso20022_validos",
+        "status": "passed",
+        "time": 0.001,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_examples.py::test_ejemplo_pacs008_internacional",
+        "classname": "06-mensajeria.tests.test_examples",
+        "name": "test_ejemplo_pacs008_internacional",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_examples.py::test_ejemplo_mt103_valido_y_mapeable",
+        "classname": "06-mensajeria.tests.test_examples",
+        "name": "test_ejemplo_mt103_valido_y_mapeable",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_examples.py::test_csv_de_mapeo_completo",
+        "classname": "06-mensajeria.tests.test_examples",
+        "name": "test_csv_de_mapeo_completo",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_iban_validos[DE89370400440532013000]",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_iban_validos[DE89370400440532013000]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_iban_validos[GB29NWBK60161331926819]",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_iban_validos[GB29NWBK60161331926819]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_iban_validos[ES9121000418450200051332]",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_iban_validos[ES9121000418450200051332]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_iban_validos[FR7630006000011234567890189]",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_iban_validos[FR7630006000011234567890189]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_iban_validos[NL91ABNA0417164300]",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_iban_validos[NL91ABNA0417164300]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_iban_validos[DE89 3704 0044 0532 0130 00]",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_iban_validos[DE89 3704 0044 0532 0130 00]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_iban_checksum_invalido",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_iban_checksum_invalido",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_iban_longitud_por_pais",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_iban_longitud_por_pais",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_iban_pais_no_soportado",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_iban_pais_no_soportado",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_iban_calculo_control_ida_y_vuelta",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_iban_calculo_control_ida_y_vuelta",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_iban_vacio",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_iban_vacio",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_bic_valido[NOVAPYPA]",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_bic_valido[NOVAPYPA]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_bic_valido[NOVBUS33]",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_bic_valido[NOVBUS33]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_bic_valido[NOVBDEFFXXX]",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_bic_valido[NOVBDEFFXXX]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_bic_valido[NOVBGB2L]",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_bic_valido[NOVBGB2L]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_bic_invalido[NOVA]",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_bic_invalido[NOVA]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_bic_invalido[NOVAPYP]",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_bic_invalido[NOVAPYP]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_bic_invalido[NOVAPYPAXX]",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_bic_invalido[NOVAPYPAXX]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_bic_invalido[NOV1PYPA]",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_bic_invalido[NOV1PYPA]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_bic_invalido[NOVAPYPAXXXX]",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_bic_invalido[NOVAPYPAXXXX]",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_bic_pais_reservado",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_bic_pais_reservado",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_bic_requerido",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_bic_requerido",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_referencia_max35",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_referencia_max35",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_reference_long_text",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_reference_long_text",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_identifiers.py::test_uetr",
+        "classname": "06-mensajeria.tests.test_identifiers",
+        "name": "test_uetr",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_instant_simulator.py::test_pago_instantaneo_externo_liquida",
+        "classname": "06-mensajeria.tests.test_instant_simulator",
+        "name": "test_pago_instantaneo_externo_liquida",
+        "status": "passed",
+        "time": 0.093,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_instant_simulator.py::test_pago_instantaneo_interno_mueve_ambas_cuentas",
+        "classname": "06-mensajeria.tests.test_instant_simulator",
+        "name": "test_pago_instantaneo_interno_mueve_ambas_cuentas",
+        "status": "passed",
+        "time": 0.031,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_instant_simulator.py::test_idempotencia_devuelve_el_mismo_registro",
+        "classname": "06-mensajeria.tests.test_instant_simulator",
+        "name": "test_idempotencia_devuelve_el_mismo_registro",
+        "status": "passed",
+        "time": 0.023,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_instant_simulator.py::test_idempotencia_conflicto",
+        "classname": "06-mensajeria.tests.test_instant_simulator",
+        "name": "test_idempotencia_conflicto",
+        "status": "passed",
+        "time": 0.021,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_instant_simulator.py::test_limite_local",
+        "classname": "06-mensajeria.tests.test_instant_simulator",
+        "name": "test_limite_local",
+        "status": "passed",
+        "time": 0.014,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_instant_simulator.py::test_reintento_y_exito",
+        "classname": "06-mensajeria.tests.test_instant_simulator",
+        "name": "test_reintento_y_exito",
+        "status": "passed",
+        "time": 0.025,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_instant_simulator.py::test_timeout_expira",
+        "classname": "06-mensajeria.tests.test_instant_simulator",
+        "name": "test_timeout_expira",
+        "status": "passed",
+        "time": 0.018,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_instant_simulator.py::test_rechazo_del_psp",
+        "classname": "06-mensajeria.tests.test_instant_simulator",
+        "name": "test_rechazo_del_psp",
+        "status": "passed",
+        "time": 0.016,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_instant_simulator.py::test_saldo_insuficiente",
+        "classname": "06-mensajeria.tests.test_instant_simulator",
+        "name": "test_saldo_insuficiente",
+        "status": "passed",
+        "time": 0.028,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_instant_simulator.py::test_cuenta_destino_inexistente",
+        "classname": "06-mensajeria.tests.test_instant_simulator",
+        "name": "test_cuenta_destino_inexistente",
+        "status": "passed",
+        "time": 0.016,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_instant_simulator.py::test_misma_cuenta_rechazada",
+        "classname": "06-mensajeria.tests.test_instant_simulator",
+        "name": "test_misma_cuenta_rechazada",
+        "status": "passed",
+        "time": 0.014,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_international_simulator.py::test_internacional_liquida_y_contabiliza",
+        "classname": "06-mensajeria.tests.test_international_simulator",
+        "name": "test_internacional_liquida_y_contabiliza",
+        "status": "passed",
+        "time": 0.029,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_international_simulator.py::test_internacional_sin_comision",
+        "classname": "06-mensajeria.tests.test_international_simulator",
+        "name": "test_internacional_sin_comision",
+        "status": "passed",
+        "time": 0.024,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_international_simulator.py::test_internacional_idempotencia",
+        "classname": "06-mensajeria.tests.test_international_simulator",
+        "name": "test_internacional_idempotencia",
+        "status": "passed",
+        "time": 0.023,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_international_simulator.py::test_internacional_idempotencia_conflicto",
+        "classname": "06-mensajeria.tests.test_international_simulator",
+        "name": "test_internacional_idempotencia_conflicto",
+        "status": "passed",
+        "time": 0.022,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_international_simulator.py::test_internacional_rechaza_eur",
+        "classname": "06-mensajeria.tests.test_international_simulator",
+        "name": "test_internacional_rechaza_eur",
+        "status": "passed",
+        "time": 0.014,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_international_simulator.py::test_internacional_valida_iban_y_bic",
+        "classname": "06-mensajeria.tests.test_international_simulator",
+        "name": "test_internacional_valida_iban_y_bic",
+        "status": "passed",
+        "time": 0.015,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_international_simulator.py::test_internacional_pais_iban_no_coincide",
+        "classname": "06-mensajeria.tests.test_international_simulator",
+        "name": "test_internacional_pais_iban_no_coincide",
+        "status": "passed",
+        "time": 0.014,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_international_simulator.py::test_internacional_aml_hold",
+        "classname": "06-mensajeria.tests.test_international_simulator",
+        "name": "test_internacional_aml_hold",
+        "status": "passed",
+        "time": 0.015,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_international_simulator.py::test_internacional_aml_reject",
+        "classname": "06-mensajeria.tests.test_international_simulator",
+        "name": "test_internacional_aml_reject",
+        "status": "passed",
+        "time": 0.014,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_international_simulator.py::test_internacional_reintento",
+        "classname": "06-mensajeria.tests.test_international_simulator",
+        "name": "test_internacional_reintento",
+        "status": "passed",
+        "time": 0.021,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_international_simulator.py::test_internacional_timeout",
+        "classname": "06-mensajeria.tests.test_international_simulator",
+        "name": "test_internacional_timeout",
+        "status": "passed",
+        "time": 0.017,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_international_simulator.py::test_internacional_saldo_insuficiente",
+        "classname": "06-mensajeria.tests.test_international_simulator",
+        "name": "test_internacional_saldo_insuficiente",
+        "status": "passed",
+        "time": 0.022,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_international_simulator.py::test_internacional_charge_bearer_our",
+        "classname": "06-mensajeria.tests.test_international_simulator",
+        "name": "test_internacional_charge_bearer_our",
+        "status": "passed",
+        "time": 0.022,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_mt103_mapping.py::test_parse_mt103",
+        "classname": "06-mensajeria.tests.test_mt103_mapping",
+        "name": "test_parse_mt103",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_mt103_mapping.py::test_validate_mt103",
+        "classname": "06-mensajeria.tests.test_mt103_mapping",
+        "name": "test_validate_mt103",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_mt103_mapping.py::test_mt103_campo_faltante",
+        "classname": "06-mensajeria.tests.test_mt103_mapping",
+        "name": "test_mt103_campo_faltante",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_mt103_mapping.py::test_mt103_charge_bearer_invalido",
+        "classname": "06-mensajeria.tests.test_mt103_mapping",
+        "name": "test_mt103_charge_bearer_invalido",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_mt103_mapping.py::test_mt103_beneficiario_iban_invalido",
+        "classname": "06-mensajeria.tests.test_mt103_mapping",
+        "name": "test_mt103_beneficiario_iban_invalido",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_mt103_mapping.py::test_mt103_a_pacs008",
+        "classname": "06-mensajeria.tests.test_mt103_mapping",
+        "name": "test_mt103_a_pacs008",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_mt103_mapping.py::test_pacs008_a_mt103",
+        "classname": "06-mensajeria.tests.test_mt103_mapping",
+        "name": "test_pacs008_a_mt103",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_mt103_mapping.py::test_mapeo_charge_bearer",
+        "classname": "06-mensajeria.tests.test_mt103_mapping",
+        "name": "test_mapeo_charge_bearer",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_mt103_mapping.py::test_mt103_fecha_invalida",
+        "classname": "06-mensajeria.tests.test_mt103_mapping",
+        "name": "test_mt103_fecha_invalida",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_xml_validation.py::test_pacs008_valido",
+        "classname": "06-mensajeria.tests.test_xml_validation",
+        "name": "test_pacs008_valido",
+        "status": "passed",
+        "time": 0.001,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_xml_validation.py::test_extract_pacs008",
+        "classname": "06-mensajeria.tests.test_xml_validation",
+        "name": "test_extract_pacs008",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_xml_validation.py::test_pacs008_importe_con_exceso_decimales",
+        "classname": "06-mensajeria.tests.test_xml_validation",
+        "name": "test_pacs008_importe_con_exceso_decimales",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_xml_validation.py::test_pacs008_iban_invalido",
+        "classname": "06-mensajeria.tests.test_xml_validation",
+        "name": "test_pacs008_iban_invalido",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_xml_validation.py::test_pacs008_internacional_exige_agente",
+        "classname": "06-mensajeria.tests.test_xml_validation",
+        "name": "test_pacs008_internacional_exige_agente",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_xml_validation.py::test_pacs002_aceptado",
+        "classname": "06-mensajeria.tests.test_xml_validation",
+        "name": "test_pacs002_aceptado",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_xml_validation.py::test_pacs002_rechazado_sin_motivo",
+        "classname": "06-mensajeria.tests.test_xml_validation",
+        "name": "test_pacs002_rechazado_sin_motivo",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_xml_validation.py::test_pain001_valido",
+        "classname": "06-mensajeria.tests.test_xml_validation",
+        "name": "test_pain001_valido",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_xml_validation.py::test_camt053_valido",
+        "classname": "06-mensajeria.tests.test_xml_validation",
+        "name": "test_camt053_valido",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_xml_validation.py::test_camt053_estado_invalido",
+        "classname": "06-mensajeria.tests.test_xml_validation",
+        "name": "test_camt053_estado_invalido",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "06-mensajeria/tests/test_xml_validation.py::test_xml_mal_formado",
+        "classname": "06-mensajeria.tests.test_xml_validation",
+        "name": "test_xml_mal_formado",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_alerts.py::test_alerta_se_crea_y_deduplica",
+        "classname": "07-aml-compliance.tests.test_alerts",
+        "name": "test_alerta_se_crea_y_deduplica",
+        "status": "passed",
+        "time": 0.199,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_alerts.py::test_alertas_distintas_y_listado",
+        "classname": "07-aml-compliance.tests.test_alerts",
+        "name": "test_alertas_distintas_y_listado",
+        "status": "passed",
+        "time": 0.137,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_evaluation.py::test_metricas_globales_y_por_patron",
+        "classname": "07-aml-compliance.tests.test_evaluation",
+        "name": "test_metricas_globales_y_por_patron",
+        "status": "passed",
+        "time": 2.19,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_evaluation.py::test_reporte_markdown_incluye_trazabilidad",
+        "classname": "07-aml-compliance.tests.test_evaluation",
+        "name": "test_reporte_markdown_incluye_trazabilidad",
+        "status": "passed",
+        "time": 2.164,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_hook.py::test_hook_permite_pago_normal",
+        "classname": "07-aml-compliance.tests.test_hook",
+        "name": "test_hook_permite_pago_normal",
+        "status": "passed",
+        "time": 0.146,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_hook.py::test_hook_rechaza_lista_y_retiene_alto_valor",
+        "classname": "07-aml-compliance.tests.test_hook",
+        "name": "test_hook_rechaza_lista_y_retiene_alto_valor",
+        "status": "passed",
+        "time": 0.175,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_hook.py::test_hook_registra_contexto_y_screening",
+        "classname": "07-aml-compliance.tests.test_hook",
+        "name": "test_hook_registra_contexto_y_screening",
+        "status": "passed",
+        "time": 0.14,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_kyc.py::test_score_profile_bajo",
+        "classname": "07-aml-compliance.tests.test_kyc",
+        "name": "test_score_profile_bajo",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_kyc.py::test_pep_y_jurisdiccion_alto_riesgo_exigen_edd",
+        "classname": "07-aml-compliance.tests.test_kyc",
+        "name": "test_pep_y_jurisdiccion_alto_riesgo_exigen_edd",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_kyc.py::test_scoring_persistido_para_todos_los_clientes",
+        "classname": "07-aml-compliance.tests.test_kyc",
+        "name": "test_scoring_persistido_para_todos_los_clientes",
+        "status": "passed",
+        "time": 0.129,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_rules.py::test_las_doce_reglas_ejecutan",
+        "classname": "07-aml-compliance.tests.test_rules",
+        "name": "test_las_doce_reglas_ejecutan",
+        "status": "passed",
+        "time": 2.147,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_rules.py::test_reglas_de_patrones_detectan_la_verdad",
+        "classname": "07-aml-compliance.tests.test_rules",
+        "name": "test_reglas_de_patrones_detectan_la_verdad",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_rules.py::test_r07_jurisdiccion_alto_riesgo",
+        "classname": "07-aml-compliance.tests.test_rules",
+        "name": "test_r07_jurisdiccion_alto_riesgo",
+        "status": "passed",
+        "time": 0.167,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_rules.py::test_r06_dormancia_real_sintetica",
+        "classname": "07-aml-compliance.tests.test_rules",
+        "name": "test_r06_dormancia_real_sintetica",
+        "status": "passed",
+        "time": 0.143,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_rules.py::test_r10_circularidad_sintetica",
+        "classname": "07-aml-compliance.tests.test_rules",
+        "name": "test_r10_circularidad_sintetica",
+        "status": "passed",
+        "time": 0.171,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_rules.py::test_r11_concentracion_sintetica",
+        "classname": "07-aml-compliance.tests.test_rules",
+        "name": "test_r11_concentracion_sintetica",
+        "status": "passed",
+        "time": 0.2,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_screening.py::test_normalizacion_de_nombres",
+        "classname": "07-aml-compliance.tests.test_screening",
+        "name": "test_normalizacion_de_nombres",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_screening.py::test_coincidencia_exacta_bloquea",
+        "classname": "07-aml-compliance.tests.test_screening",
+        "name": "test_coincidencia_exacta_bloquea",
+        "status": "passed",
+        "time": 0.124,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_screening.py::test_variante_parcial_revisa_o_bloquea",
+        "classname": "07-aml-compliance.tests.test_screening",
+        "name": "test_variante_parcial_revisa_o_bloquea",
+        "status": "passed",
+        "time": 0.132,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_screening.py::test_nombre_normal_no_coincide",
+        "classname": "07-aml-compliance.tests.test_screening",
+        "name": "test_nombre_normal_no_coincide",
+        "status": "passed",
+        "time": 0.128,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_screening.py::test_similitud_y_umbrales",
+        "classname": "07-aml-compliance.tests.test_screening",
+        "name": "test_similitud_y_umbrales",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_screening.py::test_registro_de_screening",
+        "classname": "07-aml-compliance.tests.test_screening",
+        "name": "test_registro_de_screening",
+        "status": "passed",
+        "time": 0.128,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_workflow.py::test_asignacion_con_sla_y_transicion",
+        "classname": "07-aml-compliance.tests.test_workflow",
+        "name": "test_asignacion_con_sla_y_transicion",
+        "status": "passed",
+        "time": 0.133,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_workflow.py::test_escalamiento_crea_caso_y_cierre",
+        "classname": "07-aml-compliance.tests.test_workflow",
+        "name": "test_escalamiento_crea_caso_y_cierre",
+        "status": "passed",
+        "time": 0.143,
+        "message": ""
+      },
+      {
+        "nodeid": "07-aml-compliance/tests/test_workflow.py::test_caso_directo_y_transicion_invalida",
+        "classname": "07-aml-compliance.tests.test_workflow",
+        "name": "test_caso_directo_y_transicion_invalida",
+        "status": "passed",
+        "time": 0.136,
+        "message": ""
+      },
+      {
+        "nodeid": "08-qa-uat/tests/test_uat_boundaries.py::test_limite_exacto_aprobado",
+        "classname": "08-qa-uat.tests.test_uat_boundaries",
+        "name": "test_limite_exacto_aprobado",
+        "status": "passed",
+        "time": 0.099,
+        "message": ""
+      },
+      {
+        "nodeid": "08-qa-uat/tests/test_uat_boundaries.py::test_monto_cero_rechazado",
+        "classname": "08-qa-uat.tests.test_uat_boundaries",
+        "name": "test_monto_cero_rechazado",
+        "status": "passed",
+        "time": 0.014,
+        "message": ""
+      },
+      {
+        "nodeid": "08-qa-uat/tests/test_uat_boundaries.py::test_monto_negativo_rechazado",
+        "classname": "08-qa-uat.tests.test_uat_boundaries",
+        "name": "test_monto_negativo_rechazado",
+        "status": "passed",
+        "time": 0.013,
+        "message": ""
+      },
+      {
+        "nodeid": "08-qa-uat/tests/test_uat_boundaries.py::test_pyg_con_decimales_rechazado",
+        "classname": "08-qa-uat.tests.test_uat_boundaries",
+        "name": "test_pyg_con_decimales_rechazado",
+        "status": "passed",
+        "time": 0.014,
+        "message": ""
+      },
+      {
+        "nodeid": "08-qa-uat/tests/test_uat_boundaries.py::test_moneda_no_local_rechazada",
+        "classname": "08-qa-uat.tests.test_uat_boundaries",
+        "name": "test_moneda_no_local_rechazada",
+        "status": "passed",
+        "time": 0.014,
+        "message": ""
+      },
+      {
+        "nodeid": "09-analitica/tests/test_analytics.py::test_expected_csv_files_exist",
+        "classname": "09-analitica.tests.test_analytics",
+        "name": "test_expected_csv_files_exist",
+        "status": "passed",
+        "time": 0.001,
+        "message": ""
+      },
+      {
+        "nodeid": "09-analitica/tests/test_analytics.py::test_expected_row_counts",
+        "classname": "09-analitica.tests.test_analytics",
+        "name": "test_expected_row_counts",
+        "status": "passed",
+        "time": 0.198,
+        "message": ""
+      },
+      {
+        "nodeid": "09-analitica/tests/test_analytics.py::test_unique_keys_in_dimensions",
+        "classname": "09-analitica.tests.test_analytics",
+        "name": "test_unique_keys_in_dimensions",
+        "status": "passed",
+        "time": 0.164,
+        "message": ""
+      },
+      {
+        "nodeid": "09-analitica/tests/test_analytics.py::test_transaction_dates_and_currencies_are_valid",
+        "classname": "09-analitica.tests.test_analytics",
+        "name": "test_transaction_dates_and_currencies_are_valid",
+        "status": "passed",
+        "time": 0.156,
+        "message": ""
+      },
+      {
+        "nodeid": "09-analitica/tests/test_analytics.py::test_transaction_amounts_are_non_negative",
+        "classname": "09-analitica.tests.test_analytics",
+        "name": "test_transaction_amounts_are_non_negative",
+        "status": "passed",
+        "time": 0.161,
+        "message": ""
+      },
+      {
+        "nodeid": "09-analitica/tests/test_analytics.py::test_alert_references_are_valid",
+        "classname": "09-analitica.tests.test_analytics",
+        "name": "test_alert_references_are_valid",
+        "status": "passed",
+        "time": 0.004,
+        "message": ""
+      },
+      {
+        "nodeid": "09-analitica/tests/test_analytics.py::test_case_dates_and_flags",
+        "classname": "09-analitica.tests.test_analytics",
+        "name": "test_case_dates_and_flags",
+        "status": "passed",
+        "time": 0.001,
+        "message": ""
+      },
+      {
+        "nodeid": "09-analitica/tests/test_analytics.py::test_daily_reconciliation_is_balanced",
+        "classname": "09-analitica.tests.test_analytics",
+        "name": "test_daily_reconciliation_is_balanced",
+        "status": "passed",
+        "time": 0.001,
+        "message": ""
+      },
+      {
+        "nodeid": "09-analitica/tests/test_analytics.py::test_daily_operations_match_transaction_totals",
+        "classname": "09-analitica.tests.test_analytics",
+        "name": "test_daily_operations_match_transaction_totals",
+        "status": "passed",
+        "time": 0.146,
+        "message": ""
+      },
+      {
+        "nodeid": "09-analitica/tests/test_analytics.py::test_export_report_is_consistent",
+        "classname": "09-analitica.tests.test_analytics",
+        "name": "test_export_report_is_consistent",
+        "status": "passed",
+        "time": 0.0,
+        "message": ""
+      },
+      {
+        "nodeid": "09-analitica/tests/test_analytics.py::test_powerquery_scripts_exist",
+        "classname": "09-analitica.tests.test_analytics",
+        "name": "test_powerquery_scripts_exist",
+        "status": "passed",
+        "time": 0.001,
+        "message": ""
+      },
+      {
+        "nodeid": "09-analitica/tests/test_analytics.py::test_dax_has_required_measures",
+        "classname": "09-analitica.tests.test_analytics",
+        "name": "test_dax_has_required_measures",
+        "status": "passed",
+        "time": 0.001,
+        "message": ""
+      },
+      {
+        "nodeid": "09-analitica/tests/test_analytics.py::test_excel_workbook_structure",
+        "classname": "09-analitica.tests.test_analytics",
+        "name": "test_excel_workbook_structure",
+        "status": "passed",
+        "time": 0.652,
+        "message": ""
+      },
+      {
+        "nodeid": "09-analitica/tests/test_analytics.py::test_excel_formulas_and_validations",
+        "classname": "09-analitica.tests.test_analytics",
+        "name": "test_excel_formulas_and_validations",
+        "status": "passed",
+        "time": 0.807,
+        "message": ""
+      },
+      {
+        "nodeid": "09-analitica/tests/test_analytics.py::test_excel_documentation_and_specs_exist",
+        "classname": "09-analitica.tests.test_analytics",
+        "name": "test_excel_documentation_and_specs_exist",
+        "status": "passed",
+        "time": 0.001,
+        "message": ""
+      },
+      {
+        "nodeid": "09-analitica/tests/test_analytics.py::test_tableau_has_core_calculations",
+        "classname": "09-analitica.tests.test_analytics",
+        "name": "test_tableau_has_core_calculations",
+        "status": "passed",
+        "time": 0.001,
+        "message": ""
+      }
+    ]
+  },
+  "sql": {
+    "generated_at": "2026-10-29T04:51:51.781424+00:00",
+    "database": "C:\\Users\\User\\Documents\\nova-payments-aml\\05-core-middleware\\db\\novabank.db",
+    "integrity_check": "ok",
+    "foreign_key_violations": 0,
+    "queries_total": 23,
+    "queries_ok": 23,
+    "queries_failed": 0,
+    "queries": [
+      {
+        "file": "01_conciliacion_saldos_libro_mayor.sql",
+        "status": "ok",
+        "rows": 800,
+        "error": null,
+        "duration_ms": 591.49
+      },
+      {
+        "file": "02_balance_comprobacion.sql",
+        "status": "ok",
+        "rows": 10,
+        "error": null,
+        "duration_ms": 139.82
+      },
+      {
+        "file": "03_saldos_por_moneda.sql",
+        "status": "ok",
+        "rows": 4,
+        "error": null,
+        "duration_ms": 0.84
+      },
+      {
+        "file": "04_top_clientes_saldo.sql",
+        "status": "ok",
+        "rows": 724,
+        "error": null,
+        "duration_ms": 6.19
+      },
+      {
+        "file": "05_movimientos_duplicados.sql",
+        "status": "ok",
+        "rows": 7,
+        "error": null,
+        "duration_ms": 140.93
+      },
+      {
+        "file": "06_cuentas_inactivas.sql",
+        "status": "ok",
+        "rows": 7,
+        "error": null,
+        "duration_ms": 594.09
+      },
+      {
+        "file": "07_flujo_diario_por_moneda.sql",
+        "status": "ok",
+        "rows": 368,
+        "error": null,
+        "duration_ms": 84.71
+      },
+      {
+        "file": "08_velocidad_transaccional_cliente.sql",
+        "status": "ok",
+        "rows": 36390,
+        "error": null,
+        "duration_ms": 263.52
+      },
+      {
+        "file": "09_estructuracion_umbral.sql",
+        "status": "ok",
+        "rows": 30,
+        "error": null,
+        "duration_ms": 27.19
+      },
+      {
+        "file": "10_contrapartes_frecuentes.sql",
+        "status": "ok",
+        "rows": 12401,
+        "error": null,
+        "duration_ms": 108.79
+      },
+      {
+        "file": "11_comisiones_por_tipo_mes.sql",
+        "status": "ok",
+        "rows": 12,
+        "error": null,
+        "duration_ms": 4.3
+      },
+      {
+        "file": "12_rentabilidad_cuenta.sql",
+        "status": "ok",
+        "rows": 800,
+        "error": null,
+        "duration_ms": 133.97
+      },
+      {
+        "file": "13_passthrough_rapido.sql",
+        "status": "ok",
+        "rows": 136,
+        "error": null,
+        "duration_ms": 228.01
+      },
+      {
+        "file": "14_cierre_vs_libro.sql",
+        "status": "ok",
+        "rows": 800,
+        "error": null,
+        "duration_ms": 225.81
+      },
+      {
+        "file": "15_tipos_cambio_utilizados.sql",
+        "status": "ok",
+        "rows": 2500,
+        "error": null,
+        "duration_ms": 14.09
+      },
+      {
+        "file": "16_distribucion_montos.sql",
+        "status": "ok",
+        "rows": 7,
+        "error": null,
+        "duration_ms": 32.82
+      },
+      {
+        "file": "17_cuentas_sobregiro_riesgo.sql",
+        "status": "ok",
+        "rows": 793,
+        "error": null,
+        "duration_ms": 2.9
+      },
+      {
+        "file": "18_cohortes_clientes.sql",
+        "status": "ok",
+        "rows": 30,
+        "error": null,
+        "duration_ms": 1.17
+      },
+      {
+        "file": "19_operaciones_rechazadas_idempotencia.sql",
+        "status": "ok",
+        "rows": 0,
+        "error": null,
+        "duration_ms": 0.37
+      },
+      {
+        "file": "20_top_gl_movimientos.sql",
+        "status": "ok",
+        "rows": 10,
+        "error": null,
+        "duration_ms": 156.0
+      },
+      {
+        "file": "21_corresponsalia_paises.sql",
+        "status": "ok",
+        "rows": 3082,
+        "error": null,
+        "duration_ms": 55.05
+      },
+      {
+        "file": "22_cobertura_verdad_aml.sql",
+        "status": "ok",
+        "rows": 6,
+        "error": null,
+        "duration_ms": 5.31
+      },
+      {
+        "file": "23_conciliacion_global_diaria.sql",
+        "status": "ok",
+        "rows": 368,
+        "error": null,
+        "duration_ms": 82.14
+      }
+    ]
+  },
+  "summary": {
+    "cases_total": 65,
+    "automated_total": 51,
+    "automated_passed": 51,
+    "automated_failed": 0,
+    "manual_pending": 6,
+    "not_implemented": 8,
+    "automated_pass_rate": "51/51 (100.0 %)"
+  },
+  "cases": [
+    {
+      "id": "TC-001",
+      "tipo": "Positivo",
+      "nivel": "Integración",
+      "historia_id": "US-001",
+      "epica_id": "EP-01",
+      "titulo": "Transferencia local PYG entre cuentas activas",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.067,
+      "evidencia": "pytest: 05-core-middleware/tests/test_api.py::test_transfer_via_api",
+      "observaciones": "Cubre el flujo contable y de API; la UI de transferencia es un wireframe."
+    },
+    {
+      "id": "TC-002",
+      "tipo": "Negativo",
+      "nivel": "Sistema",
+      "historia_id": "US-002",
+      "epica_id": "EP-01",
+      "titulo": "Resolver alias de beneficiario inexistente",
+      "prioridad": "Alta",
+      "automatizacion": "No implementado",
+      "estado_ejecucion": "No ejecutable - funcionalidad fuera del prototipo",
+      "duracion_s": 0.0,
+      "evidencia": "No aplica: funcionalidad no implementada",
+      "observaciones": "El simulador acepta un alias como referencia, pero no existe un directorio de alias ni resolución de titular en el prototipo."
+    },
+    {
+      "id": "TC-003",
+      "tipo": "Positivo",
+      "nivel": "Integración",
+      "historia_id": "US-003",
+      "epica_id": "EP-01",
+      "titulo": "Consultar estado y asientos de una operación",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.06,
+      "evidencia": "pytest: 05-core-middleware/tests/test_api.py::test_credit_via_api_and_operation_status",
+      "observaciones": "El estado del pago local tipo SPI se cubre además con la máquina de estados del simulador."
+    },
+    {
+      "id": "TC-004",
+      "tipo": "Negativo",
+      "nivel": "Sistema",
+      "historia_id": "US-004",
+      "epica_id": "EP-01",
+      "titulo": "Solicitar devolución fuera de plazo",
+      "prioridad": "Media",
+      "automatizacion": "No implementado",
+      "estado_ejecucion": "No ejecutable - funcionalidad fuera del prototipo",
+      "duracion_s": 0.0,
+      "evidencia": "No aplica: funcionalidad no implementada",
+      "observaciones": "El flujo de devoluciones es un proceso BPMN; no existe endpoint de devolución en el prototipo."
+    },
+    {
+      "id": "TC-005",
+      "tipo": "Límite",
+      "nivel": "Integración",
+      "historia_id": "US-005",
+      "epica_id": "EP-01",
+      "titulo": "Rechazar transferencia local por encima del tope y por saldo insuficiente",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.071,
+      "evidencia": "pytest: 06-mensajeria/tests/test_instant_simulator.py::test_limite_local; 05-core-middleware/tests/test_api.py::test_debit_and_insufficient_funds_via_api",
+      "observaciones": "Cubre límite por operación y saldo; el límite diario agregado no está implementado."
+    },
+    {
+      "id": "TC-006",
+      "tipo": "Negativo",
+      "nivel": "Integración",
+      "historia_id": "US-006",
+      "epica_id": "EP-02",
+      "titulo": "Rechazar IBAN con checksum inválido y BIC mal formado",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.015,
+      "evidencia": "pytest: 06-mensajeria/tests/test_international_simulator.py::test_internacional_valida_iban_y_bic; 06-mensajeria/tests/test_identifiers.py::test_iban_checksum_invalido",
+      "observaciones": "La validación es de formato y checksum; no consulta directorios reales."
+    },
+    {
+      "id": "TC-007",
+      "tipo": "Positivo",
+      "nivel": "Integración",
+      "historia_id": "US-007",
+      "epica_id": "EP-02",
+      "titulo": "Generar y validar pacs.008 internacional",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.001,
+      "evidencia": "pytest: 06-mensajeria/tests/test_xml_validation.py::test_pacs008_valido; 06-mensajeria/tests/test_examples.py::test_ejemplo_pacs008_internacional",
+      "observaciones": "No se valida contra XSD oficiales (S-056)."
+    },
+    {
+      "id": "TC-008",
+      "tipo": "Positivo",
+      "nivel": "Integración",
+      "historia_id": "US-008",
+      "epica_id": "EP-02",
+      "titulo": "Procesar pacs.002 aceptado y rechazado",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.0,
+      "evidencia": "pytest: 06-mensajeria/tests/test_xml_validation.py::test_pacs002_aceptado; 06-mensajeria/tests/test_xml_validation.py::test_pacs002_rechazado_sin_motivo",
+      "observaciones": "Cubre validación de mensaje; la actualización de estado se prueba en el simulador."
+    },
+    {
+      "id": "TC-009",
+      "tipo": "Positivo",
+      "nivel": "Integración",
+      "historia_id": "US-009",
+      "epica_id": "EP-02",
+      "titulo": "Reintentar envío internacional sin duplicar",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.044,
+      "evidencia": "pytest: 06-mensajeria/tests/test_international_simulator.py::test_internacional_idempotencia; 06-mensajeria/tests/test_international_simulator.py::test_internacional_reintento",
+      "observaciones": "La idempotencia del simulador es en proceso; la del core persiste en SQLite."
+    },
+    {
+      "id": "TC-010",
+      "tipo": "Negativo",
+      "nivel": "Integración",
+      "historia_id": "US-010",
+      "epica_id": "EP-02",
+      "titulo": "Gestionar rechazo y timeout internacional",
+      "prioridad": "Media",
+      "automatizacion": "Automatizado (parcial)",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.033,
+      "evidencia": "pytest: 06-mensajeria/tests/test_international_simulator.py::test_internacional_timeout; 06-mensajeria/tests/test_instant_simulator.py::test_rechazo_del_psp",
+      "observaciones": "La devolución efectiva de fondos (return) no está implementada; solo rechazo y timeout."
+    },
+    {
+      "id": "TC-011",
+      "tipo": "Positivo",
+      "nivel": "UAT",
+      "historia_id": "US-011",
+      "epica_id": "EP-03",
+      "titulo": "Alta digital de cliente con datos mínimos",
+      "prioridad": "Alta",
+      "automatizacion": "No implementado",
+      "estado_ejecucion": "No ejecutable - funcionalidad fuera del prototipo",
+      "duracion_s": 0.0,
+      "evidencia": "No aplica: funcionalidad no implementada",
+      "observaciones": "El onboarding está especificado en BPMN y UX; no hay formulario ni endpoint de alta en el prototipo."
+    },
+    {
+      "id": "TC-012",
+      "tipo": "Negativo",
+      "nivel": "UAT",
+      "historia_id": "US-012",
+      "epica_id": "EP-03",
+      "titulo": "Verificación de identidad con documento vencido",
+      "prioridad": "Alta",
+      "automatizacion": "No implementado",
+      "estado_ejecucion": "No ejecutable - funcionalidad fuera del prototipo",
+      "duracion_s": 0.0,
+      "evidencia": "No aplica: funcionalidad no implementada",
+      "observaciones": "No hay captura ni validación documental implementada."
+    },
+    {
+      "id": "TC-013",
+      "tipo": "Positivo",
+      "nivel": "Integración",
+      "historia_id": "US-013",
+      "epica_id": "EP-03",
+      "titulo": "Screening de sanciones con coincidencia exacta y nombre normal",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.252,
+      "evidencia": "pytest: 07-aml-compliance/tests/test_screening.py::test_coincidencia_exacta_bloquea; 07-aml-compliance/tests/test_screening.py::test_nombre_normal_no_coincide",
+      "observaciones": "Las listas son ficticias; no se consultan listas oficiales."
+    },
+    {
+      "id": "TC-014",
+      "tipo": "Límite",
+      "nivel": "Integración",
+      "historia_id": "US-014",
+      "epica_id": "EP-03",
+      "titulo": "Scoring KYC bajo y cliente PEP con EDD",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.0,
+      "evidencia": "pytest: 07-aml-compliance/tests/test_kyc.py::test_score_profile_bajo; 07-aml-compliance/tests/test_kyc.py::test_pep_y_jurisdiccion_alto_riesgo_exigen_edd",
+      "observaciones": "Pesos y umbrales son parámetros internos (SNV-10)."
+    },
+    {
+      "id": "TC-015",
+      "tipo": "Negativo",
+      "nivel": "UAT",
+      "historia_id": "US-015",
+      "epica_id": "EP-03",
+      "titulo": "Bloqueo por revisión periódica vencida",
+      "prioridad": "Media",
+      "automatizacion": "No implementado",
+      "estado_ejecucion": "No ejecutable - funcionalidad fuera del prototipo",
+      "duracion_s": 0.0,
+      "evidencia": "No aplica: funcionalidad no implementada",
+      "observaciones": "No existe scheduler ni estado de revisión periódica en el prototipo."
+    },
+    {
+      "id": "TC-016",
+      "tipo": "Negativo",
+      "nivel": "Integración",
+      "historia_id": "US-016",
+      "epica_id": "EP-04",
+      "titulo": "Retener o rechazar pago por screening previo",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.19,
+      "evidencia": "pytest: 07-aml-compliance/tests/test_hook.py::test_hook_rechaza_lista_y_retiene_alto_valor; 06-mensajeria/tests/test_international_simulator.py::test_internacional_aml_hold",
+      "observaciones": "El hook es simulado y no consulta listas reales."
+    },
+    {
+      "id": "TC-017",
+      "tipo": "Positivo",
+      "nivel": "Integración",
+      "historia_id": "US-017",
+      "epica_id": "EP-04",
+      "titulo": "Ejecutar las 12 reglas de monitoreo y detectar patrones",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 2.147,
+      "evidencia": "pytest: 07-aml-compliance/tests/test_rules.py::test_las_doce_reglas_ejecutan; 07-aml-compliance/tests/test_rules.py::test_reglas_de_patrones_detectan_la_verdad",
+      "observaciones": "Los umbrales están calibrados sobre datos sintéticos (SNV-12)."
+    },
+    {
+      "id": "TC-018",
+      "tipo": "Límite",
+      "nivel": "Integración",
+      "historia_id": "US-018",
+      "epica_id": "EP-04",
+      "titulo": "Asignar prioridad P1 y SLA a una alerta de alto riesgo",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.332,
+      "evidencia": "pytest: 07-aml-compliance/tests/test_alerts.py::test_alerta_se_crea_y_deduplica; 07-aml-compliance/tests/test_workflow.py::test_asignacion_con_sla_y_transicion",
+      "observaciones": "Los SLA son parámetros internos (SNV-08)."
+    },
+    {
+      "id": "TC-019",
+      "tipo": "Positivo",
+      "nivel": "Integración",
+      "historia_id": "US-019",
+      "epica_id": "EP-04",
+      "titulo": "Listar alertas distintas y filtrar por prioridad",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.137,
+      "evidencia": "pytest: 07-aml-compliance/tests/test_alerts.py::test_alertas_distintas_y_listado",
+      "observaciones": "La bandeja visual es un wireframe de Fase 6."
+    },
+    {
+      "id": "TC-020",
+      "tipo": "Positivo",
+      "nivel": "Integración",
+      "historia_id": "US-020",
+      "epica_id": "EP-04",
+      "titulo": "Investigar y cerrar una alerta",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.133,
+      "evidencia": "pytest: 07-aml-compliance/tests/test_workflow.py::test_asignacion_con_sla_y_transicion",
+      "observaciones": "El cierre de alerta se prueba junto con la asignación; el cierre de caso se prueba en TC-021."
+    },
+    {
+      "id": "TC-021",
+      "tipo": "Positivo",
+      "nivel": "Integración",
+      "historia_id": "US-021",
+      "epica_id": "EP-05",
+      "titulo": "Escalar alerta a caso de investigación y cerrarlo",
+      "prioridad": "Media",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.143,
+      "evidencia": "pytest: 07-aml-compliance/tests/test_workflow.py::test_escalamiento_crea_caso_y_cierre",
+      "observaciones": "Cubre también la validación de transiciones inválidas."
+    },
+    {
+      "id": "TC-022",
+      "tipo": "Positivo",
+      "nivel": "UAT",
+      "historia_id": "US-022",
+      "epica_id": "EP-05",
+      "titulo": "Preparar borrador de ROS con campos obligatorios",
+      "prioridad": "Alta",
+      "automatizacion": "Manual",
+      "estado_ejecucion": "Pendiente de ejecución manual",
+      "duracion_s": 0.0,
+      "evidencia": "Requiere ejecución y captura del autor",
+      "observaciones": "Los dos ROS de Fase 5 son documentos Markdown; no existe formulario ni persistencia de ROS."
+    },
+    {
+      "id": "TC-023",
+      "tipo": "Negativo",
+      "nivel": "UAT",
+      "historia_id": "US-023",
+      "epica_id": "EP-05",
+      "titulo": "Aprobar ROS sin evidencia adjunta",
+      "prioridad": "Alta",
+      "automatizacion": "Manual",
+      "estado_ejecucion": "Pendiente de ejecución manual",
+      "duracion_s": 0.0,
+      "evidencia": "Requiere ejecución y captura del autor",
+      "observaciones": "No se presentó ningún ROS ante autoridad; el flujo de aprobación no está implementado."
+    },
+    {
+      "id": "TC-024",
+      "tipo": "Positivo",
+      "nivel": "Integración",
+      "historia_id": "US-024",
+      "epica_id": "EP-06",
+      "titulo": "Registrar asiento de partida doble balanceado",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.059,
+      "evidencia": "pytest: 05-core-middleware/tests/test_ledger_service.py::test_credit_account_creates_balanced_entry; 05-core-middleware/tests/test_schema_constraints.py::test_unbalanced_entry_is_rejected_by_trigger",
+      "observaciones": "Los triggers son la última línea de defensa contable."
+    },
+    {
+      "id": "TC-025",
+      "tipo": "Positivo",
+      "nivel": "Integración",
+      "historia_id": "US-025",
+      "epica_id": "EP-06",
+      "titulo": "Conciliar saldo operativo contra libro mayor",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.063,
+      "evidencia": "pytest: 05-core-middleware/tests/test_seed.py::test_seed_ledger_is_balanced_and_reconciled; 05-core-middleware/tests/test_api.py::test_balance_is_reconciled",
+      "observaciones": "Cubre conciliación interna; la conciliación contra un riel externo es simulada."
+    },
+    {
+      "id": "TC-026",
+      "tipo": "Límite",
+      "nivel": "Integración",
+      "historia_id": "US-026",
+      "epica_id": "EP-06",
+      "titulo": "Cierre diario contra el libro mayor",
+      "prioridad": "Media",
+      "automatizacion": "Automatizado (parcial)",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.004,
+      "evidencia": "pytest: 05-core-middleware/tests/test_seed.py::test_daily_closing_matches_ledger",
+      "observaciones": "La gestión visual de diferencias no está implementada; el control SQL es automático."
+    },
+    {
+      "id": "TC-027",
+      "tipo": "Positivo",
+      "nivel": "Sistema",
+      "historia_id": "US-027",
+      "epica_id": "EP-06",
+      "titulo": "Consultar bitácora de auditoría por correlación",
+      "prioridad": "Alta",
+      "automatizacion": "Manual",
+      "estado_ejecucion": "Pendiente de ejecución manual",
+      "duracion_s": 0.0,
+      "evidencia": "Requiere ejecución y captura del autor",
+      "observaciones": "Existe tabla de auditoría y correlación, pero no un endpoint de consulta de bitácora."
+    },
+    {
+      "id": "TC-028",
+      "tipo": "Positivo",
+      "nivel": "Integración",
+      "historia_id": "US-028",
+      "epica_id": "EP-07",
+      "titulo": "Validar KPIs de pagos en el dataset analítico",
+      "prioridad": "Media",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.147,
+      "evidencia": "pytest: 09-analitica/tests/test_analytics.py::test_daily_operations_match_transaction_totals; 09-analitica/tests/test_analytics.py::test_daily_reconciliation_is_balanced",
+      "observaciones": "El tablero visual requiere Power BI/Tableau (EV-007/EV-008)."
+    },
+    {
+      "id": "TC-029",
+      "tipo": "Positivo",
+      "nivel": "Integración",
+      "historia_id": "US-029",
+      "epica_id": "EP-07",
+      "titulo": "Validar KPIs AML y referencias de alertas",
+      "prioridad": "Media",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.005,
+      "evidencia": "pytest: 09-analitica/tests/test_analytics.py::test_alert_references_are_valid; 09-analitica/tests/test_analytics.py::test_case_dates_and_flags",
+      "observaciones": "El corte analítico difiere del snapshot de Fase 5 (P-018)."
+    },
+    {
+      "id": "TC-030",
+      "tipo": "Positivo",
+      "nivel": "Integración",
+      "historia_id": "US-030",
+      "epica_id": "EP-07",
+      "titulo": "Exportar reporte operativo y verificar integridad",
+      "prioridad": "Baja",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.001,
+      "evidencia": "pytest: 09-analitica/tests/test_analytics.py::test_export_report_is_consistent; 09-analitica/tests/test_analytics.py::test_expected_csv_files_exist",
+      "observaciones": "La exportación a PDF/Excel del reporte final no está implementada."
+    },
+    {
+      "id": "TC-031",
+      "tipo": "Positivo",
+      "nivel": "UAT",
+      "historia_id": "US-031",
+      "epica_id": "EP-08",
+      "titulo": "Consultar estado desde autoservicio",
+      "prioridad": "Media",
+      "automatizacion": "Manual",
+      "estado_ejecucion": "Pendiente de ejecución manual",
+      "duracion_s": 0.0,
+      "evidencia": "Requiere ejecución y captura del autor",
+      "observaciones": "La API de estado existe; el canal de autoservicio es un wireframe."
+    },
+    {
+      "id": "TC-032",
+      "tipo": "Negativo",
+      "nivel": "UAT",
+      "historia_id": "US-032",
+      "epica_id": "EP-08",
+      "titulo": "Registrar reclamo de pago sin comprobante",
+      "prioridad": "Media",
+      "automatizacion": "No implementado",
+      "estado_ejecucion": "No ejecutable - funcionalidad fuera del prototipo",
+      "duracion_s": 0.0,
+      "evidencia": "No aplica: funcionalidad no implementada",
+      "observaciones": "No hay módulo de reclamos en el prototipo."
+    },
+    {
+      "id": "TC-033",
+      "tipo": "Positivo",
+      "nivel": "Sistema",
+      "historia_id": "US-033",
+      "epica_id": "EP-08",
+      "titulo": "Notificar evento de estado final",
+      "prioridad": "Media",
+      "automatizacion": "No implementado",
+      "estado_ejecucion": "No ejecutable - funcionalidad fuera del prototipo",
+      "duracion_s": 0.0,
+      "evidencia": "No aplica: funcionalidad no implementada",
+      "observaciones": "No hay bus de eventos ni servicio de notificaciones implementado."
+    },
+    {
+      "id": "TC-034",
+      "tipo": "Límite",
+      "nivel": "Sistema",
+      "historia_id": "US-034",
+      "epica_id": "EP-09",
+      "titulo": "Configurar tope local y validar su aplicación",
+      "prioridad": "Media",
+      "automatizacion": "Automatizado (parcial)",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.014,
+      "evidencia": "pytest: 06-mensajeria/tests/test_instant_simulator.py::test_limite_local",
+      "observaciones": "El tope es una constante del simulador; no hay pantalla de configuración ni versionado."
+    },
+    {
+      "id": "TC-035",
+      "tipo": "Negativo",
+      "nivel": "UAT",
+      "historia_id": "US-035",
+      "epica_id": "EP-09",
+      "titulo": "Aprobar cambio de regla sin segundo aprobador",
+      "prioridad": "Media",
+      "automatizacion": "Manual",
+      "estado_ejecucion": "Pendiente de ejecución manual",
+      "duracion_s": 0.0,
+      "evidencia": "Requiere ejecución y captura del autor",
+      "observaciones": "Los parámetros están versionados en JSON; no hay flujo de aprobación implementado."
+    },
+    {
+      "id": "TC-036",
+      "tipo": "Positivo",
+      "nivel": "UAT",
+      "historia_id": "US-036",
+      "epica_id": "EP-09",
+      "titulo": "Simular impacto de un cambio de umbral",
+      "prioridad": "Baja",
+      "automatizacion": "Manual",
+      "estado_ejecucion": "Pendiente de ejecución manual",
+      "duracion_s": 0.0,
+      "evidencia": "Requiere ejecución y captura del autor",
+      "observaciones": "No existe simulador de reglas en el prototipo; solo evaluación completa."
+    },
+    {
+      "id": "TC-037",
+      "tipo": "Negativo",
+      "nivel": "Sistema",
+      "historia_id": "US-037",
+      "epica_id": "EP-10",
+      "titulo": "Acceso a operación sin rol autorizado",
+      "prioridad": "Alta",
+      "automatizacion": "No implementado",
+      "estado_ejecucion": "No ejecutable - funcionalidad fuera del prototipo",
+      "duracion_s": 0.0,
+      "evidencia": "No aplica: funcionalidad no implementada",
+      "observaciones": "La API no implementa autenticación ni autorización (S-055); es una brecha conocida del prototipo."
+    },
+    {
+      "id": "TC-038",
+      "tipo": "Positivo",
+      "nivel": "Integración",
+      "historia_id": "US-038",
+      "epica_id": "EP-10",
+      "titulo": "Propagar identificador de correlación en la API",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.211,
+      "evidencia": "pytest: 05-core-middleware/tests/test_api.py::test_health",
+      "observaciones": "La prueba automatizada verifica la generación; la conservación del valor recibido se revisa en el middleware."
+    },
+    {
+      "id": "TC-039",
+      "tipo": "Negativo",
+      "nivel": "Integración",
+      "historia_id": "US-039",
+      "epica_id": "EP-10",
+      "titulo": "Repetir solicitud idempotente y detectar conflicto",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.105,
+      "evidencia": "pytest: 05-core-middleware/tests/test_api.py::test_idempotent_replay_returns_same_operation; 05-core-middleware/tests/test_api.py::test_idempotency_conflict_via_api",
+      "observaciones": "No hay TTL de claves en el prototipo (S-049)."
+    },
+    {
+      "id": "TC-040",
+      "tipo": "Positivo",
+      "nivel": "Sistema",
+      "historia_id": "US-040",
+      "epica_id": "EP-10",
+      "titulo": "Monitorear salud del core",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.211,
+      "evidencia": "pytest: 05-core-middleware/tests/test_api.py::test_health",
+      "observaciones": "No se mide un SLA productivo ni se prueba recuperación ante desastres."
+    },
+    {
+      "id": "TC-041",
+      "tipo": "Límite",
+      "nivel": "Integración",
+      "historia_id": "US-005",
+      "epica_id": "EP-01",
+      "titulo": "Aceptar pago local exactamente en el tope de 10.000.000 PYG",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.099,
+      "evidencia": "pytest: 08-qa-uat/tests/test_uat_boundaries.py::test_limite_exacto_aprobado",
+      "observaciones": "Caso límite agregado en Fase 7 para cubrir el borde exacto."
+    },
+    {
+      "id": "TC-042",
+      "tipo": "Límite",
+      "nivel": "Integración",
+      "historia_id": "US-005",
+      "epica_id": "EP-01",
+      "titulo": "Rechazar pago local un peso por encima del tope",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.014,
+      "evidencia": "pytest: 06-mensajeria/tests/test_instant_simulator.py::test_limite_local",
+      "observaciones": "Complementa TC-041 con el borde superior."
+    },
+    {
+      "id": "TC-043",
+      "tipo": "Negativo",
+      "nivel": "Integración",
+      "historia_id": "US-005",
+      "epica_id": "EP-01",
+      "titulo": "Rechazar importe cero",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.014,
+      "evidencia": "pytest: 08-qa-uat/tests/test_uat_boundaries.py::test_monto_cero_rechazado",
+      "observaciones": "Caso de borde inferior."
+    },
+    {
+      "id": "TC-044",
+      "tipo": "Negativo",
+      "nivel": "Integración",
+      "historia_id": "US-005",
+      "epica_id": "EP-01",
+      "titulo": "Rechazar importe negativo",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.013,
+      "evidencia": "pytest: 08-qa-uat/tests/test_uat_boundaries.py::test_monto_negativo_rechazado",
+      "observaciones": "Caso de borde inferior."
+    },
+    {
+      "id": "TC-045",
+      "tipo": "Negativo",
+      "nivel": "Integración",
+      "historia_id": "US-006",
+      "epica_id": "EP-02",
+      "titulo": "Rechazar moneda desconocida",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.0,
+      "evidencia": "pytest: 06-mensajeria/tests/test_currency_amounts.py::test_importes_invalidos[1-ZZZ-CURRENCY_UNKNOWN]",
+      "observaciones": "La tabla ISO 4217 se genera desde el XML oficial de SIX (F-13)."
+    },
+    {
+      "id": "TC-046",
+      "tipo": "Límite",
+      "nivel": "Integración",
+      "historia_id": "US-006",
+      "epica_id": "EP-02",
+      "titulo": "Rechazar decimales en guaraníes",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.0,
+      "evidencia": "pytest: 06-mensajeria/tests/test_currency_amounts.py::test_importes_invalidos[10.5-PYG-AMOUNT_PRECISION]; 06-mensajeria/tests/test_currency_amounts.py::test_importes_validos[1000-PYG]",
+      "observaciones": "Cubre precisión por unidad menor."
+    },
+    {
+      "id": "TC-047",
+      "tipo": "Negativo",
+      "nivel": "Sistema",
+      "historia_id": "US-006",
+      "epica_id": "EP-02",
+      "titulo": "Rechazar IBAN con dígito de control incorrecto",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.0,
+      "evidencia": "pytest: 06-mensajeria/tests/test_identifiers.py::test_iban_checksum_invalido",
+      "observaciones": "No se valida pertenencia a un banco real."
+    },
+    {
+      "id": "TC-048",
+      "tipo": "Negativo",
+      "nivel": "Sistema",
+      "historia_id": "US-006",
+      "epica_id": "EP-02",
+      "titulo": "Rechazar IBAN de país no soportado",
+      "prioridad": "Media",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.0,
+      "evidencia": "pytest: 06-mensajeria/tests/test_identifiers.py::test_iban_pais_no_soportado",
+      "observaciones": "Paraguay no usa IBAN en el caso (S-058)."
+    },
+    {
+      "id": "TC-049",
+      "tipo": "Negativo",
+      "nivel": "Sistema",
+      "historia_id": "US-006",
+      "epica_id": "EP-02",
+      "titulo": "Rechazar BIC con longitud inválida",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.0,
+      "evidencia": "pytest: 06-mensajeria/tests/test_identifiers.py::test_bic_invalido[NOVAPYP]; 06-mensajeria/tests/test_identifiers.py::test_bic_valido[NOVAPYPA]",
+      "observaciones": "BIC ficticio de NovaBank."
+    },
+    {
+      "id": "TC-050",
+      "tipo": "Negativo",
+      "nivel": "Sistema",
+      "historia_id": "US-007",
+      "epica_id": "EP-02",
+      "titulo": "Rechazar UETR inválido",
+      "prioridad": "Media",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.0,
+      "evidencia": "pytest: 06-mensajeria/tests/test_identifiers.py::test_uetr",
+      "observaciones": "Cubre formato, no unicidad global."
+    },
+    {
+      "id": "TC-051",
+      "tipo": "Negativo",
+      "nivel": "Integración",
+      "historia_id": "US-007",
+      "epica_id": "EP-02",
+      "titulo": "Rechazar pacs.008 internacional sin agente acreedor",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.0,
+      "evidencia": "pytest: 06-mensajeria/tests/test_xml_validation.py::test_pacs008_internacional_exige_agente",
+      "observaciones": "Validación estructural y de negocio, no XSD oficial."
+    },
+    {
+      "id": "TC-052",
+      "tipo": "Negativo",
+      "nivel": "Integración",
+      "historia_id": "US-008",
+      "epica_id": "EP-02",
+      "titulo": "Rechazar pacs.002 RJCT sin motivo",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.0,
+      "evidencia": "pytest: 06-mensajeria/tests/test_xml_validation.py::test_pacs002_rechazado_sin_motivo",
+      "observaciones": "Complementa TC-008."
+    },
+    {
+      "id": "TC-053",
+      "tipo": "Negativo",
+      "nivel": "Sistema",
+      "historia_id": "US-007",
+      "epica_id": "EP-02",
+      "titulo": "Rechazar XML mal formado",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.0,
+      "evidencia": "pytest: 06-mensajeria/tests/test_xml_validation.py::test_xml_mal_formado",
+      "observaciones": "Control de robustez del parser."
+    },
+    {
+      "id": "TC-054",
+      "tipo": "Negativo",
+      "nivel": "Integración",
+      "historia_id": "US-008",
+      "epica_id": "EP-02",
+      "titulo": "Rechazar camt.053 con estado inválido",
+      "prioridad": "Media",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.0,
+      "evidencia": "pytest: 06-mensajeria/tests/test_xml_validation.py::test_camt053_estado_invalido",
+      "observaciones": "Camt.053 se usa para conciliación, no para iniciar pagos."
+    },
+    {
+      "id": "TC-055",
+      "tipo": "Negativo",
+      "nivel": "Sistema",
+      "historia_id": "US-010",
+      "epica_id": "EP-02",
+      "titulo": "Rechazar MT103 sin campo obligatorio",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.0,
+      "evidencia": "pytest: 06-mensajeria/tests/test_mt103_mapping.py::test_mt103_campo_faltante",
+      "observaciones": "El mapeo es funcional, no certificado por SWIFT (SNV-09)."
+    },
+    {
+      "id": "TC-056",
+      "tipo": "Negativo",
+      "nivel": "Sistema",
+      "historia_id": "US-010",
+      "epica_id": "EP-02",
+      "titulo": "Rechazar MT103 con charge bearer inválido",
+      "prioridad": "Media",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.0,
+      "evidencia": "pytest: 06-mensajeria/tests/test_mt103_mapping.py::test_mt103_charge_bearer_invalido",
+      "observaciones": "Códigos alineados al mapeo funcional."
+    },
+    {
+      "id": "TC-057",
+      "tipo": "Negativo",
+      "nivel": "Integración",
+      "historia_id": "US-006",
+      "epica_id": "EP-02",
+      "titulo": "Rechazar liquidación internacional en EUR",
+      "prioridad": "Media",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.014,
+      "evidencia": "pytest: 06-mensajeria/tests/test_international_simulator.py::test_internacional_rechaza_eur",
+      "observaciones": "Limitación de alcance registrada en S-061."
+    },
+    {
+      "id": "TC-058",
+      "tipo": "Negativo",
+      "nivel": "Integración",
+      "historia_id": "US-010",
+      "epica_id": "EP-02",
+      "titulo": "Rechazar pago internacional por saldo insuficiente",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.022,
+      "evidencia": "pytest: 06-mensajeria/tests/test_international_simulator.py::test_internacional_saldo_insuficiente",
+      "observaciones": "Cubre importe más comisión, no solo importe."
+    },
+    {
+      "id": "TC-059",
+      "tipo": "Negativo",
+      "nivel": "Integración",
+      "historia_id": "US-009",
+      "epica_id": "EP-02",
+      "titulo": "Detectar conflicto de idempotencia internacional",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.022,
+      "evidencia": "pytest: 06-mensajeria/tests/test_international_simulator.py::test_internacional_idempotencia_conflicto",
+      "observaciones": "Complementa TC-009."
+    },
+    {
+      "id": "TC-060",
+      "tipo": "Positivo",
+      "nivel": "Integración",
+      "historia_id": "US-017",
+      "epica_id": "EP-04",
+      "titulo": "Detectar estructuración por debajo del umbral",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.0,
+      "evidencia": "pytest: 07-aml-compliance/tests/test_rules.py::test_reglas_de_patrones_detectan_la_verdad",
+      "observaciones": "Los umbrales son sintéticos (SNV-12)."
+    },
+    {
+      "id": "TC-061",
+      "tipo": "Negativo",
+      "nivel": "Integración",
+      "historia_id": "US-016",
+      "epica_id": "EP-04",
+      "titulo": "Permitir pago normal sin alerta AML",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.146,
+      "evidencia": "pytest: 07-aml-compliance/tests/test_hook.py::test_hook_permite_pago_normal",
+      "observaciones": "Caso negativo de screening."
+    },
+    {
+      "id": "TC-062",
+      "tipo": "Positivo",
+      "nivel": "Integración",
+      "historia_id": "US-017",
+      "epica_id": "EP-04",
+      "titulo": "Detectar jurisdicción de alto riesgo",
+      "prioridad": "Media",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.167,
+      "evidencia": "pytest: 07-aml-compliance/tests/test_rules.py::test_r07_jurisdiccion_alto_riesgo",
+      "observaciones": "La lista no reproduce una lista oficial del GAFI (SNV-03)."
+    },
+    {
+      "id": "TC-063",
+      "tipo": "Negativo",
+      "nivel": "Sistema",
+      "historia_id": "US-024",
+      "epica_id": "EP-06",
+      "titulo": "Rechazar asiento contable desbalanceado",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.021,
+      "evidencia": "pytest: 05-core-middleware/tests/test_schema_constraints.py::test_unbalanced_entry_is_rejected_by_trigger",
+      "observaciones": "Invariante de partida doble a nivel de base."
+    },
+    {
+      "id": "TC-064",
+      "tipo": "Negativo",
+      "nivel": "Sistema",
+      "historia_id": "US-024",
+      "epica_id": "EP-06",
+      "titulo": "Impedir modificación de un asiento posteado",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.022,
+      "evidencia": "pytest: 05-core-middleware/tests/test_schema_constraints.py::test_balanced_entry_can_be_posted_and_becomes_immutable",
+      "observaciones": "La corrección se hace con un asiento de reverso, no editando."
+    },
+    {
+      "id": "TC-065",
+      "tipo": "Negativo",
+      "nivel": "Sistema",
+      "historia_id": "US-024",
+      "epica_id": "EP-06",
+      "titulo": "Impedir sobregiro por encima del límite",
+      "prioridad": "Alta",
+      "automatizacion": "Automatizado",
+      "estado_ejecucion": "Aprobado",
+      "duracion_s": 0.016,
+      "evidencia": "pytest: 05-core-middleware/tests/test_schema_constraints.py::test_account_balance_cannot_break_overdraft_limit",
+      "observaciones": "Invariante de saldo a nivel de base."
+    }
+  ]
+}

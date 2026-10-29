@@ -1,0 +1,72 @@
+# Azure DevOps — NovaBank QA/UAT
+# Ejecuta instalación, compilación, seed sintético, pytest, controles SQL y UAT.
+# No contiene secretos ni conexiones a entornos reales.
+
+trigger:
+  branches:
+    include:
+      - main
+
+pr:
+  branches:
+    include:
+      - main
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  PYTHON_VERSION: "3.12"
+  DB_PATH: "05-core-middleware/db/novabank.db"
+
+stages:
+  - stage: Quality
+    displayName: Calidad y UAT
+    jobs:
+      - job: Test
+        displayName: pytest + controles SQL
+        timeoutInMinutes: 20
+        steps:
+          - task: UsePythonVersion@0
+            displayName: Usar Python $(PYTHON_VERSION)
+            inputs:
+              versionSpec: $(PYTHON_VERSION)
+              addToPath: true
+
+          - script: |
+              python -m pip install --upgrade pip
+              python -m pip install -r requirements.txt
+            displayName: Instalar dependencias
+
+          - script: |
+              python -m compileall -q 05-core-middleware 06-mensajeria 07-aml-compliance 08-qa-uat 09-analitica
+            displayName: Compilar módulos
+
+          - script: |
+              python 05-core-middleware/scripts/seed.py --db $(DB_PATH)
+            displayName: Generar base sintética reproducible
+
+          - script: |
+              python 08-qa-uat/scripts/run_uat.py --db $(DB_PATH)
+            displayName: Ejecutar pytest, UAT y consultas SQL de control
+
+          - task: PublishTestResults@2
+            displayName: Publicar resultados pytest
+            condition: always()
+            inputs:
+              testResultsFormat: JUnit
+              testResultsFiles: "08-qa-uat/resultados/junit-uat.xml"
+              failTaskOnFailedTests: true
+              testRunTitle: "NovaBank — pytest y UAT"
+
+          - task: PublishPipelineArtifact@1
+            displayName: Publicar artefactos QA/UAT
+            condition: always()
+            inputs:
+              targetPath: "08-qa-uat"
+              artifact: "qa-uat-results"
+
+          - script: |
+              python -c "import json; r=json.load(open('08-qa-uat/resultados/resultados-uat.json', encoding='utf-8')); s=r['summary']; print('Casos:', s['cases_total']); print('Automatizados aprobados:', s['automated_passed'], '/', s['automated_total']); print('Manuales pendientes:', s['manual_pending']); print('No implementados:', s['not_implemented'])"
+            displayName: Resumen de resultados
+            condition: always()

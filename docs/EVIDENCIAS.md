@@ -23,9 +23,9 @@ Registro de pasos manuales, capturas y enlaces de herramientas que el agente **n
 | EV-006 | 6 | Balsamiq / Figma | Wireframes y prototipo | _pendiente_ | _pendiente_ | _pendiente_ | Artefacto listo; captura pendiente |
 | EV-007 | 6 | Power BI | Modelo y dashboard | _pendiente_ | _pendiente_ | _pendiente_ | Artefacto listo; captura pendiente |
 | EV-008 | 6 | Tableau | Dashboard | _pendiente_ | _pendiente_ | _pendiente_ | Artefacto listo; captura pendiente |
-| EV-009 | 7 | Azure DevOps | Pipeline ejecutado | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
-| EV-010 | 7 | GitHub Actions | Workflow ejecutado | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
-| EV-011 | 7 | LinkedIn | Post publicado | _pendiente_ | _pendiente_ | _pendiente_ | Pendiente |
+| EV-009 | 7 | Azure DevOps | Pipeline ejecutado | _pendiente_ | _pendiente_ | _pendiente_ | Artefacto listo; ejecución pendiente |
+| EV-010 | 7 | GitHub Actions | Workflow ejecutado | _pendiente_ | _pendiente_ | _pendiente_ | Artefacto listo; ejecución pendiente |
+| EV-011 | 7 | LinkedIn | Post publicado | _pendiente_ | _pendiente_ | _pendiente_ | Borrador listo; publicación pendiente |
 
 ## Fase 0 — Preparación
 
@@ -234,7 +234,7 @@ Pasos:
 - [x] Dos sprints planificados (47 SP + 52 SP).
 - [x] CSV de Jira y de Azure DevOps generados y verificados.
 - [x] Kit Confluence con 6 ADR, glosario, actas y RAID log creado.
-- [x] Matriz de trazabilidad con `TC-001` a `TC-040` reservados.
+- [x] Matriz de trazabilidad actualizada en Fase 7 con IDs y estados de los 65 casos.
 - [ ] EV-001 completada por el autor.
 - [ ] EV-002 completada por el autor.
 - [ ] EV-003 completada por el autor.
@@ -252,7 +252,7 @@ Los artefactos son código y datos reproducibles; la evidencia se obtiene ejecut
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
-.\.venv\Scripts\python.exe 05-core-middleware\scripts\seed.py --db 05-core-middleware\db\novabank.db --reset
+.\.venv\Scripts\python.exe 05-core-middleware\scripts\seed.py --db 05-core-middleware\db\novabank.db
 .\.venv\Scripts\python.exe 05-core-middleware\scripts\export_openapi.py
 .\.venv\Scripts\python.exe -m pytest -q
 ```
@@ -393,7 +393,7 @@ cd 06-mensajeria
 - [x] 36 medidas DAX y columnas calculadas documentadas en `powerbi/medidas.dax`.
 - [x] 14 scripts M, tema de Power BI y guía de publicación.
 - [x] Campos calculados equivalentes y guía de Tableau Public.
-- [x] 16 pruebas del módulo de analítica aprobadas; suite completa: **199 pruebas aprobadas**, 0 fallos.
+- [x] 16 pruebas del módulo de analítica aprobadas; suite completa al cierre de Fase 6: **199 pruebas aprobadas**, 0 fallos. Tras Fase 7: **204** (5 pruebas de borde UAT).
 
 ### Artefactos de evidencia
 
@@ -416,6 +416,162 @@ cd 06-mensajeria
 
 ---
 
+## Fase 7 — QA/UAT y cierre
+
+**Estado:** Automatización y artefactos completos. EV-009, EV-010 y EV-011
+requieren ejecución manual del autor.
+
+**Commits y push:** pendientes al cierre de esta sesión. Los resultados se
+generaron localmente antes del commit final.
+
+### Comandos ejecutados
+
+```powershell
+.\.venv\Scripts\python.exe 08-qa-uat\scripts\build_cases.py
+.\.venv\Scripts\python.exe 08-qa-uat\scripts\run_uat.py
+.\.venv\Scripts\python.exe 08-qa-uat\scripts\run_sql_controls.py
+.\.venv\Scripts\python.exe 08-qa-uat\scripts\update_traceability.py
+.\.venv\Scripts\python.exe -m pytest -q
+.\.venv\Scripts\python.exe -c "import yaml; yaml.safe_load(open('08-qa-uat/azure-pipelines.yml', encoding='utf-8')); yaml.safe_load(open('.github/workflows/ci.yml', encoding='utf-8')); print('YAML OK')"
+```
+
+### Resultados verificados (2026-10-29)
+
+- [x] 65 casos de prueba definidos: 25 positivos, 32 negativos y 8 de límite.
+- [x] 40/40 historias cubiertas por al menos un caso.
+- [x] 51/51 casos automatizados aprobados (100 %).
+- [x] 6 casos manuales pendientes de ejecución.
+- [x] 8 casos no implementados declarados explícitamente.
+- [x] `pytest -q`: **204 pruebas aprobadas**, 0 fallos.
+- [x] 23/23 consultas SQL de control OK.
+- [x] `PRAGMA integrity_check`: `ok`; 0 violaciones de clave foránea.
+- [x] 5 defectos documentados: 1 crítica, 2 altas y 2 medias.
+- [x] Matriz de trazabilidad actualizada con IDs y estados reales.
+- [x] `matriz-ejecucion.xlsx` generado con 7 hojas.
+- [x] `azure-pipelines.yml` y `.github/workflows/ci.yml` validados como YAML.
+- [ ] Pipelines ejecutados en Azure DevOps y GitHub Actions (EV-009, EV-010).
+- [ ] Post de LinkedIn publicado (EV-011).
+
+### Artefactos de evidencia
+
+- Estrategia: `08-qa-uat/estrategia-pruebas.md`.
+- Plan UAT: `08-qa-uat/plan-uat.md`.
+- Acta de cierre: `08-qa-uat/acta-cierre-uat.md`.
+- Catálogo: `08-qa-uat/casos-prueba.csv` y `08-qa-uat/casos-prueba.md`.
+- Importación Azure Test Plans: `08-qa-uat/casos-prueba-ado-testplans.csv`.
+- Cobertura: `08-qa-uat/matriz-cobertura.csv`.
+- Ejecución: `08-qa-uat/matriz-ejecucion.xlsx`.
+- Resultados: `08-qa-uat/resultados/`.
+- Defectos: `08-qa-uat/defectos.md`.
+- Pipeline Azure DevOps: `08-qa-uat/azure-pipelines.yml`.
+- Workflow GitHub Actions: `.github/workflows/ci.yml`.
+- Textos LinkedIn: `docs/linkedin.md`.
+
+### EV-009 — Ejecutar el pipeline en Azure DevOps
+
+**Estado:** Artefacto listo; ejecución pendiente.
+
+Pasos:
+
+1. Crear la organización/proyecto `NovaBank-Payments` o reutilizar uno existente.
+2. Conectar el repositorio `Vaxilium/nova-payments-aml` (GitHub) o subir el
+   código a Azure Repos.
+3. Ir a **Pipelines → New pipeline → Azure Repos Git / GitHub → Existing YAML**.
+4. Seleccionar `08-qa-uat/azure-pipelines.yml`.
+5. Ejecutar sobre `main` y aprobar los permisos que solicite.
+6. Verificar que el stage `Quality` termina en verde.
+7. Revisar la pestaña **Tests** y descargar el artefacto `qa-uat-results`.
+8. Capturar el run, la pestaña de tests y el resumen de artefactos.
+
+**Verificación mínima:**
+- [ ] El pipeline instala dependencias sin error.
+- [ ] `compileall` termina sin error.
+- [ ] El seed genera la base sintética.
+- [ ] `run_uat.py` termina con 51/51 automatizados aprobados.
+- [ ] Los 204 tests aparecen en la pestaña Tests.
+- [ ] El artefacto `qa-uat-results` se descarga y contiene `resultados-uat.json`.
+- [ ] No hay secretos en el YAML ni en los logs.
+
+- Enlace del run: _pendiente_
+- Enlace del proyecto: _pendiente_
+- Captura del run verde: _pendiente_
+- Captura de la pestaña Tests: _pendiente_
+- Fecha: _pendiente_
+
+> El pipeline usa Python 3.12. Si alguna dependencia falla en esa versión, se
+> registra el error y se ajusta `requirements.txt`; no se declara verde sin
+> evidencia del run.
+
+### EV-010 — Ejecutar el workflow de GitHub Actions
+
+**Estado:** Artefacto listo; ejecución pendiente.
+
+Pasos:
+
+1. Hacer push de `.github/workflows/ci.yml` a `main`.
+2. Abrir **Actions → CI** en `https://github.com/Vaxilium/nova-payments-aml`.
+3. Esperar el run disparado por el push o usar **Run workflow**.
+4. Verificar que el job `pytest, SQL y UAT` termina en verde.
+5. Descargar los artefactos `qa-uat-results` y `junit-results`.
+6. Capturar el resumen del run y la lista de artefactos.
+
+**Verificación mínima:**
+- [ ] El workflow se dispara en `push` o `pull_request` a `main`.
+- [ ] Python 3.12 se configura correctamente.
+- [ ] El seed y `run_uat.py` terminan sin error.
+- [ ] Los artefactos se publican aunque el job falle (`if: always()`).
+- [ ] El run queda verde y el enlace es público.
+- [ ] No hay secretos ni tokens en el workflow.
+
+- Enlace del run: _pendiente_
+- Captura del run verde: _pendiente_
+- Captura de artefactos: _pendiente_
+- Fecha: _pendiente_
+
+### EV-011 — Publicar el caso en LinkedIn
+
+**Estado:** Borrador listo; publicación pendiente.
+
+Pasos:
+
+1. Revisar `docs/linkedin.md` y elegir uno de los tres borradores.
+2. Reemplazar los placeholders de enlaces por URLs reales y verificadas.
+3. Confirmar que no se afirma haber operado herramientas sin evidencia.
+4. Publicar el post y agregar el repositorio a **Destacados**.
+5. Capturar el post publicado y guardar la URL.
+
+**Verificación mínima:**
+- [ ] El texto no exagera resultados ni inventa métricas.
+- [ ] El enlace al repositorio funciona sin autenticación.
+- [ ] El enlace de LinkedIn es público o visible para la red objetivo.
+- [ ] Las capturas no exponen datos personales ni credenciales.
+- [ ] El post distingue claramente el caso ficticio.
+
+- Enlace del post: _pendiente_
+- Enlace del repositorio en Destacados: _pendiente_
+- Captura del post: _pendiente_
+- Fecha: _pendiente_
+
+### Checklist de cierre de Fase 7
+
+- [x] Estrategia y plan UAT creados.
+- [x] 65 casos con cobertura 40/40 historias.
+- [x] Ejecución automatizada real y reproducible.
+- [x] Controles SQL e integridad verificados.
+- [x] Defectos documentados con severidad y evidencia.
+- [x] Matriz de trazabilidad actualizada.
+- [x] Pipelines de Azure DevOps y GitHub Actions creados y validados como YAML.
+- [x] Acta de cierre UAT creada.
+- [x] README final y borradores de LinkedIn creados.
+- [ ] EV-009 completada por el autor.
+- [ ] EV-010 completada por el autor.
+- [ ] EV-011 completada por el autor.
+
+> La UAT automatizada está cerrada. La UAT manual y la evidencia de herramientas
+> externas no se declaran completadas hasta que el autor las ejecute.
+
+---
+
 ## Plantillas por herramienta
 
 ### Jira (Fase 2)
@@ -428,7 +584,14 @@ Ver **EV-002** en la sección Fase 2. Artefacto: `03-requerimientos/confluence/`
 
 ### Azure DevOps (Fases 2 y 7)
 
-Ver **EV-003** en la sección Fase 2 para la importación de work items. El pipeline YAML se ejecuta en Fase 7 (EV-009).
+- **EV-003:** importar los work items de `03-requerimientos/ado_import/`.
+- **EV-009:** crear el pipeline desde `08-qa-uat/azure-pipelines.yml`, ejecutarlo
+  en `main` y capturar el run verde, la pestaña Tests y el artefacto
+  `qa-uat-results`.
+- Enlace del proyecto: _pendiente_
+- Enlace del run: _pendiente_
+- Captura: _pendiente_
+- Fecha: _pendiente_
 
 ### Bizagi / Camunda / Signavio (Fase 1)
 
@@ -476,7 +639,10 @@ Ver **EV-003** en la sección Fase 2 para la importación de work items. El pipe
 
 ### GitHub Actions (Fase 7)
 
-- [ ] Verificar que el workflow corre en `main`.
+Ver **EV-010** en la sección Fase 7. Workflow: `.github/workflows/ci.yml`.
+
+- [ ] Verificar que el workflow corre en `main` con Python 3.12.
+- [ ] Descargar `qa-uat-results` y `junit-results`.
 - [ ] Conservar enlace al run verde.
 - Enlace del run: _pendiente_
 - Captura: _pendiente_
@@ -484,8 +650,11 @@ Ver **EV-003** en la sección Fase 2 para la importación de work items. El pipe
 
 ### LinkedIn (Fase 7)
 
-- [ ] Revisar el borrador del post.
-- [ ] Publicar solo con enlaces reales y verificados.
+Ver **EV-011** en la sección Fase 7. Borradores: `docs/linkedin.md`.
+
+- [ ] Revisar el borrador del post y elegir uno de los tres.
+- [ ] Reemplazar placeholders por enlaces reales y verificados.
+- [ ] Publicar solo si el repositorio y las métricas son verificables.
 - Enlace del post: _pendiente_
 - Captura: _pendiente_
 - Fecha: _pendiente_

@@ -1,0 +1,188 @@
+﻿ID,Work Item Type,Title,Test Step,Step Action,Step Expected,Area Path,Assigned To,State
+,Test Case,TC-001 - Transferencia local PYG entre cuentas activas,1,Verificar precondiciones: Base sembrada; dos cuentas PYG activas con saldo suficiente; API /v1 disponible.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-001 - Transferencia local PYG entre cuentas activas,2,Consultar el saldo de origen y destino.,La API devuelve saldos conciliados con el libro mayor.,NovaBank-Payments\QA,,Design
+,Test Case,TC-001 - Transferencia local PYG entre cuentas activas,3,Enviar POST /v1/transfers con importe 900 PYG e Idempotency-Key válida.,HTTP 201 con operation_id y estado POSTED.,NovaBank-Payments\QA,,Design
+,Test Case,TC-001 - Transferencia local PYG entre cuentas activas,4,Consultar nuevamente ambos saldos.,Origen disminuye 900 y destino aumenta 900; la suma se conserva.,NovaBank-Payments\QA,,Design
+,Test Case,TC-002 - Resolver alias de beneficiario inexistente,1,Verificar precondiciones: Cliente autenticado en el canal; alias no registrado o inactivo.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-002 - Resolver alias de beneficiario inexistente,2,Ingresar el alias BENEFICIARIO-INEXISTENTE.,El canal inicia la resolución del alias.,NovaBank-Payments\QA,,Design
+,Test Case,TC-002 - Resolver alias de beneficiario inexistente,3,Confirmar la búsqueda.,El sistema muestra ALIAS_NO_ENCONTRADO y no crea el pago.,NovaBank-Payments\QA,,Design
+,Test Case,TC-003 - Consultar estado y asientos de una operación,1,Verificar precondiciones: Existe una operación POSTED creada por la API.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-003 - Consultar estado y asientos de una operación,2,Crear un crédito con Idempotency-Key api-credit-0001.,HTTP 201 con operation_id.,NovaBank-Payments\QA,,Design
+,Test Case,TC-003 - Consultar estado y asientos de una operación,3,Consultar GET /v1/operations/{operation_id}.,HTTP 200 con estado POSTED y líneas del asiento.,NovaBank-Payments\QA,,Design
+,Test Case,TC-004 - Solicitar devolución fuera de plazo,1,Verificar precondiciones: Pago ACREDITADO con fecha fuera del plazo configurado de devolución.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-004 - Solicitar devolución fuera de plazo,2,Abrir el pago y seleccionar Solicitar devolución.,El canal muestra el formulario de devolución.,NovaBank-Payments\QA,,Design
+,Test Case,TC-004 - Solicitar devolución fuera de plazo,3,Registrar motivo y confirmar.,El sistema rechaza con FUERA_DE_PLAZO y ofrece reclamo formal.,NovaBank-Payments\QA,,Design
+,Test Case,TC-005 - Rechazar transferencia local por encima del tope y por saldo insuficiente,1,Verificar precondiciones: Cuenta PYG activa; tope local de 10.000.000 PYG; cuenta con saldo menor al importe solicitado.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-005 - Rechazar transferencia local por encima del tope y por saldo insuficiente,2,Enviar pago local por 10.000.001 PYG.,El simulador rechaza con AMOUNT_LIMIT y emite pacs.002 RJCT.,NovaBank-Payments\QA,,Design
+,Test Case,TC-005 - Rechazar transferencia local por encima del tope y por saldo insuficiente,3,Enviar débito por un importe mayor al saldo disponible.,La API responde 422 con INSUFFICIENT_FUNDS y no debita.,NovaBank-Payments\QA,,Design
+,Test Case,TC-006 - Rechazar IBAN con checksum inválido y BIC mal formado,1,Verificar precondiciones: Simulador internacional inicializado; cuenta USD activa.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-006 - Rechazar IBAN con checksum inválido y BIC mal formado,2,Enviar pago con IBAN DE88370400440532013000.,Validación rechaza el checksum del IBAN.,NovaBank-Payments\QA,,Design
+,Test Case,TC-006 - Rechazar IBAN con checksum inválido y BIC mal formado,3,Enviar pago con BIC NOVBDE.,Validación rechaza la longitud del BIC.,NovaBank-Payments\QA,,Design
+,Test Case,TC-007 - Generar y validar pacs.008 internacional,1,"Verificar precondiciones: Cuenta USD activa; IBAN y BIC válidos; comisión 25,00 USD.",Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-007 - Generar y validar pacs.008 internacional,2,"Enviar pago internacional de 100,00 USD.","El simulador genera pacs.008 con deudor, acreedor y agentes.",NovaBank-Payments\QA,,Design
+,Test Case,TC-007 - Generar y validar pacs.008 internacional,3,Validar el XML generado y el ejemplo de referencia.,Ambos pasan la validación estructural y de negocio.,NovaBank-Payments\QA,,Design
+,Test Case,TC-008 - Procesar pacs.002 aceptado y rechazado,1,Verificar precondiciones: Existen mensajes pacs.002 de ejemplo ACSC y RJCT.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-008 - Procesar pacs.002 aceptado y rechazado,2,Validar pacs.002 con estado ACSC.,El mensaje es válido y refleja aceptación.,NovaBank-Payments\QA,,Design
+,Test Case,TC-008 - Procesar pacs.002 aceptado y rechazado,3,Validar pacs.002 RJCT sin motivo.,La validación detecta la falta de motivo y falla.,NovaBank-Payments\QA,,Design
+,Test Case,TC-009 - Reintentar envío internacional sin duplicar,1,Verificar precondiciones: Cuenta USD activa; gateway configurado para un reintento y luego aceptación.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-009 - Reintentar envío internacional sin duplicar,2,Enviar la misma solicitud con la misma Idempotency-Key.,El simulador devuelve el mismo registro sin duplicar el asiento.,NovaBank-Payments\QA,,Design
+,Test Case,TC-009 - Reintentar envío internacional sin duplicar,3,Forzar un reintento transitorio del gateway.,El segundo intento liquida y registra attempts=2.,NovaBank-Payments\QA,,Design
+,Test Case,TC-010 - Gestionar rechazo y timeout internacional,1,Verificar precondiciones: Cuenta USD activa; gateway configurado para rechazo o timeout.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-010 - Gestionar rechazo y timeout internacional,2,Enviar pago con gateway que rechaza.,El pago queda REJECTED y se emite pacs.002 RJCT válido.,NovaBank-Payments\QA,,Design
+,Test Case,TC-010 - Gestionar rechazo y timeout internacional,3,Enviar pago con gateway que expira.,El pago queda EXPIRED con motivo TIMEOUT y pacs.002 válido.,NovaBank-Payments\QA,,Design
+,Test Case,TC-011 - Alta digital de cliente con datos mínimos,1,Verificar precondiciones: Canal de onboarding disponible; documento ficticio válido; lista de países configurada.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-011 - Alta digital de cliente con datos mínimos,2,Completar formulario de alta con datos personales ficticios.,El sistema valida campos obligatorios y crea un borrador de cliente.,NovaBank-Payments\QA,,Design
+,Test Case,TC-011 - Alta digital de cliente con datos mínimos,3,Aceptar términos y continuar.,El cliente queda en estado PENDIENTE_VERIFICACION.,NovaBank-Payments\QA,,Design
+,Test Case,TC-012 - Verificación de identidad con documento vencido,1,Verificar precondiciones: Solicitud de alta en curso; documento ficticio con fecha vencida.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-012 - Verificación de identidad con documento vencido,2,Cargar documento vencido.,El sistema detecta la fecha inválida.,NovaBank-Payments\QA,,Design
+,Test Case,TC-012 - Verificación de identidad con documento vencido,3,Intentar continuar.,El alta se detiene con DOCUMENTO_VENCIDO y solicita nuevo documento.,NovaBank-Payments\QA,,Design
+,Test Case,TC-013 - Screening de sanciones con coincidencia exacta y nombre normal,1,Verificar precondiciones: Lista ficticia de sanciones/PEP cargada; módulo de screening disponible.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-013 - Screening de sanciones con coincidencia exacta y nombre normal,2,Evaluar un nombre que coincide exactamente con la lista.,El screening devuelve BLOCK y registra la coincidencia.,NovaBank-Payments\QA,,Design
+,Test Case,TC-013 - Screening de sanciones con coincidencia exacta y nombre normal,3,Evaluar un nombre sin coincidencia.,El screening devuelve ALLOW y no bloquea.,NovaBank-Payments\QA,,Design
+,Test Case,TC-014 - Scoring KYC bajo y cliente PEP con EDD,1,Verificar precondiciones: Clientes sintéticos con perfiles LOW y PEP cargados.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-014 - Scoring KYC bajo y cliente PEP con EDD,2,Calcular score de un perfil de bajo riesgo.,El score queda en rango LOW (0-39) sin EDD.,NovaBank-Payments\QA,,Design
+,Test Case,TC-014 - Scoring KYC bajo y cliente PEP con EDD,3,Calcular score de un cliente PEP en jurisdicción de riesgo.,El score sube y exige EDD.,NovaBank-Payments\QA,,Design
+,Test Case,TC-015 - Bloqueo por revisión periódica vencida,1,Verificar precondiciones: Cliente con revisión periódica vencida y estado activo.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-015 - Bloqueo por revisión periódica vencida,2,Ejecutar el job de revisión periódica.,El sistema identifica la revisión vencida.,NovaBank-Payments\QA,,Design
+,Test Case,TC-015 - Bloqueo por revisión periódica vencida,3,Intentar iniciar una transferencia.,El cliente queda bloqueado para nuevas operaciones.,NovaBank-Payments\QA,,Design
+,Test Case,TC-016 - Retener o rechazar pago por screening previo,1,Verificar precondiciones: Simulador internacional con hook AML; cuenta USD activa.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-016 - Retener o rechazar pago por screening previo,2,Enviar pago a nombre de la lista ficticia.,El pago se rechaza con AMLREJECT y no se postea.,NovaBank-Payments\QA,,Design
+,Test Case,TC-016 - Retener o rechazar pago por screening previo,3,Enviar pago de alto valor o país de riesgo.,El pago queda HELD con pacs.002 PDNG.,NovaBank-Payments\QA,,Design
+,Test Case,TC-017 - Ejecutar las 12 reglas de monitoreo y detectar patrones,1,Verificar precondiciones: Base con esquema AML y dataset sintético etiquetado.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-017 - Ejecutar las 12 reglas de monitoreo y detectar patrones,2,Ejecutar R01-R12 sobre las transacciones.,Las 12 reglas ejecutan sin error.,NovaBank-Payments\QA,,Design
+,Test Case,TC-017 - Ejecutar las 12 reglas de monitoreo y detectar patrones,3,Comparar detecciones con la verdad sintética.,Los patrones etiquetados se detectan.,NovaBank-Payments\QA,,Design
+,Test Case,TC-018 - Asignar prioridad P1 y SLA a una alerta de alto riesgo,1,Verificar precondiciones: Alerta R01 con score KYC alto.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-018 - Asignar prioridad P1 y SLA a una alerta de alto riesgo,2,Crear una alerta con score de riesgo 90.,La alerta se clasifica P1 y recibe SLA.,NovaBank-Payments\QA,,Design
+,Test Case,TC-018 - Asignar prioridad P1 y SLA a una alerta de alto riesgo,3,Asignar la alerta a un analista.,La alerta pasa a EN_ANALISIS y registra la transición.,NovaBank-Payments\QA,,Design
+,Test Case,TC-019 - Listar alertas distintas y filtrar por prioridad,1,Verificar precondiciones: Base AML inicializada con al menos tres alertas.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-019 - Listar alertas distintas y filtrar por prioridad,2,Crear tres alertas de reglas y fechas distintas.,Se generan tres identificadores únicos.,NovaBank-Payments\QA,,Design
+,Test Case,TC-019 - Listar alertas distintas y filtrar por prioridad,3,Listar alertas P1.,La consulta devuelve las alertas P1 esperadas.,NovaBank-Payments\QA,,Design
+,Test Case,TC-020 - Investigar y cerrar una alerta,1,Verificar precondiciones: Alerta asignada a un analista.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-020 - Investigar y cerrar una alerta,2,Registrar la asignación de la alerta.,La alerta queda EN_ANALISIS con analista responsable.,NovaBank-Payments\QA,,Design
+,Test Case,TC-020 - Investigar y cerrar una alerta,3,Registrar la transición de cierre con motivo.,La transición queda auditada.,NovaBank-Payments\QA,,Design
+,Test Case,TC-021 - Escalar alerta a caso de investigación y cerrarlo,1,Verificar precondiciones: Alerta P1 en análisis.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-021 - Escalar alerta a caso de investigación y cerrarlo,2,Escalar la alerta con motivo.,Se crea un caso ABIERTO con prioridad P1 y la alerta pasa a ESCALADA.,NovaBank-Payments\QA,,Design
+,Test Case,TC-021 - Escalar alerta a caso de investigación y cerrarlo,3,Actualizar el caso a EN_ANALISIS y CERRADO.,"El caso registra cierre, notas y fecha.",NovaBank-Payments\QA,,Design
+,Test Case,TC-021 - Escalar alerta a caso de investigación y cerrarlo,4,Intentar una transición inválida.,El sistema rechaza la transición.,NovaBank-Payments\QA,,Design
+,Test Case,TC-022 - Preparar borrador de ROS con campos obligatorios,1,Verificar precondiciones: Caso de investigación con evidencia y cliente identificado.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-022 - Preparar borrador de ROS con campos obligatorios,2,Abrir el caso y seleccionar Preparar ROS.,El sistema muestra la plantilla de ROS.,NovaBank-Payments\QA,,Design
+,Test Case,TC-022 - Preparar borrador de ROS con campos obligatorios,3,"Completar sujeto, operaciones, tipología y narrativa.",El borrador guarda los campos y queda en estado BORRADOR.,NovaBank-Payments\QA,,Design
+,Test Case,TC-023 - Aprobar ROS sin evidencia adjunta,1,Verificar precondiciones: Borrador de ROS sin documentos adjuntos.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-023 - Aprobar ROS sin evidencia adjunta,2,Intentar aprobar el borrador.,El sistema bloquea la aprobación.,NovaBank-Payments\QA,,Design
+,Test Case,TC-023 - Aprobar ROS sin evidencia adjunta,3,Adjuntar evidencia ficticia y reintentar.,La aprobación se registra con usuario y fecha.,NovaBank-Payments\QA,,Design
+,Test Case,TC-024 - Registrar asiento de partida doble balanceado,1,Verificar precondiciones: Base del core con plan de cuentas y una cuenta activa.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-024 - Registrar asiento de partida doble balanceado,2,Registrar un crédito de 1.500 PYG.,Se crea un asiento con débito y crédito por el mismo importe.,NovaBank-Payments\QA,,Design
+,Test Case,TC-024 - Registrar asiento de partida doble balanceado,3,Intentar postear un asiento desbalanceado.,El trigger de base rechaza el asiento.,NovaBank-Payments\QA,,Design
+,Test Case,TC-025 - Conciliar saldo operativo contra libro mayor,1,Verificar precondiciones: Base sembrada con asientos y saldos.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-025 - Conciliar saldo operativo contra libro mayor,2,Ejecutar la conciliación global.,No hay diferencias entre saldo operativo y libro mayor.,NovaBank-Payments\QA,,Design
+,Test Case,TC-025 - Conciliar saldo operativo contra libro mayor,3,Consultar el saldo de una cuenta por API.,La respuesta marca reconciled=true.,NovaBank-Payments\QA,,Design
+,Test Case,TC-026 - Cierre diario contra el libro mayor,1,Verificar precondiciones: Base con cierres diarios generados por el seed.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-026 - Cierre diario contra el libro mayor,2,Ejecutar el control de cierre vs libro.,Los totales diarios coinciden.,NovaBank-Payments\QA,,Design
+,Test Case,TC-026 - Cierre diario contra el libro mayor,3,Revisar una fecha sin movimientos.,El control devuelve cero diferencias.,NovaBank-Payments\QA,,Design
+,Test Case,TC-027 - Consultar bitácora de auditoría por correlación,1,Verificar precondiciones: Operación ejecutada con X-Correlation-ID.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-027 - Consultar bitácora de auditoría por correlación,2,Ejecutar una operación con correlación COR-DEMO-001.,La operación se registra en la bitácora.,NovaBank-Payments\QA,,Design
+,Test Case,TC-027 - Consultar bitácora de auditoría por correlación,3,Consultar la bitácora por ese identificador.,Se recuperan los eventos de la operación.,NovaBank-Payments\QA,,Design
+,Test Case,TC-028 - Validar KPIs de pagos en el dataset analítico,1,Verificar precondiciones: Dataset analítico exportado con 12 CSV.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-028 - Validar KPIs de pagos en el dataset analítico,2,Comparar totales diarios de operaciones contra transacciones.,Los totales coinciden.,NovaBank-Payments\QA,,Design
+,Test Case,TC-028 - Validar KPIs de pagos en el dataset analítico,3,Verificar conciliación diaria del dataset.,No hay desbalances.,NovaBank-Payments\QA,,Design
+,Test Case,TC-029 - Validar KPIs AML y referencias de alertas,1,Verificar precondiciones: Dataset con alertas y casos.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-029 - Validar KPIs AML y referencias de alertas,2,"Verificar que cada alerta referencia cliente, cuenta y regla existentes.",No hay referencias huérfanas.,NovaBank-Payments\QA,,Design
+,Test Case,TC-029 - Validar KPIs AML y referencias de alertas,3,Verificar fechas y cierres de casos.,Las fechas y flags son coherentes.,NovaBank-Payments\QA,,Design
+,Test Case,TC-030 - Exportar reporte operativo y verificar integridad,1,Verificar precondiciones: Exportador analítico disponible.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-030 - Exportar reporte operativo y verificar integridad,2,Ejecutar la exportación de los 12 CSV.,Se generan todos los archivos esperados.,NovaBank-Payments\QA,,Design
+,Test Case,TC-030 - Exportar reporte operativo y verificar integridad,3,Leer export_report.json.,integrity_check=ok y sin violaciones de clave foránea.,NovaBank-Payments\QA,,Design
+,Test Case,TC-031 - Consultar estado desde autoservicio,1,Verificar precondiciones: Cliente con un pago ACREDITADO; canal de autoservicio disponible.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-031 - Consultar estado desde autoservicio,2,Ingresar al detalle del pago.,"Se muestra estado, fecha y comprobante.",NovaBank-Payments\QA,,Design
+,Test Case,TC-031 - Consultar estado desde autoservicio,3,Consultar un pago ajeno.,El sistema niega el acceso.,NovaBank-Payments\QA,,Design
+,Test Case,TC-032 - Registrar reclamo de pago sin comprobante,1,Verificar precondiciones: Cliente autenticado; pago existente.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-032 - Registrar reclamo de pago sin comprobante,2,Abrir el formulario de reclamo sin adjuntar comprobante.,El sistema marca el campo obligatorio.,NovaBank-Payments\QA,,Design
+,Test Case,TC-032 - Registrar reclamo de pago sin comprobante,3,Adjuntar comprobante ficticio y enviar.,Se crea el reclamo con número y SLA.,NovaBank-Payments\QA,,Design
+,Test Case,TC-033 - Notificar evento de estado final,1,Verificar precondiciones: Pago que alcanza estado ACREDITADO.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-033 - Notificar evento de estado final,2,Registrar la transición a estado final.,Se emite un evento con identificador de correlación.,NovaBank-Payments\QA,,Design
+,Test Case,TC-033 - Notificar evento de estado final,3,Verificar la notificación.,La notificación usa datos enmascarados.,NovaBank-Payments\QA,,Design
+,Test Case,TC-034 - Configurar tope local y validar su aplicación,1,Verificar precondiciones: Parámetro de tope local configurado en 10.000.000 PYG.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-034 - Configurar tope local y validar su aplicación,2,Consultar el parámetro vigente.,El sistema devuelve el tope configurado.,NovaBank-Payments\QA,,Design
+,Test Case,TC-034 - Configurar tope local y validar su aplicación,3,Enviar un pago por encima del tope.,El pago se rechaza con AMOUNT_LIMIT.,NovaBank-Payments\QA,,Design
+,Test Case,TC-035 - Aprobar cambio de regla sin segundo aprobador,1,Verificar precondiciones: Cambio de umbral propuesto por un analista.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-035 - Aprobar cambio de regla sin segundo aprobador,2,Solicitar aprobación con un solo usuario.,El sistema exige un segundo aprobador.,NovaBank-Payments\QA,,Design
+,Test Case,TC-035 - Aprobar cambio de regla sin segundo aprobador,3,Registrar el segundo aprobador.,El cambio queda versionado y auditado.,NovaBank-Payments\QA,,Design
+,Test Case,TC-036 - Simular impacto de un cambio de umbral,1,Verificar precondiciones: Dataset histórico cargado; regla R01 parametrizada.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-036 - Simular impacto de un cambio de umbral,2,Ejecutar la simulación con el umbral actual.,Se obtiene el número base de alertas.,NovaBank-Payments\QA,,Design
+,Test Case,TC-036 - Simular impacto de un cambio de umbral,3,Ejecutar con un umbral menor.,Se muestra el incremento de alertas y su costo estimado.,NovaBank-Payments\QA,,Design
+,Test Case,TC-037 - Acceso a operación sin rol autorizado,1,Verificar precondiciones: Usuario con rol de solo lectura.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-037 - Acceso a operación sin rol autorizado,2,Intentar crear una transferencia con rol LECTURA.,El sistema responde 403 y no ejecuta la operación.,NovaBank-Payments\QA,,Design
+,Test Case,TC-037 - Acceso a operación sin rol autorizado,3,Repetir con rol OPERADOR.,La operación se permite y queda auditada.,NovaBank-Payments\QA,,Design
+,Test Case,TC-038 - Propagar identificador de correlación en la API,1,Verificar precondiciones: API /v1 disponible.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-038 - Propagar identificador de correlación en la API,2,Llamar GET /v1/health sin correlación.,La respuesta incluye X-Correlation-ID generado.,NovaBank-Payments\QA,,Design
+,Test Case,TC-038 - Propagar identificador de correlación en la API,3,Llamar con X-Correlation-ID propio.,La respuesta conserva el identificador recibido.,NovaBank-Payments\QA,,Design
+,Test Case,TC-039 - Repetir solicitud idempotente y detectar conflicto,1,Verificar precondiciones: Cuenta PYG activa; Idempotency-Key válida.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-039 - Repetir solicitud idempotente y detectar conflicto,2,Repetir la misma solicitud con la misma clave.,Se devuelve la misma operación con Idempotent-Replayed=true.,NovaBank-Payments\QA,,Design
+,Test Case,TC-039 - Repetir solicitud idempotente y detectar conflicto,3,Reutilizar la clave con otro importe.,La API responde 409 IDEMPOTENCY_CONFLICT.,NovaBank-Payments\QA,,Design
+,Test Case,TC-040 - Monitorear salud del core,1,Verificar precondiciones: Base del core disponible.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-040 - Monitorear salud del core,2,Llamar GET /v1/health.,HTTP 200 con status=ok y conteo de cuentas.,NovaBank-Payments\QA,,Design
+,Test Case,TC-040 - Monitorear salud del core,3,Revisar el tiempo de respuesta.,La llamada responde en el umbral de la prueba.,NovaBank-Payments\QA,,Design
+,Test Case,TC-041 - Aceptar pago local exactamente en el tope de 10.000.000 PYG,1,Verificar precondiciones: Cuenta PYG con saldo 20.000.000; tope local 10.000.000.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-041 - Aceptar pago local exactamente en el tope de 10.000.000 PYG,2,Enviar pago local por 10.000.000 PYG.,El simulador valida y liquida el pago.,NovaBank-Payments\QA,,Design
+,Test Case,TC-041 - Aceptar pago local exactamente en el tope de 10.000.000 PYG,3,Consultar el saldo de origen.,El saldo disminuye exactamente 10.000.000.,NovaBank-Payments\QA,,Design
+,Test Case,TC-042 - Rechazar pago local un peso por encima del tope,1,Verificar precondiciones: Cuenta PYG activa; tope local 10.000.000.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-042 - Rechazar pago local un peso por encima del tope,2,Enviar pago local por 10.000.001 PYG.,El simulador rechaza con AMOUNT_LIMIT.,NovaBank-Payments\QA,,Design
+,Test Case,TC-042 - Rechazar pago local un peso por encima del tope,3,Revisar el saldo.,El saldo no cambia.,NovaBank-Payments\QA,,Design
+,Test Case,TC-043 - Rechazar importe cero,1,Verificar precondiciones: Cuenta PYG activa.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-043 - Rechazar importe cero,2,Enviar pago local por 0 PYG.,El validador rechaza con AMOUNT_NOT_POSITIVE.,NovaBank-Payments\QA,,Design
+,Test Case,TC-043 - Rechazar importe cero,3,Verificar que no se crea asiento.,No hay movimiento contable.,NovaBank-Payments\QA,,Design
+,Test Case,TC-044 - Rechazar importe negativo,1,Verificar precondiciones: Cuenta PYG activa.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-044 - Rechazar importe negativo,2,Enviar pago local por -1 PYG.,El validador rechaza con AMOUNT_NOT_POSITIVE.,NovaBank-Payments\QA,,Design
+,Test Case,TC-044 - Rechazar importe negativo,3,Verificar que no se crea asiento.,No hay movimiento contable.,NovaBank-Payments\QA,,Design
+,Test Case,TC-045 - Rechazar moneda desconocida,1,Verificar precondiciones: Validador ISO 4217 cargado.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-045 - Rechazar moneda desconocida,2,Validar importe en moneda ZZZ.,El validador devuelve CURRENCY_UNKNOWN.,NovaBank-Payments\QA,,Design
+,Test Case,TC-046 - Rechazar decimales en guaraníes,1,Verificar precondiciones: Validador de importes cargado.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-046 - Rechazar decimales en guaraníes,2,"Validar importe 10,5 PYG.",El validador devuelve AMOUNT_PRECISION.,NovaBank-Payments\QA,,Design
+,Test Case,TC-046 - Rechazar decimales en guaraníes,3,Validar importe 1.000 PYG.,El validador acepta el importe.,NovaBank-Payments\QA,,Design
+,Test Case,TC-047 - Rechazar IBAN con dígito de control incorrecto,1,Verificar precondiciones: Validador IBAN MOD 97-10 disponible.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-047 - Rechazar IBAN con dígito de control incorrecto,2,Validar IBAN DE88370400440532013000.,El validador rechaza el checksum.,NovaBank-Payments\QA,,Design
+,Test Case,TC-048 - Rechazar IBAN de país no soportado,1,Verificar precondiciones: Tabla de longitudes IBAN cargada.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-048 - Rechazar IBAN de país no soportado,2,Validar un IBAN de un país fuera de la tabla.,El validador devuelve país no soportado.,NovaBank-Payments\QA,,Design
+,Test Case,TC-049 - Rechazar BIC con longitud inválida,1,Verificar precondiciones: Validador BIC disponible.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-049 - Rechazar BIC con longitud inválida,2,Validar BIC NOVAPYP.,El validador rechaza la longitud.,NovaBank-Payments\QA,,Design
+,Test Case,TC-049 - Rechazar BIC con longitud inválida,3,Validar BIC NOVAPYPA.,El validador acepta el BIC.,NovaBank-Payments\QA,,Design
+,Test Case,TC-050 - Rechazar UETR inválido,1,Verificar precondiciones: Validador de UETR disponible.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-050 - Rechazar UETR inválido,2,Validar un UETR con formato incorrecto.,El validador rechaza el identificador.,NovaBank-Payments\QA,,Design
+,Test Case,TC-050 - Rechazar UETR inválido,3,Validar un UETR UUID válido.,El validador lo acepta.,NovaBank-Payments\QA,,Design
+,Test Case,TC-051 - Rechazar pacs.008 internacional sin agente acreedor,1,Verificar precondiciones: Perfil internacional de pacs.008 configurado.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-051 - Rechazar pacs.008 internacional sin agente acreedor,2,Validar un pacs.008 internacional sin creditor agent.,La validación falla por campo obligatorio.,NovaBank-Payments\QA,,Design
+,Test Case,TC-052 - Rechazar pacs.002 RJCT sin motivo,1,Verificar precondiciones: Mensaje pacs.002 de rechazo sin reason code.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-052 - Rechazar pacs.002 RJCT sin motivo,2,Validar el mensaje.,La validación detecta la ausencia de motivo.,NovaBank-Payments\QA,,Design
+,Test Case,TC-053 - Rechazar XML mal formado,1,Verificar precondiciones: Validador XML disponible.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-053 - Rechazar XML mal formado,2,Validar un XML con etiqueta sin cerrar.,El validador devuelve error de parseo.,NovaBank-Payments\QA,,Design
+,Test Case,TC-054 - Rechazar camt.053 con estado inválido,1,Verificar precondiciones: Ejemplo camt.053 cargado con estado no permitido.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-054 - Rechazar camt.053 con estado inválido,2,Validar el extracto con estado XX.,La validación rechaza el estado.,NovaBank-Payments\QA,,Design
+,Test Case,TC-055 - Rechazar MT103 sin campo obligatorio,1,Verificar precondiciones: Parser MT103 disponible.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-055 - Rechazar MT103 sin campo obligatorio,2,Parsear un MT103 sin campo :32A:.,El parser detecta el campo faltante.,NovaBank-Payments\QA,,Design
+,Test Case,TC-056 - Rechazar MT103 con charge bearer inválido,1,Verificar precondiciones: Parser MT103 disponible.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-056 - Rechazar MT103 con charge bearer inválido,2,Parsear un MT103 con :71A:XXX.,El parser rechaza el código.,NovaBank-Payments\QA,,Design
+,Test Case,TC-057 - Rechazar liquidación internacional en EUR,1,Verificar precondiciones: Cuenta USD activa; plan contable solo PYG/USD.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-057 - Rechazar liquidación internacional en EUR,2,Enviar pago internacional en EUR.,El simulador rechaza con CURRENCY_NOT_SETTLEABLE.,NovaBank-Payments\QA,,Design
+,Test Case,TC-058 - Rechazar pago internacional por saldo insuficiente,1,"Verificar precondiciones: Cuenta USD con saldo 1,00 USD; importe más comisión supera el saldo.",Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-058 - Rechazar pago internacional por saldo insuficiente,2,"Enviar pago de 100,00 USD con comisión 25,00 USD.",El pago se rechaza con AM04.,NovaBank-Payments\QA,,Design
+,Test Case,TC-058 - Rechazar pago internacional por saldo insuficiente,3,Revisar el saldo.,El saldo no cambia.,NovaBank-Payments\QA,,Design
+,Test Case,TC-059 - Detectar conflicto de idempotencia internacional,1,Verificar precondiciones: Pago internacional ya enviado con una clave.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-059 - Detectar conflicto de idempotencia internacional,2,Reutilizar la clave con otro importe.,El simulador lanza IdempotencyConflict.,NovaBank-Payments\QA,,Design
+,Test Case,TC-059 - Detectar conflicto de idempotencia internacional,3,Revisar el registro original.,El primer pago permanece intacto.,NovaBank-Payments\QA,,Design
+,Test Case,TC-060 - Detectar estructuración por debajo del umbral,1,Verificar precondiciones: Dataset con patrón STRUCTURING etiquetado.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-060 - Detectar estructuración por debajo del umbral,2,Ejecutar R01 sobre las transacciones.,Se generan alertas de estructuración.,NovaBank-Payments\QA,,Design
+,Test Case,TC-060 - Detectar estructuración por debajo del umbral,3,Comparar con la verdad sintética.,El patrón etiquetado queda cubierto.,NovaBank-Payments\QA,,Design
+,Test Case,TC-061 - Permitir pago normal sin alerta AML,1,Verificar precondiciones: Pago de bajo valor a beneficiario sin coincidencia.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-061 - Permitir pago normal sin alerta AML,2,Evaluar el pago con el hook AML.,El hook devuelve ALLOW.,NovaBank-Payments\QA,,Design
+,Test Case,TC-061 - Permitir pago normal sin alerta AML,3,Verificar que no se genera bloqueo.,El pago continúa su curso.,NovaBank-Payments\QA,,Design
+,Test Case,TC-062 - Detectar jurisdicción de alto riesgo,1,Verificar precondiciones: Lista ficticia de países de alto riesgo cargada.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-062 - Detectar jurisdicción de alto riesgo,2,Ejecutar R07 sobre transacciones con país de riesgo.,Se generan alertas de geografía.,NovaBank-Payments\QA,,Design
+,Test Case,TC-062 - Detectar jurisdicción de alto riesgo,3,Revisar el detalle de la alerta.,La alerta incluye el código de país.,NovaBank-Payments\QA,,Design
+,Test Case,TC-063 - Rechazar asiento contable desbalanceado,1,Verificar precondiciones: Base con triggers contables activos.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-063 - Rechazar asiento contable desbalanceado,2,Insertar un asiento con débito 100 y crédito 90.,El trigger rechaza el asiento.,NovaBank-Payments\QA,,Design
+,Test Case,TC-063 - Rechazar asiento contable desbalanceado,3,Revisar el libro mayor.,No queda un asiento desbalanceado.,NovaBank-Payments\QA,,Design
+,Test Case,TC-064 - Impedir modificación de un asiento posteado,1,Verificar precondiciones: Asiento balanceado ya posteado.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-064 - Impedir modificación de un asiento posteado,2,Intentar actualizar una línea del asiento.,El trigger de inmutabilidad rechaza la modificación.,NovaBank-Payments\QA,,Design
+,Test Case,TC-064 - Impedir modificación de un asiento posteado,3,Consultar el asiento.,El asiento permanece sin cambios.,NovaBank-Payments\QA,,Design
+,Test Case,TC-065 - Impedir sobregiro por encima del límite,1,Verificar precondiciones: Cuenta con límite de sobregiro 0.,Precondiciones cumplidas,NovaBank-Payments\QA,,Design
+,Test Case,TC-065 - Impedir sobregiro por encima del límite,2,Intentar un débito que deje saldo negativo.,La base rechaza la actualización de saldo.,NovaBank-Payments\QA,,Design
+,Test Case,TC-065 - Impedir sobregiro por encima del límite,3,Revisar el saldo.,El saldo se mantiene no negativo.,NovaBank-Payments\QA,,Design
