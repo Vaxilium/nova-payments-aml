@@ -25,7 +25,8 @@ Registro de pasos manuales, capturas y enlaces de herramientas que el agente **n
 | EV-008 | 6 | Tableau | Dashboard | _pendiente_ | _pendiente_ | _pendiente_ | Artefacto listo; captura pendiente |
 | EV-009 | 7 | Azure DevOps | Pipeline ejecutado | _pendiente_ | _pendiente_ | _pendiente_ | Artefacto listo; ejecución pendiente |
 | EV-010 | 7 | GitHub Actions | Workflow ejecutado | _pendiente_ | _pendiente_ | _pendiente_ | Artefacto listo; ejecución pendiente |
-| EV-011 | 7 | LinkedIn | Post publicado | _pendiente_ | _pendiente_ | _pendiente_ | Borrador listo; publicación pendiente |
+| EV-011 | 7, 9 | LinkedIn | Carrusel y post publicados | _pendiente_ | _pendiente_ | _pendiente_ | Carrusel PDF listo; publicación pendiente |
+| EV-012 | 9 | GitHub Pages | Homepage publicada | _pendiente_ | _pendiente_ | _pendiente_ | Sitio y workflow listos; Pages pendiente de habilitar |
 
 ## Fase 0 — Preparación
 
@@ -670,13 +671,70 @@ Ver **EV-010** en la sección Fase 7. Workflow: `.github/workflows/ci.yml`.
 - Captura: _pendiente_
 - Fecha: _pendiente_
 
-### LinkedIn (Fase 7)
+### LinkedIn (Fase 7 y 9)
 
-Ver **EV-011** en la sección Fase 7. Borradores: `docs/linkedin.md`.
+Ver **EV-011**. Textos y carrusel: `docs/linkedin.md` y
+`docs/assets/linkedin/carousel-novabank.pdf`.
 
-- [ ] Revisar el borrador del post y elegir uno de los tres.
-- [ ] Reemplazar placeholders por enlaces reales y verificados.
-- [ ] Publicar solo si el repositorio y las métricas son verificables.
+- [x] Generar carrusel de 10 slides (1080×1350) y PDF.
+- [ ] Revisar el texto y el carrusel; elegir el post final.
+- [ ] Subir el PDF como documento en LinkedIn y copiar el texto sugerido.
+- [ ] Verificar que el repositorio y las métricas sean visibles sin login.
+- [ ] No afirmar que se operaron Jira, Figma, Power BI, Tableau ni Camunda.
 - Enlace del post: _pendiente_
 - Captura: _pendiente_
 - Fecha: _pendiente_
+
+## Fase 9 — Portafolio visual
+
+**Objetivo:** hacer visible el caso con arte reproducible, sin capturas de
+herramientas no operadas y sin imágenes de IA.
+
+### Assets generados por código
+
+- [x] Marca, isotipo, favicon y banners claro/oscuro.
+- [x] 6 gráficos, arquitectura, 2 secuencias y previews de 6 BPMN.
+- [x] Dashboard HTML autocontenido y capturas claro/oscuro.
+- [x] 10 capturas PNG de wireframes + galería UX.
+- [x] Demo GIF y póster (copia temporal de SQLite, sin modificar la base).
+- [x] Carrusel LinkedIn de 10 slides y PDF.
+- [x] Homepage `docs/site/` y workflow `.github/workflows/pages.yml`.
+
+```powershell
+python -m pip install -r requirements-assets.txt
+python -m playwright install chromium
+python -m scripts.make_assets --all
+python -m scripts.check_assets
+```
+
+Resultado de `check_assets`: **OK**; 26 activos requeridos, 32 referencias
+locales, 53 PNG validados y GIF de 21 frames. Guardar salida si se requiere
+evidencia local.
+
+### GitHub Pages (EV-012)
+
+- [ ] En GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+- [ ] Ejecutar `pages` desde **Actions** o pushear un cambio en `docs/site/`.
+- [ ] Verificar `https://vaxilium.github.io/nova-payments-aml/`.
+- [ ] Revisar que banner, dashboard, galería UX y PDF abran.
+- URL: _pendiente_
+- Captura: _pendiente_
+- Fecha: _pendiente_
+
+### LinkedIn (EV-011)
+
+- [ ] Revisar `docs/assets/linkedin/carousel/01-portada.png` a `10-cierre.png`.
+- [ ] Subir `carousel-novabank.pdf` como documento.
+- [ ] Usar el texto de `docs/linkedin.md`.
+- [ ] Guardar URL y captura.
+
+### Límites de esta fase
+
+- Las capturas de wireframes son PNG de los SVG propios; no son capturas de
+  Balsamiq, Figma, Lucidchart, Visio ni Miro.
+- El dashboard es HTML/CSS generado, no un `.pbix` de Power BI ni un workbook de
+  Tableau.
+- La demo es una ejecución real del prototipo sobre una copia temporal; no es una
+  integración con SPI/SWIFT.
+- La publicación en LinkedIn y el despliegue de Pages requieren acción manual del
+  autor y se registran en EV-011/EV-012.

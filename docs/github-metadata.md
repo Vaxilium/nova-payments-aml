@@ -39,7 +39,7 @@ fictional-case
 
 ## About / Website
 
-- **Website:** dejar vacío hasta tener un enlace público de LinkedIn o un post.
+- **Website:** `https://vaxilium.github.io/nova-payments-aml/` (GitHub Pages, habilitar en Settings → Pages → Source: GitHub Actions).
 - **Include in the home page:** marcar solo si el repositorio ya tiene las
   capturas de `docs/evidencias/`.
 - **Releases:** crear la release `v1.0.0` a partir del tag y usar las notas del

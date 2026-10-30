@@ -1,9 +1,35 @@
-# NovaBank — Instant & Cross-Border Payments + AML Hub
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/img/banner-dark.png">
+    <img src="docs/assets/img/banner-light.png" alt="NovaBank — Payments that flow. Risk under control." width="100%">
+  </picture>
+</p>
 
-> Portfolio case study by **Franco Tillería Centurión** — Business Analyst (banking) — Asunción, Paraguay
-> Fictional case. No real customer, account or confidential data is used.
+<h1 align="center">NovaBank — Instant &amp; Cross-Border Payments + AML Hub</h1>
+
+<p align="center"><b>End-to-end portfolio case · Business Analysis · Payments · AML</b></p>
+
+<p align="center">
+  <img alt="Python 3.12+" src="https://img.shields.io/badge/Python-3.12%2B-3776AB?style=flat-square&amp;logo=python&amp;logoColor=white">
+  <img alt="Tests" src="https://img.shields.io/badge/tests-204%2F204-2DD4BF?style=flat-square">
+  <img alt="UAT" src="https://img.shields.io/badge/UAT-51%2F51-22D3EE?style=flat-square">
+  <img alt="AML rules" src="https://img.shields.io/badge/AML-12%20rules-0E7490?style=flat-square">
+  <img alt="ISO 20022" src="https://img.shields.io/badge/ISO%2020022-pacs.008-155E8A?style=flat-square">
+  <img alt="MIT License" src="https://img.shields.io/badge/license-MIT-64748B?style=flat-square">
+</p>
+
+<p align="center">
+  <b>Franco Tillería Centurión</b> · Business Analyst · Asunción, Paraguay<br>
+  <a href="https://www.linkedin.com/in/franco-tilleria-centurion/">LinkedIn</a> ·
+  <a href="https://github.com/Vaxilium">GitHub</a> ·
+  <a href="https://github.com/Vaxilium/nova-payments-aml">Repository</a> ·
+  <a href="README.md">Versión en español</a>
+</p>
+
+> **Entirely fictional case.** NovaBank, its customers, accounts, BIC and IBAN are
+> invented. No confidential information from real employers or institutions is used.
 >
-> [Versión en español](README.md) · [Case study](docs/case-study.md) · [Interview guide (ES)](docs/entrevista.md) · [Truth audit (ES)](docs/AUDITORIA.md) · [Evidence checklist (ES)](docs/evidencias/README.md)
+> [Case study](docs/case-study.md) · [Interview guide (ES)](docs/entrevista.md) · [Truth audit (ES)](docs/AUDITORIA.md) · [Evidence (ES)](docs/EVIDENCIAS.md) · [LinkedIn carousel](docs/assets/linkedin/carousel-novabank.pdf)
 
 ## Executive summary
 
@@ -15,8 +41,14 @@ core/middleware design, messaging validation, AML rules, UAT and analytics.
 
 It is a public portfolio built to demonstrate practical BA tools and banking
 domain knowledge on a realistic but entirely synthetic scenario. The project is
-complete at artifact level across seven delivery phases plus an independent
-audit/reinforcement phase.
+complete at artifact level across nine delivery phases. It includes 10 epics and
+40 user stories with Gherkin acceptance criteria, 6 BPMN processes, 4 DMN
+decision tables, a tested SQLite core with double-entry accounting, a FastAPI
+`/v1` service, ISO 20022/MT103 validators and simulators, 12 AML monitoring
+rules, a synthetic dataset, an 11-sheet Excel workbook, Power BI/Tableau
+specifications, and a UAT pack with 65 test cases. Phase 9 adds a reproducible
+visual system: brand assets, banners, diagrams, charts, a dashboard, wireframes,
+a technical demo GIF, a LinkedIn carousel and a GitHub Pages site.
 
 Latest reproducible results (2026-10-29, fresh clone, local Windows environment):
 
@@ -34,6 +66,79 @@ Azure DevOps, Figma/Balsamiq, Power BI, Tableau, Camunda and LinkedIn **requires
 manual execution by the author** and is tracked in
 [`docs/EVIDENCIAS.md`](docs/EVIDENCIAS.md). Every claim in this README was
 audited in [`docs/AUDITORIA.md`](docs/AUDITORIA.md).
+
+<p align="center">
+  <a href="#the-problem">Problem</a> ·
+  <a href="#the-solution">Solution</a> ·
+  <a href="#reproducible-demo">Demo</a> ·
+  <a href="#visual-gallery">Gallery</a> ·
+  <a href="#key-results-real-metrics">Results</a> ·
+  <a href="#how-to-run-the-project">Run</a> ·
+  <a href="#what-it-demonstrates-and-what-it-does-not">Limits</a>
+</p>
+
+## At a glance
+
+| Dimension | Reproducible result |
+|---|---|
+| Business and requirements | 10 epics · 40 Gherkin stories · 16 NFRs · 198 SP |
+| Processes and decisions | 6 BPMN · 4 DMN · 10 wireframes |
+| Core and messaging | SQLite double-entry ledger · FastAPI `/v1` · ISO 20022/MT103 |
+| AML | 12 SQL rules · 377 deduplicated alerts · 59 cases |
+| Quality | 204/204 tests · 51/51 automated UAT · 23/23 SQL controls |
+| Presentation | Dashboard · demo GIF · LinkedIn carousel · GitHub Pages |
+
+## Reproducible demo
+
+<p align="center">
+  <a href="docs/assets/img/demo.gif">
+    <img src="docs/assets/img/demo-poster.png" alt="Technical demo: local transfer, ISO 20022 message and AML hold" width="900">
+  </a>
+</p>
+
+The demo runs a real local transfer against a **temporary SQLite copy**, shows the
+double-entry posting and an AML hold for a high-value international payment. It
+does not modify the repository database and uses no PII.
+
+```powershell
+python -m pip install -r requirements-assets.txt
+python -m scripts.demo
+```
+
+Output: [`docs/assets/img/demo.gif`](docs/assets/img/demo.gif) · source
+[`docs/assets/src/demo.html`](docs/assets/src/demo.html) · script
+[`scripts/demo.py`](scripts/demo.py).
+
+## Visual gallery
+
+<table>
+  <tr>
+    <td width="50%">
+      <a href="docs/assets/dashboard/index.html"><img src="docs/assets/img/dashboard-dark.png" alt="Operations and compliance dashboard" width="100%"></a>
+      <sub><b>Operations dashboard</b> · KPIs, SLA, alerts and AML quality · <a href="docs/assets/dashboard/index.html">interactive HTML</a></sub>
+    </td>
+    <td width="50%">
+      <a href="docs/assets/img/architecture.png"><img src="docs/assets/img/architecture.png" alt="NovaBank logical architecture" width="100%"></a>
+      <sub><b>Architecture</b> · from channel to ledger · <a href="02-procesos/diagramas-sistema.md">full view (ES)</a></sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <a href="docs/assets/img/chart-alerts-by-rule.png"><img src="docs/assets/img/chart-alerts-by-rule.png" alt="AML alerts by rule" width="100%"></a>
+      <sub><b>AML monitoring</b> · 377 deduplicated alerts · <a href="07-aml-compliance/docs/reglas-monitoreo.md">12 rules (ES)</a></sub>
+    </td>
+    <td width="50%">
+      <a href="docs/assets/img/ux/ux-aml-inbox.png"><img src="docs/assets/img/ux/ux-aml-inbox.png" alt="AML alert queue wireframe" width="100%"></a>
+      <sub><b>UX</b> · 10 app and AML console wireframes · <a href="docs/assets/ux/index.html">gallery</a></sub>
+    </td>
+  </tr>
+</table>
+
+More: [dashboard](docs/assets/dashboard/index.html) ·
+[UX gallery](docs/assets/ux/index.html) ·
+[charts](docs/assets/img/) ·
+[demo GIF](docs/assets/img/demo.gif) ·
+[LinkedIn carousel (PDF)](docs/assets/linkedin/carousel-novabank.pdf).
 
 ## The problem
 
@@ -64,6 +169,7 @@ operational and compliance risk:
 | 6 — UX & analytics | Show screens and analytical capability | 10 wireframes, UX specs, 12 CSVs, Excel, Power Query, 36 DAX measures, Tableau guide |
 | 7 — QA/UAT & close | Verify and communicate | Strategy, UAT plan, 65 cases, defects, pipelines, README and LinkedIn drafts |
 | 8 — Audit & hardening | Verify claims and package the portfolio | Truth audit, clean-clone test, security review, English README, case study, interview guide |
+| 9 — Visual portfolio | Make the case visible and reproducible | Brand, banners, diagrams, charts, dashboard, UX, demo GIF, carousel and GitHub Pages |
 
 ## Logical architecture
 
@@ -117,7 +223,8 @@ Full context, container, entity and journey views are in
 | Test automation | pytest | [`08-qa-uat/`](08-qa-uat/README.md) and phase 3–7 suites | Implemented; 204/204 |
 | UAT and evidence | Azure Test Plans / Excel | [65 cases](08-qa-uat/casos-prueba.csv), [matrix](08-qa-uat/matriz-ejecucion.xlsx) | Automation executed; manual UAT pending |
 | Continuous integration | GitHub Actions | [`.github/workflows/ci.yml`](.github/workflows/ci.yml) | Workflow ready; manual run pending (EV-010) |
-| Outreach | LinkedIn | [`docs/linkedin.md`](docs/linkedin.md) | Drafts ready; publishing pending (EV-011) |
+| Web publishing | GitHub Pages | [`docs/site/`](docs/site/) + [workflow](.github/workflows/pages.yml) | Site ready; Pages enablement pending (EV-012) |
+| Outreach | LinkedIn | [`docs/linkedin.md`](docs/linkedin.md) + [carousel PDF](docs/assets/linkedin/carousel-novabank.pdf) | Text and carousel ready; publishing pending (EV-011) |
 
 ## How to run the project
 
@@ -162,6 +269,20 @@ python 09-analitica\scripts\build_excel.py
 # 9. Local API (optional)
 uvicorn app.main:app --reload --app-dir 05-core-middleware
 ```
+
+### Generate the visual assets
+
+Phase 9 assets are regenerated from code with Playwright, Pillow, Matplotlib and
+`img2pdf`. Chromium and Node are required for Mermaid/BPMN rendering.
+
+```powershell
+python -m pip install -r requirements-assets.txt
+python -m playwright install chromium
+python -m scripts.make_assets --all
+```
+
+Individual steps: `brand`, `charts`, `diagrams`, `covers`, `dashboard`, `ux`,
+`demo` and `linkedin`.
 
 ## Key results (real metrics)
 
@@ -292,6 +413,7 @@ uvicorn app.main:app --reload --app-dir 05-core-middleware
 | 6 — UX & analytics | Artifacts complete; EV-006 to EV-008 pending |
 | 7 — QA/UAT & close | Automation and artifacts complete; EV-009 to EV-011 pending |
 | 8 — Audit & hardening | Complete and verified on a fresh clone |
+| 9 — Visual portfolio | Complete: brand, assets, demo, carousel and GitHub Pages site |
 
 ## Repository structure
 
@@ -307,11 +429,15 @@ nova-payments-aml/
 ├─ 08-qa-uat/            # strategy, UAT cases, pipelines, evidence
 ├─ 09-analitica/         # datasets, Excel, Power BI (DAX), Tableau
 ├─ docs/                 # governance, audit, case study, interview guide, evidence
-├─ .github/workflows/    # GitHub Actions CI
+│  ├─ assets/            # brand, diagrams, dashboard, UX, demo and LinkedIn
+│  └─ site/              # static GitHub Pages homepage
+├─ scripts/              # visual asset generators
+├─ .github/workflows/    # CI and GitHub Pages deployment
 ├─ AGENTS.md             # operating rules for agents and contributors
 ├─ PLAN.md               # phase roadmap
 ├─ README.md             # Spanish version
-├─ requirements.txt      # Python dependencies
+├─ requirements.txt      # core and test dependencies
+├─ requirements-assets.txt # visual generation dependencies
 ├─ LICENSE               # MIT
 └─ .gitignore
 ```
@@ -330,6 +456,9 @@ nova-payments-aml/
 | [`docs/evidencias/README.md`](docs/evidencias/README.md) | Screenshot checklist for the author |
 | [`docs/case-study.md`](docs/case-study.md) | Two-page case study |
 | [`docs/entrevista.md`](docs/entrevista.md) | Per-phase interview script and limits |
+| [`docs/assets/CREDITOS.md`](docs/assets/CREDITOS.md) | Ownership and generation of visual assets |
+| [`docs/linkedin.md`](docs/linkedin.md) | Featured text, carousel and post drafts (ES) |
+| [`docs/site/index.html`](docs/site/index.html) | Static portfolio homepage |
 | [`CHANGELOG.md`](CHANGELOG.md) | Version history |
 
 ## Fiction notice
@@ -343,7 +472,8 @@ does not use confidential information.
 ## Author
 
 **Franco Tillería Centurión** — Functional Analyst / Business Analyst
-LinkedIn: _public link pending_ (see P-004 in `docs/PENDIENTES.md`).
+[LinkedIn](https://www.linkedin.com/in/franco-tilleria-centurion/) ·
+[GitHub](https://github.com/Vaxilium)
 
 ## License
 

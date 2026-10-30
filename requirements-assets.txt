@@ -1,0 +1,9 @@
+# Dependencias para generar los activos visuales de Fase 9.
+# Instalar con: python -m pip install -r requirements-assets.txt
+# Requiere además Node.js y: npm install --prefix <carpeta> bpmn-js@18.6.2 mermaid@11.12.0
+# y Chromium: python -m playwright install chromium
+
+matplotlib==3.11.2
+playwright==1.55.0
+pillow==13.0.0
+img2pdf==0.6.3

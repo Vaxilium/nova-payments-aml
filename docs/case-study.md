@@ -82,6 +82,7 @@ Todos los números fueron reproducidos en un clon limpio el 2026-10-29:
 | Calidad AML | Recall 100 %; precisión 99,13 % sobre etiquetadas |
 | Analítica | 12 CSV, 377 alertas reproducibles, 59 casos, 11 hojas Excel |
 | Trazabilidad | 40/40 historias con al menos un caso |
+| Portafolio visual | Marca, 6 gráficos, arquitectura/secuencias/BPMN, dashboard, UX, demo GIF, carrusel LinkedIn, GitHub Pages |
 
 Lectura honesta: la precisión conservadora es **69,03 %** porque la muestra
 normal es solo ~1 % del dataset. El 99,13 % aplica únicamente a las transacciones
@@ -91,7 +92,7 @@ etiquetadas.
 
 | Usada realmente por el agente | Entregada como artefacto; requiere ejecución manual |
 |---|---|
-| Python, SQLite, FastAPI, pytest, openpyxl, PyYAML | Jira, Confluence, Azure DevOps, Bizagi/Camunda/Signavio, Lucidchart/Visio/Miro, Balsamiq/Figma, Power BI, Tableau, Excel (workbook generado, revisión visual manual) |
+| Python, SQLite, FastAPI, pytest, openpyxl, PyYAML, Playwright, Pillow, Matplotlib, img2pdf, Mermaid, bpmn-js | Jira, Confluence, Azure DevOps, Bizagi/Camunda/Signavio, Lucidchart/Visio/Miro, Balsamiq/Figma, Power BI, Tableau, Excel (workbook generado, revisión visual manual) |
 
 Los artefactos manuales están listos para importar o replicar; las capturas y
 enlaces quedan pendientes en `docs/EVIDENCIAS.md`. No se declara haber operado

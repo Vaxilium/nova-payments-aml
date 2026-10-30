@@ -131,6 +131,12 @@ Los siguientes supuestos se marcan `SUPUESTO NO VERIFICADO` en los documentos do
 | SNV-10 | Los pesos y umbrales del score KYC son parámetros de diseño; no fueron validados por Cumplimiento ni por un modelo estadístico. | `07-aml-compliance/docs/enfoque-riesgo.md` | P-009, P-011 |
 | SNV-11 | El proxy de dormancia de R06 (cuenta antigua, inactividad 48 h y depósito ≥5.000.000) aproxima el patrón etiquetado, pero no mide dormancia real. | `07-aml-compliance/docs/reglas-monitoreo.md` | P-015 |
 | SNV-12 | Los umbrales de las reglas R01–R12 se calibraron sobre el dataset sintético de Fase 3 y no representan umbrales de producción. | `07-aml-compliance/docs/reglas-monitoreo.md` | P-011, P-017 |
+| S-096 | 2026-10-29 | Decisión | Todos los activos visuales se generan con código (SVG, HTML/CSS, Matplotlib, Mermaid, bpmn-js y Playwright). No se usan fotos, ilustraciones de terceros ni imágenes de IA. | Evitar dependencias de licencias y declarar autoría real. | Medio | Activo |
+| S-097 | 2026-10-29 | Decisión | Las previews de BPMN y Mermaid son renders de artefactos propios; no son capturas de Bizagi, Camunda, Signavio, Lucidchart, Visio ni Miro. | No afirmar uso de herramientas no operadas. | Alto | Activo |
+| S-098 | 2026-10-29 | Decisión | El dashboard de Fase 9 es una página HTML/CSS autocontenida con capturas Playwright; no es un `.pbix` de Power BI ni un workbook de Tableau. | Mantener separado el artefacto generado de las herramientas externas pendientes. | Medio | Activo |
+| S-099 | 2026-10-29 | Decisión | La demo GIF ejecuta una transferencia local y una retención AML de alto valor sobre una copia temporal de SQLite; no modifica la base del repositorio ni representa una integración real. | Demostrar el flujo con evidencia real sin alterar datos ni exagerar el alcance. | Alto | Activo |
+| S-100 | 2026-10-29 | Decisión | El carrusel LinkedIn tiene 10 slides de 1080×1350 y se entrega como PDF y PNG; la publicación es manual y se registra en EV-011. | Formato compatible con documento de LinkedIn y evidencia honesta. | Bajo | Activo |
+| S-101 | 2026-10-29 | Decisión | GitHub Pages publica una copia de `docs/site/` con `docs/assets/` montado en `/assets`; el workflow no genera contenido adicional. | Mantener rutas estables y evitar publicar archivos fuera del alcance. | Medio | Activo |
 
 ## Historial de cambios
 
@@ -147,3 +153,4 @@ Los siguientes supuestos se marcan `SUPUESTO NO VERIFICADO` en los documentos do
 | 2026-10-29 | Fase 5: se agregan S-067 a S-079 y SNV-10 a SNV-12 por scoring KYC, perfiles determinísticos, screening, deduplicación, SLA, reglas SQL, proxy de dormancia, agregaciones, evaluación, ISO3, ROS y suite de pruebas. |
 | 2026-10-29 | Fase 6: se agregan S-080 a S-085 por latencia sintética, ciclo de vida analítico, exportación en memoria, compatibilidad XLOOKUP, modelo de casos y conversión de comisión internacional. |
 | 2026-10-29 | Fase 7: se agregan S-086 a S-095 por catálogo UAT reproducible, evidencia local, defectos, trazabilidad, compatibilidad 3.12/3.15, cortes de alertas, snapshot de métricas, borradores LinkedIn, casos manuales y criterio de cierre. |
+| 2026-10-29 | Fase 9: se agregan S-096 a S-101 por generación de activos, previews de procesos, dashboard HTML, demo temporal, carrusel LinkedIn y publicación en GitHub Pages. |

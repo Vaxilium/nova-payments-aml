@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="80" viewBox="0 0 400 80" role="img" aria-label="NovaBank — Payments &amp; AML Hub">
+<svg x="8" y="8" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Isotipo NovaBank">
+<defs>
+<mask id="nbh-mono-mark-hole"><rect width="64" height="64" fill="#fff"/><circle cx="32" cy="32" r="5.4" fill="#000"/></mask>
+</defs>
+<path d="M32 2.5 L39.6 24.4 L61.5 32 L39.6 39.6 L32 61.5 L24.4 39.6 L2.5 32 L24.4 24.4 Z" fill="currentColor" mask="url(#nbh-mono-mark-hole)"/>
+<circle cx="32" cy="32" r="1.9" fill="currentColor"/>
+</svg>
+<text x="88" y="41" font-family='"Segoe UI", Inter, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif' font-size="38" font-weight="700" letter-spacing="-1.4">
+<tspan fill="currentColor">Nova</tspan><tspan fill="currentColor">Bank</tspan>
+</text>
+<text x="90" y="62" font-family='"Segoe UI", Inter, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif' font-size="10.5" font-weight="600" letter-spacing="3.1" fill="currentColor">PAYMENTS &amp; AML HUB</text>
+</svg>

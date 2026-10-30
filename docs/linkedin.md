@@ -4,6 +4,62 @@
 > post publicado. Reemplazar `_pendiente_` solo con enlaces reales y verificados.
 > El caso NovaBank es 100 % ficticio.
 
+## Carrusel 2026 — Pagos, riesgo y decisiones
+
+**Archivo:** `docs/assets/linkedin/carousel-novabank.pdf` · 10 slides · 1080 × 1350
+**Portada:** `docs/assets/linkedin/carousel/01-portada.png`
+**Formato:** subir el PDF como documento en LinkedIn y usar el texto de abajo.
+
+### Texto sugerido para el post
+
+¿Cómo se ve un proyecto de pagos y AML desde Business Analysis?
+
+Armé NovaBank, un caso ficticio de un banco paraguayo que lanza transferencias
+instantáneas, pagos internacionales y monitoreo AML. El repositorio cubre el ciclo
+completo, no solo la etapa de documentación:
+
+- 10 épicas, 40 historias con Gherkin y 198 story points.
+- 6 procesos BPMN y 4 tablas DMN.
+- Core SQLite con partida doble y API FastAPI con idempotencia.
+- Mensajería ISO 20022/MT103 y 12 reglas AML.
+- 204 pruebas automatizadas y 51/51 casos UAT automatizados.
+- Dashboard, 10 wireframes, demo GIF y este carrusel.
+
+Lo más valioso fue la trazabilidad: cada historia tiene al menos un caso de
+prueba. Lo más incómodo fue aceptar lo que el prototipo no hace: no se conecta a
+SPI/SWIFT, no tiene autenticación y no es una certificación ISO 20022. Eso también
+queda documentado.
+
+Caso 100 % ficticio, datos sintéticos y resultados reproducibles.
+
+Repo: https://github.com/Vaxilium/nova-payments-aml
+
+#BusinessAnalysis #Pagos #AML #ISO20022 #SQL #UAT
+
+### Guion del carrusel
+
+1. Portada: pagos instantáneos, cross-border y AML.
+2. El reto: una sola experiencia, tres tensiones.
+3. Rol: BA end-to-end.
+4. Arquitectura: del canal al libro mayor.
+5. Diseño funcional: BPMN, DMN y criterios de aceptación.
+6. Datos y AML: 494 transacciones → 377 alertas → 59 casos.
+7. Calidad: 100 % recall; 99,13 % y 69,03 % de precisión.
+8. Producto: wireframes, dashboard y demo.
+9. Límites: lo implementado, lo manual y lo pendiente.
+10. Cierre y contacto.
+
+### Publicación
+
+1. Revisar los 10 PNG y el PDF.
+2. Subir `carousel-novabank.pdf` como documento.
+3. Pegar el texto, revisar el enlace y publicar.
+4. Guardar URL y captura en `docs/EVIDENCIAS.md` (EV-011).
+5. No afirmar uso operativo de Jira, Figma, Power BI, Tableau, Camunda, Bizagi,
+   Signavio, Lucidchart, Visio o Miro.
+
+---
+
 ## Sección Destacados
 
 **NovaBank — Pagos instantáneos, cross-border y AML (caso ficticio)**
@@ -122,6 +178,7 @@ Repositorio: https://github.com/Vaxilium/nova-payments-aml
 - [ ] Mantener la aclaración de caso ficticio.
 - [ ] Agregar el repositorio a la sección Destacados.
 - [ ] Guardar URL y captura en `docs/EVIDENCIAS.md` (EV-011).
+- [ ] Subir `docs/assets/linkedin/carousel-novabank.pdf` como documento en LinkedIn.
 
 ## Nota de honestidad
 

@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NovaBank · Panel de operaciones y cumplimiento</title>
+<link rel="icon" href="../brand/favicon.svg" type="image/svg+xml">
+<style>
+    :root {
+      --bg:#F8FAFC; --panel:#FFFFFF; --ink:#0F172A;
+      --muted:#64748B; --line:#E2E8F0; --soft:#F1F5F9;
+      --accent:#155E8A; --accent2:#14B8A6; --grid:#E2E8F0;
+      --shadow:0 16px 34px rgba(15,23,42,.08);
+    }
+    [data-theme="dark"] {
+      --bg:#04121F; --panel:#0A2540; --ink:#E6F1F8;
+      --muted:#94A3B8; --line:#1E4E75; --soft:#103B5C;
+      --accent:#22D3EE; --accent2:#2DD4BF; --grid:#1E4E75;
+      --shadow:0 18px 40px rgba(0,0,0,.28);
+    }
+    * { box-sizing:border-box; }
+    html, body { margin:0; background:var(--bg); color:var(--ink); font-family:"Segoe UI", Inter, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif; }
+    .shell { width:1600px; margin:0 auto; padding:34px 44px 26px; }
+    .mono { font-family:"Cascadia Mono", Consolas, "Courier New", monospace; font-variant-numeric:tabular-nums; }
+    .top { display:flex; justify-content:space-between; align-items:flex-start; gap:24px; }
+    .brand { display:flex; align-items:center; gap:22px; }
+    .brand svg { width:250px; height:auto; display:block; }
+    .logo-dark { display:none; }
+    [data-theme="dark"] .logo-light { display:none; }
+    [data-theme="dark"] .logo-dark { display:block; }
+    h1 { margin:0; font-size:28px; letter-spacing:-.7px; }
+    .brand p { margin:5px 0 0; color:var(--muted); font-size:13px; }
+    .top-right { display:flex; align-items:center; gap:10px; }
+    .badge { border:1px solid var(--line); background:var(--panel); color:var(--muted);
+      border-radius:999px; padding:8px 13px; font-size:11px; font-weight:800; letter-spacing:.6px; }
+    .theme { border:1px solid var(--line); background:var(--panel); color:var(--ink);
+      border-radius:999px; padding:8px 13px; font-size:11px; font-weight:800; cursor:pointer; }
+    .kpis { display:grid; grid-template-columns:repeat(5,1fr); gap:14px; margin:26px 0 18px; }
+    .kpi, .card { background:var(--panel); border:1px solid var(--line); border-radius:16px;
+      box-shadow:var(--shadow); }
+    .kpi { padding:18px 19px 16px; }
+    .kpi-value { font-size:30px; font-weight:800; letter-spacing:-1px; color:var(--accent); }
+    .kpi:nth-child(3) .kpi-value, .kpi:nth-child(4) .kpi-value { color:var(--accent2); }
+    .kpi-label { font-size:13px; font-weight:700; margin-top:4px; }
+    .kpi-note { font-size:11px; color:var(--muted); margin-top:3px; }
+    .rows { display:grid; gap:16px; margin-bottom:16px; }
+    .rows.two { grid-template-columns:1.55fr 1fr; }
+    .rows.split { grid-template-columns:1fr 1.35fr; }
+    .card { padding:20px 22px 18px; min-width:0; }
+    .card-head { display:flex; justify-content:space-between; align-items:flex-start; gap:16px; margin-bottom:8px; }
+    h2 { margin:0; font-size:17px; letter-spacing:-.2px; }
+    .card-head p { margin:4px 0 0; color:var(--muted); font-size:11.5px; }
+    .pill { border:1px solid var(--line); background:var(--soft); color:var(--muted);
+      border-radius:999px; padding:5px 10px; font-size:10.5px; font-weight:800; white-space:nowrap; }
+    svg { display:block; width:100%; height:auto; overflow:visible; }
+    .grid line.grid { stroke:var(--grid); stroke-width:1; opacity:.75; }
+    .axis { fill:var(--muted); font-size:10.5px; }
+    .line { fill:none; stroke:var(--accent); stroke-width:2.4; }
+    .area { fill:var(--accent); opacity:.14; }
+    .bar { fill:var(--accent); opacity:.78; }
+    .bar.warn { fill:#FBBF24; opacity:.95; }
+    .p50-line, .p95-line, .p99-line, .sla-line { stroke-width:1.6; stroke-dasharray:5 4; }
+    .p50-line { stroke:#22D3EE; }
+    .p95-line { stroke:#5EEAD4; }
+    .p99-line { stroke:#FBBF24; }
+    .sla-line { stroke:#F87171; stroke-dasharray:2 3; }
+    .marker { fill:var(--muted); font-size:9.5px; }
+    .value { fill:var(--ink); font-size:10.5px; font-weight:800; }
+    .donut-wrap { display:flex; align-items:center; gap:18px; padding-top:6px; }
+    .donut-wrap svg { width:190px; flex:0 0 190px; }
+    .donut-n { fill:var(--ink); font-size:24px; font-weight:800; }
+    .donut-l { fill:var(--muted); font-size:10.5px; }
+    .legend { display:flex; flex-direction:column; gap:9px; min-width:170px; }
+    .legend-row { display:grid; grid-template-columns:10px 46px 1fr; gap:7px;
+      align-items:center; color:var(--muted); font-size:11.5px; }
+    .legend-row strong { color:var(--ink); font-size:12px; }
+    .legend-row .muted { grid-column:2 / 4; font-size:10.5px; }
+    .dot { width:9px; height:9px; border-radius:50%; }
+    .conf { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:8px 0 10px; }
+    .conf-cell { border:1px solid var(--line); border-left:4px solid var(--c); border-radius:12px;
+      padding:12px 14px; background:var(--soft); }
+    .conf-cell span { color:var(--c); font-size:11px; font-weight:800; }
+    .conf-cell strong { display:block; font-size:30px; line-height:1.1; margin-top:2px; }
+    .conf-cell small { color:var(--muted); font-size:10.5px; }
+    .note { color:var(--muted); font-size:10.5px; line-height:1.45; margin:2px 0 0; }
+    table { width:100%; border-collapse:collapse; font-size:11px; }
+    th { text-align:left; color:var(--muted); font-size:10px; text-transform:uppercase;
+      letter-spacing:.7px; padding:7px 6px; border-bottom:1px solid var(--line); }
+    td { padding:8px 6px; border-bottom:1px solid var(--line); vertical-align:middle; }
+    tr:last-child td { border-bottom:0; }
+    .prio { display:inline-block; border-radius:999px; padding:3px 8px; font-size:10px; font-weight:800; }
+    .prio.p1 { background:#EF444422; color:#EF4444; }
+    .prio.p2 { background:#F59E0B22; color:#F59E0B; }
+    .prio.p3 { background:#64748B22; color:var(--muted); }
+    footer { display:flex; justify-content:space-between; color:var(--muted); font-size:10.5px;
+      padding:10px 2px 0; }
+    </style></head>
+<body>
+    <div class="shell">
+      <header class="top">
+        <div class="brand">
+          <div class="logo-light"><svg xmlns="http://www.w3.org/2000/svg" width="400" height="80" viewBox="0 0 400 80" role="img" aria-label="NovaBank — Payments &amp; AML Hub">
+<svg x="8" y="8" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Isotipo NovaBank">
+<defs><linearGradient id="nbh-light-mark-nova" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#155E8A"/><stop offset="100%" stop-color="#14B8A6"/></linearGradient>
+<mask id="nbh-light-mark-hole"><rect width="64" height="64" fill="#fff"/><circle cx="32" cy="32" r="5.4" fill="#000"/></mask>
+</defs>
+<path d="M32 2.5 L39.6 24.4 L61.5 32 L39.6 39.6 L32 61.5 L24.4 39.6 L2.5 32 L24.4 24.4 Z" fill="url(#nbh-light-mark-nova)" mask="url(#nbh-light-mark-hole)"/>
+<circle cx="32" cy="32" r="1.9" fill="#FFFFFF"/>
+</svg>
+<text x="88" y="41" font-family='"Segoe UI", Inter, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif' font-size="38" font-weight="700" letter-spacing="-1.4">
+<tspan fill="#0A2540">Nova</tspan><tspan fill="#14B8A6">Bank</tspan>
+</text>
+<text x="90" y="62" font-family='"Segoe UI", Inter, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif' font-size="10.5" font-weight="600" letter-spacing="3.1" fill="#64748B">PAYMENTS &amp; AML HUB</text>
+</svg></div>
+          <div class="logo-dark"><svg xmlns="http://www.w3.org/2000/svg" width="400" height="80" viewBox="0 0 400 80" role="img" aria-label="NovaBank — Payments &amp; AML Hub">
+<svg x="8" y="8" xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Isotipo NovaBank">
+<defs><linearGradient id="nbh-dark-mark-nova" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#22D3EE"/><stop offset="100%" stop-color="#5EEAD4"/></linearGradient>
+<mask id="nbh-dark-mark-hole"><rect width="64" height="64" fill="#fff"/><circle cx="32" cy="32" r="5.4" fill="#000"/></mask>
+</defs>
+<path d="M32 2.5 L39.6 24.4 L61.5 32 L39.6 39.6 L32 61.5 L24.4 39.6 L2.5 32 L24.4 24.4 Z" fill="url(#nbh-dark-mark-nova)" mask="url(#nbh-dark-mark-hole)"/>
+<circle cx="32" cy="32" r="1.9" fill="#FFFFFF"/>
+</svg>
+<text x="88" y="41" font-family='"Segoe UI", Inter, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif' font-size="38" font-weight="700" letter-spacing="-1.4">
+<tspan fill="#FFFFFF">Nova</tspan><tspan fill="#67E8F9">Bank</tspan>
+</text>
+<text x="90" y="62" font-family='"Segoe UI", Inter, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif' font-size="10.5" font-weight="600" letter-spacing="3.1" fill="#94A3B8">PAYMENTS &amp; AML HUB</text>
+</svg></div>
+          <div>
+            <h1>Panel de operaciones y cumplimiento</h1>
+            <p>Abril–septiembre 2026 · datos sintéticos · corte 2026-10-29</p>
+          </div>
+        </div>
+        <div class="top-right">
+          <button id="theme" class="theme" type="button" aria-label="Cambiar tema">Tema</button>
+          <span class="badge">Caso ficticio</span>
+        </div>
+      </header>
+
+      <section class="kpis"><article class="kpi"><div class="kpi-value mono">49.582</div>
+        <div class="kpi-label">movimientos</div><div class="kpi-note">49.582 transacciones sintéticas</div></article><article class="kpi"><div class="kpi-value mono">377</div>
+        <div class="kpi-label">alertas AML</div><div class="kpi-note">deduplicadas en el corte</div></article><article class="kpi"><div class="kpi-value mono">99,13 %</div>
+        <div class="kpi-label">precisión</div><div class="kpi-note">sobre etiquetadas</div></article><article class="kpi"><div class="kpi-value mono">100 %</div>
+        <div class="kpi-label">recall</div><div class="kpi-note">341 de 341 sospechosas</div></article><article class="kpi"><div class="kpi-value mono">95,3 %</div>
+        <div class="kpi-label">dentro de SLA</div><div class="kpi-note">p95 4.783 ms</div></article></section>
+
+      <section class="rows two">
+        <article class="card wide">
+          <div class="card-head"><div><h2>Volumen diario</h2>
+          <p>49.582 operaciones en 183 días</p></div>
+          <span class="pill">Media 271/día</span></div>
+          
+    <svg viewBox="0 0 820 250" role="img" aria-label="Volumen diario de transacciones">
+      <line x1="46" y1="22.0" x2="806" y2="22.0" class="grid"/><line x1="46" y1="71.0" x2="806" y2="71.0" class="grid"/><line x1="46" y1="120.0" x2="806" y2="120.0" class="grid"/><line x1="46" y1="169.0" x2="806" y2="169.0" class="grid"/><line x1="46" y1="218.0" x2="806" y2="218.0" class="grid"/>
+      <path d="M46,218 L46.0,62.5 L50.2,72.8 L54.4,80.3 L58.5,80.9 L62.7,75.5 L66.9,90.1 L71.1,77.6 L75.2,68.5 L79.4,76.0 L83.6,63.6 L87.8,60.9 L91.9,82.0 L96.1,69.0 L100.3,80.3 L104.5,63.6 L108.6,84.7 L112.8,73.9 L117.0,72.2 L121.2,85.2 L125.3,79.3 L129.5,69.5 L133.7,72.8 L137.9,61.5 L142.0,57.7 L146.2,53.4 L150.4,77.1 L154.6,71.7 L158.7,55.5 L162.9,67.9 L167.1,69.5 L171.3,84.7 L175.5,79.8 L179.6,81.4 L183.8,69.0 L188.0,66.3 L192.2,63.1 L196.3,86.3 L200.5,93.3 L204.7,71.7 L208.9,74.4 L213.0,69.0 L217.2,82.5 L221.4,69.0 L225.6,59.8 L229.7,63.6 L233.9,54.4 L238.1,82.5 L242.3,69.0 L246.4,72.8 L250.6,85.7 L254.8,77.6 L259.0,74.9 L263.1,59.3 L267.3,54.4 L271.5,88.4 L275.7,50.1 L279.8,63.1 L284.0,49.0 L288.2,79.8 L292.4,62.5 L296.5,70.6 L300.7,98.7 L304.9,71.2 L309.1,67.9 L313.3,70.1 L317.4,66.3 L321.6,54.4 L325.8,62.0 L330.0,69.5 L334.1,70.1 L338.3,60.9 L342.5,70.1 L346.7,67.4 L350.8,78.7 L355.0,60.4 L359.2,77.6 L363.4,74.4 L367.5,75.5 L371.7,60.4 L375.9,67.4 L380.1,63.6 L384.2,72.8 L388.4,77.6 L392.6,77.6 L396.8,62.5 L400.9,52.3 L405.1,74.4 L409.3,66.3 L413.5,89.0 L417.6,76.6 L421.8,78.7 L426.0,80.9 L430.2,85.7 L434.4,71.7 L438.5,76.0 L442.7,73.9 L446.9,72.2 L451.1,69.0 L455.2,62.5 L459.4,69.0 L463.6,74.9 L467.8,68.5 L471.9,60.4 L476.1,55.0 L480.3,76.6 L484.5,74.9 L488.6,79.3 L492.8,63.6 L497.0,84.7 L501.2,80.9 L505.3,73.9 L509.5,79.8 L513.7,70.6 L517.9,69.5 L522.0,72.2 L526.2,74.9 L530.4,70.6 L534.6,75.5 L538.7,72.2 L542.9,79.8 L547.1,60.9 L551.3,70.1 L555.5,84.1 L559.6,77.1 L563.8,63.1 L568.0,77.6 L572.2,65.2 L576.3,73.3 L580.5,79.8 L584.7,59.3 L588.9,65.8 L593.0,59.3 L597.2,71.7 L601.4,70.1 L605.6,77.1 L609.7,56.6 L613.9,83.0 L618.1,75.5 L622.3,77.1 L626.4,82.0 L630.6,66.3 L634.8,80.9 L639.0,66.3 L643.1,68.5 L647.3,67.4 L651.5,82.0 L655.7,83.0 L659.8,60.9 L664.0,75.5 L668.2,80.3 L672.4,64.7 L676.5,60.9 L680.7,74.4 L684.9,62.5 L689.1,71.2 L693.3,83.6 L697.4,73.9 L701.6,79.8 L705.8,71.2 L710.0,67.9 L714.1,84.7 L718.3,69.5 L722.5,67.4 L726.7,62.0 L730.8,59.3 L735.0,66.8 L739.2,83.6 L743.4,72.8 L747.5,77.6 L751.7,77.1 L755.9,82.0 L760.1,74.4 L764.2,79.8 L768.4,67.4 L772.6,57.1 L776.8,62.5 L780.9,70.6 L785.1,84.7 L789.3,73.3 L793.5,65.8 L797.6,85.7 L801.8,77.6 L806.0,59.3 L806,218 Z" class="area"/>
+      <polyline points="46.0,62.5 50.2,72.8 54.4,80.3 58.5,80.9 62.7,75.5 66.9,90.1 71.1,77.6 75.2,68.5 79.4,76.0 83.6,63.6 87.8,60.9 91.9,82.0 96.1,69.0 100.3,80.3 104.5,63.6 108.6,84.7 112.8,73.9 117.0,72.2 121.2,85.2 125.3,79.3 129.5,69.5 133.7,72.8 137.9,61.5 142.0,57.7 146.2,53.4 150.4,77.1 154.6,71.7 158.7,55.5 162.9,67.9 167.1,69.5 171.3,84.7 175.5,79.8 179.6,81.4 183.8,69.0 188.0,66.3 192.2,63.1 196.3,86.3 200.5,93.3 204.7,71.7 208.9,74.4 213.0,69.0 217.2,82.5 221.4,69.0 225.6,59.8 229.7,63.6 233.9,54.4 238.1,82.5 242.3,69.0 246.4,72.8 250.6,85.7 254.8,77.6 259.0,74.9 263.1,59.3 267.3,54.4 271.5,88.4 275.7,50.1 279.8,63.1 284.0,49.0 288.2,79.8 292.4,62.5 296.5,70.6 300.7,98.7 304.9,71.2 309.1,67.9 313.3,70.1 317.4,66.3 321.6,54.4 325.8,62.0 330.0,69.5 334.1,70.1 338.3,60.9 342.5,70.1 346.7,67.4 350.8,78.7 355.0,60.4 359.2,77.6 363.4,74.4 367.5,75.5 371.7,60.4 375.9,67.4 380.1,63.6 384.2,72.8 388.4,77.6 392.6,77.6 396.8,62.5 400.9,52.3 405.1,74.4 409.3,66.3 413.5,89.0 417.6,76.6 421.8,78.7 426.0,80.9 430.2,85.7 434.4,71.7 438.5,76.0 442.7,73.9 446.9,72.2 451.1,69.0 455.2,62.5 459.4,69.0 463.6,74.9 467.8,68.5 471.9,60.4 476.1,55.0 480.3,76.6 484.5,74.9 488.6,79.3 492.8,63.6 497.0,84.7 501.2,80.9 505.3,73.9 509.5,79.8 513.7,70.6 517.9,69.5 522.0,72.2 526.2,74.9 530.4,70.6 534.6,75.5 538.7,72.2 542.9,79.8 547.1,60.9 551.3,70.1 555.5,84.1 559.6,77.1 563.8,63.1 568.0,77.6 572.2,65.2 576.3,73.3 580.5,79.8 584.7,59.3 588.9,65.8 593.0,59.3 597.2,71.7 601.4,70.1 605.6,77.1 609.7,56.6 613.9,83.0 618.1,75.5 622.3,77.1 626.4,82.0 630.6,66.3 634.8,80.9 639.0,66.3 643.1,68.5 647.3,67.4 651.5,82.0 655.7,83.0 659.8,60.9 664.0,75.5 668.2,80.3 672.4,64.7 676.5,60.9 680.7,74.4 684.9,62.5 689.1,71.2 693.3,83.6 697.4,73.9 701.6,79.8 705.8,71.2 710.0,67.9 714.1,84.7 718.3,69.5 722.5,67.4 726.7,62.0 730.8,59.3 735.0,66.8 739.2,83.6 743.4,72.8 747.5,77.6 751.7,77.1 755.9,82.0 760.1,74.4 764.2,79.8 768.4,67.4 772.6,57.1 776.8,62.5 780.9,70.6 785.1,84.7 789.3,73.3 793.5,65.8 797.6,85.7 801.8,77.6 806.0,59.3" class="line"/>
+      <text x="46.0" y="242" class="axis" text-anchor="middle">Abr</text><text x="171.3" y="242" class="axis" text-anchor="middle">May</text><text x="300.7" y="242" class="axis" text-anchor="middle">Jun</text><text x="426.0" y="242" class="axis" text-anchor="middle">Jul</text><text x="555.5" y="242" class="axis" text-anchor="middle">Ago</text><text x="684.9" y="242" class="axis" text-anchor="middle">Sep</text>
+    </svg>
+        </article>
+        <article class="card">
+          <div class="card-head"><div><h2>Mezcla por moneda</h2><p>Participación operativa</p></div></div>
+          
+    <div class="donut-wrap">
+      <svg viewBox="0 0 184 184" role="img" aria-label="Distribución por moneda">
+        <circle cx="92" cy="92" r="54" fill="none" stroke="#22D3EE" stroke-width="20" stroke-dasharray="205.06 134.23" stroke-dashoffset="-0.00" transform="rotate(-90 92 92)"/><circle cx="92" cy="92" r="54" fill="none" stroke="#2DD4BF" stroke-width="20" stroke-dasharray="134.23 205.06" stroke-dashoffset="-205.06" transform="rotate(-90 92 92)"/>
+        <text x="92" y="88" text-anchor="middle" class="donut-n">49.582</text>
+        <text x="92" y="108" text-anchor="middle" class="donut-l">operaciones</text>
+      </svg>
+      <div class="legend"><div class="legend-row"><span class="dot" style="background:#22D3EE"></span>
+        <strong>PYG</strong><span>29.966 ops</span>
+        <span class="muted">60,4 %</span></div><div class="legend-row"><span class="dot" style="background:#2DD4BF"></span>
+        <strong>USD</strong><span>19.616 ops</span>
+        <span class="muted">39,6 %</span></div></div>
+    </div>
+        </article>
+      </section>
+
+      <section class="rows two">
+        <article class="card wide">
+          <div class="card-head"><div><h2>Latencia del pago instantáneo</h2>
+          <p>10.820 pagos locales · latencia sintética y determinista</p></div>
+          <span class="pill">95,3 % dentro de SLA</span></div>
+          
+    <svg viewBox="0 0 820 250" role="img" aria-label="Distribución de latencia del pago instantáneo">
+      <line x1="46" y1="22.0" x2="806" y2="22.0" class="grid"/><line x1="46" y1="71.0" x2="806" y2="71.0" class="grid"/><line x1="46" y1="120.0" x2="806" y2="120.0" class="grid"/><line x1="46" y1="169.0" x2="806" y2="169.0" class="grid"/><line x1="46" y1="218.0" x2="806" y2="218.0" class="grid"/><rect x="47.0" y="135.5" width="29.7" height="82.5" class="bar"/><rect x="78.7" y="28.7" width="29.7" height="189.3" class="bar"/><rect x="110.3" y="25.2" width="29.7" height="192.8" class="bar"/><rect x="142.0" y="22.0" width="29.7" height="196.0" class="bar"/><rect x="173.7" y="32.4" width="29.7" height="185.6" class="bar"/><rect x="205.3" y="24.7" width="29.7" height="193.3" class="bar"/><rect x="237.0" y="26.4" width="29.7" height="191.6" class="bar"/><rect x="268.7" y="23.2" width="29.7" height="194.8" class="bar"/><rect x="300.3" y="36.3" width="29.7" height="181.7" class="bar"/><rect x="332.0" y="93.9" width="29.7" height="124.1" class="bar"/><rect x="363.7" y="217.3" width="29.7" height="0.7" class="bar"/><rect x="395.3" y="210.9" width="29.7" height="7.1" class="bar"/><rect x="427.0" y="209.8" width="29.7" height="8.2" class="bar"/><rect x="458.7" y="210.1" width="29.7" height="7.9" class="bar"/><rect x="490.3" y="212.3" width="29.7" height="5.7" class="bar"/><rect x="522.0" y="212.5" width="29.7" height="5.5" class="bar"/><rect x="553.7" y="211.3" width="29.7" height="6.7" class="bar"/><rect x="585.3" y="211.1" width="29.7" height="6.9" class="bar"/><rect x="617.0" y="209.9" width="29.7" height="8.1" class="bar"/><rect x="648.7" y="212.6" width="29.7" height="5.4" class="bar"/><rect x="680.3" y="212.5" width="29.7" height="5.5" class="bar warn"/><rect x="712.0" y="211.8" width="29.7" height="6.2" class="bar warn"/><rect x="743.7" y="212.3" width="29.7" height="5.7" class="bar warn"/><rect x="775.3" y="212.1" width="29.7" height="5.9" class="bar warn"/><text x="46.0" y="242" class="axis" text-anchor="middle">0s</text><text x="172.7" y="242" class="axis" text-anchor="middle">2s</text><text x="299.3" y="242" class="axis" text-anchor="middle">4s</text><text x="426.0" y="242" class="axis" text-anchor="middle">6s</text><text x="552.7" y="242" class="axis" text-anchor="middle">8s</text><text x="679.3" y="242" class="axis" text-anchor="middle">10s</text><text x="806.0" y="242" class="axis" text-anchor="middle">12s</text><line x1="214.8" y1="22" x2="214.8" y2="218" class="p50-line"/><text x="217.8" y="34" class="marker">p50</text><line x1="348.9" y1="22" x2="348.9" y2="218" class="p95-line"/><text x="351.9" y="34" class="marker">p95</text><line x1="704.9" y1="22" x2="704.9" y2="218" class="p99-line"/><text x="707.9" y="34" class="marker">p99</text><line x1="679.3" y1="22" x2="679.3" y2="218" class="sla-line"/><text x="682.3" y="34" class="marker">SLA</text>
+    </svg>
+        </article>
+        <article class="card">
+          <div class="card-head"><div><h2>Alertas por regla</h2><p>Top 7 de 12 reglas</p></div></div>
+          <svg viewBox="0 0 520 250" role="img" aria-label="Alertas por regla"><rect x="132" y="16" width="344.0" height="22" rx="4" fill="#22D3EE"/><text x="124" y="31" class="axis" text-anchor="end">R09 · Cambio de conducta</text><text x="483.0" y="31" class="value">80</text><rect x="132" y="50" width="339.7" height="22" rx="4" fill="#FBBF24"/><text x="124" y="65" class="axis" text-anchor="end">R04 · Cuenta de paso</text><text x="478.7" y="65" class="value">79</text><rect x="132" y="84" width="318.2" height="22" rx="4" fill="#22D3EE"/><text x="124" y="99" class="axis" text-anchor="end">R05 · Depósitos redondos</text><text x="457.2" y="99" class="value">74</text><rect x="132" y="118" width="305.3" height="22" rx="4" fill="#22D3EE"/><text x="124" y="133" class="axis" text-anchor="end">R08 · Importe atípico</text><text x="444.3" y="133" class="value">71</text><rect x="132" y="152" width="129.0" height="22" rx="4" fill="#FBBF24"/><text x="124" y="167" class="axis" text-anchor="end">R01 · Estructuración</text><text x="268.0" y="167" class="value">30</text><rect x="132" y="186" width="124.7" height="22" rx="4" fill="#22D3EE"/><text x="124" y="201" class="axis" text-anchor="end">R06 · Cuenta dormida</text><text x="263.7" y="201" class="value">29</text><rect x="132" y="220" width="21.5" height="22" rx="4" fill="#FBBF24"/><text x="124" y="235" class="axis" text-anchor="end">R02 · Velocidad (cantidad)</text><text x="160.5" y="235" class="value">5</text></svg>
+        </article>
+      </section>
+
+      <section class="rows split">
+        <article class="card">
+          <div class="card-head"><div><h2>Calidad del monitoreo</h2><p>833 transacciones etiquetadas</p></div></div>
+          <div class="conf"><div class="conf-cell" style="--c:#34D399">
+        <span>Verdaderos positivos</span><strong>341</strong><small>sospechosa · alertada</small></div><div class="conf-cell" style="--c:#FBBF24">
+        <span>Falsos positivos</span><strong>3</strong><small>normal · alertada</small></div><div class="conf-cell" style="--c:#F87171">
+        <span>Falsos negativos</span><strong>0</strong><small>sospechosa · no alertada</small></div><div class="conf-cell" style="--c:#22D3EE">
+        <span>Verdaderos negativos</span><strong>489</strong><small>normal · no alertada</small></div></div>
+          <p class="note">150 alertas sin etiqueta quedan fuera de la matriz. Si se cuentan como FP,
+          la precisión conservadora baja a 69,03 %.</p>
+        </article>
+        <article class="card wide">
+          <div class="card-head"><div><h2>Alertas priorizadas</h2><p>Ordenadas por prioridad y score</p></div>
+          <span class="pill">P1 / P2 / P3</span></div>
+          <table>
+    <thead><tr><th>Prioridad</th><th>Alerta</th><th>Regla</th><th>Score</th><th>Estado</th><th>Vence</th></tr></thead>
+    <tbody><tr><td><span class="prio p1">P1</span></td>
+        <td class="mono">44</td>
+        <td>R04 · Cuenta de paso (entrada y salida rápida)</td>
+        <td class="mono">87</td>
+        <td>ESCALADA</td>
+        <td class="mono">2026-04-21 18:33</td></tr><tr><td><span class="prio p1">P1</span></td>
+        <td class="mono">4</td>
+        <td>R01 · Estructuración por debajo del umbral</td>
+        <td class="mono">82</td>
+        <td>CERRADA_FALSO_POSITIVO</td>
+        <td class="mono">2026-05-26 16:20</td></tr><tr><td><span class="prio p1">P1</span></td>
+        <td class="mono">32</td>
+        <td>R02 · Velocidad transaccional por cantidad</td>
+        <td class="mono">81</td>
+        <td>NUEVA</td>
+        <td class="mono"></td></tr><tr><td><span class="prio p2">P2</span></td>
+        <td class="mono">374</td>
+        <td>R12 · Fan-in de múltiples remitentes</td>
+        <td class="mono">77</td>
+        <td>ESCALADA</td>
+        <td class="mono">2026-06-29 18:58</td></tr><tr><td><span class="prio p2">P2</span></td>
+        <td class="mono">120</td>
+        <td>R05 · Depósitos redondos reiterados</td>
+        <td class="mono">71</td>
+        <td>EN_ANALISIS</td>
+        <td class="mono">2026-04-24 15:26</td></tr><tr><td><span class="prio p2">P2</span></td>
+        <td class="mono">199</td>
+        <td>R06 · Reactivación de cuenta inactiva</td>
+        <td class="mono">68</td>
+        <td>NUEVA</td>
+        <td class="mono"></td></tr></tbody></table>
+        </article>
+      </section>
+
+      <footer>
+        <span>Fuente: 09-analitica/data/*.csv · 07-aml-compliance/docs/evaluacion-verdad.md</span>
+        <span>NovaBank · caso ficticio · sin PII</span>
+      </footer>
+    </div>
+<script>
+const root = document.documentElement;
+document.getElementById('theme').addEventListener('click', () => {
+  root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+});
+const params = new URLSearchParams(location.search);
+if (params.get('theme')) root.dataset.theme = params.get('theme');
+</script>
+</body></html>

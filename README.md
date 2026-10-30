@@ -1,9 +1,35 @@
-# NovaBank — Instant & Cross-Border Payments + AML Hub
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/assets/img/banner-dark.png">
+    <img src="docs/assets/img/banner-light.png" alt="NovaBank — Pagos que fluyen. Riesgo bajo control." width="100%">
+  </picture>
+</p>
 
-> Portfolio case study by **Franco Tillería Centurión** — Business Analyst (banking) — Asunción, Paraguay
-> Fictional case. No real customer, account or confidential data is used.
+<h1 align="center">NovaBank — Instant &amp; Cross-Border Payments + AML Hub</h1>
+
+<p align="center"><b>Caso de portafolio end-to-end · Business Analysis · Pagos · AML</b></p>
+
+<p align="center">
+  <img alt="Python 3.12+" src="https://img.shields.io/badge/Python-3.12%2B-3776AB?style=flat-square&amp;logo=python&amp;logoColor=white">
+  <img alt="Tests" src="https://img.shields.io/badge/tests-204%2F204-2DD4BF?style=flat-square">
+  <img alt="UAT" src="https://img.shields.io/badge/UAT-51%2F51-22D3EE?style=flat-square">
+  <img alt="AML rules" src="https://img.shields.io/badge/AML-12%20reglas-0E7490?style=flat-square">
+  <img alt="ISO 20022" src="https://img.shields.io/badge/ISO%2020022-pacs.008-155E8A?style=flat-square">
+  <img alt="MIT License" src="https://img.shields.io/badge/license-MIT-64748B?style=flat-square">
+</p>
+
+<p align="center">
+  <b>Franco Tillería Centurión</b> · Business Analyst · Asunción, Paraguay<br>
+  <a href="https://www.linkedin.com/in/franco-tilleria-centurion/">LinkedIn</a> ·
+  <a href="https://github.com/Vaxilium">GitHub</a> ·
+  <a href="https://github.com/Vaxilium/nova-payments-aml">Repositorio</a> ·
+  <a href="README.en.md">English version</a>
+</p>
+
+> **Caso 100 % ficticio.** NovaBank, sus clientes, cuentas, BIC e IBAN son inventados.
+> No se usa información confidencial de empleadores o entidades reales.
 >
-> [English version](README.en.md) · [Case study](docs/case-study.md) · [Interview guide](docs/entrevista.md) · [Truth audit](docs/AUDITORIA.md) · [Evidence checklist](docs/evidencias/README.md)
+> [Case study](docs/case-study.md) · [Guion de entrevista](docs/entrevista.md) · [Auditoría de verdad](docs/AUDITORIA.md) · [Evidencias](docs/EVIDENCIAS.md) · [Carrusel LinkedIn](docs/assets/linkedin/carousel-novabank.pdf)
 
 ## Executive Summary (English)
 
@@ -15,13 +41,14 @@ core/middleware design, messaging validation, AML rules, UAT and analytics. It i
 a public portfolio built to demonstrate practical BA tools and banking-domain
 knowledge on a realistic but entirely synthetic scenario.
 
-The project is complete at artifact level across seven delivery phases plus an
-independent audit/reinforcement phase. It includes 10
-epics and 40 user stories with Gherkin acceptance criteria, 6 BPMN processes, 4
+The project is complete at artifact level across nine delivery phases. It includes
+10 epics and 40 user stories with Gherkin acceptance criteria, 6 BPMN processes, 4
 DMN decision tables, a tested SQLite core with double-entry accounting, a FastAPI
 `/v1` service, ISO 20022/MT103 validators and simulators, 12 AML monitoring
 rules, a synthetic dataset, an 11-sheet Excel workbook, Power BI/Tableau
-specifications, and a UAT pack with 65 test cases.
+specifications, and a UAT pack with 65 test cases. Phase 9 adds a reproducible
+visual system: brand assets, banners, diagrams, charts, a dashboard, wireframes,
+a technical demo GIF, a LinkedIn carousel and a GitHub Pages site.
 
 Latest reproducible results (2026-10-29, local Windows environment):
 
@@ -39,6 +66,80 @@ The automated evidence is real and reproducible (verified in a fresh clone on
 Power BI, Tableau, Camunda and LinkedIn **requires manual execution by the
 author** and is tracked in [`docs/EVIDENCIAS.md`](docs/EVIDENCIAS.md). Every claim
 in this README was audited in [`docs/AUDITORIA.md`](docs/AUDITORIA.md).
+
+<p align="center">
+  <a href="#el-problema">Problema</a> ·
+  <a href="#la-solución">Solución</a> ·
+  <a href="#demo-reproducible">Demo</a> ·
+  <a href="#galería-visual">Galería</a> ·
+  <a href="#resultados-clave-métricas-reales">Resultados</a> ·
+  <a href="#cómo-ejecutar-el-proyecto">Ejecutar</a> ·
+  <a href="#qué-demuestra-y-qué-no-demuestra">Límites</a> ·
+  <a href="#gobierno-del-proyecto">Gobierno</a>
+</p>
+
+## Vista rápida
+
+| Dimensión | Resultado reproducible |
+|---|---|
+| Negocio y requisitos | 10 épicas · 40 historias Gherkin · 16 NFR · 198 SP |
+| Procesos y decisiones | 6 BPMN · 4 DMN · 10 wireframes |
+| Core y mensajería | SQLite con partida doble · API FastAPI `/v1` · ISO 20022/MT103 |
+| AML | 12 reglas SQL · 377 alertas deduplicadas · 59 casos |
+| Calidad | 204/204 pruebas · 51/51 UAT automatizada · 23/23 controles SQL |
+| Presentación | Dashboard · demo GIF · carrusel LinkedIn · GitHub Pages |
+
+## Demo reproducible
+
+<p align="center">
+  <a href="docs/assets/img/demo.gif">
+    <img src="docs/assets/img/demo-poster.png" alt="Demo técnica: transferencia local, mensaje ISO 20022 y retención AML" width="900">
+  </a>
+</p>
+
+La demo ejecuta una transferencia local real sobre una **copia temporal** de
+SQLite, muestra el asiento de partida doble y una retención AML por alto valor.
+No modifica la base del repositorio y no usa PII.
+
+```powershell
+python -m pip install -r requirements-assets.txt
+python -m scripts.demo
+```
+
+Salida: [`docs/assets/img/demo.gif`](docs/assets/img/demo.gif) · fuente
+[`docs/assets/src/demo.html`](docs/assets/src/demo.html) · script
+[`scripts/demo.py`](scripts/demo.py).
+
+## Galería visual
+
+<table>
+  <tr>
+    <td width="50%">
+      <a href="docs/assets/dashboard/index.html"><img src="docs/assets/img/dashboard-dark.png" alt="Dashboard de operaciones y cumplimiento" width="100%"></a>
+      <sub><b>Dashboard operativo</b> · KPIs, SLA, alertas y calidad AML · <a href="docs/assets/dashboard/index.html">HTML interactivo</a></sub>
+    </td>
+    <td width="50%">
+      <a href="docs/assets/img/architecture.png"><img src="docs/assets/img/architecture.png" alt="Arquitectura lógica de NovaBank" width="100%"></a>
+      <sub><b>Arquitectura</b> · del canal al libro mayor · <a href="02-procesos/diagramas-sistema.md">vista completa</a></sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <a href="docs/assets/img/chart-alerts-by-rule.png"><img src="docs/assets/img/chart-alerts-by-rule.png" alt="Alertas AML por regla" width="100%"></a>
+      <sub><b>Monitoreo AML</b> · 377 alertas deduplicadas · <a href="07-aml-compliance/docs/reglas-monitoreo.md">12 reglas</a></sub>
+    </td>
+    <td width="50%">
+      <a href="docs/assets/img/ux/ux-aml-inbox.png"><img src="docs/assets/img/ux/ux-aml-inbox.png" alt="Wireframe de la bandeja de alertas AML" width="100%"></a>
+      <sub><b>UX</b> · 10 wireframes de app y consola AML · <a href="docs/assets/ux/index.html">galería</a></sub>
+    </td>
+  </tr>
+</table>
+
+Más artefactos: [dashboard](docs/assets/dashboard/index.html) ·
+[galería UX](docs/assets/ux/index.html) ·
+[gráficos](docs/assets/img/) ·
+[demo GIF](docs/assets/img/demo.gif) ·
+[carrusel LinkedIn (PDF)](docs/assets/linkedin/carousel-novabank.pdf).
 
 ## El problema
 
@@ -71,6 +172,8 @@ El repositorio modela el ciclo completo de un BA end-to-end:
 | 5 — AML y compliance | Demostrar KYC, screening y monitoreo | Scoring, 12 reglas SQL, screening difuso, alertas, casos, SLA, ROS ficticios, mapeo SEPRELAD/GAFI |
 | 6 — UX y analítica | Mostrar pantallas y capacidad analítica | 10 wireframes, especificaciones UX, 12 CSV, Excel, Power Query, 36 medidas DAX, guía Tableau |
 | 7 — QA/UAT y cierre | Verificar y comunicar | Estrategia, plan UAT, 65 casos, defectos, pipelines, README y borradores LinkedIn |
+| 8 — Auditoría | Verificar afirmaciones y empaquetar | Auditoría de verdad, clon limpio, README bilingüe, case study, entrevista y licencia |
+| 9 — Portafolio visual | Hacer visible y reproducible el caso | Marca, banners, diagramas, gráficos, dashboard, UX, demo GIF, carrusel y GitHub Pages |
 
 ## Arquitectura (vista lógica)
 
@@ -124,7 +227,8 @@ La vista completa de contexto, contenedores, entidades y journeys está en
 | Automatización de pruebas | pytest | [`08-qa-uat/`](08-qa-uat/README.md) y suites de fases 3 a 7 | Implementado; 204/204 |
 | UAT y evidencia | Azure Test Plans / Excel | [65 casos](08-qa-uat/casos-prueba.csv), [matriz](08-qa-uat/matriz-ejecucion.xlsx) | Automatización ejecutada; UAT manual pendiente |
 | Integración continua | GitHub Actions | [`.github/workflows/ci.yml`](.github/workflows/ci.yml) | Workflow listo; run manual pendiente (EV-010) |
-| Difusión | LinkedIn | [`docs/linkedin.md`](docs/linkedin.md) | Borradores listos; publicación pendiente (EV-011) |
+| Publicación web | GitHub Pages | [`docs/site/`](docs/site/) + [workflow](.github/workflows/pages.yml) | Sitio listo; despliegue pendiente de habilitar Pages (EV-012) |
+| Difusión | LinkedIn | [`docs/linkedin.md`](docs/linkedin.md) + [carrusel PDF](docs/assets/linkedin/carousel-novabank.pdf) | Textos y carrusel listos; publicación pendiente (EV-011) |
 
 ## Cómo ejecutar el proyecto
 
@@ -172,6 +276,20 @@ uvicorn app.main:app --reload --app-dir 05-core-middleware
 
 Si se usa `cmd.exe` en lugar de PowerShell, reemplazar `.\` por nada y `\` por
 `/` en las rutas; los scripts aceptan ambos separadores.
+
+### Generar los activos visuales
+
+Los assets de Fase 9 se regeneran por código con Playwright, Pillow, Matplotlib
+e `img2pdf`. Requieren Chromium y Node para renderizar Mermaid/BPMN.
+
+```powershell
+python -m pip install -r requirements-assets.txt
+python -m playwright install chromium
+python -m scripts.make_assets --all
+```
+
+Pasos individuales: `brand`, `charts`, `diagrams`, `covers`, `dashboard`, `ux`,
+`demo` y `linkedin`.
 
 Artefactos que se generan:
 
@@ -314,6 +432,7 @@ Artefactos que se generan:
 | 6 — UX y analítica | Completada en artefactos; EV-006 a EV-008 pendientes |
 | 7 — QA/UAT y cierre | Completada en automatización y artefactos; EV-009 a EV-011 pendientes |
 | 8 — Auditoría y refuerzo | Completada y verificada en clon limpio |
+| 9 — Portafolio visual | Completada: marca, assets, demo, carrusel y sitio de GitHub Pages |
 
 ## Estructura del repositorio
 
@@ -329,10 +448,14 @@ nova-payments-aml/
 ├─ 08-qa-uat/            # estrategia, casos UAT, pipelines, evidencias
 ├─ 09-analitica/         # datasets, Excel, Power BI (DAX), Tableau
 ├─ docs/                 # gobernanza: supuestos, pendientes, fuentes, evidencias
-├─ .github/workflows/    # CI de GitHub Actions
+│  ├─ assets/            # marca, diagramas, dashboard, UX, demo y LinkedIn
+│  └─ site/              # homepage estática para GitHub Pages
+├─ scripts/              # generadores de assets visuales
+├─ .github/workflows/    # CI y despliegue de GitHub Pages
 ├─ AGENTS.md             # reglas operativas para agentes y colaboradores
 ├─ PLAN.md               # hoja de ruta por fases
-├─ requirements.txt      # dependencias de Python
+├─ requirements.txt      # dependencias del núcleo y pruebas
+├─ requirements-assets.txt # dependencias de generación visual
 ├─ .env.example          # variables de entorno (sin secretos)
 └─ .gitignore
 ```
@@ -352,7 +475,9 @@ nova-payments-aml/
 | [`docs/case-study.md`](docs/case-study.md) | Case study de dos páginas |
 | [`docs/entrevista.md`](docs/entrevista.md) | Guion de entrevista por fase y límites del proyecto |
 | [`08-qa-uat/README.md`](08-qa-uat/README.md) | Estrategia, casos, resultados y pipelines |
-| [`docs/linkedin.md`](docs/linkedin.md) | Textos para Destacados y borradores de posts |
+| [`docs/linkedin.md`](docs/linkedin.md) | Textos para Destacados, carrusel y borradores de posts |
+| [`docs/assets/CREDITOS.md`](docs/assets/CREDITOS.md) | Autoría y generación de los activos visuales |
+| [`docs/site/index.html`](docs/site/index.html) | Homepage estática del portafolio |
 | [`CHANGELOG.md`](CHANGELOG.md) | Historial de versiones |
 | [`LICENSE`](LICENSE) | Licencia MIT |
 
@@ -367,7 +492,8 @@ entidades ni utiliza información confidencial.
 ## Autor
 
 **Franco Tillería Centurión** — Analista Funcional / Business Analyst
-LinkedIn: _pendiente de enlace público_ (ver P-004 en `docs/PENDIENTES.md`).
+[LinkedIn](https://www.linkedin.com/in/franco-tilleria-centurion/) ·
+[GitHub](https://github.com/Vaxilium)
 
 ## Licencia
 

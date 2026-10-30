@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo NovaBank</title>
+<style>
+* { box-sizing:border-box; }
+html,body { margin:0; width:1280px; height:800px; overflow:hidden; }
+body { background:#04121F; color:#E2E8F0; font-family:"Segoe UI", Inter, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif; }
+.page { position:relative; width:1280px; height:800px; padding:34px 48px 24px;
+  background:
+    radial-gradient(circle at 82% 8%, rgba(34,211,238,.16), transparent 34%),
+    radial-gradient(circle at 4% 90%, rgba(20,184,166,.11), transparent 30%),
+    linear-gradient(145deg, #071A2F, #04121F 70%); }
+.top { display:flex; align-items:center; justify-content:space-between; }
+.logo { height:42px; }
+.badge { border:1px solid rgba(34,211,238,.45); color:#67E8F9; border-radius:999px;
+  padding:7px 14px; font-size:11px; font-weight:800; letter-spacing:1.8px; }
+h1 { font-size:22px; margin:16px 0 4px; letter-spacing:-.2px; }
+.sub { color:#94A3B8; font-size:12.5px; margin:0 0 16px; }
+.pipeline { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:14px; }
+.stage { display:flex; align-items:center; gap:10px; border:1px solid #1E3A52;
+  background:rgba(127,180,210,.04); border-radius:10px; padding:10px 12px; color:#94A3B8; }
+.stage .dot { width:9px; height:9px; border-radius:50%; background:#334155; flex:none; }
+.stage .num { font:700 10px "Segoe UI", Inter, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif; letter-spacing:1px; color:#64748B; }
+.stage .name { font-size:12px; font-weight:700; }
+.stage.active { border-color:#22D3EE; background:rgba(34,211,238,.10); color:#E0F2FE; }
+.stage.active .dot { background:#22D3EE; box-shadow:0 0 0 5px rgba(34,211,238,.14); }
+.stage.done { border-color:rgba(45,212,191,.55); color:#CCFBF1; }
+.stage.done .dot { background:#2DD4BF; }
+.terminal { border:1px solid #1E3A52; background:#020A12; border-radius:12px;
+  box-shadow:0 22px 50px rgba(0,0,0,.38); overflow:hidden; }
+.bar { height:34px; display:flex; align-items:center; gap:7px; padding:0 14px;
+  background:#0A1B2B; border-bottom:1px solid #1E3A52; }
+.bar i { width:9px; height:9px; border-radius:50%; display:block; }
+.bar .r { background:#F87171; } .bar .y { background:#FBBF24; } .bar .g { background:#34D399; }
+.bar span { color:#64748B; font:600 10.5px "Segoe UI", Inter, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif; margin-left:8px; letter-spacing:.4px; }
+pre { margin:0; padding:15px 20px 16px; font:12.8px/1.52 "Cascadia Mono", Consolas, monospace; }
+.line { white-space:pre; opacity:0; transform:translateY(3px); transition:opacity .12s ease, transform .12s ease; }
+.line.on { opacity:1; transform:none; }
+.line.cmd { color:#67E8F9; } .line.step { color:#5EEAD4; font-weight:700; margin-top:4px; }
+.line.ok { color:#86EFAC; } .line.warn { color:#FCD34D; font-weight:700; }
+.line.done { color:#7DD3FC; font-weight:700; } .line.muted { color:#64748B; }
+.line.blank { height:9px; }
+.foot { display:flex; justify-content:space-between; align-items:center; margin-top:12px;
+  color:#64748B; font-size:10.5px; }
+.foot b { color:#94A3B8; }
+</style></head>
+<body><div class="page">
+  <div class="top"><img class="logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA0MDAgODAiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iTm92YUJhbmsg4oCUIFBheW1lbnRzICZhbXA7IEFNTCBIdWIiPgo8c3ZnIHg9IjgiIHk9IjgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiB2aWV3Qm94PSIwIDAgNjQgNjQiIHJvbGU9ImltZyIgYXJpYS1sYWJlbD0iSXNvdGlwbyBOb3ZhQmFuayI+CjxkZWZzPjxsaW5lYXJHcmFkaWVudCBpZD0ibmJoLWRhcmstbWFyay1ub3ZhIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzIyRDNFRSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzVFRUFENCIvPjwvbGluZWFyR3JhZGllbnQ+CjxtYXNrIGlkPSJuYmgtZGFyay1tYXJrLWhvbGUiPjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCIgZmlsbD0iI2ZmZiIvPjxjaXJjbGUgY3g9IjMyIiBjeT0iMzIiIHI9IjUuNCIgZmlsbD0iIzAwMCIvPjwvbWFzaz4KPC9kZWZzPgo8cGF0aCBkPSJNMzIgMi41IEwzOS42IDI0LjQgTDYxLjUgMzIgTDM5LjYgMzkuNiBMMzIgNjEuNSBMMjQuNCAzOS42IEwyLjUgMzIgTDI0LjQgMjQuNCBaIiBmaWxsPSJ1cmwoI25iaC1kYXJrLW1hcmstbm92YSkiIG1hc2s9InVybCgjbmJoLWRhcmstbWFyay1ob2xlKSIvPgo8Y2lyY2xlIGN4PSIzMiIgY3k9IjMyIiByPSIxLjkiIGZpbGw9IiNGRkZGRkYiLz4KPC9zdmc+Cjx0ZXh0IHg9Ijg4IiB5PSI0MSIgZm9udC1mYW1pbHk9JyJTZWdvZSBVSSIsIEludGVyLCBzeXN0ZW0tdWksIC1hcHBsZS1zeXN0ZW0sICJIZWx2ZXRpY2EgTmV1ZSIsIEFyaWFsLCBzYW5zLXNlcmlmJyBmb250LXNpemU9IjM4IiBmb250LXdlaWdodD0iNzAwIiBsZXR0ZXItc3BhY2luZz0iLTEuNCI+Cjx0c3BhbiBmaWxsPSIjRkZGRkZGIj5Ob3ZhPC90c3Bhbj48dHNwYW4gZmlsbD0iIzY3RThGOSI+QmFuazwvdHNwYW4+CjwvdGV4dD4KPHRleHQgeD0iOTAiIHk9IjYyIiBmb250LWZhbWlseT0nIlNlZ29lIFVJIiwgSW50ZXIsIHN5c3RlbS11aSwgLWFwcGxlLXN5c3RlbSwgIkhlbHZldGljYSBOZXVlIiwgQXJpYWwsIHNhbnMtc2VyaWYnIGZvbnQtc2l6ZT0iMTAuNSIgZm9udC13ZWlnaHQ9IjYwMCIgbGV0dGVyLXNwYWNpbmc9IjMuMSIgZmlsbD0iIzk0QTNCOCI+UEFZTUVOVFMgJmFtcDsgQU1MIEhVQjwvdGV4dD4KPC9zdmc+" alt="NovaBank">
+    <div class="badge">DEMO REPRODUCIBLE</div></div>
+  <h1>Pagos que fluyen. Riesgo bajo control.</h1>
+  <p class="sub">Core bancario → mensajería ISO 20022 → control AML · ejecución real sobre datos sintéticos</p>
+  <div class="pipeline">
+    <div class="stage" id="s1"><span class="dot"></span><span class="num">01</span><span class="name">Core ledger</span></div>
+    <div class="stage" id="s2"><span class="dot"></span><span class="num">02</span><span class="name">ISO 20022 + AML</span></div>
+    <div class="stage" id="s3"><span class="dot"></span><span class="num">03</span><span class="name">Controles</span></div>
+  </div>
+  <div class="terminal"><div class="bar"><i class="r"></i><i class="y"></i><i class="g"></i>
+    <span>C:\Users\User\Documents\nova-payments-aml</span></div>
+    <pre id="terminal"><div class="line cmd" data-line="0" data-stage="1">&gt; python -m scripts.demo</div><div class="line muted" data-line="1" data-stage="1">  datos ficticios · ejecución sobre copia temporal de SQLite</div><div class="line step" data-line="2" data-stage="1">[1/3] CORE LEDGER · transferencia local PYG</div><div class="line ok" data-line="3" data-stage="1">POST /v1/transfers · 201 CREATED</div><div class="line out" data-line="4" data-stage="1">  operation   OP-DF158E358EDC4BBB · POSTED</div><div class="line out" data-line="5" data-stage="1">  importe     ₲ 850.000 · canal MOBILE</div><div class="line out" data-line="6" data-stage="1">  origen      ACC-000001 · 00000000000001</div><div class="line out" data-line="7" data-stage="1">  destino     ACC-000002 · 00000000000002</div><div class="line out" data-line="8" data-stage="1">  asiento     D 850.000 / C 850.000 · balanced=true</div><div class="line ok" data-line="9" data-stage="1">  ledger      reconciled=true · 800 cuentas</div><div class="line blank" data-line="10" data-stage="1">&nbsp;</div><div class="line step" data-line="11" data-stage="2">[2/3] ISO 20022 · transferencia internacional</div><div class="line out" data-line="12" data-stage="2">  instruction DEMO-INTL-20261029-001 · US$ 125.000,00</div><div class="line out" data-line="13" data-stage="2">  creditor    Comercial Ibérica S.A. · ES · NOVXESMMXXX</div><div class="line warn" data-line="14" data-stage="2">  AML         HOLD · Pago internacional de alto valor</div><div class="line out" data-line="15" data-stage="2">  state       HELD · INITIATED → VALIDATED → HELD</div><div class="line ok" data-line="16" data-stage="3">  pacs.002    PDNG / AMLHOLD · 747 B</div><div class="line blank" data-line="17" data-stage="3">&nbsp;</div><div class="line step" data-line="18" data-stage="3">[3/3] CIERRE · controles de la demo</div><div class="line ok" data-line="19" data-stage="3">  core        partida doble verificada</div><div class="line ok" data-line="20" data-stage="3">  messaging   XML ISO 20022 generado</div><div class="line ok" data-line="21" data-stage="3">  compliance  retención AML aplicada</div><div class="line done" data-line="22" data-stage="3">  demo        completada · sin PII · reproducible</div></pre></div>
+  <div class="foot"><span><b>Demo:</b> Franco Tillería Centurión · Business Analyst</span>
+    <span>Datos ficticios · sin PII · 23 pasos</span></div>
+</div>
+<script>
+const rows = Array.from(document.querySelectorAll('[data-line]'));
+const stages = {1: document.getElementById('s1'), 2: document.getElementById('s2'), 3: document.getElementById('s3')};
+let lastStage = 0;
+function setFrame(n) {
+  rows.forEach((row, index) => row.classList.toggle('on', index < n));
+  const visible = rows.slice(0, n).filter(row => row.dataset.stage);
+  const current = visible.length ? Number(visible[visible.length - 1].dataset.stage) : 0;
+  for (let stage = 1; stage <= 3; stage += 1) {
+    stages[stage].classList.toggle('active', stage === current);
+    stages[stage].classList.toggle('done', stage < current);
+  }
+}
+window.setFrame = setFrame;
+setFrame(1);
+</script></body></html>

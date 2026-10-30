@@ -179,6 +179,30 @@ entrevista, licencia, changelog y checklist de capturas.
 
 ---
 
+## Fase 9 — Portafolio visual y publicación
+
+**Objetivo:** identidad visual y presentación profesional para GitHub/LinkedIn,
+con arte 100 % reproducible por código y sin afirmaciones falsas.
+
+- [x] Marca, isotipo, favicon, banners claro/oscuro, social preview, portada LinkedIn.
+- [x] 6 gráficos analíticos con datos reales y paleta navy.
+- [x] Arquitectura Mermaid, 2 secuencias y 6 BPMN renderizados con bpmn-js.
+- [x] Dashboard HTML autocontenido con tema claro/oscuro y capturas.
+- [x] 10 wireframes UX capturados y galería HTML.
+- [x] Demo GIF reproducible (transferencia local + retención AML high-value) y póster.
+- [x] Carrusel LinkedIn 10 slides 1080×1350 + PDF, con métricas, funnel, fórmulas y límites.
+- [x] Homepage GitHub Pages (`docs/site/`) + workflow `.github/workflows/pages.yml`.
+- [x] Validador de assets `check_assets.py` (existencia, peso, dimensiones, referencias).
+- [x] `requirements-assets.txt`, `brand.md` corregido, `check_assets.py` OK.
+- [x] README bilingüe rediseñado: banner, badges, galería, demo, resultados, comandos.
+- [x] `docs/assets/CREDITOS.md` con autoría y límites.
+- [x] Actualización de `docs/SUPUESTOS.md`, `docs/PENDIENTES.md`, `docs/EVIDENCIAS.md`.
+- [x] Commit(s) + push de cierre de fase.
+
+**Entregables clave:** marca, banners, diagramas, gráficos, dashboard, UX, demo GIF, carrusel LinkedIn, GitHub Pages, validador, README final, documentación de gobernanza.
+
+---
+
 ## Hitos
 
 | Hito | Fase | Criterio |
@@ -204,3 +228,4 @@ entrevista, licencia, changelog y checklist de capturas.
 | 2026-10-29 | 6 | 10 wireframes SVG, 12 CSV analíticos, workbook de 11 hojas, 36 medidas DAX, Power Query y guía Tableau, 16 pruebas (199 totales). Push realizado. Pendientes: EV-006 a EV-008. |
 | 2026-10-29 | 7 | 65 casos UAT, 51 automatizados aprobados, 6 manuales pendientes, 8 no implementados, 5 defectos, 204 pruebas, 23 controles SQL, pipelines YAML, README final y borradores LinkedIn. Push realizado: `1410343`. |
 | 2026-10-29 | 8 | Auditoría de 34 afirmaciones, prueba desde clon limpio (204/204, 51/51, 23/23), cierre de SNV-01/P-006, revisión de seguridad sin secretos, README bilingüe, case study, guion de entrevista, LICENSE MIT, CHANGELOG y checklist de evidencias. Tag `v1.0.0`. |
+| 2026-10-29 | 9 | Marca, 6 gráficos, arquitectura/secuencias/BPMN, dashboard, UX, demo GIF, carrusel LinkedIn, GitHub Pages, check_assets, README rediseñado, gobernanza actualizada. Push realizado. |

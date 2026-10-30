@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NovaBank · Pagos y AML · Caso de portafolio</title>
+  <meta name="description" content="Caso de portafolio end-to-end de pagos instantáneos, cross-border y AML. Business Analysis, ISO 20022, SQL, FastAPI y UAT sobre datos ficticios.">
+  <meta property="og:title" content="NovaBank · Pagos y AML">
+  <meta property="og:description" content="Caso de portafolio end-to-end de pagos instantáneos, cross-border y AML. Datos ficticios y resultados reproducibles.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://vaxilium.github.io/nova-payments-aml/assets/img/social-preview.png">
+  <link rel="icon" href="assets/brand/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="./"><img src="assets/brand/logo-horizontal-dark.svg" alt="NovaBank"></a>
+    <nav aria-label="Navegación principal">
+      <a href="#caso">Caso</a>
+      <a href="#demo">Demo</a>
+      <a href="#resultados">Resultados</a>
+      <a href="#galeria">Galería</a>
+      <a href="#limites">Límites</a>
+    </nav>
+    <a class="gh" href="https://github.com/Vaxilium/nova-payments-aml">GitHub <span>↗</span></a>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="kicker">Caso de portafolio · Business Analysis</p>
+        <h1>Pagos que fluyen.<br><span>Riesgo bajo control.</span></h1>
+        <p class="lead">NovaBank es un banco ficticio de Paraguay que lanza pagos instantáneos,
+        transferencias internacionales y monitoreo AML. El repositorio cubre el ciclo completo:
+        negocio, procesos, requerimientos, core, mensajería, compliance, analítica y UAT.</p>
+        <div class="cta">
+          <a class="button primary" href="https://github.com/Vaxilium/nova-payments-aml">Ver repositorio</a>
+          <a class="button" href="assets/linkedin/carousel-novabank.pdf">Carrusel LinkedIn</a>
+        </div>
+        <p class="author"><b>Franco Tillería Centurión</b> · Business Analyst · Asunción, Paraguay</p>
+      </div>
+      <div class="hero-card">
+        <img src="assets/img/dashboard-dark.png" alt="Dashboard de operaciones y cumplimiento de NovaBank">
+        <div class="hero-glow"></div>
+      </div>
+    </section>
+
+    <section class="strip" aria-label="Indicadores principales">
+      <div><b>49.582</b><span>movimientos sintéticos</span></div>
+      <div><b>12</b><span>reglas AML</span></div>
+      <div><b>204/204</b><span>pruebas pytest</span></div>
+      <div><b>51/51</b><span>UAT automatizada</span></div>
+      <div><b>0</b><span>descuadres contables</span></div>
+    </section>
+
+    <section id="caso" class="section">
+      <div class="section-head">
+        <p class="kicker">01 / El caso</p>
+        <h2>Un solo caso, todas las capas del problema.</h2>
+        <p>El objetivo no es juntar documentos. Es demostrar que un BA puede conectar una
+        necesidad de negocio con procesos, requerimientos verificables, un sistema funcional
+        y evidencia de calidad.</p>
+      </div>
+      <div class="cards three">
+        <article>
+          <span class="tag">Negocio</span>
+          <h3>Entender la tensión</h3>
+          <p>Velocidad para el cliente, control para el banco y trazabilidad para auditoría.
+          BRD, stakeholders, riesgos, KPIs y contexto regulatorio.</p>
+        </article>
+        <article>
+          <span class="tag">Diseño</span>
+          <h3>Convertirlo en contrato</h3>
+          <p>6 BPMN, 4 DMN, 10 épicas, 40 historias Gherkin, 198 story points y 16 NFR
+          con criterios de aceptación.</p>
+        </article>
+        <article>
+          <span class="tag">Sistema</span>
+          <h3>Demostrarlo funcionando</h3>
+          <p>Core SQLite con partida doble, API FastAPI idempotente, ISO 20022/MT103,
+          12 reglas AML y un dashboard reproducible.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="demo" class="section dark-section">
+      <div class="section-head">
+        <p class="kicker">02 / Demo reproducible</p>
+        <h2>Una transferencia, un mensaje y una retención AML.</h2>
+        <p>La demo corre sobre una copia temporal de SQLite. Ejecuta una transferencia local,
+        muestra la partida doble y una retención AML por alto valor. No modifica la base del
+        repositorio ni usa PII.</p>
+      </div>
+      <div class="demo-grid">
+        <a class="demo-frame" href="assets/img/demo.gif">
+          <img src="assets/img/demo-poster.png" alt="Demo técnica de NovaBank">
+        </a>
+        <div class="demo-copy">
+          <div class="code">
+            <span>$</span> python -m scripts.demo
+          </div>
+          <ul class="checklist">
+            <li>Core: transferencia PYG con asiento equilibrado.</li>
+            <li>Mensajería: `pacs.002` PDNG / AMLHOLD.</li>
+            <li>Compliance: decisión HOLD por alto valor.</li>
+            <li>Salida: GIF y HTML generados por código.</li>
+          </ul>
+          <a class="text-link" href="https://github.com/Vaxilium/nova-payments-aml/blob/main/scripts/demo.py">Ver scripts/demo.py ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="resultados" class="section">
+      <div class="section-head">
+        <p class="kicker">03 / Resultados</p>
+        <h2>Números reproducibles, con sus límites a la vista.</h2>
+        <p>Los resultados se verificaron en un clon limpio. La precisión conservadora se
+        publica junto a la métrica sobre etiquetadas para no ocultar la incertidumbre.</p>
+      </div>
+      <div class="metrics">
+        <article><b>49.582</b><span>movimientos · 183 días</span></article>
+        <article><b>377</b><span>alertas deduplicadas · 59 casos</span></article>
+        <article><b>100 %</b><span>recall sobre 341 sospechosas</span></article>
+        <article><b>99,13 %</b><span>precisión sobre etiquetadas</span></article>
+        <article><b>69,03 %</b><span>precisión conservadora</span></article>
+        <article><b>204/204</b><span>pruebas automatizadas</span></article>
+      </div>
+      <div class="callout">
+        <b>Lectura honesta:</b> 3 falsos positivos etiquetados y 150 alertas sin ground truth.
+        No se cuentan como acierto ni como error. La limitación está documentada.
+      </div>
+    </section>
+
+    <section id="galeria" class="section">
+      <div class="section-head">
+        <p class="kicker">04 / Galería</p>
+        <h2>Artefactos que se pueden abrir y discutir.</h2>
+      </div>
+      <div class="gallery">
+        <a href="assets/dashboard/index.html">
+          <img src="assets/img/dashboard-light.png" alt="Dashboard claro de NovaBank">
+          <span>Dashboard interactivo <b>↗</b></span>
+        </a>
+        <a href="assets/ux/index.html">
+          <img src="assets/img/ux/ux-aml-inbox.png" alt="Bandeja de alertas AML">
+          <span>10 wireframes UX <b>↗</b></span>
+        </a>
+        <a href="assets/img/chart-alerts-by-rule.png">
+          <img src="assets/img/chart-alerts-by-rule.png" alt="Alertas AML por regla">
+          <span>Monitoreo AML <b>↗</b></span>
+        </a>
+        <a href="assets/img/architecture.png">
+          <img src="assets/img/architecture.png" alt="Arquitectura lógica">
+          <span>Arquitectura <b>↗</b></span>
+        </a>
+      </div>
+    </section>
+
+    <section id="limites" class="section dark-section">
+      <div class="split">
+        <div>
+          <p class="kicker">05 / Límites</p>
+          <h2>Lo que el prototipo no hace también es parte del entregable.</h2>
+        </div>
+        <div>
+          <ul class="limits">
+            <li><b>No</b> hay conectividad real con SPI, SWIFT, corresponsales ni cámaras.</li>
+            <li><b>No</b> hay autenticación, autorización ni certificación XSD.</li>
+            <li><b>No</b> se declara rendimiento, alta disponibilidad ni RTO/RPO.</li>
+            <li><b>No</b> se operaron Jira, Figma, Power BI, Tableau ni Camunda; sus artefactos están listos para importar.</li>
+          </ul>
+          <a class="text-link" href="https://github.com/Vaxilium/nova-payments-aml/blob/main/docs/case-study.md">Leer el case study ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact">
+      <img src="assets/brand/isotipo-dark.svg" alt="">
+      <h2>¿Hablamos de pagos, riesgo y buenos requerimientos?</h2>
+      <p>Franco Tillería Centurión · Business Analyst</p>
+      <div class="cta">
+        <a class="button primary" href="https://www.linkedin.com/in/franco-tilleria-centurion/">LinkedIn ↗</a>
+        <a class="button" href="https://github.com/Vaxilium">GitHub ↗</a>
+        <a class="button" href="https://github.com/Vaxilium/nova-payments-aml">Repositorio ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>NovaBank · caso 100 % ficticio · datos sintéticos · sin PII</span>
+    <span>Hecho con código, no con capturas de herramientas no operadas.</span>
+  </footer>
+</body>
+</html>
