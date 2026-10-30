@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T02:16:36-03:00",
+  "generated_at": "2026-10-30T01:39:51-03:00",
   "command": "python -m pytest -q --junitxml=08-qa-uat/resultados/junit-uat.xml",
   "environment": "Windows 11; Python 3.15.0; base 05-core-middleware/db/novabank.db; pytest 204 pruebas",
   "pytest": {
@@ -13,7 +13,7 @@
         "classname": "05-core-middleware.tests.test_api",
         "name": "test_health",
         "status": "passed",
-        "time": 0.217,
+        "time": 0.22,
         "message": ""
       },
       {
@@ -21,7 +21,7 @@
         "classname": "05-core-middleware.tests.test_api",
         "name": "test_list_and_get_customers",
         "status": "passed",
-        "time": 0.04,
+        "time": 0.042,
         "message": ""
       },
       {
@@ -45,7 +45,7 @@
         "classname": "05-core-middleware.tests.test_api",
         "name": "test_account_not_found",
         "status": "passed",
-        "time": 0.035,
+        "time": 0.04,
         "message": ""
       },
       {
@@ -53,7 +53,7 @@
         "classname": "05-core-middleware.tests.test_api",
         "name": "test_balance_is_reconciled",
         "status": "passed",
-        "time": 0.037,
+        "time": 0.045,
         "message": ""
       },
       {
@@ -61,7 +61,7 @@
         "classname": "05-core-middleware.tests.test_api",
         "name": "test_credit_via_api_and_operation_status",
         "status": "passed",
-        "time": 0.058,
+        "time": 0.061,
         "message": ""
       },
       {
@@ -69,7 +69,7 @@
         "classname": "05-core-middleware.tests.test_api",
         "name": "test_idempotent_replay_returns_same_operation",
         "status": "passed",
-        "time": 0.047,
+        "time": 0.049,
         "message": ""
       },
       {
@@ -77,7 +77,7 @@
         "classname": "05-core-middleware.tests.test_api",
         "name": "test_idempotency_conflict_via_api",
         "status": "passed",
-        "time": 0.046,
+        "time": 0.05,
         "message": ""
       },
       {
@@ -85,7 +85,7 @@
         "classname": "05-core-middleware.tests.test_api",
         "name": "test_missing_idempotency_key_via_api",
         "status": "passed",
-        "time": 0.033,
+        "time": 0.035,
         "message": ""
       },
       {
@@ -101,7 +101,7 @@
         "classname": "05-core-middleware.tests.test_api",
         "name": "test_debit_and_insufficient_funds_via_api",
         "status": "passed",
-        "time": 0.058,
+        "time": 0.054,
         "message": ""
       },
       {
@@ -109,7 +109,7 @@
         "classname": "05-core-middleware.tests.test_api",
         "name": "test_transfer_via_api",
         "status": "passed",
-        "time": 0.065,
+        "time": 0.061,
         "message": ""
       },
       {
@@ -117,7 +117,7 @@
         "classname": "05-core-middleware.tests.test_api",
         "name": "test_transfer_same_account_via_api",
         "status": "passed",
-        "time": 0.038,
+        "time": 0.039,
         "message": ""
       },
       {
@@ -125,7 +125,7 @@
         "classname": "05-core-middleware.tests.test_api",
         "name": "test_transfer_currency_mismatch_via_api",
         "status": "passed",
-        "time": 0.04,
+        "time": 0.041,
         "message": ""
       },
       {
@@ -133,7 +133,7 @@
         "classname": "05-core-middleware.tests.test_api",
         "name": "test_blocked_account_via_api",
         "status": "passed",
-        "time": 0.046,
+        "time": 0.044,
         "message": ""
       },
       {
@@ -149,7 +149,7 @@
         "classname": "05-core-middleware.tests.test_api",
         "name": "test_operation_not_found",
         "status": "passed",
-        "time": 0.035,
+        "time": 0.036,
         "message": ""
       },
       {
@@ -157,7 +157,7 @@
         "classname": "05-core-middleware.tests.test_concurrency",
         "name": "test_concurrent_withdrawals_never_overdraw",
         "status": "passed",
-        "time": 0.032,
+        "time": 0.041,
         "message": ""
       },
       {
@@ -165,7 +165,7 @@
         "classname": "05-core-middleware.tests.test_concurrency",
         "name": "test_concurrent_same_idempotency_key_credits_once",
         "status": "passed",
-        "time": 0.029,
+        "time": 0.045,
         "message": ""
       },
       {
@@ -173,7 +173,7 @@
         "classname": "05-core-middleware.tests.test_ledger_service",
         "name": "test_credit_account_creates_balanced_entry",
         "status": "passed",
-        "time": 0.038,
+        "time": 0.042,
         "message": ""
       },
       {
@@ -181,7 +181,7 @@
         "classname": "05-core-middleware.tests.test_ledger_service",
         "name": "test_credit_is_idempotent",
         "status": "passed",
-        "time": 0.028,
+        "time": 0.035,
         "message": ""
       },
       {
@@ -189,7 +189,7 @@
         "classname": "05-core-middleware.tests.test_ledger_service",
         "name": "test_idempotency_conflict_on_different_payload",
         "status": "passed",
-        "time": 0.026,
+        "time": 0.028,
         "message": ""
       },
       {
@@ -197,7 +197,7 @@
         "classname": "05-core-middleware.tests.test_ledger_service",
         "name": "test_missing_and_invalid_idempotency_key",
         "status": "passed",
-        "time": 0.019,
+        "time": 0.018,
         "message": ""
       },
       {
@@ -205,7 +205,7 @@
         "classname": "05-core-middleware.tests.test_ledger_service",
         "name": "test_debit_account_updates_balance",
         "status": "passed",
-        "time": 0.029,
+        "time": 0.03,
         "message": ""
       },
       {
@@ -229,7 +229,7 @@
         "classname": "05-core-middleware.tests.test_ledger_service",
         "name": "test_transfer_moves_funds_and_balances",
         "status": "passed",
-        "time": 0.035,
+        "time": 0.037,
         "message": ""
       },
       {
@@ -245,7 +245,7 @@
         "classname": "05-core-middleware.tests.test_ledger_service",
         "name": "test_transfer_insufficient_funds",
         "status": "passed",
-        "time": 0.026,
+        "time": 0.02,
         "message": ""
       },
       {
@@ -261,7 +261,7 @@
         "classname": "05-core-middleware.tests.test_schema_constraints",
         "name": "test_schema_contains_core_tables_and_triggers",
         "status": "passed",
-        "time": 0.018,
+        "time": 0.017,
         "message": ""
       },
       {
@@ -277,7 +277,7 @@
         "classname": "05-core-middleware.tests.test_schema_constraints",
         "name": "test_entry_with_one_line_cannot_be_posted",
         "status": "passed",
-        "time": 0.022,
+        "time": 0.021,
         "message": ""
       },
       {
@@ -293,7 +293,7 @@
         "classname": "05-core-middleware.tests.test_schema_constraints",
         "name": "test_balanced_entry_can_be_posted_and_becomes_immutable",
         "status": "passed",
-        "time": 0.022,
+        "time": 0.027,
         "message": ""
       },
       {
@@ -301,7 +301,7 @@
         "classname": "05-core-middleware.tests.test_schema_constraints",
         "name": "test_line_currency_must_match_account",
         "status": "passed",
-        "time": 0.021,
+        "time": 0.022,
         "message": ""
       },
       {
@@ -309,7 +309,7 @@
         "classname": "05-core-middleware.tests.test_schema_constraints",
         "name": "test_account_balance_cannot_break_overdraft_limit",
         "status": "passed",
-        "time": 0.019,
+        "time": 0.016,
         "message": ""
       },
       {
@@ -317,7 +317,7 @@
         "classname": "05-core-middleware.tests.test_seed",
         "name": "test_seed_is_reproducible",
         "status": "passed",
-        "time": 0.131,
+        "time": 0.124,
         "message": ""
       },
       {
@@ -333,7 +333,7 @@
         "classname": "05-core-middleware.tests.test_seed",
         "name": "test_daily_closing_matches_ledger",
         "status": "passed",
-        "time": 0.004,
+        "time": 0.005,
         "message": ""
       },
       {
@@ -349,7 +349,7 @@
         "classname": "05-core-middleware.tests.test_seed",
         "name": "test_seed_contains_expected_scale",
         "status": "passed",
-        "time": 0.047,
+        "time": 0.049,
         "message": ""
       },
       {
@@ -381,7 +381,7 @@
         "classname": "05-core-middleware.tests.test_sql_queries",
         "name": "test_query_executes[03_saldos_por_moneda.sql]",
         "status": "passed",
-        "time": 0.017,
+        "time": 0.016,
         "message": ""
       },
       {
@@ -397,7 +397,7 @@
         "classname": "05-core-middleware.tests.test_sql_queries",
         "name": "test_query_executes[05_movimientos_duplicados.sql]",
         "status": "passed",
-        "time": 0.019,
+        "time": 0.02,
         "message": ""
       },
       {
@@ -405,7 +405,7 @@
         "classname": "05-core-middleware.tests.test_sql_queries",
         "name": "test_query_executes[06_cuentas_inactivas.sql]",
         "status": "passed",
-        "time": 0.02,
+        "time": 0.018,
         "message": ""
       },
       {
@@ -413,7 +413,7 @@
         "classname": "05-core-middleware.tests.test_sql_queries",
         "name": "test_query_executes[07_flujo_diario_por_moneda.sql]",
         "status": "passed",
-        "time": 0.024,
+        "time": 0.02,
         "message": ""
       },
       {
@@ -421,7 +421,7 @@
         "classname": "05-core-middleware.tests.test_sql_queries",
         "name": "test_query_executes[08_velocidad_transaccional_cliente.sql]",
         "status": "passed",
-        "time": 0.025,
+        "time": 0.027,
         "message": ""
       },
       {
@@ -429,7 +429,7 @@
         "classname": "05-core-middleware.tests.test_sql_queries",
         "name": "test_query_executes[09_estructuracion_umbral.sql]",
         "status": "passed",
-        "time": 0.019,
+        "time": 0.022,
         "message": ""
       },
       {
@@ -437,7 +437,7 @@
         "classname": "05-core-middleware.tests.test_sql_queries",
         "name": "test_query_executes[10_contrapartes_frecuentes.sql]",
         "status": "passed",
-        "time": 0.021,
+        "time": 0.019,
         "message": ""
       },
       {
@@ -445,7 +445,7 @@
         "classname": "05-core-middleware.tests.test_sql_queries",
         "name": "test_query_executes[11_comisiones_por_tipo_mes.sql]",
         "status": "passed",
-        "time": 0.017,
+        "time": 0.019,
         "message": ""
       },
       {
@@ -453,7 +453,7 @@
         "classname": "05-core-middleware.tests.test_sql_queries",
         "name": "test_query_executes[12_rentabilidad_cuenta.sql]",
         "status": "passed",
-        "time": 0.018,
+        "time": 0.019,
         "message": ""
       },
       {
@@ -461,7 +461,7 @@
         "classname": "05-core-middleware.tests.test_sql_queries",
         "name": "test_query_executes[13_passthrough_rapido.sql]",
         "status": "passed",
-        "time": 0.019,
+        "time": 0.02,
         "message": ""
       },
       {
@@ -477,7 +477,7 @@
         "classname": "05-core-middleware.tests.test_sql_queries",
         "name": "test_query_executes[15_tipos_cambio_utilizados.sql]",
         "status": "passed",
-        "time": 0.018,
+        "time": 0.017,
         "message": ""
       },
       {
@@ -485,7 +485,7 @@
         "classname": "05-core-middleware.tests.test_sql_queries",
         "name": "test_query_executes[16_distribucion_montos.sql]",
         "status": "passed",
-        "time": 0.017,
+        "time": 0.02,
         "message": ""
       },
       {
@@ -493,7 +493,7 @@
         "classname": "05-core-middleware.tests.test_sql_queries",
         "name": "test_query_executes[17_cuentas_sobregiro_riesgo.sql]",
         "status": "passed",
-        "time": 0.017,
+        "time": 0.018,
         "message": ""
       },
       {
@@ -501,7 +501,7 @@
         "classname": "05-core-middleware.tests.test_sql_queries",
         "name": "test_query_executes[18_cohortes_clientes.sql]",
         "status": "passed",
-        "time": 0.018,
+        "time": 0.017,
         "message": ""
       },
       {
@@ -509,7 +509,7 @@
         "classname": "05-core-middleware.tests.test_sql_queries",
         "name": "test_query_executes[19_operaciones_rechazadas_idempotencia.sql]",
         "status": "passed",
-        "time": 0.017,
+        "time": 0.018,
         "message": ""
       },
       {
@@ -517,7 +517,7 @@
         "classname": "05-core-middleware.tests.test_sql_queries",
         "name": "test_query_executes[20_top_gl_movimientos.sql]",
         "status": "passed",
-        "time": 0.022,
+        "time": 0.02,
         "message": ""
       },
       {
@@ -525,7 +525,7 @@
         "classname": "05-core-middleware.tests.test_sql_queries",
         "name": "test_query_executes[21_corresponsalia_paises.sql]",
         "status": "passed",
-        "time": 0.018,
+        "time": 0.019,
         "message": ""
       },
       {
@@ -533,7 +533,7 @@
         "classname": "05-core-middleware.tests.test_sql_queries",
         "name": "test_query_executes[22_cobertura_verdad_aml.sql]",
         "status": "passed",
-        "time": 0.018,
+        "time": 0.017,
         "message": ""
       },
       {
@@ -541,7 +541,7 @@
         "classname": "05-core-middleware.tests.test_sql_queries",
         "name": "test_query_executes[23_conciliacion_global_diaria.sql]",
         "status": "passed",
-        "time": 0.02,
+        "time": 0.019,
         "message": ""
       },
       {
@@ -549,7 +549,7 @@
         "classname": "05-core-middleware.tests.test_sql_queries",
         "name": "test_all_queries_use_cte_or_window",
         "status": "passed",
-        "time": 0.002,
+        "time": 0.003,
         "message": ""
       },
       {
@@ -693,7 +693,7 @@
         "classname": "06-mensajeria.tests.test_examples",
         "name": "test_ejemplos_iso20022_validos",
         "status": "passed",
-        "time": 0.002,
+        "time": 0.003,
         "message": ""
       },
       {
@@ -701,7 +701,7 @@
         "classname": "06-mensajeria.tests.test_examples",
         "name": "test_ejemplo_pacs008_internacional",
         "status": "passed",
-        "time": 0.0,
+        "time": 0.001,
         "message": ""
       },
       {
@@ -709,7 +709,7 @@
         "classname": "06-mensajeria.tests.test_examples",
         "name": "test_ejemplo_mt103_valido_y_mapeable",
         "status": "passed",
-        "time": 0.0,
+        "time": 0.001,
         "message": ""
       },
       {
@@ -717,7 +717,7 @@
         "classname": "06-mensajeria.tests.test_examples",
         "name": "test_csv_de_mapeo_completo",
         "status": "passed",
-        "time": 0.0,
+        "time": 0.001,
         "message": ""
       },
       {
@@ -725,7 +725,7 @@
         "classname": "06-mensajeria.tests.test_identifiers",
         "name": "test_iban_validos[DE89370400440532013000]",
         "status": "passed",
-        "time": 0.0,
+        "time": 0.001,
         "message": ""
       },
       {
@@ -741,7 +741,7 @@
         "classname": "06-mensajeria.tests.test_identifiers",
         "name": "test_iban_validos[ES9121000418450200051332]",
         "status": "passed",
-        "time": 0.0,
+        "time": 0.001,
         "message": ""
       },
       {
@@ -749,7 +749,7 @@
         "classname": "06-mensajeria.tests.test_identifiers",
         "name": "test_iban_validos[FR7630006000011234567890189]",
         "status": "passed",
-        "time": 0.0,
+        "time": 0.002,
         "message": ""
       },
       {
@@ -757,7 +757,7 @@
         "classname": "06-mensajeria.tests.test_identifiers",
         "name": "test_iban_validos[NL91ABNA0417164300]",
         "status": "passed",
-        "time": 0.0,
+        "time": 0.001,
         "message": ""
       },
       {
@@ -829,7 +829,7 @@
         "classname": "06-mensajeria.tests.test_identifiers",
         "name": "test_bic_valido[NOVBDEFFXXX]",
         "status": "passed",
-        "time": 0.0,
+        "time": 0.001,
         "message": ""
       },
       {
@@ -925,7 +925,7 @@
         "classname": "06-mensajeria.tests.test_instant_simulator",
         "name": "test_pago_instantaneo_externo_liquida",
         "status": "passed",
-        "time": 0.095,
+        "time": 0.097,
         "message": ""
       },
       {
@@ -933,7 +933,7 @@
         "classname": "06-mensajeria.tests.test_instant_simulator",
         "name": "test_pago_instantaneo_interno_mueve_ambas_cuentas",
         "status": "passed",
-        "time": 0.032,
+        "time": 0.035,
         "message": ""
       },
       {
@@ -941,7 +941,7 @@
         "classname": "06-mensajeria.tests.test_instant_simulator",
         "name": "test_idempotencia_devuelve_el_mismo_registro",
         "status": "passed",
-        "time": 0.023,
+        "time": 0.024,
         "message": ""
       },
       {
@@ -949,7 +949,7 @@
         "classname": "06-mensajeria.tests.test_instant_simulator",
         "name": "test_idempotencia_conflicto",
         "status": "passed",
-        "time": 0.024,
+        "time": 0.028,
         "message": ""
       },
       {
@@ -973,7 +973,7 @@
         "classname": "06-mensajeria.tests.test_instant_simulator",
         "name": "test_timeout_expira",
         "status": "passed",
-        "time": 0.016,
+        "time": 0.024,
         "message": ""
       },
       {
@@ -981,7 +981,7 @@
         "classname": "06-mensajeria.tests.test_instant_simulator",
         "name": "test_rechazo_del_psp",
         "status": "passed",
-        "time": 0.016,
+        "time": 0.019,
         "message": ""
       },
       {
@@ -989,7 +989,7 @@
         "classname": "06-mensajeria.tests.test_instant_simulator",
         "name": "test_saldo_insuficiente",
         "status": "passed",
-        "time": 0.024,
+        "time": 0.027,
         "message": ""
       },
       {
@@ -1013,7 +1013,7 @@
         "classname": "06-mensajeria.tests.test_international_simulator",
         "name": "test_internacional_liquida_y_contabiliza",
         "status": "passed",
-        "time": 0.029,
+        "time": 0.031,
         "message": ""
       },
       {
@@ -1021,7 +1021,7 @@
         "classname": "06-mensajeria.tests.test_international_simulator",
         "name": "test_internacional_sin_comision",
         "status": "passed",
-        "time": 0.025,
+        "time": 0.027,
         "message": ""
       },
       {
@@ -1029,7 +1029,7 @@
         "classname": "06-mensajeria.tests.test_international_simulator",
         "name": "test_internacional_idempotencia",
         "status": "passed",
-        "time": 0.029,
+        "time": 0.026,
         "message": ""
       },
       {
@@ -1037,7 +1037,7 @@
         "classname": "06-mensajeria.tests.test_international_simulator",
         "name": "test_internacional_idempotencia_conflicto",
         "status": "passed",
-        "time": 0.022,
+        "time": 0.023,
         "message": ""
       },
       {
@@ -1045,7 +1045,7 @@
         "classname": "06-mensajeria.tests.test_international_simulator",
         "name": "test_internacional_rechaza_eur",
         "status": "passed",
-        "time": 0.014,
+        "time": 0.017,
         "message": ""
       },
       {
@@ -1053,7 +1053,7 @@
         "classname": "06-mensajeria.tests.test_international_simulator",
         "name": "test_internacional_valida_iban_y_bic",
         "status": "passed",
-        "time": 0.015,
+        "time": 0.017,
         "message": ""
       },
       {
@@ -1061,7 +1061,7 @@
         "classname": "06-mensajeria.tests.test_international_simulator",
         "name": "test_internacional_pais_iban_no_coincide",
         "status": "passed",
-        "time": 0.014,
+        "time": 0.017,
         "message": ""
       },
       {
@@ -1069,7 +1069,7 @@
         "classname": "06-mensajeria.tests.test_international_simulator",
         "name": "test_internacional_aml_hold",
         "status": "passed",
-        "time": 0.014,
+        "time": 0.017,
         "message": ""
       },
       {
@@ -1077,7 +1077,7 @@
         "classname": "06-mensajeria.tests.test_international_simulator",
         "name": "test_internacional_aml_reject",
         "status": "passed",
-        "time": 0.014,
+        "time": 0.017,
         "message": ""
       },
       {
@@ -1085,7 +1085,7 @@
         "classname": "06-mensajeria.tests.test_international_simulator",
         "name": "test_internacional_reintento",
         "status": "passed",
-        "time": 0.022,
+        "time": 0.024,
         "message": ""
       },
       {
@@ -1093,7 +1093,7 @@
         "classname": "06-mensajeria.tests.test_international_simulator",
         "name": "test_internacional_timeout",
         "status": "passed",
-        "time": 0.016,
+        "time": 0.017,
         "message": ""
       },
       {
@@ -1101,7 +1101,7 @@
         "classname": "06-mensajeria.tests.test_international_simulator",
         "name": "test_internacional_saldo_insuficiente",
         "status": "passed",
-        "time": 0.024,
+        "time": 0.023,
         "message": ""
       },
       {
@@ -1277,7 +1277,7 @@
         "classname": "07-aml-compliance.tests.test_alerts",
         "name": "test_alerta_se_crea_y_deduplica",
         "status": "passed",
-        "time": 0.245,
+        "time": 0.211,
         "message": ""
       },
       {
@@ -1285,7 +1285,7 @@
         "classname": "07-aml-compliance.tests.test_alerts",
         "name": "test_alertas_distintas_y_listado",
         "status": "passed",
-        "time": 0.177,
+        "time": 0.139,
         "message": ""
       },
       {
@@ -1293,7 +1293,7 @@
         "classname": "07-aml-compliance.tests.test_evaluation",
         "name": "test_metricas_globales_y_por_patron",
         "status": "passed",
-        "time": 2.162,
+        "time": 2.588,
         "message": ""
       },
       {
@@ -1301,7 +1301,7 @@
         "classname": "07-aml-compliance.tests.test_evaluation",
         "name": "test_reporte_markdown_incluye_trazabilidad",
         "status": "passed",
-        "time": 2.149,
+        "time": 2.433,
         "message": ""
       },
       {
@@ -1309,7 +1309,7 @@
         "classname": "07-aml-compliance.tests.test_hook",
         "name": "test_hook_permite_pago_normal",
         "status": "passed",
-        "time": 0.184,
+        "time": 0.154,
         "message": ""
       },
       {
@@ -1317,7 +1317,7 @@
         "classname": "07-aml-compliance.tests.test_hook",
         "name": "test_hook_rechaza_lista_y_retiene_alto_valor",
         "status": "passed",
-        "time": 0.189,
+        "time": 0.171,
         "message": ""
       },
       {
@@ -1325,7 +1325,7 @@
         "classname": "07-aml-compliance.tests.test_hook",
         "name": "test_hook_registra_contexto_y_screening",
         "status": "passed",
-        "time": 0.176,
+        "time": 0.365,
         "message": ""
       },
       {
@@ -1349,7 +1349,7 @@
         "classname": "07-aml-compliance.tests.test_kyc",
         "name": "test_scoring_persistido_para_todos_los_clientes",
         "status": "passed",
-        "time": 0.157,
+        "time": 0.501,
         "message": ""
       },
       {
@@ -1357,7 +1357,7 @@
         "classname": "07-aml-compliance.tests.test_rules",
         "name": "test_las_doce_reglas_ejecutan",
         "status": "passed",
-        "time": 2.144,
+        "time": 2.425,
         "message": ""
       },
       {
@@ -1373,7 +1373,7 @@
         "classname": "07-aml-compliance.tests.test_rules",
         "name": "test_r07_jurisdiccion_alto_riesgo",
         "status": "passed",
-        "time": 0.201,
+        "time": 0.933,
         "message": ""
       },
       {
@@ -1381,7 +1381,7 @@
         "classname": "07-aml-compliance.tests.test_rules",
         "name": "test_r06_dormancia_real_sintetica",
         "status": "passed",
-        "time": 0.16,
+        "time": 0.39,
         "message": ""
       },
       {
@@ -1389,7 +1389,7 @@
         "classname": "07-aml-compliance.tests.test_rules",
         "name": "test_r10_circularidad_sintetica",
         "status": "passed",
-        "time": 0.194,
+        "time": 0.175,
         "message": ""
       },
       {
@@ -1397,7 +1397,7 @@
         "classname": "07-aml-compliance.tests.test_rules",
         "name": "test_r11_concentracion_sintetica",
         "status": "passed",
-        "time": 0.21,
+        "time": 0.193,
         "message": ""
       },
       {
@@ -1413,7 +1413,7 @@
         "classname": "07-aml-compliance.tests.test_screening",
         "name": "test_coincidencia_exacta_bloquea",
         "status": "passed",
-        "time": 0.142,
+        "time": 0.133,
         "message": ""
       },
       {
@@ -1421,7 +1421,7 @@
         "classname": "07-aml-compliance.tests.test_screening",
         "name": "test_variante_parcial_revisa_o_bloquea",
         "status": "passed",
-        "time": 0.144,
+        "time": 0.122,
         "message": ""
       },
       {
@@ -1429,7 +1429,7 @@
         "classname": "07-aml-compliance.tests.test_screening",
         "name": "test_nombre_normal_no_coincide",
         "status": "passed",
-        "time": 0.21,
+        "time": 0.126,
         "message": ""
       },
       {
@@ -1445,7 +1445,7 @@
         "classname": "07-aml-compliance.tests.test_screening",
         "name": "test_registro_de_screening",
         "status": "passed",
-        "time": 0.956,
+        "time": 0.127,
         "message": ""
       },
       {
@@ -1453,7 +1453,7 @@
         "classname": "07-aml-compliance.tests.test_workflow",
         "name": "test_asignacion_con_sla_y_transicion",
         "status": "passed",
-        "time": 1.058,
+        "time": 0.132,
         "message": ""
       },
       {
@@ -1461,7 +1461,7 @@
         "classname": "07-aml-compliance.tests.test_workflow",
         "name": "test_escalamiento_crea_caso_y_cierre",
         "status": "passed",
-        "time": 0.899,
+        "time": 0.145,
         "message": ""
       },
       {
@@ -1469,7 +1469,7 @@
         "classname": "07-aml-compliance.tests.test_workflow",
         "name": "test_caso_directo_y_transicion_invalida",
         "status": "passed",
-        "time": 0.882,
+        "time": 0.13,
         "message": ""
       },
       {
@@ -1477,7 +1477,7 @@
         "classname": "08-qa-uat.tests.test_uat_boundaries",
         "name": "test_limite_exacto_aprobado",
         "status": "passed",
-        "time": 0.489,
+        "time": 0.112,
         "message": ""
       },
       {
@@ -1485,7 +1485,7 @@
         "classname": "08-qa-uat.tests.test_uat_boundaries",
         "name": "test_monto_cero_rechazado",
         "status": "passed",
-        "time": 0.024,
+        "time": 0.014,
         "message": ""
       },
       {
@@ -1493,7 +1493,7 @@
         "classname": "08-qa-uat.tests.test_uat_boundaries",
         "name": "test_monto_negativo_rechazado",
         "status": "passed",
-        "time": 0.018,
+        "time": 0.014,
         "message": ""
       },
       {
@@ -1501,7 +1501,7 @@
         "classname": "08-qa-uat.tests.test_uat_boundaries",
         "name": "test_pyg_con_decimales_rechazado",
         "status": "passed",
-        "time": 0.018,
+        "time": 0.014,
         "message": ""
       },
       {
@@ -1509,7 +1509,7 @@
         "classname": "08-qa-uat.tests.test_uat_boundaries",
         "name": "test_moneda_no_local_rechazada",
         "status": "passed",
-        "time": 0.019,
+        "time": 0.016,
         "message": ""
       },
       {
@@ -1525,7 +1525,7 @@
         "classname": "09-analitica.tests.test_analytics",
         "name": "test_expected_row_counts",
         "status": "passed",
-        "time": 0.2,
+        "time": 0.231,
         "message": ""
       },
       {
@@ -1533,7 +1533,7 @@
         "classname": "09-analitica.tests.test_analytics",
         "name": "test_unique_keys_in_dimensions",
         "status": "passed",
-        "time": 0.166,
+        "time": 0.177,
         "message": ""
       },
       {
@@ -1541,7 +1541,7 @@
         "classname": "09-analitica.tests.test_analytics",
         "name": "test_transaction_dates_and_currencies_are_valid",
         "status": "passed",
-        "time": 0.159,
+        "time": 0.17,
         "message": ""
       },
       {
@@ -1549,7 +1549,7 @@
         "classname": "09-analitica.tests.test_analytics",
         "name": "test_transaction_amounts_are_non_negative",
         "status": "passed",
-        "time": 0.185,
+        "time": 0.172,
         "message": ""
       },
       {
@@ -1557,7 +1557,7 @@
         "classname": "09-analitica.tests.test_analytics",
         "name": "test_alert_references_are_valid",
         "status": "passed",
-        "time": 0.004,
+        "time": 0.007,
         "message": ""
       },
       {
@@ -1581,7 +1581,7 @@
         "classname": "09-analitica.tests.test_analytics",
         "name": "test_daily_operations_match_transaction_totals",
         "status": "passed",
-        "time": 0.15,
+        "time": 0.176,
         "message": ""
       },
       {
@@ -1597,7 +1597,7 @@
         "classname": "09-analitica.tests.test_analytics",
         "name": "test_powerquery_scripts_exist",
         "status": "passed",
-        "time": 0.001,
+        "time": 0.002,
         "message": ""
       },
       {
@@ -1613,7 +1613,7 @@
         "classname": "09-analitica.tests.test_analytics",
         "name": "test_excel_workbook_structure",
         "status": "passed",
-        "time": 0.641,
+        "time": 0.754,
         "message": ""
       },
       {
@@ -1621,7 +1621,7 @@
         "classname": "09-analitica.tests.test_analytics",
         "name": "test_excel_formulas_and_validations",
         "status": "passed",
-        "time": 0.715,
+        "time": 0.752,
         "message": ""
       },
       {
@@ -1637,13 +1637,13 @@
         "classname": "09-analitica.tests.test_analytics",
         "name": "test_tableau_has_core_calculations",
         "status": "passed",
-        "time": 0.0,
+        "time": 0.001,
         "message": ""
       }
     ]
   },
   "sql": {
-    "generated_at": "2026-10-29T05:16:32.448802+00:00",
+    "generated_at": "2026-10-30T04:39:46.169830+00:00",
     "database": "05-core-middleware\\db\\novabank.db",
     "integrity_check": "ok",
     "foreign_key_violations": 0,
@@ -1656,161 +1656,161 @@
         "status": "ok",
         "rows": 800,
         "error": null,
-        "duration_ms": 582.62
+        "duration_ms": 639.1
       },
       {
         "file": "02_balance_comprobacion.sql",
         "status": "ok",
         "rows": 10,
         "error": null,
-        "duration_ms": 149.52
+        "duration_ms": 151.18
       },
       {
         "file": "03_saldos_por_moneda.sql",
         "status": "ok",
         "rows": 4,
         "error": null,
-        "duration_ms": 0.84
+        "duration_ms": 1.25
       },
       {
         "file": "04_top_clientes_saldo.sql",
         "status": "ok",
         "rows": 724,
         "error": null,
-        "duration_ms": 6.1
+        "duration_ms": 7.68
       },
       {
         "file": "05_movimientos_duplicados.sql",
         "status": "ok",
         "rows": 7,
         "error": null,
-        "duration_ms": 149.73
+        "duration_ms": 154.18
       },
       {
         "file": "06_cuentas_inactivas.sql",
         "status": "ok",
-        "rows": 7,
+        "rows": 476,
         "error": null,
-        "duration_ms": 579.75
+        "duration_ms": 649.95
       },
       {
         "file": "07_flujo_diario_por_moneda.sql",
         "status": "ok",
-        "rows": 368,
+        "rows": 369,
         "error": null,
-        "duration_ms": 82.86
+        "duration_ms": 98.14
       },
       {
         "file": "08_velocidad_transaccional_cliente.sql",
         "status": "ok",
-        "rows": 36390,
+        "rows": 36391,
         "error": null,
-        "duration_ms": 283.46
+        "duration_ms": 286.01
       },
       {
         "file": "09_estructuracion_umbral.sql",
         "status": "ok",
         "rows": 30,
         "error": null,
-        "duration_ms": 25.3
+        "duration_ms": 26.76
       },
       {
         "file": "10_contrapartes_frecuentes.sql",
         "status": "ok",
-        "rows": 12401,
+        "rows": 12402,
         "error": null,
-        "duration_ms": 106.56
+        "duration_ms": 121.27
       },
       {
         "file": "11_comisiones_por_tipo_mes.sql",
         "status": "ok",
         "rows": 12,
         "error": null,
-        "duration_ms": 4.56
+        "duration_ms": 4.35
       },
       {
         "file": "12_rentabilidad_cuenta.sql",
         "status": "ok",
         "rows": 800,
         "error": null,
-        "duration_ms": 132.13
+        "duration_ms": 151.46
       },
       {
         "file": "13_passthrough_rapido.sql",
         "status": "ok",
         "rows": 136,
         "error": null,
-        "duration_ms": 231.69
+        "duration_ms": 243.75
       },
       {
         "file": "14_cierre_vs_libro.sql",
         "status": "ok",
         "rows": 800,
         "error": null,
-        "duration_ms": 226.82
+        "duration_ms": 256.87
       },
       {
         "file": "15_tipos_cambio_utilizados.sql",
         "status": "ok",
         "rows": 2500,
         "error": null,
-        "duration_ms": 16.25
+        "duration_ms": 16.61
       },
       {
         "file": "16_distribucion_montos.sql",
         "status": "ok",
         "rows": 7,
         "error": null,
-        "duration_ms": 30.01
+        "duration_ms": 31.91
       },
       {
         "file": "17_cuentas_sobregiro_riesgo.sql",
         "status": "ok",
         "rows": 793,
         "error": null,
-        "duration_ms": 2.95
+        "duration_ms": 4.3
       },
       {
         "file": "18_cohortes_clientes.sql",
         "status": "ok",
         "rows": 30,
         "error": null,
-        "duration_ms": 1.02
+        "duration_ms": 1.19
       },
       {
         "file": "19_operaciones_rechazadas_idempotencia.sql",
         "status": "ok",
         "rows": 0,
         "error": null,
-        "duration_ms": 0.32
+        "duration_ms": 0.51
       },
       {
         "file": "20_top_gl_movimientos.sql",
         "status": "ok",
         "rows": 10,
         "error": null,
-        "duration_ms": 158.17
+        "duration_ms": 171.35
       },
       {
         "file": "21_corresponsalia_paises.sql",
         "status": "ok",
         "rows": 3082,
         "error": null,
-        "duration_ms": 53.81
+        "duration_ms": 56.29
       },
       {
         "file": "22_cobertura_verdad_aml.sql",
         "status": "ok",
         "rows": 6,
         "error": null,
-        "duration_ms": 6.04
+        "duration_ms": 7.13
       },
       {
         "file": "23_conciliacion_global_diaria.sql",
         "status": "ok",
-        "rows": 368,
+        "rows": 369,
         "error": null,
-        "duration_ms": 86.69
+        "duration_ms": 94.42
       }
     ]
   },
@@ -1834,7 +1834,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.065,
+      "duracion_s": 0.061,
       "evidencia": "pytest: 05-core-middleware/tests/test_api.py::test_transfer_via_api",
       "observaciones": "Cubre el flujo contable y de API; la UI de transferencia es un wireframe."
     },
@@ -1862,7 +1862,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.058,
+      "duracion_s": 0.061,
       "evidencia": "pytest: 05-core-middleware/tests/test_api.py::test_credit_via_api_and_operation_status",
       "observaciones": "El estado del pago local tipo SPI se cubre además con la máquina de estados del simulador."
     },
@@ -1890,7 +1890,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.072,
+      "duracion_s": 0.068,
       "evidencia": "pytest: 06-mensajeria/tests/test_instant_simulator.py::test_limite_local; 05-core-middleware/tests/test_api.py::test_debit_and_insufficient_funds_via_api",
       "observaciones": "Cubre límite por operación y saldo; el límite diario agregado no está implementado."
     },
@@ -1904,7 +1904,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.015,
+      "duracion_s": 0.017,
       "evidencia": "pytest: 06-mensajeria/tests/test_international_simulator.py::test_internacional_valida_iban_y_bic; 06-mensajeria/tests/test_identifiers.py::test_iban_checksum_invalido",
       "observaciones": "La validación es de formato y checksum; no consulta directorios reales."
     },
@@ -1918,7 +1918,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.001,
+      "duracion_s": 0.002,
       "evidencia": "pytest: 06-mensajeria/tests/test_xml_validation.py::test_pacs008_valido; 06-mensajeria/tests/test_examples.py::test_ejemplo_pacs008_internacional",
       "observaciones": "No se valida contra XSD oficiales (S-056)."
     },
@@ -1946,7 +1946,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.051,
+      "duracion_s": 0.05,
       "evidencia": "pytest: 06-mensajeria/tests/test_international_simulator.py::test_internacional_idempotencia; 06-mensajeria/tests/test_international_simulator.py::test_internacional_reintento",
       "observaciones": "La idempotencia del simulador es en proceso; la del core persiste en SQLite."
     },
@@ -1960,7 +1960,7 @@
       "prioridad": "Media",
       "automatizacion": "Automatizado (parcial)",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.032,
+      "duracion_s": 0.036,
       "evidencia": "pytest: 06-mensajeria/tests/test_international_simulator.py::test_internacional_timeout; 06-mensajeria/tests/test_instant_simulator.py::test_rechazo_del_psp",
       "observaciones": "La devolución efectiva de fondos (return) no está implementada; solo rechazo y timeout."
     },
@@ -2002,7 +2002,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.352,
+      "duracion_s": 0.259,
       "evidencia": "pytest: 07-aml-compliance/tests/test_screening.py::test_coincidencia_exacta_bloquea; 07-aml-compliance/tests/test_screening.py::test_nombre_normal_no_coincide",
       "observaciones": "Las listas son ficticias; no se consultan listas oficiales."
     },
@@ -2044,7 +2044,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.203,
+      "duracion_s": 0.188,
       "evidencia": "pytest: 07-aml-compliance/tests/test_hook.py::test_hook_rechaza_lista_y_retiene_alto_valor; 06-mensajeria/tests/test_international_simulator.py::test_internacional_aml_hold",
       "observaciones": "El hook es simulado y no consulta listas reales."
     },
@@ -2058,7 +2058,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 2.144,
+      "duracion_s": 2.425,
       "evidencia": "pytest: 07-aml-compliance/tests/test_rules.py::test_las_doce_reglas_ejecutan; 07-aml-compliance/tests/test_rules.py::test_reglas_de_patrones_detectan_la_verdad",
       "observaciones": "Los umbrales están calibrados sobre datos sintéticos (SNV-12)."
     },
@@ -2072,7 +2072,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 1.303,
+      "duracion_s": 0.343,
       "evidencia": "pytest: 07-aml-compliance/tests/test_alerts.py::test_alerta_se_crea_y_deduplica; 07-aml-compliance/tests/test_workflow.py::test_asignacion_con_sla_y_transicion",
       "observaciones": "Los SLA son parámetros internos (SNV-08)."
     },
@@ -2086,7 +2086,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.177,
+      "duracion_s": 0.139,
       "evidencia": "pytest: 07-aml-compliance/tests/test_alerts.py::test_alertas_distintas_y_listado",
       "observaciones": "La bandeja visual es un wireframe de Fase 6."
     },
@@ -2100,7 +2100,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 1.058,
+      "duracion_s": 0.132,
       "evidencia": "pytest: 07-aml-compliance/tests/test_workflow.py::test_asignacion_con_sla_y_transicion",
       "observaciones": "El cierre de alerta se prueba junto con la asignación; el cierre de caso se prueba en TC-021."
     },
@@ -2114,7 +2114,7 @@
       "prioridad": "Media",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.899,
+      "duracion_s": 0.145,
       "evidencia": "pytest: 07-aml-compliance/tests/test_workflow.py::test_escalamiento_crea_caso_y_cierre",
       "observaciones": "Cubre también la validación de transiciones inválidas."
     },
@@ -2156,7 +2156,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.059,
+      "duracion_s": 0.063,
       "evidencia": "pytest: 05-core-middleware/tests/test_ledger_service.py::test_credit_account_creates_balanced_entry; 05-core-middleware/tests/test_schema_constraints.py::test_unbalanced_entry_is_rejected_by_trigger",
       "observaciones": "Los triggers son la última línea de defensa contable."
     },
@@ -2170,7 +2170,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.059,
+      "duracion_s": 0.067,
       "evidencia": "pytest: 05-core-middleware/tests/test_seed.py::test_seed_ledger_is_balanced_and_reconciled; 05-core-middleware/tests/test_api.py::test_balance_is_reconciled",
       "observaciones": "Cubre conciliación interna; la conciliación contra un riel externo es simulada."
     },
@@ -2184,7 +2184,7 @@
       "prioridad": "Media",
       "automatizacion": "Automatizado (parcial)",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.004,
+      "duracion_s": 0.005,
       "evidencia": "pytest: 05-core-middleware/tests/test_seed.py::test_daily_closing_matches_ledger",
       "observaciones": "La gestión visual de diferencias no está implementada; el control SQL es automático."
     },
@@ -2212,7 +2212,7 @@
       "prioridad": "Media",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.151,
+      "duracion_s": 0.177,
       "evidencia": "pytest: 09-analitica/tests/test_analytics.py::test_daily_operations_match_transaction_totals; 09-analitica/tests/test_analytics.py::test_daily_reconciliation_is_balanced",
       "observaciones": "El tablero visual requiere Power BI/Tableau (EV-007/EV-008)."
     },
@@ -2226,7 +2226,7 @@
       "prioridad": "Media",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.005,
+      "duracion_s": 0.008,
       "evidencia": "pytest: 09-analitica/tests/test_analytics.py::test_alert_references_are_valid; 09-analitica/tests/test_analytics.py::test_case_dates_and_flags",
       "observaciones": "El corte analítico difiere del snapshot de Fase 5 (P-018)."
     },
@@ -2352,7 +2352,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.217,
+      "duracion_s": 0.22,
       "evidencia": "pytest: 05-core-middleware/tests/test_api.py::test_health",
       "observaciones": "La prueba automatizada verifica la generación; la conservación del valor recibido se revisa en el middleware."
     },
@@ -2366,7 +2366,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.093,
+      "duracion_s": 0.099,
       "evidencia": "pytest: 05-core-middleware/tests/test_api.py::test_idempotent_replay_returns_same_operation; 05-core-middleware/tests/test_api.py::test_idempotency_conflict_via_api",
       "observaciones": "No hay TTL de claves en el prototipo (S-049)."
     },
@@ -2380,7 +2380,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.217,
+      "duracion_s": 0.22,
       "evidencia": "pytest: 05-core-middleware/tests/test_api.py::test_health",
       "observaciones": "No se mide un SLA productivo ni se prueba recuperación ante desastres."
     },
@@ -2394,7 +2394,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.489,
+      "duracion_s": 0.112,
       "evidencia": "pytest: 08-qa-uat/tests/test_uat_boundaries.py::test_limite_exacto_aprobado",
       "observaciones": "Caso límite agregado en Fase 7 para cubrir el borde exacto."
     },
@@ -2422,7 +2422,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.024,
+      "duracion_s": 0.014,
       "evidencia": "pytest: 08-qa-uat/tests/test_uat_boundaries.py::test_monto_cero_rechazado",
       "observaciones": "Caso de borde inferior."
     },
@@ -2436,7 +2436,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.018,
+      "duracion_s": 0.014,
       "evidencia": "pytest: 08-qa-uat/tests/test_uat_boundaries.py::test_monto_negativo_rechazado",
       "observaciones": "Caso de borde inferior."
     },
@@ -2618,7 +2618,7 @@
       "prioridad": "Media",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.014,
+      "duracion_s": 0.017,
       "evidencia": "pytest: 06-mensajeria/tests/test_international_simulator.py::test_internacional_rechaza_eur",
       "observaciones": "Limitación de alcance registrada en S-061."
     },
@@ -2632,7 +2632,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.024,
+      "duracion_s": 0.023,
       "evidencia": "pytest: 06-mensajeria/tests/test_international_simulator.py::test_internacional_saldo_insuficiente",
       "observaciones": "Cubre importe más comisión, no solo importe."
     },
@@ -2646,7 +2646,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.022,
+      "duracion_s": 0.023,
       "evidencia": "pytest: 06-mensajeria/tests/test_international_simulator.py::test_internacional_idempotencia_conflicto",
       "observaciones": "Complementa TC-009."
     },
@@ -2674,7 +2674,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.184,
+      "duracion_s": 0.154,
       "evidencia": "pytest: 07-aml-compliance/tests/test_hook.py::test_hook_permite_pago_normal",
       "observaciones": "Caso negativo de screening."
     },
@@ -2688,7 +2688,7 @@
       "prioridad": "Media",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.201,
+      "duracion_s": 0.933,
       "evidencia": "pytest: 07-aml-compliance/tests/test_rules.py::test_r07_jurisdiccion_alto_riesgo",
       "observaciones": "La lista no reproduce una lista oficial del GAFI (SNV-03)."
     },
@@ -2716,7 +2716,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.022,
+      "duracion_s": 0.027,
       "evidencia": "pytest: 05-core-middleware/tests/test_schema_constraints.py::test_balanced_entry_can_be_posted_and_becomes_immutable",
       "observaciones": "La corrección se hace con un asiento de reverso, no editando."
     },
@@ -2730,7 +2730,7 @@
       "prioridad": "Alta",
       "automatizacion": "Automatizado",
       "estado_ejecucion": "Aprobado",
-      "duracion_s": 0.019,
+      "duracion_s": 0.016,
       "evidencia": "pytest: 05-core-middleware/tests/test_schema_constraints.py::test_account_balance_cannot_break_overdraft_limit",
       "observaciones": "Invariante de saldo a nivel de base."
     }

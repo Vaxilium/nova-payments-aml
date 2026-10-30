@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T05:16:32.448802+00:00",
+  "generated_at": "2026-10-30T04:39:46.169830+00:00",
   "database": "05-core-middleware\\db\\novabank.db",
   "integrity_check": "ok",
   "foreign_key_violations": 0,
@@ -12,161 +12,161 @@
       "status": "ok",
       "rows": 800,
       "error": null,
-      "duration_ms": 582.62
+      "duration_ms": 639.1
     },
     {
       "file": "02_balance_comprobacion.sql",
       "status": "ok",
       "rows": 10,
       "error": null,
-      "duration_ms": 149.52
+      "duration_ms": 151.18
     },
     {
       "file": "03_saldos_por_moneda.sql",
       "status": "ok",
       "rows": 4,
       "error": null,
-      "duration_ms": 0.84
+      "duration_ms": 1.25
     },
     {
       "file": "04_top_clientes_saldo.sql",
       "status": "ok",
       "rows": 724,
       "error": null,
-      "duration_ms": 6.1
+      "duration_ms": 7.68
     },
     {
       "file": "05_movimientos_duplicados.sql",
       "status": "ok",
       "rows": 7,
       "error": null,
-      "duration_ms": 149.73
+      "duration_ms": 154.18
     },
     {
       "file": "06_cuentas_inactivas.sql",
       "status": "ok",
-      "rows": 7,
+      "rows": 476,
       "error": null,
-      "duration_ms": 579.75
+      "duration_ms": 649.95
     },
     {
       "file": "07_flujo_diario_por_moneda.sql",
       "status": "ok",
-      "rows": 368,
+      "rows": 369,
       "error": null,
-      "duration_ms": 82.86
+      "duration_ms": 98.14
     },
     {
       "file": "08_velocidad_transaccional_cliente.sql",
       "status": "ok",
-      "rows": 36390,
+      "rows": 36391,
       "error": null,
-      "duration_ms": 283.46
+      "duration_ms": 286.01
     },
     {
       "file": "09_estructuracion_umbral.sql",
       "status": "ok",
       "rows": 30,
       "error": null,
-      "duration_ms": 25.3
+      "duration_ms": 26.76
     },
     {
       "file": "10_contrapartes_frecuentes.sql",
       "status": "ok",
-      "rows": 12401,
+      "rows": 12402,
       "error": null,
-      "duration_ms": 106.56
+      "duration_ms": 121.27
     },
     {
       "file": "11_comisiones_por_tipo_mes.sql",
       "status": "ok",
       "rows": 12,
       "error": null,
-      "duration_ms": 4.56
+      "duration_ms": 4.35
     },
     {
       "file": "12_rentabilidad_cuenta.sql",
       "status": "ok",
       "rows": 800,
       "error": null,
-      "duration_ms": 132.13
+      "duration_ms": 151.46
     },
     {
       "file": "13_passthrough_rapido.sql",
       "status": "ok",
       "rows": 136,
       "error": null,
-      "duration_ms": 231.69
+      "duration_ms": 243.75
     },
     {
       "file": "14_cierre_vs_libro.sql",
       "status": "ok",
       "rows": 800,
       "error": null,
-      "duration_ms": 226.82
+      "duration_ms": 256.87
     },
     {
       "file": "15_tipos_cambio_utilizados.sql",
       "status": "ok",
       "rows": 2500,
       "error": null,
-      "duration_ms": 16.25
+      "duration_ms": 16.61
     },
     {
       "file": "16_distribucion_montos.sql",
       "status": "ok",
       "rows": 7,
       "error": null,
-      "duration_ms": 30.01
+      "duration_ms": 31.91
     },
     {
       "file": "17_cuentas_sobregiro_riesgo.sql",
       "status": "ok",
       "rows": 793,
       "error": null,
-      "duration_ms": 2.95
+      "duration_ms": 4.3
     },
     {
       "file": "18_cohortes_clientes.sql",
       "status": "ok",
       "rows": 30,
       "error": null,
-      "duration_ms": 1.02
+      "duration_ms": 1.19
     },
     {
       "file": "19_operaciones_rechazadas_idempotencia.sql",
       "status": "ok",
       "rows": 0,
       "error": null,
-      "duration_ms": 0.32
+      "duration_ms": 0.51
     },
     {
       "file": "20_top_gl_movimientos.sql",
       "status": "ok",
       "rows": 10,
       "error": null,
-      "duration_ms": 158.17
+      "duration_ms": 171.35
     },
     {
       "file": "21_corresponsalia_paises.sql",
       "status": "ok",
       "rows": 3082,
       "error": null,
-      "duration_ms": 53.81
+      "duration_ms": 56.29
     },
     {
       "file": "22_cobertura_verdad_aml.sql",
       "status": "ok",
       "rows": 6,
       "error": null,
-      "duration_ms": 6.04
+      "duration_ms": 7.13
     },
     {
       "file": "23_conciliacion_global_diaria.sql",
       "status": "ok",
-      "rows": 368,
+      "rows": 369,
       "error": null,
-      "duration_ms": 86.69
+      "duration_ms": 94.42
     }
   ]
 }
